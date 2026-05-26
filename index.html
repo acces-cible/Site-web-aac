@@ -10,1239 +10,603 @@
 
 <style>
 /* ============================================================
-   ⚙️ CONFIG — MODIFIEZ ICI LES COULEURS ET POLICES
+   ⚙️ CONFIG — TOUT CE QUE VOUS POUVEZ MODIFIER FACILEMENT
    ============================================================ */
 :root {
-  /* Couleurs principales */
-  --c-ardoise:   #3A3835;   /* Fond sombre (nav, footer, sections) */
-  --c-or:        #C8A96E;   /* Couleur accent (boutons, titres accent) */
+  /* --- COULEURS --- */
+  --c-ardoise:   #3A3835;   /* Fond sombre (nav, footer) */
+  --c-or:        #C8A96E;   /* Accent doré (boutons, titres) */
   --c-ivoire:    #f5f0e6;   /* Fond clair chaud */
-  --c-blanc:     #ffffff;   /* Fond blanc pur */
+  --c-blanc:     #ffffff;
   --c-gris:      #f0ede8;   /* Fond gris très doux */
   --c-bord:      #ddd8ce;   /* Couleur des bordures */
   --c-texte:     #2d2825;   /* Texte principal */
-  --c-muted:     #8a7d6e;   /* Texte secondaire / muted */
+  --c-muted:     #8a7d6e;   /* Texte secondaire */
 
-  /* Tailles de police — MODIFIEZ ICI POUR AJUSTER */
-  --fs-nav:      10px;      /* Liens de navigation */
-  --fs-badge:    9px;       /* Badges / étiquettes */
-  --fs-label:    9px;       /* Labels en majuscules */
-  --fs-small:    12px;      /* Petits textes */
-  --fs-body:     14px;      /* Corps de texte */
-  --fs-body-lg:  15px;      /* Corps large */
-  --fs-h3:       18px;      /* Titres h3 */
-  --fs-h2:       26px;      /* Titres h2 sections */
-  --fs-h1:       38px;      /* Titre hero principal */
-  --fs-hero:     44px;      /* Titre hero grand écran */
+  /* --- TAILLES DE POLICE --- */
+  --fs-nav:      10px;
+  --fs-label:    9px;
+  --fs-small:    12px;
+  --fs-body:     14px;
+  --fs-body-lg:  15px;
+  --fs-h3:       18px;
+  --fs-h2:       26px;
+  --fs-hero:     44px;
 
-  /* Polices */
+  /* --- PHOTOS : modifiez la hauteur ici --- */
+  --photo-hero-h:     1200px;   /* ← hauteur photo hero (droite) */
+  --photo-produit-h:  260px;   /* ← hauteur photos dans les cartes produit */
+  --photo-apercu-h:   280px;   /* ← hauteur photo section bureaux */
+
+  /* --- POLICES --- */
   --font-body:   'Nunito', sans-serif;
   --font-serif:  'DM Serif Display', serif;
 
-  /* Espacement */
+  /* --- ESPACEMENTS --- */
   --pad-section: 64px 48px;
   --pad-mobile:  40px 24px;
   --radius:      2px;
 }
 
 /* ============================================================
-   🔧 RESET & BASE
+   BASE
    ============================================================ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body {
-  font-family: var(--font-body);
-  color: var(--c-texte);
-  background: var(--c-blanc);
-  font-size: var(--fs-body);
-  line-height: 1.7;
-}
+body { font-family: var(--font-body); color: var(--c-texte); background: var(--c-blanc); font-size: var(--fs-body); line-height: 1.7; }
 img { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
-button { cursor: pointer; border: none; font-family: inherit; }
 
 /* ============================================================
-   🎨 UTILITAIRES
+   UTILITAIRES
    ============================================================ */
 .lbl {
-  font-size: var(--fs-label);
-  font-weight: 700;
-  letter-spacing: .22em;
-  text-transform: uppercase;
-  color: var(--c-or);
+  font-size: var(--fs-label); font-weight: 700;
+  letter-spacing: .22em; text-transform: uppercase; color: var(--c-or);
 }
-.serif { font-family: var(--font-serif); font-weight: 400; }
-.section-hidden { display: none !important; }  /* ← cacher une section */
-.section-visible { display: block; }
+.serif { font-family: var(--font-serif); }
 
 .btn-dark {
-  background: var(--c-ardoise);
-  color: var(--c-blanc);
-  padding: 12px 24px;
-  font-size: var(--fs-nav);
-  font-weight: 800;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  border-radius: var(--radius);
-  display: inline-block;
-  transition: opacity .2s;
+  background: var(--c-ardoise); color: var(--c-blanc);
+  padding: 12px 24px; font-size: var(--fs-nav); font-weight: 800;
+  letter-spacing: .1em; text-transform: uppercase;
+  border-radius: var(--radius); display: inline-block; transition: opacity .2s;
 }
 .btn-dark:hover { opacity: .85; }
 
 .btn-or {
-  background: var(--c-or);
-  color: var(--c-ardoise);
-  padding: 12px 24px;
-  font-size: var(--fs-nav);
-  font-weight: 800;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  border-radius: var(--radius);
-  display: inline-block;
-  transition: opacity .2s;
+  background: var(--c-or); color: var(--c-ardoise);
+  padding: 12px 24px; font-size: var(--fs-nav); font-weight: 800;
+  letter-spacing: .1em; text-transform: uppercase;
+  border-radius: var(--radius); display: inline-block; transition: opacity .2s;
 }
 .btn-or:hover { opacity: .85; }
 
 .btn-ghost {
-  border: 1.5px solid var(--c-bord);
-  color: var(--c-ardoise);
-  background: transparent;
-  padding: 11px 22px;
-  font-size: var(--fs-nav);
-  font-weight: 700;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  border-radius: var(--radius);
-  display: inline-block;
-  transition: background .2s;
+  border: 1.5px solid var(--c-bord); color: var(--c-ardoise);
+  background: transparent; padding: 11px 22px;
+  font-size: var(--fs-nav); font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; border-radius: var(--radius);
+  display: inline-block; transition: background .2s;
 }
 .btn-ghost:hover { background: var(--c-gris); }
 
+/* Placeholder photo */
+.photo-placeholder {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 8px;
+  background: var(--c-gris); border: 1.5px dashed var(--c-bord);
+  color: var(--c-muted); text-align: center; font-size: 11px;
+  border-radius: var(--radius);
+}
+.photo-placeholder span { font-size: 28px; }
+
 /* ============================================================
-   SECTION: NAV
+   NAV
    ============================================================ */
 .nav {
-  background: var(--c-ardoise);
-  padding: 0 48px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  background: var(--c-ardoise); padding: 0 48px; height: 60px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
 }
-.nav-logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.nav-logo-bar {
-  width: 2px;
-  height: 26px;
-  background: var(--c-or);
-  flex-shrink: 0;
-}
-.nav-logo-text {
-  color: var(--c-blanc);
-  font-size: 11.5px;
-  font-weight: 700;
-  letter-spacing: .04em;
-  line-height: 1.3;
-}
-.nav-logo-text small {
-  display: block;
-  color: rgba(200,169,110,.7);
-  font-size: 8.5px;
-  font-weight: 400;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-}
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-}
-.nav-links a {
-  color: rgba(255,255,255,.45);
-  font-size: var(--fs-nav);
-  font-weight: 600;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  transition: color .2s;
-  position: relative;
-}
-.nav-links a:hover,
-.nav-links a.active { color: rgba(255,255,255,.9); }
-
-/* Dropdown ERGO */
-.nav-dropdown { position: relative; }
-.nav-dropdown-menu {
-  display: none;
-  position: absolute;
-  top: calc(100% + 12px);
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--c-blanc);
-  border: 1px solid var(--c-bord);
-  border-radius: 4px;
-  min-width: 220px;
-  box-shadow: 0 8px 24px rgba(0,0,0,.12);
-  overflow: hidden;
-}
-.nav-dropdown:hover .nav-dropdown-menu { display: block; }
-.nav-dropdown-menu a {
-  display: block;
-  padding: 11px 18px;
-  font-size: 11.5px;
-  color: var(--c-texte) !important;
-  border-bottom: 1px solid var(--c-bord);
-  font-weight: 600;
-  letter-spacing: .04em;
-  text-transform: none;
-}
-.nav-dropdown-menu a:last-child { border-bottom: none; }
-.nav-dropdown-menu a:hover { background: var(--c-gris); }
-
-.nav-cta {
-  background: var(--c-or);
-  color: var(--c-ardoise);
-  padding: 8px 18px;
-  font-size: 9.5px;
-  font-weight: 800;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  border-radius: var(--radius);
-}
+.nav-logo { display: flex; align-items: center; gap: 12px; }
+.nav-logo-bar { width: 2px; height: 26px; background: var(--c-or); flex-shrink: 0; }
+.nav-logo-text { color: var(--c-blanc); font-size: 11.5px; font-weight: 700; letter-spacing: .04em; line-height: 1.3; }
+.nav-logo-text small { display: block; color: rgba(200,169,110,.7); font-size: 8.5px; font-weight: 400; letter-spacing: .16em; text-transform: uppercase; }
+.nav-links { display: flex; align-items: center; gap: 28px; }
+.nav-links a { color: rgba(255,255,255,.45); font-size: var(--fs-nav); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; transition: color .2s; }
+.nav-links a:hover { color: rgba(255,255,255,.9); }
+.nav-cta { background: var(--c-or); color: var(--c-ardoise); padding: 8px 18px; font-size: 9.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; border-radius: var(--radius); }
 .nav-cta:hover { opacity: .9; }
-
-/* Bouton langue */
-.lang-btn {
-  background: transparent;
-  border: 1px solid rgba(255,255,255,.25);
-  color: rgba(255,255,255,.6);
-  padding: 5px 10px;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .1em;
-  border-radius: var(--radius);
-  cursor: pointer;
-  transition: all .2s;
-}
+.lang-btn { background: transparent; border: 1px solid rgba(255,255,255,.25); color: rgba(255,255,255,.6); padding: 5px 10px; font-size: 10px; font-weight: 700; letter-spacing: .1em; border-radius: var(--radius); cursor: pointer; transition: all .2s; font-family: inherit; }
 .lang-btn:hover { border-color: var(--c-or); color: var(--c-or); }
-
-/* Menu mobile hamburger */
-.nav-hamburger {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  cursor: pointer;
-  padding: 4px;
-}
-.nav-hamburger span {
-  display: block;
-  width: 22px;
-  height: 2px;
-  background: var(--c-blanc);
-  border-radius: 2px;
-}
-.nav-mobile-menu {
-  display: none;
-  position: fixed;
-  top: 60px;
-  left: 0;
-  right: 0;
-  background: var(--c-ardoise);
-  border-top: 1px solid rgba(255,255,255,.1);
-  z-index: 99;
-  padding: 16px 24px 24px;
-}
+.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--c-blanc); border-radius: 2px; }
+.nav-mobile-menu { display: none; position: fixed; top: 60px; left: 0; right: 0; background: var(--c-ardoise); border-top: 1px solid rgba(255,255,255,.1); z-index: 99; padding: 16px 24px 24px; }
 .nav-mobile-menu.open { display: block; }
-.nav-mobile-menu a {
-  display: block;
-  color: rgba(255,255,255,.7);
-  font-size: 13px;
-  font-weight: 600;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(255,255,255,.08);
-  letter-spacing: .04em;
-}
+.nav-mobile-menu a { display: block; color: rgba(255,255,255,.7); font-size: 13px; font-weight: 600; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.08); letter-spacing: .04em; }
 .nav-mobile-menu a:hover { color: var(--c-or); }
-.nav-mobile-sub {
-  padding-left: 16px;
-  font-size: 12px !important;
-  color: rgba(255,255,255,.5) !important;
-}
 
 /* ============================================================
-   SECTION: HERO
+   HERO
    ============================================================ */
-.hero {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 520px;
-  border-bottom: 1px solid var(--c-bord);
-}
-.hero-left {
-  padding: var(--pad-section);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border-right: 1px solid var(--c-bord);
-}
-.hero-eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 22px;
-}
-.hero-eyebrow-line {
-  width: 22px;
-  height: 1.5px;
-  background: var(--c-or);
-}
-.hero-h1 {
-  font-family: var(--font-serif);
-  font-size: var(--fs-hero);
-  line-height: 1.1;
-  color: var(--c-texte);
-  margin-bottom: 18px;
-}
+.hero { display: grid; grid-template-columns: 1fr 1fr; min-height: 520px; border-bottom: 1px solid var(--c-bord); }
+.hero-left { padding: var(--pad-section); display: flex; flex-direction: column; justify-content: space-between; border-right: 1px solid var(--c-bord); }
+.hero-eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 22px; }
+.hero-eyebrow-line { width: 22px; height: 1.5px; background: var(--c-or); }
+.hero-h1 { font-family: var(--font-serif); font-size: var(--fs-hero); line-height: 1.1; color: var(--c-texte); margin-bottom: 18px; }
 .hero-h1 em { color: var(--c-or); font-style: italic; }
-.hero-p {
-  color: var(--c-muted);
-  font-size: var(--fs-body-lg);
-  line-height: 1.75;
-  max-width: 380px;
-  margin-bottom: 32px;
-}
-.hero-btns {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 36px;
-  flex-wrap: wrap;
-}
-.hero-stats {
-  display: flex;
-  gap: 28px;
-  border-top: 1px solid var(--c-bord);
-  padding-top: 20px;
-}
-.stat-n {
-  font-size: 22px;
-  font-weight: 800;
-  color: var(--c-ardoise);
-}
-.stat-l {
-  font-size: 8.5px;
-  font-weight: 700;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: var(--c-muted);
-  margin-top: 2px;
-}
-.hero-right {
-  background: var(--c-ivoire);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 48px;
-  position: relative;
-}
-.hero-right-tag {
-  position: absolute;
-  top: 20px;
-  left: 24px;
-  font-size: 8px;
-  font-weight: 700;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: var(--c-muted);
-}
-.hero-img {
-  max-width: 300px;
-  max-height: 360px;
-  object-fit: contain;
-  object-position: center bottom;
-}
+.hero-p { color: var(--c-muted); font-size: var(--fs-body-lg); line-height: 1.75; max-width: 380px; margin-bottom: 32px; }
+.hero-btns { display: flex; gap: 10px; margin-bottom: 36px; flex-wrap: wrap; }
+.hero-stats { display: flex; gap: 28px; border-top: 1px solid var(--c-bord); padding-top: 20px; }
+.stat-n { font-size: 22px; font-weight: 800; color: var(--c-ardoise); }
+.stat-l { font-size: 8.5px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--c-muted); margin-top: 2px; }
+.hero-right { background: var(--c-ivoire); display: flex; align-items: center; justify-content: center; padding: 48px; position: relative; }
+.hero-right-tag { position: absolute; top: 20px; left: 24px; font-size: 8px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--c-muted); }
 
 /* ============================================================
-   SECTION: CONFIANCE (bande sous le hero)
+   PHOTO HERO — modifiez --photo-hero-h dans :root
    ============================================================ */
-.confiance {
-  background: var(--c-gris);
-  border-bottom: 1px solid var(--c-bord);
-  padding: 20px 48px;
-  display: flex;
-  justify-content: center;
-  gap: 56px;
-  flex-wrap: wrap;
-}
-.confiance-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.confiance-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--c-or);
-  flex-shrink: 0;
-}
-.confiance-text {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--c-ardoise);
-}
+.hero-img { max-width: 320px; height: var(--photo-hero-h); object-fit: contain; object-position: center bottom; }
 
 /* ============================================================
-   SECTION: PRODUITS (Chaise ERGO — versions)
+   BANDE CONFIANCE
    ============================================================ */
-.produits {
-  padding: var(--pad-section);
-  background: var(--c-blanc);
-  border-bottom: 1px solid var(--c-bord);
-}
-.section-header {
-  margin-bottom: 36px;
-}
+.confiance { background: var(--c-gris); border-bottom: 1px solid var(--c-bord); padding: 20px 48px; display: flex; justify-content: center; gap: 56px; flex-wrap: wrap; }
+.confiance-item { display: flex; align-items: center; gap: 10px; }
+.confiance-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--c-or); flex-shrink: 0; }
+.confiance-text { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--c-ardoise); }
+
+/* ============================================================
+   PRODUITS
+   ============================================================ */
+.produits { padding: var(--pad-section); background: var(--c-blanc); border-bottom: 1px solid var(--c-bord); }
+.section-header { margin-bottom: 36px; }
 .section-header .lbl { margin-bottom: 8px; }
-.section-header h2 {
-  font-family: var(--font-serif);
-  font-size: var(--fs-h2);
-  color: var(--c-texte);
-  line-height: 1.2;
-  margin-bottom: 8px;
-}
-.section-header p {
-  color: var(--c-muted);
-  max-width: 540px;
-  font-size: var(--fs-body);
-  line-height: 1.7;
-}
+.section-header h2 { font-family: var(--font-serif); font-size: var(--fs-h2); color: var(--c-texte); line-height: 1.2; margin-bottom: 8px; }
+.section-header p { color: var(--c-muted); max-width: 540px; font-size: var(--fs-body); line-height: 1.7; }
 
-/* Grille 3 cartes produit */
-.produits-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: var(--c-bord);
-  border: 1px solid var(--c-bord);
-  margin-bottom: 24px;
-}
-.produit-card {
-  background: var(--c-blanc);
-  padding: 28px 24px;
-  position: relative;
-  transition: background .2s;
-}
+.produits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--c-bord); border: 1px solid var(--c-bord); margin-bottom: 24px; }
+.produit-card { background: var(--c-blanc); overflow: hidden; transition: background .2s; }
 .produit-card:hover { background: var(--c-gris); }
-.produit-card-top {
-  height: 2px;
-  background: var(--c-bord);
-  margin-bottom: 14px;
-}
-.produit-card-top::before {
-  content: '';
-  display: block;
-  width: 32px;
-  height: 2px;
-  background: var(--c-or);
-}
-.produit-card-tag {
-  font-size: 8.5px;
-  font-weight: 700;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--c-muted);
-  margin-bottom: 10px;
-}
-.produit-card h3 {
-  font-family: var(--font-serif);
-  font-size: var(--fs-h3);
-  color: var(--c-texte);
-  margin-bottom: 8px;
-}
-.produit-card p {
-  font-size: var(--fs-small);
-  color: var(--c-muted);
-  line-height: 1.65;
-  margin-bottom: 14px;
-}
-.produit-card-link {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--c-ardoise);
-}
+
+/* ============================================================
+   PHOTO PRODUIT — modifiez --photo-produit-h dans :root
+   ============================================================ */
+.produit-card-img { width: 100%; height: var(--photo-produit-h); object-fit: contain; object-position: center; background: var(--c-ivoire); padding: 16px; }
+.produit-card-img-placeholder { width: 100%; height: var(--photo-produit-h); }
+
+.produit-card-body { padding: 22px 24px 28px; }
+.produit-card-top { height: 2px; background: var(--c-bord); margin-bottom: 14px; }
+.produit-card-top::before { content: ''; display: block; width: 32px; height: 2px; background: var(--c-or); }
+.produit-card-tag { font-size: 8.5px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--c-muted); margin-bottom: 10px; }
+.produit-card h3 { font-family: var(--font-serif); font-size: var(--fs-h3); color: var(--c-texte); margin-bottom: 8px; }
+.produit-card p { font-size: var(--fs-small); color: var(--c-muted); line-height: 1.65; margin-bottom: 14px; }
+.produit-card-link { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--c-ardoise); }
 .produit-card-link:hover { color: var(--c-or); }
 
-.produits-sur-mesure {
-  border: 1.5px solid var(--c-bord);
-  padding: 20px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
-  border-radius: var(--radius);
-}
-.produits-sur-mesure-text .lbl { font-size: 8px; margin-bottom: 4px; }
-.produits-sur-mesure-text p {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--c-texte);
-}
+.produits-sur-mesure { border: 1.5px solid var(--c-bord); padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-radius: var(--radius); }
+.produits-sur-mesure p { font-size: 14px; font-weight: 700; color: var(--c-texte); }
+.produits-sur-mesure .lbl { font-size: 8px; margin-bottom: 4px; }
 
 /* ============================================================
-   SECTION: HISTOIRE (extrait)
+   HISTOIRE
    ============================================================ */
-.histoire {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  border-bottom: 1px solid var(--c-bord);
-}
-.histoire-left {
-  background: var(--c-ardoise);
-  padding: var(--pad-section);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
+.histoire { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--c-bord); }
+.histoire-left { background: var(--c-ardoise); padding: var(--pad-section); display: flex; flex-direction: column; justify-content: center; }
 .histoire-left .lbl { margin-bottom: 12px; }
-.histoire-left h2 {
-  font-family: var(--font-serif);
-  font-size: var(--fs-h2);
-  color: var(--c-blanc);
-  line-height: 1.2;
-  margin-bottom: 16px;
-}
-.histoire-left p {
-  color: rgba(255,255,255,.6);
-  font-size: var(--fs-body);
-  line-height: 1.75;
-  max-width: 340px;
-  margin-bottom: 28px;
-}
-.hist-link {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: var(--c-or);
-}
+.histoire-left h2 { font-family: var(--font-serif); font-size: var(--fs-h2); color: var(--c-blanc); line-height: 1.2; margin-bottom: 16px; }
+.histoire-left p { color: rgba(255,255,255,.6); font-size: var(--fs-body); line-height: 1.75; max-width: 340px; margin-bottom: 28px; }
+.hist-link { font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--c-or); }
 .hist-link:hover { opacity: .8; }
 .hist-link::after { content: ' →'; }
-
-.histoire-right {
-  background: var(--c-ivoire);
-  padding: var(--pad-section);
-}
+.histoire-right { background: var(--c-ivoire); padding: var(--pad-section); }
 .timeline { display: flex; flex-direction: column; }
-.tl-item {
-  display: flex;
-  gap: 18px;
-  padding: 16px 0;
-  border-bottom: 1px solid var(--c-bord);
-  align-items: flex-start;
-}
+.tl-item { display: flex; gap: 18px; padding: 16px 0; border-bottom: 1px solid var(--c-bord); align-items: flex-start; }
 .tl-item:last-child { border-bottom: none; }
-.tl-year {
-  font-size: 17px;
-  font-weight: 900;
-  color: var(--c-or);
-  min-width: 48px;
-  letter-spacing: -.02em;
-  margin-top: 1px;
-  flex-shrink: 0;
-}
+.tl-year { font-size: 17px; font-weight: 900; color: var(--c-or); min-width: 48px; letter-spacing: -.02em; margin-top: 1px; flex-shrink: 0; }
 .tl-year.tl-crisis { color: #c0392b; }
-.tl-body strong {
-  font-size: 12.5px;
-  font-weight: 800;
-  color: var(--c-texte);
-  display: block;
-  margin-bottom: 3px;
-}
-.tl-body span {
-  font-size: 11.5px;
-  color: var(--c-muted);
-  line-height: 1.55;
-}
+.tl-body strong { font-size: 12.5px; font-weight: 800; color: var(--c-texte); display: block; margin-bottom: 3px; }
+.tl-body span { font-size: 11.5px; color: var(--c-muted); line-height: 1.55; }
 
 /* ============================================================
-   SECTION: TEMOIGNAGE
+   TÉMOIGNAGE
    ============================================================ */
-.temoignage {
-  background: var(--c-or);
-  padding: 24px 48px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 32px;
-  flex-wrap: wrap;
-}
-.temoignage-texte {
-  font-family: var(--font-serif);
-  font-size: 15px;
-  font-style: italic;
-  color: var(--c-ardoise);
-  max-width: 560px;
-  line-height: 1.65;
-}
-.temoignage-texte strong {
-  font-style: normal;
-  font-family: var(--font-body);
-  font-weight: 800;
-  font-size: 14px;
-}
+.temoignage { background: var(--c-or); padding: 24px 48px; display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+.temoignage-texte { font-family: var(--font-serif); font-size: 15px; font-style: italic; color: var(--c-ardoise); max-width: 560px; line-height: 1.65; }
+.temoignage-texte strong { font-style: normal; font-family: var(--font-body); font-weight: 800; font-size: 14px; }
 .temoignage-source { text-align: right; flex-shrink: 0; }
-.temoignage-source-role {
-  font-size: 8.5px;
-  font-weight: 700;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: rgba(58,56,53,.5);
-}
-.temoignage-source-name {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--c-ardoise);
-  margin-top: 3px;
-}
+.temoignage-source-role { font-size: 8.5px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: rgba(58,56,53,.5); }
+.temoignage-source-name { font-size: 12px; font-weight: 700; color: var(--c-ardoise); margin-top: 3px; }
 
 /* ============================================================
-   SECTION: BUREAUX & ACCESSOIRES (aperçu)
+   APERÇU BUREAUX
    ============================================================ */
-.apercu-produits {
-  padding: var(--pad-section);
-  background: var(--c-gris);
-  border-bottom: 1px solid var(--c-bord);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
-  align-items: center;
-}
+.apercu-produits { padding: var(--pad-section); background: var(--c-gris); border-bottom: 1px solid var(--c-bord); display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
 .apercu-content .lbl { margin-bottom: 10px; }
-.apercu-content h2 {
-  font-family: var(--font-serif);
-  font-size: var(--fs-h2);
-  color: var(--c-texte);
-  line-height: 1.2;
-  margin-bottom: 12px;
-}
-.apercu-content p {
-  color: var(--c-muted);
-  font-size: var(--fs-body);
-  line-height: 1.7;
-  margin-bottom: 24px;
-}
-.apercu-img-zone {
-  background: var(--c-blanc);
-  border: 1px solid var(--c-bord);
-  border-radius: var(--radius);
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 220px;
-}
-.apercu-img-zone img {
-  width: 100%;
-  height: 260px;
-  object-fit: cover;
-  object-position: center;
-}
+.apercu-content h2 { font-family: var(--font-serif); font-size: var(--fs-h2); color: var(--c-texte); line-height: 1.2; margin-bottom: 12px; }
+.apercu-content p { color: var(--c-muted); font-size: var(--fs-body); line-height: 1.7; margin-bottom: 24px; }
+.apercu-btns { display: flex; gap: 10px; flex-wrap: wrap; }
 
 /* ============================================================
-   SECTION: ERGOTHÉRAPEUTES CTA
+   PHOTO APERÇU — modifiez --photo-apercu-h dans :root
    ============================================================ */
-.ergo-cta {
-  background: var(--c-ardoise);
-  padding: var(--pad-section);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 48px;
-  flex-wrap: wrap;
-  border-bottom: 1px solid rgba(255,255,255,.08);
-}
-.ergo-badge {
-  background: rgba(200,169,110,.15);
-  border: 1px solid rgba(200,169,110,.3);
-  color: var(--c-or);
-  font-size: 8px;
-  font-weight: 800;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  padding: 4px 10px;
-  border-radius: var(--radius);
-  display: inline-flex;
-  margin-bottom: 14px;
-}
-.ergo-cta h2 {
-  font-family: var(--font-serif);
-  font-size: var(--fs-h2);
-  color: var(--c-blanc);
-  margin-bottom: 12px;
-  line-height: 1.2;
-}
-.ergo-cta p {
-  color: rgba(255,255,255,.65);
-  font-size: var(--fs-body);
-  line-height: 1.7;
-  max-width: 400px;
-}
+.apercu-img-zone { border: 1px solid var(--c-bord); border-radius: var(--radius); overflow: hidden; min-height: var(--photo-apercu-h); display: flex; align-items: center; justify-content: center; background: var(--c-blanc); }
+.apercu-img-zone img { width: 100%; height: var(--photo-apercu-h); object-fit: cover; object-position: center; }
+
+/* ============================================================
+   ERGO CTA
+   ============================================================ */
+.ergo-cta { background: var(--c-ardoise); padding: var(--pad-section); display: flex; align-items: center; justify-content: space-between; gap: 48px; flex-wrap: wrap; border-bottom: 1px solid rgba(255,255,255,.08); }
+.ergo-badge { background: rgba(200,169,110,.15); border: 1px solid rgba(200,169,110,.3); color: var(--c-or); font-size: 8px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; padding: 4px 10px; border-radius: var(--radius); display: inline-flex; margin-bottom: 14px; }
+.ergo-cta h2 { font-family: var(--font-serif); font-size: var(--fs-h2); color: var(--c-blanc); margin-bottom: 12px; line-height: 1.2; }
+.ergo-cta p { color: rgba(255,255,255,.65); font-size: var(--fs-body); line-height: 1.7; max-width: 400px; }
 .ergo-cta-btn-zone { flex-shrink: 0; }
 
 /* ============================================================
-   SECTION: FOOTER
+   FOOTER
    ============================================================ */
-.footer {
-  background: #1e1c1a;
-  padding: 40px 48px;
-}
-.footer-top {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 40px;
-  border-bottom: 1px solid rgba(255,255,255,.08);
-  padding-bottom: 32px;
-  margin-bottom: 24px;
-}
-.footer-brand {
-  color: var(--c-blanc);
-  font-size: 13px;
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-.footer-sub {
-  color: rgba(255,255,255,.3);
-  font-size: 9.5px;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  margin-bottom: 16px;
-}
-.footer-contact a {
-  display: block;
-  color: rgba(255,255,255,.5);
-  font-size: 12px;
-  margin-bottom: 6px;
-}
+.footer { background: #1e1c1a; padding: 40px 48px; }
+.footer-top { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; border-bottom: 1px solid rgba(255,255,255,.08); padding-bottom: 32px; margin-bottom: 24px; }
+.footer-brand { color: var(--c-blanc); font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+.footer-sub { color: rgba(255,255,255,.3); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 16px; }
+.footer-contact a { display: block; color: rgba(255,255,255,.5); font-size: 12px; margin-bottom: 6px; }
 .footer-contact a:hover { color: var(--c-or); }
-.footer-nav-title {
-  color: var(--c-or);
-  font-size: 8.5px;
-  font-weight: 700;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  margin-bottom: 12px;
-}
-.footer-nav-links a {
-  display: block;
-  color: rgba(255,255,255,.45);
-  font-size: 11.5px;
-  font-weight: 600;
-  padding: 4px 0;
-}
+.footer-nav-title { color: var(--c-or); font-size: 8.5px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; margin-bottom: 12px; }
+.footer-nav-links a { display: block; color: rgba(255,255,255,.45); font-size: 11.5px; font-weight: 600; padding: 4px 0; }
 .footer-nav-links a:hover { color: var(--c-or); }
-.footer-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-.footer-copyright {
-  color: rgba(255,255,255,.2);
-  font-size: 10px;
-}
-.footer-social {
-  display: flex;
-  gap: 12px;
-}
-.footer-social a {
-  color: rgba(255,255,255,.3);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-}
-.footer-social a:hover { color: var(--c-or); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.footer-copyright { color: rgba(255,255,255,.2); font-size: 10px; }
 
 /* ============================================================
-   📱 RESPONSIVE — MOBILE
+   RESPONSIVE MOBILE
    ============================================================ */
 @media (max-width: 768px) {
-  :root {
-    --fs-h1:    28px;
-    --fs-hero:  30px;
-    --fs-h2:    22px;
-    --pad-section: 40px 24px;
-  }
-
+  :root { --fs-hero: 30px; --fs-h2: 22px; --pad-section: 40px 24px; }
   .nav { padding: 0 20px; }
   .nav-links { display: none; }
   .nav-hamburger { display: flex; }
-
   .hero { grid-template-columns: 1fr; min-height: auto; }
   .hero-left { padding: 40px 24px; border-right: none; border-bottom: 1px solid var(--c-bord); }
-  .hero-right { padding: 32px 24px; min-height: 260px; }
-  .hero-img { max-width: 200px; max-height: 260px; }
-
+  .hero-right { padding: 32px 24px; min-height: 280px; }
   .confiance { padding: 16px 20px; gap: 16px; flex-direction: column; align-items: flex-start; }
-
   .produits { padding: var(--pad-mobile); }
   .produits-grid { grid-template-columns: 1fr; }
-  .produits-sur-mesure { flex-direction: column; align-items: flex-start; }
-
   .histoire { grid-template-columns: 1fr; }
-  .histoire-left { padding: 40px 24px; }
-  .histoire-right { padding: 40px 24px; }
-
   .temoignage { padding: 24px; flex-direction: column; text-align: center; }
-  .temoignage-source { text-align: center; }
-
   .apercu-produits { grid-template-columns: 1fr; padding: var(--pad-mobile); }
-
   .ergo-cta { padding: var(--pad-mobile); flex-direction: column; align-items: flex-start; }
-
   .footer { padding: 32px 20px; }
   .footer-top { grid-template-columns: 1fr; gap: 28px; }
-}
-
-@media (max-width: 480px) {
   .hero-btns { flex-direction: column; }
-  .hero-btns .btn-dark,
-  .hero-btns .btn-ghost { text-align: center; }
-  .hero-stats { gap: 18px; }
 }
 </style>
-
 </head>
 <body>
 
 <!-- ============================================================
-     SECTION: NAV
+     NAV
      ============================================================ -->
 <nav class="nav">
   <a href="index.html" class="nav-logo">
     <div class="nav-logo-bar"></div>
     <div class="nav-logo-text">
       Les Adaptations Accès-Cible
-      <small data-fr="Partenaire des ergothérapeutes · Québec" data-en="Partner of Occupational Therapists · Québec">Partenaire des ergothérapeutes · Québec</small>
+      <small>Partenaire des ergothérapeutes · Québec</small>
     </div>
   </a>
-
   <div class="nav-links" id="navLinks">
-    <!-- Dropdown ERGO -->
-    <div class="nav-dropdown">
-      <a href="ergo.html" class="active" data-fr="Chaise ERGO" data-en="ERGO Chair">Chaise ERGO</a>
-      <div class="nav-dropdown-menu">
-        <a href="ergo.html#garderie" data-fr="Hauteur garderie" data-en="Daycare Height">Hauteur garderie</a>
-        <a href="ergo.html#standard" data-fr="Standard (table cuisine)" data-en="Standard (kitchen table)">Standard (table cuisine)</a>
-        <a href="ergo.html#surdi" data-fr="Surdimensionnée (adultes)" data-en="Oversized (adults)">Surdimensionnée (adultes)</a>
-      </div>
-    </div>
-    <a href="accessoires.html" data-fr="Accessoires" data-en="Accessories">Accessoires</a>
-    <a href="tables.html" data-fr="Tables" data-en="Tables">Tables</a>
-    <a href="marchepied.html" data-fr="Marchepied" data-en="Step Stool">Marchepied</a>
-    <a href="commander.html" data-fr="Commander" data-en="Order">Commander</a>
-    <a href="histoire.html" data-fr="Notre histoire" data-en="Our Story">Notre histoire</a>
-    <a href="contact.html" data-fr="Contact" data-en="Contact">Contact</a>
+    <a href="#produits">Chaise ERGO</a>
+    <a href="#bureaux">Bureaux</a>
+    <a href="#histoire">Notre histoire</a>
+    <a href="#ergos">Ergothérapeutes</a>
     <button class="lang-btn" id="langBtn" onclick="toggleLang()">EN</button>
-    <a href="commander.html" class="nav-cta" data-fr="Soumission →" data-en="Get a Quote →">Soumission →</a>
+    <a href="https://acces-cible.fillout.com/t/erKz8m4uBEus" target="_blank" class="nav-cta">Soumission →</a>
   </div>
-
-  <!-- Hamburger mobile -->
-  <div class="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+  <div class="nav-hamburger" onclick="toggleMobileMenu()">
     <span></span><span></span><span></span>
   </div>
 </nav>
 
-<!-- Menu mobile -->
 <div class="nav-mobile-menu" id="mobileMenu">
-  <div class="nav-dropdown">
-    <a href="ergo.html" style="font-weight:800;color:var(--c-or)!important" data-fr="Chaise ERGO" data-en="ERGO Chair">Chaise ERGO</a>
-  </div>
-  <a href="ergo.html#garderie" class="nav-mobile-sub" data-fr="↳ Hauteur garderie" data-en="↳ Daycare Height">↳ Hauteur garderie</a>
-  <a href="ergo.html#standard" class="nav-mobile-sub" data-fr="↳ Standard" data-en="↳ Standard">↳ Standard</a>
-  <a href="ergo.html#surdi" class="nav-mobile-sub" data-fr="↳ Surdimensionnée" data-en="↳ Oversized">↳ Surdimensionnée</a>
-  <a href="accessoires.html" data-fr="Accessoires" data-en="Accessories">Accessoires</a>
-  <a href="tables.html" data-fr="Tables ajustables" data-en="Adjustable Tables">Tables ajustables</a>
-  <a href="marchepied.html" data-fr="Marchepied sur mesure" data-en="Custom Step Stool">Marchepied sur mesure</a>
-  <a href="commander.html" data-fr="Commander / Soumission" data-en="Order / Get a Quote">Commander / Soumission</a>
-  <a href="histoire.html" data-fr="Notre histoire" data-en="Our Story">Notre histoire</a>
-  <a href="contact.html" data-fr="Nous contacter" data-en="Contact Us">Nous contacter</a>
-  <div style="margin-top:16px">
-    <button class="btn-or" style="width:100%;text-align:center" onclick="toggleLang()">
-      <span data-fr="Voir en anglais (EN)" data-en="Voir en français (FR)">Voir en anglais (EN)</span>
-    </button>
-  </div>
+  <a href="#produits">Chaise ERGO</a>
+  <a href="#bureaux">Bureaux &amp; Accessoires</a>
+  <a href="#histoire">Notre histoire</a>
+  <a href="#ergos">Ergothérapeutes</a>
+  <a href="https://acces-cible.fillout.com/t/erKz8m4uBEus" target="_blank" style="color:var(--c-or)!important;font-weight:800">Soumission →</a>
 </div>
 
 
 <!-- ============================================================
-     SECTION: HERO
+     HERO
      ============================================================ -->
-<section id="hero" class="section-visible">
-  <div class="hero">
-    <!-- Gauche : texte -->
-    <div class="hero-left">
-      <div>
-        <div class="hero-eyebrow">
-          <div class="hero-eyebrow-line"></div>
-          <span class="lbl" data-fr="Artisans québécois · Depuis 1990" data-en="Quebec Craftspeople · Since 1990">Artisans québécois · Depuis 1990</span>
-        </div>
-        <h1 class="hero-h1" data-fr="La chaise que vous prescrivez avec <em>confiance.</em>" data-en="The chair you prescribe with <em>confidence.</em>">
-          La chaise que vous prescrivez avec <em>confiance.</em>
-        </h1>
-        <p class="hero-p" data-fr="35 ans de fabrication sur mesure, élaborée en dialogue constant avec les ergothérapeutes du Québec. Chaque chaise est une réponse clinique précise." data-en="35 years of custom manufacturing, developed in constant dialogue with occupational therapists in Quebec. Every chair is a precise clinical response.">
-          35 ans de fabrication sur mesure, élaborée en dialogue constant avec les ergothérapeutes du Québec. Chaque chaise est une réponse clinique précise.
-        </p>
+<section class="hero">
+  <div class="hero-left">
+    <div>
+      <div class="hero-eyebrow">
+        <div class="hero-eyebrow-line"></div>
+        <span class="lbl" data-fr="Artisans québécois · Depuis 1990" data-en="Quebec Craftspeople · Since 1990">Artisans québécois · Depuis 1990</span>
       </div>
-      <div>
-        <div class="hero-btns">
-          <a href="ergo.html" class="btn-dark" data-fr="Voir la Chaise ERGO" data-en="View the ERGO Chair">Voir la Chaise ERGO</a>
-          <a href="commander.html" class="btn-ghost" data-fr="Demander une soumission" data-en="Get a Quote">Demander une soumission</a>
-        </div>
-        <div class="hero-stats">
-          <div><div class="stat-n">35+</div><div class="stat-l" data-fr="années" data-en="years">années</div></div>
-          <div><div class="stat-n">3</div><div class="stat-l" data-fr="gammes" data-en="models">gammes</div></div>
-          <div><div class="stat-n">100%</div><div class="stat-l" data-fr="sur mesure" data-en="custom">sur mesure</div></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Droite : photo -->
-    <div class="hero-right">
-      <div class="hero-right-tag" data-fr="Chaise ERGO · Modèle Signature" data-en="ERGO Chair · Signature Model">Chaise ERGO · Modèle Signature</div>
-      <!-- 🖼️ PHOTO HERO — remplacer src par le chemin de votre image -->
-      <img class="hero-img" src="images/ergo-hero.jpg" alt="Chaise ERGO Accès-Cible"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <!-- Placeholder si pas d'image -->
-      <div style="display:none;width:260px;height:320px;border:1.5px dashed var(--c-bord);border-radius:var(--radius);align-items:center;justify-content:center;flex-direction:column;gap:8px;color:var(--c-muted);text-align:center;font-size:12px">
-        <div style="font-size:32px">🪑</div>
-        <div data-fr="Photo à ajouter" data-en="Photo to add">Photo à ajouter</div>
-        <div style="font-size:10px">images/ergo-hero.jpg</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ============================================================
-     SECTION: CONFIANCE
-     ============================================================ -->
-<section id="confiance" class="section-visible">
-  <div class="confiance">
-    <div class="confiance-item">
-      <div class="confiance-dot"></div>
-      <span class="confiance-text" data-fr="Fabriqué au Québec" data-en="Made in Québec">Fabriqué au Québec</span>
-    </div>
-    <div class="confiance-item">
-      <div class="confiance-dot"></div>
-      <span class="confiance-text" data-fr="35 ans d'expertise" data-en="35 years of expertise">35 ans d'expertise</span>
-    </div>
-    <div class="confiance-item">
-      <div class="confiance-dot"></div>
-      <span class="confiance-text" data-fr="100% sur mesure" data-en="100% custom-made">100% sur mesure</span>
-    </div>
-    <div class="confiance-item">
-      <div class="confiance-dot"></div>
-      <span class="confiance-text" data-fr="Partenaires ergothérapeutes" data-en="OT partners">Partenaires ergothérapeutes</span>
-    </div>
-    <div class="confiance-item">
-      <div class="confiance-dot"></div>
-      <span class="confiance-text" data-fr="Bois franc · Vinyle médical" data-en="Hardwood · Medical vinyl">Bois franc · Vinyle médical</span>
-    </div>
-  </div>
-</section>
-
-
-<!-- ============================================================
-     SECTION: PRODUITS
-     NOTE : EKKO et MINIGO sont CACHÉS (section-hidden)
-            Changer en section-visible quand prêt
-     ============================================================ -->
-<section id="produits" class="section-visible">
-  <div class="produits">
-    <div class="section-header">
-      <div class="lbl" data-fr="Nos chaises adaptées" data-en="Our adaptive chairs">Nos chaises adaptées</div>
-      <h2 data-fr="La Chaise ERGO — 3 versions, 1 exigence : l'enfant." data-en="The ERGO Chair — 3 versions, 1 standard: the child.">La Chaise ERGO — 3 versions, 1 exigence : l'enfant.</h2>
-      <p data-fr="Conçue depuis 35 ans en collaboration directe avec les ergothérapeutes du Québec. Trois hauteurs pour chaque contexte de vie." data-en="Designed for 35 years in direct collaboration with occupational therapists in Quebec. Three heights for every life context.">
-        Conçue depuis 35 ans en collaboration directe avec les ergothérapeutes du Québec. Trois hauteurs pour chaque contexte de vie.
+      <h1 class="hero-h1" data-fr="La chaise que vous prescrivez avec <em>confiance.</em>" data-en="The chair you prescribe with <em>confidence.</em>">
+        La chaise que vous prescrivez avec <em>confiance.</em>
+      </h1>
+      <p class="hero-p" data-fr="35 ans de fabrication sur mesure, élaborée en dialogue constant avec les ergothérapeutes du Québec. Chaque chaise est une réponse clinique précise." data-en="35 years of custom manufacturing, developed in constant dialogue with Quebec occupational therapists. Every chair is a precise clinical response.">
+        35 ans de fabrication sur mesure, élaborée en dialogue constant avec les ergothérapeutes du Québec. Chaque chaise est une réponse clinique précise.
       </p>
     </div>
+    <div>
+      <div class="hero-btns">
+        <a href="#produits" class="btn-dark" data-fr="Voir la Chaise ERGO" data-en="View the ERGO Chair">Voir la Chaise ERGO</a>
+        <a href="https://acces-cible.fillout.com/t/erKz8m4uBEus" target="_blank" class="btn-ghost" data-fr="Demander une soumission" data-en="Get a Quote">Demander une soumission</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="stat-n">35+</div><div class="stat-l" data-fr="années" data-en="years">années</div></div>
+        <div><div class="stat-n">3</div><div class="stat-l" data-fr="gammes" data-en="models">gammes</div></div>
+        <div><div class="stat-n">100%</div><div class="stat-l" data-fr="sur mesure" data-en="custom">sur mesure</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-right-tag" data-fr="Chaise ERGO · Modèle Signature" data-en="ERGO Chair · Signature Model">Chaise ERGO · Modèle Signature</div>
+    <!-- ════ PHOTO HERO ════ hauteur modifiable via --photo-hero-h dans :root -->
+    <img class="hero-img" src="images/ergo-hero.jpg" alt="Chaise ERGO Accès-Cible">
+  </div>
+</section>
 
-    <div class="produits-grid">
-      <!-- Carte : Garderie -->
-      <div class="produit-card">
+
+<!-- ============================================================
+     BANDE CONFIANCE
+     ============================================================ -->
+<div class="confiance">
+  <div class="confiance-item"><div class="confiance-dot"></div><span class="confiance-text" data-fr="Fabriqué au Québec" data-en="Made in Québec">Fabriqué au Québec</span></div>
+  <div class="confiance-item"><div class="confiance-dot"></div><span class="confiance-text" data-fr="35 ans d'expertise" data-en="35 years of expertise">35 ans d'expertise</span></div>
+  <div class="confiance-item"><div class="confiance-dot"></div><span class="confiance-text" data-fr="100% sur mesure" data-en="100% custom-made">100% sur mesure</span></div>
+  <div class="confiance-item"><div class="confiance-dot"></div><span class="confiance-text" data-fr="Partenaires ergothérapeutes" data-en="OT partners">Partenaires ergothérapeutes</span></div>
+  <div class="confiance-item"><div class="confiance-dot"></div><span class="confiance-text" data-fr="Bois franc · Vinyle médical" data-en="Hardwood · Medical vinyl">Bois franc · Vinyle médical</span></div>
+</div>
+
+
+<!-- ============================================================
+     PRODUITS — Chaise ERGO 3 versions
+     ============================================================ -->
+<section id="produits" class="produits">
+  <div class="section-header">
+    <div class="lbl" data-fr="Nos chaises adaptées" data-en="Our adaptive chairs">Nos chaises adaptées</div>
+    <h2 data-fr="La Chaise ERGO — 3 versions, 1 exigence : l'enfant." data-en="The ERGO Chair — 3 versions, 1 standard: the child.">La Chaise ERGO — 3 versions, 1 exigence : l'enfant.</h2>
+    <p data-fr="Conçue depuis 35 ans en collaboration directe avec les ergothérapeutes du Québec. Trois hauteurs pour chaque contexte de vie." data-en="Designed for 35 years in direct collaboration with Quebec occupational therapists.">
+      Conçue depuis 35 ans en collaboration directe avec les ergothérapeutes du Québec. Trois hauteurs pour chaque contexte de vie.
+    </p>
+  </div>
+
+  <div class="produits-grid">
+
+    <!-- ════ CARTE 1 : Garderie ════ -->
+    <div class="produit-card">
+      <!-- Photo : hauteur modifiable via --photo-produit-h dans :root -->
+      <img class="produit-card-img" src="images/Garderie.png" alt="ERGO Hauteur garderie">
+      <div class="produit-card-body">
         <div class="produit-card-top"></div>
         <div class="produit-card-tag" data-fr="ERGO · Hauteur garderie" data-en="ERGO · Daycare Height">ERGO · Hauteur garderie</div>
         <h3 data-fr="Hauteur garderie" data-en="Daycare Height">Hauteur garderie</h3>
         <p data-fr="Conçue pour les tables basses des services de garde. Mêmes standards posturaux, format adapté aux petites tables." data-en="Designed for low daycare tables. Same postural standards, format adapted to small tables.">
           Conçue pour les tables basses des services de garde. Mêmes standards posturaux, format adapté aux petites tables.
         </p>
-        <a href="ergo.html#garderie" class="produit-card-link" data-fr="Voir les détails →" data-en="View details →">Voir les détails →</a>
+        <a href="#" class="produit-card-link" data-fr="Voir les détails →" data-en="View details →">Voir les détails →</a>
       </div>
+    </div>
 
-      <!-- Carte : Standard -->
-      <div class="produit-card">
+    <!-- ════ CARTE 2 : Standard ════ -->
+    <div class="produit-card">
+      <img class="produit-card-img" src="images/Garderie et standard 01.png" alt="ERGO Standard">
+      <div class="produit-card-body">
         <div class="produit-card-top"></div>
         <div class="produit-card-tag" data-fr="ERGO · Standard" data-en="ERGO · Standard">ERGO · Standard</div>
         <h3 data-fr="Hauteur standard" data-en="Standard Height">Hauteur standard</h3>
         <p data-fr="La version classique pour table de cuisine. Notre modèle de référence depuis 35 ans — hautement ajustable, tous accessoires de posture compatibles." data-en="The classic version for kitchen tables. Our reference model for 35 years — highly adjustable, all postural accessories compatible.">
           La version classique pour table de cuisine. Notre modèle de référence depuis 35 ans — hautement ajustable, tous accessoires de posture compatibles.
         </p>
-        <a href="ergo.html#standard" class="produit-card-link" data-fr="Voir les détails →" data-en="View details →">Voir les détails →</a>
+        <a href="#" class="produit-card-link" data-fr="Voir les détails →" data-en="View details →">Voir les détails →</a>
       </div>
+    </div>
 
-      <!-- Carte : Surdimensionnée -->
-      <div class="produit-card">
+    <!-- ════ CARTE 3 : Surdimensionnée ════ -->
+    <div class="produit-card">
+      <img class="produit-card-img" src="images/Surdimensionnee.png" alt="ERGO Surdimensionnée">
+      <div class="produit-card-body">
         <div class="produit-card-top"></div>
         <div class="produit-card-tag" data-fr="ERGO · Surdimensionnée" data-en="ERGO · Oversized">ERGO · Surdimensionnée</div>
         <h3 data-fr="Surdimensionnée" data-en="Oversized">Surdimensionnée</h3>
-        <p data-fr="Pour adultes et personnes avec larges besoins posturaux. Disponible en 18 et 20 pouces de largeur de bassin. Sur commande spéciale : 22 et 24 pouces." data-en="For adults and people with broader postural needs. Available in 18 and 20 inch hip widths. Special order: 22 and 24 inches.">
-          Pour adultes et personnes avec larges besoins posturaux. Disponible en 18&quot; et 20&quot; de largeur de bassin.
+        <p data-fr="Pour adultes et personnes avec larges besoins posturaux. Disponible en 18&quot; et 20&quot; de largeur de bassin." data-en="For adults with broader postural needs. Available in 18&quot; and 20&quot; hip widths.">
+          Pour adultes et personnes avec larges besoins posturaux. Disponible en 18" et 20" de largeur de bassin.
         </p>
-        <a href="ergo.html#surdi" class="produit-card-link" data-fr="Voir les détails →" data-en="View details →">Voir les détails →</a>
+        <a href="#" class="produit-card-link" data-fr="Voir les détails →" data-en="View details →">Voir les détails →</a>
       </div>
     </div>
 
-    <!-- Sur mesure -->
-    <div class="produits-sur-mesure">
-      <div class="produits-sur-mesure-text">
-        <div class="lbl" data-fr="Besoin unique ?" data-en="Unique need?">Besoin unique ?</div>
-        <p data-fr="Solutions entièrement sur mesure — dimensions spéciales, bureaux adaptés, marchepieds. Chaque projet est unique." data-en="Fully custom solutions — special dimensions, adapted desks, step stools. Every project is unique.">
-          Solutions entièrement sur mesure — dimensions spéciales, bureaux adaptés, marchepieds. Chaque projet est unique.
-        </p>
-      </div>
-      <a href="commander.html" class="btn-dark" data-fr="Faire une demande →" data-en="Submit a request →">Faire une demande →</a>
-    </div>
   </div>
-</section>
 
-<!-- EKKO — CACHÉ, décommenter quand prêt -->
-<!-- <section id="ekko" class="section-hidden"> ... </section> -->
-
-<!-- MINIGO — CACHÉ, décommenter quand prêt -->
-<!-- <section id="minigo" class="section-hidden"> ... </section> -->
-
-
-<!-- ============================================================
-     SECTION: HISTOIRE (extrait)
-     ============================================================ -->
-<section id="histoire" class="section-visible">
-  <div class="histoire">
-    <div class="histoire-left">
-      <div class="lbl" data-fr="Notre histoire" data-en="Our story">Notre histoire</div>
-      <h2 data-fr="De 1965 à aujourd'hui — une vocation née de l'expérience." data-en="From 1965 to today — a calling born from experience.">
-        De 1965 à aujourd'hui — une vocation née de l'expérience.
-      </h2>
-      <p data-fr="Claude Poupart a lui-même vécu en environnement adapté. Cette expérience intime, combinée à 35 ans d'innovation et à la reconstruction après l'incendie de 2023, est au cœur de chaque chaise fabriquée." data-en="Claude Poupart himself lived in an adapted environment. This intimate experience, combined with 35 years of innovation and the rebuilding after the 2023 fire, is at the heart of every chair made.">
-        Claude Poupart a lui-même vécu en environnement adapté. Cette expérience intime, combinée à 35 ans d'innovation et à la reconstruction après l'incendie de 2023, est au cœur de chaque chaise fabriquée.
-      </p>
-      <a href="histoire.html" class="hist-link" data-fr="Lire l'histoire complète" data-en="Read the full story">Lire l'histoire complète</a>
-    </div>
-    <div class="histoire-right">
-      <div class="timeline">
-        <div class="tl-item">
-          <div class="tl-year">1965</div>
-          <div class="tl-body">
-            <strong data-fr="La résilience forge le destin" data-en="Resilience shapes destiny">La résilience forge le destin</strong>
-            <span data-fr="Claude, 12 ans, séjourne au Camp Papillon. Cette immersion oriente toute sa vie." data-en="Claude, age 12, stays at Camp Papillon. This immersion shapes his entire life.">Claude, 12 ans, séjourne au Camp Papillon. Cette immersion oriente toute sa vie.</span>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-year">1990</div>
-          <div class="tl-body">
-            <strong data-fr="La première chaise" data-en="The first chair">La première chaise</strong>
-            <span data-fr="Face au manque de solutions abordables, Claude sort sa planche à dessin au CRME." data-en="Faced with a lack of affordable solutions, Claude picks up his drafting board at the CRME.">Face au manque de solutions abordables, Claude sort sa planche à dessin au CRME.</span>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-year tl-crisis">2023</div>
-          <div class="tl-body">
-            <strong data-fr="L'incendie" data-en="The fire">L'incendie</strong>
-            <span data-fr="L'atelier est détruit en 20 minutes. 30 ans d'outils et de souvenirs disparaissent." data-en="The workshop is destroyed in 20 minutes. 30 years of tools and memories disappear.">L'atelier est détruit en 20 minutes. 30 ans d'outils et de souvenirs disparaissent.</span>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-year">2024</div>
-          <div class="tl-body">
-            <strong data-fr="Nouveau départ" data-en="New beginning">Nouveau départ</strong>
-            <span data-fr="À 70 ans, Claude rebâtit. Même mission, nouvelle énergie." data-en="At 70, Claude rebuilds. Same mission, new energy.">À 70 ans, Claude rebâtit. Même mission, nouvelle énergie.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ============================================================
-     SECTION: TEMOIGNAGE
-     ============================================================ -->
-<section id="temoignage" class="section-visible">
-  <div class="temoignage">
-    <div class="temoignage-texte">
-      <strong data-fr="« Claude comprend nos besoins avant même qu'on les articule." data-en="«Claude understands our needs even before we can articulate them.">« Claude comprend nos besoins avant même qu'on les articule.</strong>
-      <span data-fr=" Un vrai partenaire clinique. »" data-en=" A true clinical partner. »"> Un vrai partenaire clinique. »</span>
-    </div>
-    <div class="temoignage-source">
-      <div class="temoignage-source-role" data-fr="Ergothérapeute partenaire · Montréal" data-en="Partner OT · Montréal">Ergothérapeute partenaire · Montréal</div>
-      <!-- Remplacez par un vrai nom avec permission -->
-      <div class="temoignage-source-name">— Ergothérapeute</div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ============================================================
-     SECTION: APERÇU ACCESSOIRES / BUREAUX / MARCHEPIED
-     ============================================================ -->
-<section id="autres-produits" class="section-visible">
-  <div class="apercu-produits">
-    <div class="apercu-content">
-      <div class="lbl" data-fr="Au-delà de la chaise" data-en="Beyond the chair">Au-delà de la chaise</div>
-      <h2 data-fr="Accessoires, bureaux adaptés et marchepied sur mesure." data-en="Accessories, adapted desks, and custom step stools.">Accessoires, bureaux adaptés et marchepied sur mesure.</h2>
-      <p data-fr="Chaque accessoire postural est compatible avec nos chaises ERGO. Nos bureaux ajustables sont fabriqués avec la même exigence. Le marchepied sur mesure complète l'environnement de l'enfant." data-en="Every postural accessory is compatible with our ERGO chairs. Our adjustable desks are built to the same standard. The custom step stool completes the child's environment.">
-        Chaque accessoire postural est compatible avec nos chaises ERGO. Nos bureaux ajustables sont fabriqués avec la même exigence. Le marchepied sur mesure complète l'environnement de l'enfant.
-      </p>
-      <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <a href="accessoires.html" class="btn-dark" data-fr="Accessoires →" data-en="Accessories →">Accessoires →</a>
-        <a href="tables.html" class="btn-ghost" data-fr="Tables ajustables →" data-en="Adjustable Tables →">Tables ajustables →</a>
-        <a href="marchepied.html" class="btn-ghost" data-fr="Marchepied →" data-en="Step Stool →">Marchepied →</a>
-      </div>
-    </div>
-    <div class="apercu-img-zone">
-      <!-- 🖼️ PHOTO BUREAU — remplacer src par le chemin de votre image -->
-      <img src="images/bureau-adaptable.jpg" alt="Bureau adapté Accès-Cible"
-        onerror="this.style.opacity=0;this.parentElement.innerHTML+='<div style=\'padding:24px;color:var(--c-muted);font-size:12px;text-align:center\'>📸 images/bureau-adaptable.jpg</div>'">
-    </div>
-  </div>
-</section>
-
-
-<!-- ============================================================
-     SECTION: ESPACE ERGOTHÉRAPEUTES
-     ============================================================ -->
-<section id="ergos" class="section-visible">
-  <div class="ergo-cta">
+  <div class="produits-sur-mesure">
     <div>
-      <div class="ergo-badge" data-fr="Espace professionnel" data-en="Professional space">Espace professionnel</div>
-      <h2 data-fr="Vous êtes ergothérapeute ?" data-en="Are you an occupational therapist?">Vous êtes ergothérapeute ?</h2>
-      <p data-fr="Accédez au formulaire de soumission, aux fiches de mesures et au processus de commande simplifié. Nous construisons ensemble, chaise par chaise." data-en="Access the quote form, measurement sheets, and streamlined ordering process. We build together, chair by chair.">
-        Accédez au formulaire de soumission, aux fiches de mesures et au processus de commande simplifié. Nous construisons ensemble, chaise par chaise.
+      <div class="lbl" data-fr="Besoin unique ?" data-en="Unique need?">Besoin unique ?</div>
+      <p data-fr="Solutions entièrement sur mesure — dimensions spéciales, bureaux adaptés, marchepieds." data-en="Fully custom solutions — special dimensions, adapted desks, step stools.">
+        Solutions entièrement sur mesure — dimensions spéciales, bureaux adaptés, marchepieds.
       </p>
     </div>
-    <div class="ergo-cta-btn-zone">
-      <a href="https://acces-cible.fillout.com/t/erKz8m4uBEus" target="_blank" class="btn-or"
-         data-fr="Formulaire de soumission →" data-en="Quote Form →">Formulaire de soumission →</a>
+    <a href="https://acces-cible.fillout.com/t/erKz8m4uBEus" target="_blank" class="btn-dark" data-fr="Faire une demande →" data-en="Submit a request →">Faire une demande →</a>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     HISTOIRE
+     ============================================================ -->
+<section id="histoire" class="histoire">
+  <div class="histoire-left">
+    <div class="lbl" data-fr="Notre histoire" data-en="Our story">Notre histoire</div>
+    <h2 data-fr="De 1965 à aujourd'hui — une vocation née de l'expérience." data-en="From 1965 to today — a calling born from experience.">
+      De 1965 à aujourd'hui — une vocation née de l'expérience.
+    </h2>
+    <p data-fr="Claude Poupart a lui-même vécu en environnement adapté. Cette expérience intime, combinée à 35 ans d'innovation et à la reconstruction après l'incendie de 2023, est au cœur de chaque chaise fabriquée." data-en="Claude Poupart himself lived in an adapted environment. This experience, combined with 35 years of innovation and rebuilding after the 2023 fire, is at the heart of every chair.">
+      Claude Poupart a lui-même vécu en environnement adapté. Cette expérience intime, combinée à 35 ans d'innovation et à la reconstruction après l'incendie de 2023, est au cœur de chaque chaise fabriquée.
+    </p>
+    <a href="#" class="hist-link" data-fr="Lire l'histoire complète" data-en="Read the full story">Lire l'histoire complète</a>
+  </div>
+  <div class="histoire-right">
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-year">1965</div>
+        <div class="tl-body">
+          <strong data-fr="La résilience forge le destin" data-en="Resilience shapes destiny">La résilience forge le destin</strong>
+          <span data-fr="Claude, 10 ans, séjourne au Camp Papillon. Cette immersion oriente toute sa vie." data-en="Claude, age 10, stays at Camp Papillon. This immersion shapes his entire life.">Claude, 10 ans, séjourne au Camp Papillon. Cette immersion oriente toute sa vie.</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1990</div>
+        <div class="tl-body">
+          <strong data-fr="La première chaise" data-en="The first chair">La première chaise</strong>
+          <span data-fr="Face au manque de solutions abordables, Claude sort sa planche à dessin au CRME et conçoit la première chaise adaptée." data-en="Faced with a lack of affordable solutions, Claude picks up his drafting board at the CRME.">Face au manque de solutions abordables, Claude sort sa planche à dessin au CRME et conçoit la première chaise adaptée.</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year tl-crisis">2023</div>
+        <div class="tl-body">
+          <strong data-fr="L'incendie" data-en="The fire">L'incendie</strong>
+          <span data-fr="Le 6 juin, l'atelier est détruit en 20 minutes. 30 ans d'outils, de dessins et de souvenirs disparaissent." data-en="On June 6th, the workshop is destroyed in 20 minutes. 30 years of tools and memories disappear.">Le 6 juin, l'atelier est détruit en 20 minutes. 30 ans d'outils, de dessins et de souvenirs disparaissent.</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2024</div>
+        <div class="tl-body">
+          <strong data-fr="Nouveau départ" data-en="New beginning">Nouveau départ</strong>
+          <span data-fr="À 70 ans, Claude rebâtit. Nouveau local, nouveaux outils. Même mission, nouvelle énergie." data-en="At 70, Claude rebuilds. New workshop, new tools. Same mission, new energy.">À 70 ans, Claude rebâtit. Nouveau local, nouveaux outils. Même mission, nouvelle énergie.</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 
 <!-- ============================================================
-     SECTION: FOOTER
+     TÉMOIGNAGE
+     ============================================================ -->
+<div class="temoignage">
+  <div class="temoignage-texte">
+    <strong data-fr="« Claude comprend nos besoins avant même qu'on les articule." data-en="«Claude understands our needs even before we can articulate them.">« Claude comprend nos besoins avant même qu'on les articule.</strong>
+    <span data-fr=" Un vrai partenaire clinique. »" data-en=" A true clinical partner. »"> Un vrai partenaire clinique. »</span>
+  </div>
+  <div class="temoignage-source">
+    <div class="temoignage-source-role" data-fr="Ergothérapeute partenaire · Québec" data-en="Partner OT · Québec">Ergothérapeute partenaire · Québec</div>
+    <div class="temoignage-source-name">— Ergothérapeute</div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     BUREAUX & ACCESSOIRES
+     ============================================================ -->
+<section id="bureaux" class="apercu-produits">
+  <div class="apercu-content">
+    <div class="lbl" data-fr="Au-delà de la chaise" data-en="Beyond the chair">Au-delà de la chaise</div>
+    <h2 data-fr="Accessoires posturaux &amp; bureaux adaptés." data-en="Postural accessories &amp; adapted desks.">Accessoires posturaux &amp; bureaux adaptés.</h2>
+    <p data-fr="Chaque accessoire est compatible avec la Chaise ERGO. Nos bureaux ajustables sont fabriqués avec la même exigence. Le marchepied sur mesure complète l'environnement de l'enfant." data-en="Every accessory is compatible with the ERGO Chair. Our adjustable desks meet the same standard. The custom step stool completes the child's environment.">
+      Chaque accessoire est compatible avec la Chaise ERGO. Nos bureaux ajustables sont fabriqués avec la même exigence. Le marchepied sur mesure complète l'environnement de l'enfant.
+    </p>
+    <div class="apercu-btns">
+      <a href="#" class="btn-dark" data-fr="Accessoires →" data-en="Accessories →">Accessoires →</a>
+      <a href="#" class="btn-ghost" data-fr="Tables ajustables →" data-en="Adjustable Tables →">Tables ajustables →</a>
+    </div>
+  </div>
+  <div class="apercu-img-zone">
+    <!-- ════ PHOTO BUREAU ════ À ajouter quand disponible -->
+    <!-- Remplacez le placeholder par : <img src="images/bureau-adaptable.jpg" alt="Bureau adapté"> -->
+    <div class="photo-placeholder" style="width:100%;height:var(--photo-apercu-h)">
+      <span>🪑</span>
+      <div><strong>Photo bureau à venir</strong></div>
+      <div>Remplacer par : images/bureau-adaptable.jpg</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     ESPACE ERGOTHÉRAPEUTES
+     ============================================================ -->
+<section id="ergos" class="ergo-cta">
+  <div>
+    <div class="ergo-badge" data-fr="Espace professionnel" data-en="Professional space">Espace professionnel</div>
+    <h2 data-fr="Vous êtes ergothérapeute ?" data-en="Are you an occupational therapist?">Vous êtes ergothérapeute ?</h2>
+    <p data-fr="Accédez au formulaire de soumission, aux fiches de mesures et au processus de commande simplifié. Nous construisons ensemble, chaise par chaise." data-en="Access the quote form, measurement sheets, and streamlined ordering process. We build together, chair by chair.">
+      Accédez au formulaire de soumission, aux fiches de mesures et au processus de commande simplifié. Nous construisons ensemble, chaise par chaise.
+    </p>
+  </div>
+  <div class="ergo-cta-btn-zone">
+    <a href="https://acces-cible.fillout.com/t/erKz8m4uBEus" target="_blank" class="btn-or" data-fr="Formulaire de soumission →" data-en="Quote Form →">Formulaire de soumission →</a>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FOOTER
      ============================================================ -->
 <footer class="footer">
   <div class="footer-top">
-    <!-- Colonne 1 : marque -->
     <div>
       <div class="footer-brand">Les Adaptations Accès-Cible</div>
-      <div class="footer-sub" data-fr="Fabrication artisanale · Québec · Depuis 1990" data-en="Artisan manufacturing · Québec · Since 1990">
-        Fabrication artisanale · Québec · Depuis 1990
-      </div>
+      <div class="footer-sub">Fabrication artisanale · Québec · Depuis 1990</div>
       <div class="footer-contact">
-        <!-- Mettez à jour avec les vraies coordonnées -->
+        <!-- ════ COORDONNÉES — à mettre à jour ════ -->
         <a href="mailto:info@lesadaptationsacces-cible.com">info@lesadaptationsacces-cible.com</a>
-        <a href="tel:+14501234567">450 123-4567</a>
-        <a href="#">Adresse — à mettre à jour</a>
+        <a href="tel:4506385232">450 638-5232</a>
+        <a href="tel:4502771298">450 277-1298</a>
       </div>
     </div>
-
-    <!-- Colonne 2 : navigation -->
     <div>
       <div class="footer-nav-title" data-fr="Produits" data-en="Products">Produits</div>
       <div class="footer-nav-links">
-        <a href="ergo.html#garderie" data-fr="ERGO — Hauteur garderie" data-en="ERGO — Daycare Height">ERGO — Hauteur garderie</a>
-        <a href="ergo.html#standard" data-fr="ERGO — Standard" data-en="ERGO — Standard">ERGO — Standard</a>
-        <a href="ergo.html#surdi" data-fr="ERGO — Surdimensionnée" data-en="ERGO — Oversized">ERGO — Surdimensionnée</a>
-        <a href="accessoires.html" data-fr="Accessoires posturaux" data-en="Postural accessories">Accessoires posturaux</a>
-        <a href="tables.html" data-fr="Tables ajustables" data-en="Adjustable tables">Tables ajustables</a>
-        <a href="marchepied.html" data-fr="Marchepied sur mesure" data-en="Custom step stool">Marchepied sur mesure</a>
+        <a href="#produits" data-fr="ERGO — Hauteur garderie" data-en="ERGO — Daycare">ERGO — Hauteur garderie</a>
+        <a href="#produits" data-fr="ERGO — Standard" data-en="ERGO — Standard">ERGO — Standard</a>
+        <a href="#produits" data-fr="ERGO — Surdimensionnée" data-en="ERGO — Oversized">ERGO — Surdimensionnée</a>
+        <a href="#bureaux" data-fr="Accessoires posturaux" data-en="Postural accessories">Accessoires posturaux</a>
+        <a href="#bureaux" data-fr="Tables ajustables" data-en="Adjustable tables">Tables ajustables</a>
       </div>
     </div>
-
-    <!-- Colonne 3 : liens utiles -->
     <div>
       <div class="footer-nav-title" data-fr="Informations" data-en="Information">Informations</div>
       <div class="footer-nav-links">
-        <a href="histoire.html" data-fr="Notre histoire" data-en="Our story">Notre histoire</a>
-        <a href="commander.html" data-fr="Formulaire de commande" data-en="Order form">Formulaire de commande</a>
-        <a href="contact.html" data-fr="Nous contacter" data-en="Contact us">Nous contacter</a>
+        <a href="#histoire" data-fr="Notre histoire" data-en="Our story">Notre histoire</a>
+        <a href="#ergos" data-fr="Espace ergothérapeutes" data-en="OT space">Espace ergothérapeutes</a>
+        <a href="https://acces-cible.fillout.com/t/erKz8m4uBEus" target="_blank" data-fr="Formulaire de soumission" data-en="Quote form">Formulaire de soumission</a>
       </div>
     </div>
   </div>
-
   <div class="footer-bottom">
     <div class="footer-copyright" data-fr="© 2025 Les Adaptations Accès-Cible Inc. Tous droits réservés." data-en="© 2025 Les Adaptations Accès-Cible Inc. All rights reserved.">
       © 2025 Les Adaptations Accès-Cible Inc. Tous droits réservés.
-    </div>
-    <div class="footer-social">
-      <!-- Les liens seront activés quand les réseaux sociaux seront prêts -->
-      <!-- <a href="#">Facebook</a> -->
-      <!-- <a href="#">Instagram</a> -->
-      <!-- <a href="#">YouTube</a> -->
     </div>
   </div>
 </footer>
 
 
 <!-- ============================================================
-     JS — Bilingue FR/EN + Mobile menu
+     JS — Bilingue FR/EN + Menu mobile
      ============================================================ -->
 <script>
-// ─── État de la langue ───
 let currentLang = 'fr';
 
 function toggleLang() {
   currentLang = currentLang === 'fr' ? 'en' : 'fr';
-  applyLang(currentLang);
+  document.querySelectorAll('[data-fr]').forEach(el => {
+    const val = el.getAttribute('data-' + currentLang);
+    if (val) { val.includes('<') ? el.innerHTML = val : el.textContent = val; }
+  });
   document.getElementById('langBtn').textContent = currentLang === 'fr' ? 'EN' : 'FR';
   document.documentElement.lang = currentLang;
 }
 
-function applyLang(lang) {
-  // Textes simples (data-fr / data-en)
-  document.querySelectorAll('[data-fr]').forEach(el => {
-    const key = 'data-' + lang;
-    if (el.hasAttribute(key)) {
-      // Si le contenu contient du HTML (em, strong), utiliser innerHTML
-      const val = el.getAttribute(key);
-      if (val.includes('<')) {
-        el.innerHTML = val;
-      } else {
-        el.textContent = val;
-      }
-    }
-  });
-}
-
-// ─── Menu mobile ───
 function toggleMobileMenu() {
-  const menu = document.getElementById('mobileMenu');
-  menu.classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
 }
 
-// Fermer le menu mobile si on clique ailleurs
 document.addEventListener('click', function(e) {
   const menu = document.getElementById('mobileMenu');
   const hamburger = document.querySelector('.nav-hamburger');
