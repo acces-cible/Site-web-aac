@@ -1,0 +1,8 @@
+# Google Drive files
+*.gsheet
+*.gdoc
+*.gslides
+*.gdraw
+*.gform
+*.gmap
+*.gsite
