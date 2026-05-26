@@ -33,10 +33,12 @@
   --fs-h2:       26px;
   --fs-hero:     44px;
 
-  /* --- PHOTOS : modifiez la hauteur ici --- */
-  --photo-hero-h:     520px;   /* ← hauteur photo hero (droite) */
-  --photo-produit-h:  260px;   /* ← hauteur photos dans les cartes produit */
-  --photo-apercu-h:   280px;   /* ← hauteur photo section bureaux */
+  /* ============================================================
+     📸 TAILLE DES PHOTOS — UNE SEULE VALEUR À CHANGER
+     ============================================================ */
+  --photo-hero-h:     480px;   /* ← photo principale (section hero droite) */
+  --photo-produit-h:  260px;   /* ← photos des 3 cartes ERGO */
+  --photo-apercu-h:   280px;   /* ← photo bureaux & accessoires */
 
   /* --- POLICES --- */
   --font-body:   'Nunito', sans-serif;
@@ -147,7 +149,7 @@ a { color: inherit; text-decoration: none; }
 /* ============================================================
    PHOTO HERO — modifiez --photo-hero-h dans :root
    ============================================================ */
-.hero-img { max-width: 480px; height: var(--photo-hero-h); object-fit: contain; object-position: center center; }
+.hero-img { height: var(--photo-hero-h); width: auto; max-width: 100%; object-fit: contain; object-position: center center; }
 
 /* ============================================================
    BANDE CONFIANCE
