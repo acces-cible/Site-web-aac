@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accessoires posturaux — Les Adaptations Accès-Cible</title>
+<meta name="description" content="Accessoires posturaux pour la chaise ERGO : coussins, ceintures, plastrons, appui-bras, cabaret, configurations hors standard.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Caveat:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ============================================================
+   ⚙️  CONFIG
+   ============================================================ */
+:root {
+  --c-marine:    #1e3a4f;
+  --c-nuit:      #1a2530;
+  --c-parchemin: #f6f2eb;
+  --c-cuivre:    #c0874a;
+  --c-brume:     #e8e2d6;
+  --c-bord:      #d4cdbf;
+  --c-muted:     #7a7060;
+  --c-blanc:     #ffffff;
+  --font-titre:  'Crimson Pro', Georgia, serif;
+  --font-script: 'Caveat', cursive;
+  --font-mono:   'JetBrains Mono', monospace;
+  --font-body:   'IBM Plex Sans', sans-serif;
+  --fs-label: 10px;
+  --fs-body:  15px;
+  --fs-h2:    32px;
+  --fs-h1:    48px;
+  --pad-section: 72px 60px;
+  --pad-mobile:  40px 20px;
+  --max-width: 1100px;
+  --radius:    4px;
+}
+
+/* ============================================================
+   RESET
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); color: var(--c-nuit); background: var(--c-parchemin); font-size: var(--fs-body); line-height: 1.75; }
+img  { display: block; max-width: 100%; height: auto; }
+a    { color: inherit; text-decoration: none; }
+button { cursor: pointer; border: none; font-family: inherit; background: none; }
+
+/* ============================================================
+   UTILITAIRES
+   ============================================================ */
+.lbl { font-family: var(--font-mono); font-size: var(--fs-label); font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--c-cuivre); display: block; }
+.btn-primary { display: inline-block; background: var(--c-marine); color: var(--c-parchemin); font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; padding: 13px 26px; border-radius: var(--radius); transition: opacity .2s; }
+.btn-primary:hover { opacity: .85; }
+.btn-accent { display: inline-block; background: var(--c-cuivre); color: var(--c-blanc); font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; padding: 13px 26px; border-radius: var(--radius); transition: opacity .2s; }
+.btn-accent:hover { opacity: .88; }
+.btn-ghost { display: inline-block; border: 1.5px solid var(--c-bord); color: var(--c-nuit); font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; padding: 12px 24px; border-radius: var(--radius); transition: border-color .2s, color .2s; }
+.btn-ghost:hover { border-color: var(--c-cuivre); color: var(--c-cuivre); }
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav { position: sticky; top: 0; z-index: 100; background: var(--c-marine); height: 58px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; border-bottom: 1px solid rgba(255,255,255,.07); }
+.nav-logo { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
+.nav-logo-barre { width: 2px; height: 28px; background: var(--c-cuivre); }
+.nav-logo-texte { font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--c-blanc); line-height: 1.25; }
+.nav-logo-texte small { display: block; font-family: var(--font-mono); font-size: 8px; letter-spacing: .15em; text-transform: uppercase; color: rgba(192,135,74,.7); margin-top: 1px; }
+.nav-liens { display: flex; align-items: center; gap: 24px; }
+.nav-liens a { font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.45); transition: color .2s; }
+.nav-liens a:hover, .nav-liens a.actif { color: rgba(255,255,255,.9); }
+.nav-dropdown { position: relative; }
+.nav-dropdown-menu { display: none; position: absolute; top: calc(100% + 14px); left: 50%; transform: translateX(-50%); background: var(--c-blanc); border: 1px solid var(--c-bord); border-radius: var(--radius); min-width: 210px; box-shadow: 0 8px 32px rgba(0,0,0,.1); overflow: hidden; }
+.nav-dropdown:hover .nav-dropdown-menu { display: block; }
+.nav-dropdown-menu a { display: block; padding: 11px 18px; font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em; color: var(--c-nuit) !important; border-bottom: 1px solid var(--c-bord); text-transform: uppercase; }
+.nav-dropdown-menu a:last-child { border-bottom: none; }
+.nav-dropdown-menu a:hover { background: var(--c-brume); }
+.nav-cta { background: var(--c-cuivre); color: var(--c-blanc) !important; font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; padding: 8px 16px; border-radius: var(--radius); transition: opacity .2s !important; }
+.nav-cta:hover { opacity: .85 !important; }
+.lang-btn { font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,.4); border: 1px solid rgba(255,255,255,.2); padding: 5px 10px; border-radius: var(--radius); cursor: pointer; transition: color .2s, border-color .2s; }
+.lang-btn:hover { color: var(--c-cuivre); border-color: var(--c-cuivre); }
+.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--c-blanc); border-radius: 1px; }
+.nav-mobile { display: none; position: fixed; top: 58px; left: 0; right: 0; background: var(--c-marine); z-index: 99; padding: 16px 20px 24px; box-shadow: 0 8px 24px rgba(0,0,0,.2); }
+.nav-mobile.ouvert { display: block; }
+.nav-mobile a { display: block; color: rgba(255,255,255,.65); font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.07); }
+.nav-mobile a:hover { color: var(--c-cuivre); }
+.nav-mobile-sub { padding-left: 16px; font-size: 10px !important; color: rgba(255,255,255,.4) !important; }
+.nav-mobile-cta { display: block; text-align: center; margin-top: 14px; background: var(--c-cuivre); color: var(--c-blanc) !important; padding: 12px !important; border-radius: var(--radius); border: none !important; }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero-outer { background: var(--c-parchemin); border-bottom: 1px solid var(--c-bord); }
+.hero { max-width: var(--max-width); margin: 0 auto; padding: 72px 60px 64px; }
+.hero .lbl { margin-bottom: 18px; }
+.hero-h1 { font-family: var(--font-titre); font-size: var(--fs-h1); font-weight: 300; line-height: 1.12; color: var(--c-marine); margin-bottom: 20px; }
+.hero-h1 em { font-style: italic; color: var(--c-cuivre); }
+.hero-sous-titre { font-size: var(--fs-body); color: var(--c-muted); line-height: 1.8; max-width: 600px; margin-bottom: 32px; }
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* Ancres */
+.ancres { background: var(--c-blanc); border-bottom: 1px solid var(--c-bord); position: sticky; top: 58px; z-index: 90; }
+.ancres-inner { max-width: var(--max-width); margin: 0 auto; padding: 0 60px; display: flex; overflow-x: auto; }
+.ancre-btn { font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--c-muted); padding: 16px 20px; border-bottom: 2px solid transparent; white-space: nowrap; transition: color .2s, border-color .2s; cursor: pointer; background: none; border-top: none; border-left: none; border-right: none; }
+.ancre-btn:hover { color: var(--c-marine); border-bottom-color: var(--c-bord); }
+.ancre-btn.actif { color: var(--c-marine); border-bottom-color: var(--c-cuivre); }
+
+/* ============================================================
+   EN-TÊTES DE SECTION
+   ============================================================ */
+.entete-section { margin-bottom: 44px; }
+.entete-section .lbl { margin-bottom: 10px; }
+.entete-section h2 { font-family: var(--font-titre); font-size: var(--fs-h2); font-weight: 300; color: var(--c-marine); line-height: 1.2; margin-bottom: 10px; }
+.entete-section p { font-size: var(--fs-body); color: var(--c-muted); max-width: 620px; line-height: 1.8; }
+
+/* ============================================================
+   LISTE SIMPLE AVEC DOT — utilisée sections 02, 03, 04
+   ============================================================ */
+.liste-groupe { margin-bottom: 44px; }
+.liste-groupe:last-child { margin-bottom: 0; }
+.liste-groupe h3 { font-family: var(--font-titre); font-size: 20px; font-weight: 400; color: var(--c-marine); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--c-bord); }
+
+.liste-items { display: flex; flex-direction: column; }
+.liste-item { display: flex; align-items: flex-start; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--c-bord); }
+.liste-item:last-child { border-bottom: none; }
+.liste-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--c-cuivre); flex-shrink: 0; margin-top: 7px; }
+.liste-item strong { display: block; font-size: 13px; font-weight: 600; color: var(--c-nuit); margin-bottom: 2px; }
+.liste-item span { font-size: 12px; color: var(--c-muted); line-height: 1.55; }
+
+/* note clinique */
+.note-clinique { margin-top: 28px; background: var(--c-blanc); border-left: 3px solid var(--c-cuivre); padding: 14px 20px; }
+.note-clinique p { font-size: 12px; color: var(--c-muted); line-height: 1.65; }
+.note-clinique strong { color: var(--c-nuit); font-weight: 600; }
+
+/* ============================================================
+   GRILLE 2 COLONNES pour sections 02, 03, 04
+   ============================================================ */
+.deux-col { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+
+/* ============================================================
+   SECTION 01 — COUSSINS : grille cartes avec photo
+   ============================================================ */
+.coussins-outer { background: var(--c-blanc); border-bottom: 1px solid var(--c-bord); }
+.coussins { max-width: var(--max-width); margin: 0 auto; padding: var(--pad-section); }
+
+.sous-section { margin-bottom: 52px; }
+.sous-section:last-child { margin-bottom: 0; }
+.sous-titre-ligne { font-family: var(--font-titre); font-size: 22px; font-weight: 400; color: var(--c-marine); padding-bottom: 10px; border-bottom: 1px solid var(--c-bord); margin-bottom: 20px; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.sous-titre-note { font-family: var(--font-mono); font-size: 9px; color: var(--c-muted); }
+
+/* grille cartes */
+.coussin-grille { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--c-bord); border: 1px solid var(--c-bord); }
+.coussin-grille-3 { grid-template-columns: repeat(3, 1fr); }
+
+.coussin-carte { background: var(--c-blanc); overflow: hidden; transition: box-shadow .15s; }
+.coussin-carte:hover { box-shadow: 0 4px 20px rgba(0,0,0,.08); position: relative; z-index: 1; }
+
+.coussin-photo { width: 100%; height: 160px; background: var(--c-brume); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.coussin-photo img { width: 100%; height: 100%; object-fit: cover; }
+.coussin-photo-placeholder { display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--c-bord); }
+.coussin-photo-placeholder span { font-family: var(--font-mono); font-size: 8px; color: var(--c-bord); }
+
+.coussin-corps { padding: 14px 16px 18px; }
+.coussin-corps .lbl { margin-bottom: 4px; font-size: 9px; }
+.coussin-corps h3 { font-family: var(--font-titre); font-size: 17px; font-weight: 400; color: var(--c-marine); margin-bottom: 5px; }
+.coussin-corps p { font-size: 12px; color: var(--c-muted); line-height: 1.55; }
+
+.variantes { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+.variante { font-family: var(--font-mono); font-size: 8px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; padding: 3px 8px; border: 1px solid var(--c-bord); color: var(--c-muted); border-radius: 2px; }
+
+/* ============================================================
+   LISTE EXPAND — sections 02 et 03
+   Même espacement que liste simple, flèche à gauche, expand photo
+   ============================================================ */
+.expand-item { border-bottom: 1px solid var(--c-bord); }
+.expand-item:last-child { border-bottom: none; }
+
+.expand-trigger {
+  width: 100%; display: flex; align-items: flex-start; gap: 12px;
+  padding: 12px 0; cursor: pointer; background: none; text-align: left;
+}
+.expand-trigger:hover .expand-nom { color: var(--c-cuivre); }
+
+/* flèche gauche → pivote bas quand ouvert */
+.expand-fleche { flex-shrink: 0; color: var(--c-muted); transition: transform .22s, color .2s; margin-top: 2px; }
+.expand-item.ouvert .expand-fleche { transform: rotate(90deg); color: var(--c-cuivre); }
+
+.expand-texte { flex: 1; }
+.expand-nom { font-size: 13px; font-weight: 600; color: var(--c-nuit); display: block; margin-bottom: 2px; transition: color .15s; }
+.expand-desc { font-size: 12px; color: var(--c-muted); line-height: 1.55; }
+
+/* panneau photo caché */
+.expand-panel { display: none; padding: 0 0 16px 24px; }
+.expand-item.ouvert .expand-panel { display: grid; grid-template-columns: 140px 1fr; gap: 16px; align-items: start; }
+
+.expand-photo { width: 140px; height: 110px; background: var(--c-brume); border: 1px solid var(--c-bord); display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; }
+.expand-photo img { width: 100%; height: 100%; object-fit: cover; }
+.expand-photo-placeholder { color: var(--c-bord); }
+
+.expand-panel-desc { font-size: 13px; color: var(--c-muted); line-height: 1.65; }
+.expand-panel-note { font-size: 11px; font-family: var(--font-mono); letter-spacing: .04em; color: var(--c-muted); font-style: italic; margin-top: 6px; }
+
+/* ============================================================
+   CTA — fond marine
+   ============================================================ */
+.cta-outer { background: var(--c-marine); }
+.cta-inner { max-width: var(--max-width); margin: 0 auto; padding: 0 60px; display: grid; grid-template-columns: 1fr 1fr; min-height: 300px; }
+.cta-citation { padding: 64px 56px 64px 0; border-right: 1px solid rgba(255,255,255,.08); position: relative; display: flex; flex-direction: column; gap: 14px; }
+.cta-citation .lbl { color: #c0874a; }
+.cta-citation-texte { font-family: var(--font-script); font-size: 26px; line-height: 1.45; color: #e8c99a; font-style: italic; flex: 1; }
+.cta-citation-source { font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: #c0874a; }
+.cta-regle { position: absolute; bottom: 0; left: 0; width: 80px; height: 3px; background: linear-gradient(90deg, var(--c-cuivre), transparent); opacity: .5; }
+.cta-action { padding: 64px 0 64px 56px; display: flex; flex-direction: column; justify-content: center; gap: 24px; }
+.cta-titre { font-family: var(--font-titre); font-size: 28px; font-weight: 300; color: var(--c-parchemin); line-height: 1.25; }
+.cta-titre em { font-style: italic; color: var(--c-cuivre); }
+.cta-liste { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.cta-liste li { font-size: 13px; color: rgba(246,242,235,.6); padding-left: 16px; position: relative; line-height: 1.5; }
+.cta-liste li::before { content: '—'; position: absolute; left: 0; color: var(--c-cuivre); font-size: 11px; }
+.cta-btns { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+.cta-lien { font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: rgba(246,242,235,.4); text-decoration: underline; text-underline-offset: 3px; transition: color .2s; }
+.cta-lien:hover { color: var(--c-cuivre); }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer { background: var(--c-nuit); border-top: 1px solid rgba(255,255,255,.05); }
+.footer-inner { max-width: var(--max-width); margin: 0 auto; padding: 48px 60px 32px; display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 48px; }
+.footer-brand { font-family: var(--font-titre); font-size: 20px; font-weight: 300; color: #ffffff; margin-bottom: 6px; }
+.footer-tagline { font-family: var(--font-mono); font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--c-cuivre); margin-bottom: 20px; }
+.footer-coords { display: flex; flex-direction: column; gap: 6px; }
+.footer-coords a, .footer-coords span { font-size: 13px; color: rgba(246,242,235,.8); transition: color .2s; line-height: 1.65; }
+.footer-coords a:hover { color: var(--c-cuivre); }
+.footer-col-titre { font-family: var(--font-mono); font-size: 9px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--c-cuivre); margin-bottom: 14px; }
+.footer-liens { display: flex; flex-direction: column; gap: 10px; }
+.footer-liens a { font-size: 13px; color: rgba(246,242,235,.75); transition: color .2s; }
+.footer-liens a:hover { color: #ffffff; }
+.footer-bottom { max-width: var(--max-width); margin: 0 auto; padding: 20px 60px 28px; border-top: 1px solid rgba(255,255,255,.1); display: flex; justify-content: space-between; align-items: center; }
+.footer-copyright { font-family: var(--font-mono); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: rgba(246,242,235,.45); }
+.footer-fab { font-family: var(--font-script); font-size: 16px; color: rgba(192,135,74,.7); }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 900px) {
+  :root { --fs-h1: 32px; --fs-h2: 24px; }
+  .nav { padding: 0 20px; }
+  .nav-liens { display: none; }
+  .nav-hamburger { display: flex; }
+  .hero { padding: var(--pad-mobile); }
+  .ancres-inner { padding: 0 20px; }
+  .coussins { padding: var(--pad-mobile); }
+  .coussin-grille { grid-template-columns: 1fr 1fr; }
+  .coussin-grille-3 { grid-template-columns: 1fr 1fr; }
+  .deux-col { grid-template-columns: 1fr; gap: 32px; }
+  .expand-item.ouvert .expand-panel { grid-template-columns: 1fr; }
+  .expand-photo { width: 100%; height: 140px; }
+  .cta-inner { grid-template-columns: 1fr; padding: 0 20px; }
+  .cta-citation { padding: 48px 0 36px; border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); }
+  .cta-action { padding: 36px 0 48px; }
+  .footer-inner { grid-template-columns: 1fr; gap: 32px; padding: 40px 20px 28px; }
+  .footer-bottom { padding: 16px 20px 24px; flex-direction: column; align-items: flex-start; gap: 8px; }
+}
+@media (max-width: 540px) {
+  .coussin-grille { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-barre"></div>
+    <div class="nav-logo-texte">
+      Les Adaptations Accès-Cible
+      <small data-fr="Partenaire des ergothérapeutes · Québec" data-en="Partner of occupational therapists · Quebec">Partenaire des ergothérapeutes · Québec</small>
+    </div>
+  </a>
+  <div class="nav-liens" id="navLiens">
+    <div class="nav-dropdown">
+      <a href="ergo.html" data-fr="Chaise ERGO" data-en="ERGO Chair">Chaise ERGO</a>
+      <div class="nav-dropdown-menu">
+        <a href="ergo.html#garderie">Hauteur garderie</a>
+        <a href="ergo.html#standard">Standard</a>
+        <a href="ergo.html#surdimensionnee">Surdimensionnée</a>
+      </div>
+    </div>
+    <a href="accessoires.html" class="actif" data-fr="Accessoires" data-en="Accessories">Accessoires</a>
+    <a href="bureaux.html" data-fr="Bureaux" data-en="Desks">Bureaux</a>
+    <a href="marchepied.html" data-fr="Marchepieds" data-en="Footrests">Marchepieds</a>
+    <a href="histoire.html" data-fr="Notre histoire" data-en="Our story">Notre histoire</a>
+    <a href="contact.html" data-fr="Contact" data-en="Contact">Contact</a>
+    <button class="lang-btn" onclick="toggleLangue()" id="langBtn">EN</button>
+    <a href="contact.html#formulaire" class="nav-cta" data-fr="Soumission →" data-en="Get a quote →">Soumission →</a>
+  </div>
+  <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-mobile" id="navMobile">
+  <a href="ergo.html">Chaise ERGO</a>
+  <a href="ergo.html#garderie" class="nav-mobile-sub">↳ Hauteur garderie</a>
+  <a href="ergo.html#standard" class="nav-mobile-sub">↳ Standard</a>
+  <a href="ergo.html#surdimensionnee" class="nav-mobile-sub">↳ Surdimensionnée</a>
+  <a href="accessoires.html">Accessoires</a>
+  <a href="bureaux.html">Bureaux</a>
+  <a href="marchepied.html">Marchepieds</a>
+  <a href="histoire.html">Notre histoire</a>
+  <a href="contact.html">Contact</a>
+  <a href="contact.html#formulaire" class="nav-mobile-cta">Demander une soumission →</a>
+</div>
+
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<div class="hero-outer">
+  <div class="hero">
+    <span class="lbl" data-fr="Accessoires posturaux · Chaise ERGO" data-en="Postural accessories · ERGO Chair">Accessoires posturaux · Chaise ERGO</span>
+    <h1 class="hero-h1"
+        data-fr-html="Les accessoires qui font<br>de la chaise une <em>solution complète.</em>"
+        data-en-html="The accessories that make<br>the chair a <em>complete solution.</em>">
+      Les accessoires qui font<br>de la chaise une <em>solution complète.</em>
+    </h1>
+    <p class="hero-sous-titre"
+       data-fr="Chaque chaise ERGO peut être équipée selon les besoins posturaux précis de l'enfant. Les accessoires sont sélectionnés avec l'ergothérapeute dans le formulaire de soumission — compatibilité et disponibilité varient selon la largeur de chaise."
+       data-en="Every ERGO chair can be equipped to the child's precise postural needs. Accessories are selected with the occupational therapist in the quote form — compatibility varies by chair width.">
+      Chaque chaise ERGO peut être équipée selon les besoins posturaux précis de l'enfant. Les accessoires sont sélectionnés avec l'ergothérapeute dans le formulaire de soumission — compatibilité et disponibilité varient selon la largeur de chaise.
+    </p>
+    <div class="hero-btns">
+      <a href="contact.html#formulaire" class="btn-primary" data-fr="Formulaire de soumission →" data-en="Quote form →">Formulaire de soumission →</a>
+      <a href="ergo.html" class="btn-ghost" data-fr="Voir la chaise ERGO" data-en="View the ERGO chair">Voir la chaise ERGO</a>
+    </div>
+  </div>
+</div>
+
+<!-- Ancres -->
+<div class="ancres">
+  <div class="ancres-inner">
+    <button class="ancre-btn actif" onclick="allerA('coussins', this)" data-fr="Coussins" data-en="Cushions">Coussins</button>
+    <button class="ancre-btn" onclick="allerA('ceintures', this)" data-fr="Ceintures & Plastrons" data-en="Belts & Chest straps">Ceintures & Plastrons</button>
+    <button class="ancre-btn" onclick="allerA('accessoires', this)" data-fr="Accessoires" data-en="Accessories">Accessoires</button>
+    <button class="ancre-btn" onclick="allerA('hors-standard', this)" data-fr="Config. hors standard" data-en="Non-standard config.">Config. hors standard</button>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     SECTION 01 — COUSSINS (fond blanc)
+     Accordion flèche gauche + photo
+     🖼️  Remplacer les src par les vraies photos quand disponibles
+     ============================================================ -->
+<div id="coussins" class="coussins-outer">
+  <div class="coussins">
+
+    <div class="entete-section">
+      <span class="lbl" data-fr="Section 01" data-en="Section 01">Section 01</span>
+      <h2 data-fr="Coussins" data-en="Cushions">Coussins</h2>
+      <p data-fr="Fabriqués sur mesure selon les dimensions de la chaise. Disponibles en vinyle qualité marine — résistant et facile à nettoyer en milieu institutionnel — dans les 18 couleurs de la gamme."
+         data-en="Custom-made to the chair's dimensions. Available in marine-grade vinyl — durable and easy to clean in institutional settings — in 18 colours.">
+        Fabriqués sur mesure selon les dimensions de la chaise. Disponibles en vinyle qualité marine — résistant et facile à nettoyer en milieu institutionnel — dans les 18 couleurs de la gamme.
+      </p>
+    </div>
+
+    <!-- ─── Coussin de dos ─── -->
+    <div class="sous-section">
+      <div class="sous-titre-ligne" data-fr="Coussin de dos" data-en="Back cushion">Coussin de dos</div>
+      <div class="coussin-grille">
+
+        <div class="coussin-carte">
+          <div class="coussin-photo"><!-- 🖼️ <img src="images/coussin-dos-leger.jpg" alt="Contour léger"> -->
+            <div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div>
+          </div>
+          <div class="coussin-corps">
+            <span class="lbl" data-fr="Dos" data-en="Back">Dos</span>
+            <h3 data-fr="Contour léger" data-en="Light contour">Contour léger</h3>
+            <p data-fr="Légère inclinaison latérale pour un soutien doux du tronc." data-en="Slight lateral curve for gentle trunk support.">Légère inclinaison latérale pour un soutien doux du tronc.</p>
+          </div>
+        </div>
+
+        <div class="coussin-carte">
+          <div class="coussin-photo"><!-- 🖼️ <img src="images/coussin-dos-moyen.jpg" alt="Contour moyen"> -->
+            <div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div>
+          </div>
+          <div class="coussin-corps">
+            <span class="lbl" data-fr="Dos" data-en="Back">Dos</span>
+            <h3 data-fr="Contour moyen" data-en="Medium contour">Contour moyen</h3>
+            <p data-fr="Contour marqué pour un soutien latéral modéré." data-en="Defined contour for moderate lateral support.">Contour marqué pour un soutien latéral modéré.</p>
+          </div>
+        </div>
+
+        <div class="coussin-carte">
+          <div class="coussin-photo"><!-- 🖼️ <img src="images/coussin-dos-accentue.jpg" alt="Contour accentué"> -->
+            <div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div>
+          </div>
+          <div class="coussin-corps">
+            <span class="lbl" data-fr="Dos" data-en="Back">Dos</span>
+            <h3 data-fr="Contour accentué" data-en="Accentuated contour">Contour accentué</h3>
+            <p data-fr="Soutien latéral prononcé pour les besoins posturaux importants." data-en="Pronounced lateral support for significant postural needs.">Soutien latéral prononcé pour les besoins posturaux importants.</p>
+          </div>
+        </div>
+
+        <div class="coussin-carte">
+          <div class="coussin-photo"><!-- 🖼️ <img src="images/appui-thoracique.jpg" alt="Appui thoracique"> -->
+            <div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div>
+          </div>
+          <div class="coussin-corps">
+            <span class="lbl" data-fr="Dos" data-en="Back">Dos</span>
+            <h3 data-fr="Appui thoracique" data-en="Thoracic support">Appui thoracique</h3>
+            <p data-fr="Vient avec un coussin lombaire et un petit coussin plat dans le haut du dossier (env. 2, 3 ou 4 po selon la hauteur du dossier)." data-en="Comes with a lumbar cushion and a small flat cushion at the top of the backrest (approx. 2, 3, or 4 in depending on backrest height).">Vient avec un coussin lombaire et un petit coussin plat dans le haut du dossier (env. 2, 3 ou 4 po).</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ─── Coussin de siège ─── -->
+    <div class="sous-section">
+      <div class="sous-titre-ligne">
+        <span data-fr="Coussin de siège" data-en="Seat cushion">Coussin de siège</span>
+        <span class="sous-titre-note" data-fr="* Coussin contour : 2 po de surplus de bassin requis" data-en="* Contour cushion: 2 in extra pelvic width required">* Coussin contour : 2 po de surplus de bassin requis</span>
+      </div>
+      <div class="coussin-grille coussin-grille-3">
+
+        <div class="coussin-carte">
+          <div class="coussin-photo"><!-- 🖼️ <img src="images/coussin-siege-plat.jpg" alt="Coussin plat"> -->
+            <div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div>
+          </div>
+          <div class="coussin-corps">
+            <span class="lbl" data-fr="Siège" data-en="Seat">Siège</span>
+            <h3 data-fr="Coussin plat" data-en="Flat cushion">Coussin plat</h3>
+            <p data-fr="Coussin de base sans contour. Compatible avec l'appui-pelvien." data-en="Basic cushion without contour. Compatible with pelvic support.">Coussin de base sans contour. Compatible avec l'appui-pelvien.</p>
+          </div>
+        </div>
+
+        <div class="coussin-carte">
+          <div class="coussin-photo"><!-- 🖼️ <img src="images/coussin-siege-contour.jpg" alt="Coussin contour"> -->
+            <div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div>
+          </div>
+          <div class="coussin-corps">
+            <span class="lbl" data-fr="Siège" data-en="Seat">Siège</span>
+            <h3 data-fr="Coussin contour" data-en="Contour cushion">Coussin contour</h3>
+            <p data-fr="Peut se combiner avec une ou plusieurs options : biseauté, bloc ABD, bloc d'ischion — jusqu'aux trois simultanément." data-en="Can be combined with one or more options: beveled, ABD block, ischion block — up to all three simultaneously.">Peut se combiner : biseauté, bloc ABD, bloc d'ischion — jusqu'aux trois.</p>
+            <div class="variantes">
+              <span class="variante">Biseauté · 5° / 8-9° / 12°+</span>
+              <span class="variante" data-fr="Bloc ABD" data-en="ABD block">Bloc ABD</span>
+              <span class="variante" data-fr="Bloc d'ischion" data-en="Ischion block">Bloc d'ischion</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="coussin-carte">
+          <div class="coussin-photo"><!-- 🖼️ <img src="images/appui-pelvien.jpg" alt="Appui-pelvien"> -->
+            <div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div>
+          </div>
+          <div class="coussin-corps">
+            <span class="lbl" data-fr="Siège" data-en="Seat">Siège</span>
+            <h3 data-fr="Appui-pelvien" data-en="Pelvic support">Appui-pelvien</h3>
+            <p data-fr="Support rembourré pour le positionnement pelvien latéral. Vient avec un coussin plat." data-en="Padded support for lateral pelvic positioning. Comes with a flat cushion.">Support rembourré pour le positionnement pelvien latéral. Vient avec un coussin plat.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ============================================================
+     SECTION 02 — CEINTURES & PLASTRONS (fond brume)
+     Liste simple avec dot — pas d'accordion
+     ============================================================ -->
+<div id="ceintures" style="background:var(--c-brume); border-bottom:1px solid var(--c-bord);">
+  <div style="max-width:var(--max-width); margin:0 auto; padding:var(--pad-section);">
+
+    <div class="entete-section">
+      <span class="lbl" data-fr="Section 02" data-en="Section 02">Section 02</span>
+      <h2 data-fr="Ceintures & Plastrons" data-en="Belts & Chest straps">Ceintures & Plastrons</h2>
+      <p data-fr="Les systèmes de maintien sont choisis selon les besoins cliniques de l'enfant. Le type d'attache disponible varie selon la ceinture sélectionnée."
+         data-en="Restraint systems are chosen based on clinical needs. Available attachment type varies by selected belt.">
+        Les systèmes de maintien sont choisis selon les besoins cliniques de l'enfant. Le type d'attache disponible varie selon la ceinture sélectionnée.
+      </p>
+    </div>
+
+    <div class="deux-col">
+
+      <!-- Ceintures -->
+      <div class="liste-groupe">
+        <h3 data-fr="Ceintures" data-en="Belts">Ceintures</h3>
+
+        <div class="expand-item">
+          <button class="expand-trigger" onclick="toggleExpand(this)">
+            <span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <div class="expand-texte"><span class="expand-nom" data-fr="Ceinture 2 points" data-en="2-point belt">Ceinture 2 points</span><span class="expand-desc" data-fr="Standard ou rembourrée" data-en="Standard or padded">Standard ou rembourrée</span></div>
+          </button>
+          <div class="expand-panel">
+            <div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div>
+            <div><p class="expand-panel-desc" data-fr="Ceinture à deux points d'ancrage. Version standard ou rembourrée pour plus de confort." data-en="Two-anchor-point belt. Standard or padded version for added comfort.">Ceinture à deux points d'ancrage. Version standard ou rembourrée pour plus de confort.</p></div>
+          </div>
+        </div>
+
+        <div class="expand-item">
+          <button class="expand-trigger" onclick="toggleExpand(this)">
+            <span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <div class="expand-texte"><span class="expand-nom" data-fr="Ceinture 3 points" data-en="3-point belt">Ceinture 3 points</span><span class="expand-desc" data-fr="Standard ou rembourrée" data-en="Standard or padded">Standard ou rembourrée</span></div>
+          </button>
+          <div class="expand-panel">
+            <div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div>
+            <div><p class="expand-panel-desc" data-fr="Trois points d'ancrage pour un maintien accru. Compatible avec le coussin contour avec bloc ABD." data-en="Three anchor points for increased support. Compatible with contour cushion with ABD block.">Trois points d'ancrage pour un maintien accru. Compatible avec le coussin contour avec bloc ABD.</p></div>
+          </div>
+        </div>
+
+        <div class="expand-item">
+          <button class="expand-trigger" onclick="toggleExpand(this)">
+            <span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <div class="expand-texte"><span class="expand-nom" data-fr="Ceinture couche" data-en="Couche belt">Ceinture couche</span><span class="expand-desc" data-fr="4 tailles : Garderie, Petite, Moyenne, Grande" data-en="4 sizes: Daycare, Small, Medium, Large">4 tailles : Garderie, Petite, Moyenne, Grande</span></div>
+          </button>
+          <div class="expand-panel">
+            <div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div>
+            <div><p class="expand-panel-desc" data-fr="Ceinture large pour un maintien au niveau de l'abdomen et des hanches." data-en="Wide belt for support at the abdomen and hips level.">Ceinture large pour un maintien au niveau de l'abdomen et des hanches.</p></div>
+          </div>
+        </div>
+
+        <div class="expand-item">
+          <button class="expand-trigger" onclick="toggleExpand(this)">
+            <span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <div class="expand-texte"><span class="expand-nom" data-fr="Ceinture thoracique" data-en="Thoracic belt">Ceinture thoracique</span><span class="expand-desc" data-fr="Standard ou rembourrée" data-en="Standard or padded">Standard ou rembourrée</span></div>
+          </button>
+          <div class="expand-panel">
+            <div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div>
+            <div><p class="expand-panel-desc" data-fr="Ceinture au niveau thoracique pour le maintien du tronc supérieur." data-en="Belt at thoracic level for upper trunk support.">Ceinture au niveau thoracique pour le maintien du tronc supérieur.</p></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Plastrons -->
+      <div class="liste-groupe">
+        <h3 data-fr="Plastrons" data-en="Chest straps">Plastrons</h3>
+
+        <div class="expand-item">
+          <button class="expand-trigger" onclick="toggleExpand(this)">
+            <span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <div class="expand-texte"><span class="expand-nom" data-fr="Plastron standard" data-en="Standard chest strap">Plastron standard</span><span class="expand-desc" data-fr="5 tailles selon la largeur des épaules — de Garderie à Très grand" data-en="5 sizes by shoulder width — from Daycare to XL">5 tailles selon la largeur des épaules — de Garderie à Très grand</span></div>
+          </button>
+          <div class="expand-panel">
+            <div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div>
+            <div><p class="expand-panel-desc" data-fr="Plastron en V pour le maintien du tronc supérieur. Taille selon la largeur des épaules de l'enfant." data-en="V-style chest strap for upper trunk support. Size based on child's shoulder width.">Plastron en V pour le maintien du tronc supérieur. Taille selon la largeur des épaules.</p></div>
+          </div>
+        </div>
+
+        <div class="expand-item">
+          <button class="expand-trigger" onclick="toggleExpand(this)">
+            <span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <div class="expand-texte"><span class="expand-nom" data-fr="Plastron en H" data-en="H-style chest strap">Plastron en H</span><span class="expand-desc" data-fr="2 tailles : Petit et Moyen" data-en="2 sizes: Small and Medium">2 tailles : Petit et Moyen</span></div>
+          </button>
+          <div class="expand-panel">
+            <div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div>
+            <div><p class="expand-panel-desc" data-fr="Plastron en H pour un maintien bilatéral du tronc. Deux tailles disponibles." data-en="H-style strap for bilateral trunk support. Two sizes available.">Plastron en H pour un maintien bilatéral du tronc. Deux tailles disponibles.</p></div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="note-clinique">
+      <p data-fr="<strong>Attaches :</strong> le type d'attache disponible (boucle, velcro/velcro, velcro/anneau, boucle d'auto) varie selon la ceinture choisie. La sélection se fait dans le formulaire de soumission."
+         data-en="<strong>Attachments:</strong> available type (buckle, velcro/velcro, velcro/ring, auto buckle) varies by selected belt. Selection is made in the quote form.">
+        <strong>Attaches :</strong> le type d'attache disponible (boucle, velcro/velcro, velcro/anneau, boucle d'auto) varie selon la ceinture choisie. La sélection se fait dans le formulaire de soumission.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ============================================================
+     SECTION 03 — ACCESSOIRES (fond parchemin)
+     Liste simple avec dot
+     ============================================================ -->
+<div id="accessoires" style="background:var(--c-parchemin); border-bottom:1px solid var(--c-bord);">
+  <div style="max-width:var(--max-width); margin:0 auto; padding:var(--pad-section);">
+
+    <div class="entete-section">
+      <span class="lbl" data-fr="Section 03" data-en="Section 03">Section 03</span>
+      <h2 data-fr="Accessoires" data-en="Accessories">Accessoires</h2>
+      <p data-fr="La compatibilité de chaque accessoire dépend de la largeur et du modèle de chaise — précisée dans le formulaire de soumission."
+         data-en="Each accessory's compatibility depends on chair width and model — specified in the quote form.">
+        La compatibilité de chaque accessoire dépend de la largeur et du modèle de chaise — précisée dans le formulaire de soumission.
+      </p>
+    </div>
+
+    <div class="deux-col">
+
+      <!-- Soutien postural -->
+      <div class="liste-groupe">
+        <h3 data-fr="Soutien postural" data-en="Postural support">Soutien postural</h3>
+
+        <div class="expand-item">
+          <button class="expand-trigger" onclick="toggleExpand(this)">
+            <span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <div class="expand-texte"><span class="expand-nom" data-fr="Appui-bras" data-en="Armrest">Appui-bras</span><span class="expand-desc" data-fr="Ajustable en hauteur" data-en="Height-adjustable">Ajustable en hauteur</span></div>
+          </button>
+          <div class="expand-panel">
+            <div class="expand-photo"><!-- 🖼️ <img src="images/appui-bras.jpg"> --><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div>
+            <div><p class="expand-panel-desc" data-fr="Ajustable en hauteur pour permettre aux bras d'être supportés adéquatement." data-en="Height-adjustable to adequately support the child's arms.">Ajustable en hauteur pour permettre aux bras d'être supportés adéquatement.</p><p class="expand-panel-note" data-fr="Poignées d'ajustement vendues séparément" data-en="Adjustment handles sold separately">Poignées d'ajustement vendues séparément</p></div>
+          </div>
+        </div>
+
+        <div class="expand-item">
+          <button class="expand-trigger" onclick="toggleExpand(this)">
+            <span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <div class="expand-texte"><span class="expand-nom" data-fr="Appui-tête (hauteur)" data-en="Headrest (height)">Appui-tête (hauteur)</span><span class="expand-desc" data-fr="Réglable en hauteur" data-en="Height-adjustable">Réglable en hauteur</span></div>
+          </button>
+          <div class="expand-panel">
+            <div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div>
+            <div><p class="expand-panel-desc" data-fr="Soutien de la tête réglable en hauteur." data-en="Head support, vertically adjustable.">Soutien de la tête réglable en hauteur.</p></div>
+          </div>
+        </div>
+
+        <div class="expand-item">
+          <button class="expand-trigger" onclick="toggleExpand(this)">
+            <span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <div class="expand-texte"><span class="expand-nom" data-fr="Appui-tête (hauteur et profondeur)" data-en="Headrest (height and depth)">Appui-tête (hauteur et profondeur)</span><span class="expand-desc" data-fr="Réglable sur deux axes" data-en="Adjustable on two axes">Réglable sur deux axes</span></div>
+          </button>
+          <div class="expand-panel">
+            <div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div>
+            <div><p class="expand-panel-desc" data-fr="Réglable sur deux axes pour un positionnement de tête plus précis." data-en="Adjustable on two axes for more precise head positioning.">Réglable sur deux axes pour un positionnement de tête plus précis.</p></div>
+          </div>
+        </div>
+
+        <div class="expand-item">
+          <button class="expand-trigger" onclick="toggleExpand(this)">
+            <span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <div class="expand-texte"><span class="expand-nom" data-fr="Appui-costaux (thoracique)" data-en="Lateral trunk support">Appui-costaux (thoracique)</span><span class="expand-desc" data-fr="Soutien latéral du tronc" data-en="Lateral trunk support">Soutien latéral du tronc</span></div>
+          </button>
+          <div class="expand-panel">
+            <div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div>
+            <div><p class="expand-panel-desc" data-fr="Soutien latéral du tronc ajustable en hauteur." data-en="Lateral trunk support, height-adjustable.">Soutien latéral du tronc ajustable en hauteur.</p></div>
+          </div>
+        </div>
+
+        <div class="expand-item">
+          <button class="expand-trigger" onclick="toggleExpand(this)">
+            <span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <div class="expand-texte"><span class="expand-nom" data-fr="Bloc ABD amovible" data-en="Removable ABD block">Bloc ABD amovible</span><span class="expand-desc" data-fr="Sans coussin contour requis" data-en="No contour cushion required">Sans coussin contour requis</span></div>
+          </button>
+          <div class="expand-panel">
+            <div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div>
+            <div><p class="expand-panel-desc" data-fr="Bloc abducteur détachable, sans coussin contour requis." data-en="Detachable abductor block, no contour cushion required.">Bloc abducteur détachable, sans coussin contour requis.</p></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Équipements -->
+      <div class="liste-groupe">
+        <h3 data-fr="Équipements" data-en="Equipment">Équipements</h3>
+
+        <div class="expand-item">
+          <button class="expand-trigger" onclick="toggleExpand(this)">
+            <span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <div class="expand-texte"><span class="expand-nom" data-fr="Cabaret" data-en="Tray">Cabaret</span><span class="expand-desc" data-fr="4 formats selon la largeur de chaise" data-en="4 sizes by chair width">4 formats selon la largeur de chaise</span></div>
+          </button>
+          <div class="expand-panel">
+            <div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div>
+            <div><p class="expand-panel-desc" data-fr="Mini (20×13 po), petit (20×18 po), régulier (24×18 po) et surdimensionné. La compatibilité est vérifiée dans le formulaire." data-en="Mini (20×13 in), small (20×18 in), regular (24×18 in) and oversized. Compatibility verified in the form.">Mini (20×13 po), petit (20×18 po), régulier (24×18 po) et surdimensionné.</p><p class="expand-panel-note" data-fr="Compatibilité vérifiée dans le formulaire" data-en="Compatibility verified in the form">Compatibilité vérifiée dans le formulaire</p></div>
+          </div>
+        </div>
+
+        <div class="expand-item">
+          <button class="expand-trigger" onclick="toggleExpand(this)">
+            <span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <div class="expand-texte"><span class="expand-nom" data-fr="Barres de soutien (Grab bar)" data-en="Support bars (Grab bar)">Barres de soutien (Grab bar)</span><span class="expand-desc" data-fr="Appui des mains" data-en="Hand support">Appui des mains</span></div>
+          </button>
+          <div class="expand-panel">
+            <div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div>
+            <div><p class="expand-panel-desc" data-fr="Barres latérales pour l'appui des mains." data-en="Side bars for hand support.">Barres latérales pour l'appui des mains.</p></div>
+          </div>
+        </div>
+
+        <div class="expand-item">
+          <button class="expand-trigger" onclick="toggleExpand(this)">
+            <span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <div class="expand-texte"><span class="expand-nom" data-fr="Bande antidérapante sur le siège" data-en="Non-slip band on seat">Bande antidérapante sur le siège</span><span class="expand-desc" data-fr="Prévient le glissement vers l'avant" data-en="Prevents forward sliding">Prévient le glissement vers l'avant</span></div>
+          </button>
+          <div class="expand-panel">
+            <div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div>
+            <div><p class="expand-panel-desc" data-fr="Prévient le glissement vers l'avant de l'enfant sur le siège." data-en="Prevents the child from sliding forward on the seat.">Prévient le glissement vers l'avant de l'enfant sur le siège.</p></div>
+          </div>
+        </div>
+
+        <div class="expand-item">
+          <button class="expand-trigger" onclick="toggleExpand(this)">
+            <span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <div class="expand-texte"><span class="expand-nom" data-fr="Poignées d'ajustement" data-en="Adjustment handles">Poignées d'ajustement</span><span class="expand-desc" data-fr="Pour les appui-bras" data-en="For armrests">Pour les appui-bras</span></div>
+          </button>
+          <div class="expand-panel">
+            <div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div>
+            <div><p class="expand-panel-desc" data-fr="Facilitent le réglage rapide des appui-bras." data-en="Make armrest adjustment quick and easy.">Facilitent le réglage rapide des appui-bras.</p></div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     SECTION 04 — CONFIGURATION HORS STANDARD (fond brume)
+     Liste simple avec dot
+     ============================================================ -->
+<div id="hors-standard" style="background:var(--c-brume); border-bottom:1px solid var(--c-bord);">
+  <div style="max-width:var(--max-width); margin:0 auto; padding:var(--pad-section);">
+
+    <div class="entete-section">
+      <span class="lbl" data-fr="Section 04" data-en="Section 04">Section 04</span>
+      <h2 data-fr="Configuration hors standard" data-en="Non-standard configuration">Configuration hors standard</h2>
+      <p data-fr="Les dimensions de dossier, siège et appui-pieds peuvent être ajustées au-delà des mesures standard. Les options disponibles varient selon la largeur de chaise."
+         data-en="Backrest, seat and footrest dimensions can be adjusted beyond standard measurements. Available options vary by chair width.">
+        Les dimensions de dossier, siège et appui-pieds peuvent être ajustées au-delà des mesures standard. Les options disponibles varient selon la largeur de chaise.
+      </p>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:48px; margin-bottom:28px;">
+
+      <div class="liste-groupe" style="margin-bottom:0;">
+        <h3 data-fr="Dossier" data-en="Backrest">Dossier</h3>
+        <div class="liste-items">
+          <div class="liste-item"><div class="liste-dot"></div><div><strong data-fr="Mini dossier" data-en="Mini backrest">Mini dossier</strong><span data-fr="Pour les enfants qui n'ont pas besoin d'un dossier haut." data-en="For children who do not need a tall backrest.">Pour les enfants qui n'ont pas besoin d'un dossier haut.</span></div></div>
+          <div class="liste-item"><div class="liste-dot"></div><div><strong data-fr="Dossier plus haut" data-en="Taller backrest">Dossier plus haut</strong><span data-fr="Plusieurs hauteurs selon la largeur de chaise." data-en="Multiple heights depending on chair width.">Plusieurs hauteurs selon la largeur de chaise.</span></div></div>
+          <div class="liste-item"><div class="liste-dot"></div><div><strong data-fr="Extension de dossier" data-en="Backrest extension">Extension de dossier</strong><span data-fr="S'ajoute à un dossier existant pour plus de hauteur." data-en="Added to an existing backrest for extra height.">S'ajoute à un dossier existant pour plus de hauteur.</span></div></div>
+        </div>
+      </div>
+
+      <div class="liste-groupe" style="margin-bottom:0;">
+        <h3 data-fr="Siège" data-en="Seat">Siège</h3>
+        <div class="liste-items">
+          <div class="liste-item"><div class="liste-dot"></div><div><strong data-fr="Mini siège" data-en="Mini seat">Mini siège</strong><span data-fr="Pour les morphologies nécessitant peu de profondeur." data-en="For morphologies requiring minimal seat depth.">Pour les morphologies nécessitant peu de profondeur.</span></div></div>
+          <div class="liste-item"><div class="liste-dot"></div><div><strong data-fr="Siège plus profond" data-en="Deeper seat">Siège plus profond</strong><span data-fr="Plusieurs profondeurs selon la largeur de chaise." data-en="Multiple depths depending on chair width.">Plusieurs profondeurs selon la largeur de chaise.</span></div></div>
+        </div>
+      </div>
+
+      <div class="liste-groupe" style="margin-bottom:0;">
+        <h3 data-fr="Appui-pieds" data-en="Footrest">Appui-pieds</h3>
+        <div class="liste-items">
+          <div class="liste-item"><div class="liste-dot"></div><div><strong data-fr="Appui-pieds plus profond" data-en="Deeper footrest">Appui-pieds plus profond</strong><span data-fr="Plusieurs profondeurs selon la largeur de chaise." data-en="Multiple depths depending on chair width.">Plusieurs profondeurs selon la largeur de chaise.</span></div></div>
+          <div class="liste-item"><div class="liste-dot"></div><div><strong data-fr="Sans appui-pieds" data-en="No footrest">Sans appui-pieds</strong><span data-fr="Facilite le transfert. Attention : impossible d'en ajouter par la suite." data-en="Facilitates transfers. Note: cannot be added later.">Facilite le transfert. Attention : impossible d'en ajouter par la suite.</span></div></div>
+          <div class="liste-item"><div class="liste-dot"></div><div><strong data-fr="2e appui-pieds" data-en="2nd footrest">2e appui-pieds</strong><span data-fr="Pour les jambes de longueurs inégales." data-en="For legs of unequal length.">Pour les jambes de longueurs inégales.</span></div></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="note-clinique">
+      <p data-fr="<strong>Standards inclus par défaut :</strong> appui-pieds de 12 po de profond sur les chaises 14 po et 16 po — appui-pieds de 16 po de profond sur les chaises surdimensionnées. Toute autre dimension est précisée dans le formulaire de soumission."
+         data-en="<strong>Included by default:</strong> 12 in deep footrest on 14 in and 16 in chairs — 16 in deep footrest on oversized chairs. Any other dimension is specified in the quote form.">
+        <strong>Standards inclus par défaut :</strong> appui-pieds de 12 po de profond sur les chaises 14 po et 16 po — appui-pieds de 16 po de profond sur les chaises surdimensionnées. Toute autre dimension est précisée dans le formulaire de soumission.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ============================================================
+     CTA
+     ============================================================ -->
+<div class="cta-outer">
+  <div class="cta-inner">
+    <div class="cta-citation">
+      <span class="lbl" data-fr="Un mot des ergothérapeutes" data-en="A word from occupational therapists">Un mot des ergothérapeutes</span>
+      <blockquote class="cta-citation-texte"
+        data-fr="« Je décris l'enfant. Claude dessine la chaise. Deux semaines plus tard, elle est parfaite. »"
+        data-en="« I describe the child. Claude designs the chair. Two weeks later, it's perfect. »">
+        « Je décris l'enfant. Claude dessine la chaise.<br>Deux semaines plus tard, elle est parfaite. »
+      </blockquote>
+      <p class="cta-citation-source" data-fr="— Ergothérapeute, région de Montréal" data-en="— Occupational therapist, Montreal area">— Ergothérapeute, région de Montréal</p>
+      <div class="cta-regle"></div>
+    </div>
+    <div class="cta-action">
+      <h2 class="cta-titre"
+          data-fr-html="Prêt à configurer<br>la chaise d'un <em>enfant en particulier ?</em>"
+          data-en-html="Ready to configure<br>a chair for <em>a specific child?</em>">
+        Prêt à configurer<br>la chaise d'un <em>enfant en particulier ?</em>
+      </h2>
+      <ul class="cta-liste">
+        <li data-fr="Tous les accessoires sont sélectionnés dans le formulaire unique" data-en="All accessories selected in the single quote form">Tous les accessoires sont sélectionnés dans le formulaire unique</li>
+        <li data-fr="Compatibilité vérifiée selon la largeur de chaise choisie" data-en="Compatibility verified by chosen chair width">Compatibilité vérifiée selon la largeur de chaise choisie</li>
+        <li data-fr="Délai de fabrication : 4 à 6 semaines" data-en="Manufacturing lead time: 4 to 6 weeks">Délai de fabrication : 4 à 6 semaines</li>
+      </ul>
+      <div class="cta-btns">
+        <a href="contact.html#formulaire" class="btn-accent"
+           data-fr="Remplir le formulaire de soumission →" data-en="Fill out the quote form →">Remplir le formulaire de soumission →</a>
+        <a href="contact.html" class="cta-lien" data-fr="Ou nous écrire directement" data-en="Or write to us directly">Ou nous écrire directement</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Les Adaptations Accès-Cible</div>
+      <div class="footer-tagline" data-fr="Fabrication artisanale · Québec · Depuis 1990" data-en="Artisan craftsmanship · Quebec · Since 1990">Fabrication artisanale · Québec · Depuis 1990</div>
+      <div class="footer-coords">
+        <span>156-A route 117<br>Sainte-Anne-des-Lacs, Québec  J0R 1B0</span>
+        <a href="tel:+14502271948">450 227-1948</a>
+        <a href="mailto:info@lesadaptationsacces-cible.com">info@lesadaptationsacces-cible.com</a>
+        <a href="mailto:info@acces-cible.ca">info@acces-cible.ca</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-titre" data-fr="Produits" data-en="Products">Produits</div>
+      <div class="footer-liens">
+        <a href="ergo.html"        data-fr="Chaise ERGO"          data-en="ERGO Chair">Chaise ERGO</a>
+        <a href="accessoires.html" data-fr="Accessoires posturaux" data-en="Postural accessories">Accessoires posturaux</a>
+        <a href="bureaux.html"     data-fr="Bureaux adaptés"       data-en="Adapted desks">Bureaux adaptés</a>
+        <a href="marchepied.html"  data-fr="Marchepieds"           data-en="Footrests">Marchepieds</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-titre" data-fr="Entreprise" data-en="Company">Entreprise</div>
+      <div class="footer-liens">
+        <a href="histoire.html"           data-fr="Notre histoire"          data-en="Our story">Notre histoire</a>
+        <a href="contact.html"            data-fr="Contact"                 data-en="Contact">Contact</a>
+        <a href="contact.html#formulaire" data-fr="Formulaire de soumission" data-en="Quote form">Formulaire de soumission</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copyright" data-fr="© 2024 Les Adaptations Accès-Cible. Tous droits réservés." data-en="© 2024 Les Adaptations Accès-Cible. All rights reserved.">© 2024 Les Adaptations Accès-Cible. Tous droits réservés.</div>
+    <div class="footer-fab" data-fr="Fait à la main · Sainte-Anne-des-Lacs" data-en="Handmade · Sainte-Anne-des-Lacs">Fait à la main · Sainte-Anne-des-Lacs</div>
+  </div>
+</footer>
+
+
+<script>
+function toggleMenu() { document.getElementById('navMobile').classList.toggle('ouvert'); }
+
+let langue = 'fr';
+function toggleLangue() {
+  langue = langue === 'fr' ? 'en' : 'fr';
+  document.getElementById('langBtn').textContent = langue === 'fr' ? 'EN' : 'FR';
+  document.documentElement.lang = langue;
+  document.querySelectorAll('[data-fr]').forEach(el => {
+    const val = el.dataset[langue];
+    if (!val) return;
+    if (val.includes('<')) el.innerHTML = val;
+    else el.textContent = val;
+  });
+  document.querySelectorAll('[data-fr-html]').forEach(el => {
+    const val = el.dataset[langue + 'Html'];
+    if (val) el.innerHTML = val;
+  });
+}
+
+// Expand sections 02 et 03 — flèche gauche, expand photo, un seul ouvert par groupe
+function toggleExpand(btn) {
+  const item = btn.closest('.expand-item');
+  const groupe = btn.closest('.liste-groupe');
+  const estOuvert = item.classList.contains('ouvert');
+  groupe.querySelectorAll('.expand-item').forEach(i => i.classList.remove('ouvert'));
+  if (!estOuvert) item.classList.add('ouvert');
+}
+
+// Ancres
+function allerA(id, btn) {
+  document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+  document.querySelectorAll('.ancre-btn').forEach(b => b.classList.remove('actif'));
+  btn.classList.add('actif');
+}
+
+// Ancre active au scroll
+const sections = ['coussins', 'ceintures', 'accessoires', 'hors-standard'];
+window.addEventListener('scroll', () => {
+  let actif = 0;
+  sections.forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top <= 130) actif = i;
+  });
+  document.querySelectorAll('.ancre-btn').forEach((b, i) => b.classList.toggle('actif', i === actif));
+});
+</script>
+</body>
+</html>
