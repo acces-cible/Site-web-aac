@@ -7,200 +7,7 @@
 <meta name="description" content="Fabricant artisanal québécois de chaises adaptées depuis 1990. Claude Poupart et Guillaume fabriquent chaque chaise sur mesure, en dialogue avec les ergothérapeutes.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Caveat:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root {
-  --c-marine:    #1e3a4f;
-  --c-nuit:      #1a2530;
-  --c-parchemin: #f6f2eb;
-  --c-cuivre:    #c0874a;
-  --c-brume:     #e8e2d6;
-  --c-bord:      #d4cdbf;
-  --c-muted:     #7a7060;
-  --c-rouille:   #8b3a2a;
-  --c-blanc:     #ffffff;
-  --font-titre:  'Crimson Pro', Georgia, serif;
-  --font-script: 'Caveat', cursive;
-  --font-mono:   'JetBrains Mono', monospace;
-  --font-body:   'IBM Plex Sans', sans-serif;
-  --fs-label:    10px;
-  --fs-body:     15px;
-  --fs-h2:       32px;
-  --fs-h1:       54px;
-  --max-width:   1100px;
-  --radius:      4px;
-}
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body { font-family: var(--font-body); color: var(--c-nuit); background: var(--c-parchemin); font-size: var(--fs-body); line-height: 1.75; }
-img { display: block; max-width: 100%; height: auto; }
-a { color: inherit; text-decoration: none; }
-button { cursor: pointer; border: none; font-family: inherit; background: none; }
-
-.lbl { font-family: var(--font-mono); font-size: var(--fs-label); font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--c-cuivre); display: block; }
-.btn-primary { display: inline-block; background: var(--c-marine); color: var(--c-parchemin); font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; padding: 13px 26px; border-radius: var(--radius); transition: opacity .2s; }
-.btn-primary:hover { opacity: .85; }
-.btn-ghost { display: inline-block; border: 1.5px solid var(--c-bord); color: var(--c-nuit); font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; padding: 12px 24px; border-radius: var(--radius); transition: border-color .2s, color .2s; }
-.btn-ghost:hover { border-color: var(--c-cuivre); color: var(--c-cuivre); }
-.btn-accent { display: inline-block; background: var(--c-cuivre); color: var(--c-blanc); font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; padding: 13px 26px; border-radius: var(--radius); transition: opacity .2s; }
-.btn-accent:hover { opacity: .88; }
-
-/* ── NAV ── */
-.nav { position: sticky; top: 0; z-index: 100; background: var(--c-marine); height: 58px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; border-bottom: 1px solid rgba(255,255,255,.07); }
-.nav-logo { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
-.nav-logo-barre { width: 2px; height: 28px; background: var(--c-cuivre); }
-.nav-logo-texte { font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--c-blanc); line-height: 1.25; }
-.nav-logo-texte small { display: block; font-family: var(--font-mono); font-size: 8px; letter-spacing: .15em; text-transform: uppercase; color: rgba(192,135,74,.7); margin-top: 1px; }
-.nav-liens { display: flex; align-items: center; gap: 24px; }
-.nav-liens a { font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.45); transition: color .2s; }
-.nav-liens a:hover, .nav-liens a.actif { color: rgba(255,255,255,.9); }
-.nav-dropdown { position: relative; }
-.nav-dropdown-menu { display: none; position: absolute; top: calc(100% + 14px); left: 50%; transform: translateX(-50%); background: var(--c-blanc); border: 1px solid var(--c-bord); border-radius: var(--radius); min-width: 210px; box-shadow: 0 8px 32px rgba(0,0,0,.1); overflow: hidden; }
-.nav-dropdown:hover .nav-dropdown-menu { display: block; }
-.nav-dropdown-menu a { display: block; padding: 11px 18px; font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em; color: var(--c-nuit) !important; border-bottom: 1px solid var(--c-bord); text-transform: uppercase; }
-.nav-dropdown-menu a:last-child { border-bottom: none; }
-.nav-dropdown-menu a:hover { background: var(--c-brume); }
-.nav-cta { background: var(--c-cuivre); color: var(--c-blanc) !important; font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; padding: 8px 16px; border-radius: var(--radius); transition: opacity .2s !important; }
-.nav-cta:hover { opacity: .85 !important; }
-.lang-btn { font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,.4); border: 1px solid rgba(255,255,255,.2); padding: 5px 10px; border-radius: var(--radius); cursor: pointer; transition: color .2s, border-color .2s; }
-.lang-btn:hover { color: var(--c-cuivre); border-color: var(--c-cuivre); }
-.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
-.nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--c-blanc); border-radius: 1px; }
-.nav-mobile { display: none; position: fixed; top: 58px; left: 0; right: 0; background: var(--c-marine); z-index: 99; padding: 16px 20px 24px; box-shadow: 0 8px 24px rgba(0,0,0,.2); }
-.nav-mobile.ouvert { display: block; }
-.nav-mobile a { display: block; color: rgba(255,255,255,.65); font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.07); }
-.nav-mobile a:hover { color: var(--c-cuivre); }
-.nav-mobile-sub { padding-left: 16px; font-size: 10px !important; color: rgba(255,255,255,.4) !important; }
-.nav-mobile-cta { display: block; text-align: center; margin-top: 14px; background: var(--c-cuivre); color: var(--c-blanc) !important; padding: 12px !important; border-radius: var(--radius); border: none !important; }
-
-/* ── HERO ── */
-.hero-outer { background: var(--c-parchemin); border-bottom: 1px solid var(--c-bord); }
-.hero { max-width: var(--max-width); margin: 0 auto; padding: 88px 60px 80px; display: grid; grid-template-columns: 1fr 380px; gap: 72px; align-items: center; }
-.hero-lbl { margin-bottom: 22px; }
-.hero-h1 { font-family: var(--font-titre); font-size: var(--fs-h1); font-weight: 300; line-height: 1.08; color: var(--c-marine); margin-bottom: 24px; }
-.hero-h1 em { font-style: italic; color: var(--c-cuivre); }
-.hero-p { font-size: var(--fs-body); color: var(--c-muted); line-height: 1.85; max-width: 480px; margin-bottom: 38px; }
-.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
-/* Photo atelier style carnet */
-.hero-photo-zone { display: flex; align-items: center; justify-content: center; }
-.carnet-photo { position: relative; display: inline-block; transform: rotate(-1.5deg); transform-origin: center bottom; transition: transform .3s ease; }
-.carnet-photo:hover { transform: rotate(0deg) scale(1.01); }
-.carnet-photo-inner { background: var(--c-blanc); padding: 12px 12px 44px; box-shadow: 0 2px 8px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.06); }
-.carnet-photo-inner img { display: block; width: 100%; max-width: 320px; height: auto; }
-.carnet-caption { font-family: var(--font-script); font-size: 14px; color: var(--c-muted); text-align: center; position: absolute; bottom: 12px; left: 12px; right: 12px; }
-.carnet-scotch { position: absolute; top: -10px; left: 50%; transform: translateX(-50%) rotate(-2deg); width: 52px; height: 18px; background: rgba(220,210,190,.55); background-image: repeating-linear-gradient(90deg,transparent,transparent 3px,rgba(255,255,255,.15) 3px,rgba(255,255,255,.15) 4px); z-index: 2; }
-/* Placeholder photo */
-.photo-placeholder { width: 300px; height: 360px; background: var(--c-brume); border: 1.5px dashed var(--c-bord); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: var(--c-muted); font-size: 12px; text-align: center; padding: 20px; }
-.photo-placeholder-icon { font-size: 32px; opacity: .4; }
-
-/* ── MISSION ── */
-.mission-outer { background: var(--c-marine); }
-.mission { max-width: var(--max-width); margin: 0 auto; padding: 72px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-.mission-gauche .lbl { color: rgba(192,135,74,.7); margin-bottom: 20px; }
-.mission-h2 { font-family: var(--font-titre); font-size: 36px; font-weight: 300; color: var(--c-parchemin); line-height: 1.2; margin-bottom: 0; }
-.mission-h2 em { font-style: italic; color: var(--c-cuivre); }
-.mission-droite p { font-size: var(--fs-body); color: rgba(246,242,235,.6); line-height: 1.85; margin-bottom: 20px; }
-.mission-droite p:last-child { margin-bottom: 0; }
-.mission-droite strong { color: rgba(246,242,235,.85); font-weight: 500; }
-
-/* ── ARTISANS ── */
-.artisans-outer { background: var(--c-parchemin); border-bottom: 1px solid var(--c-bord); }
-.artisans { max-width: var(--max-width); margin: 0 auto; padding: 80px 60px; }
-.artisans-entete { margin-bottom: 56px; }
-.artisans-entete .lbl { margin-bottom: 14px; }
-.artisans-h2 { font-family: var(--font-titre); font-size: var(--fs-h2); font-weight: 300; color: var(--c-marine); line-height: 1.2; }
-.artisans-grille { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
-.artisan-carte { display: grid; grid-template-columns: 200px 1fr; gap: 36px; align-items: start; padding: 36px; background: var(--c-blanc); border: 1px solid var(--c-bord); border-radius: var(--radius); }
-.artisan-photo { width: 200px; height: 240px; background: var(--c-brume); border: 1.5px dashed var(--c-bord); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: var(--c-muted); font-size: 11px; text-align: center; flex-shrink: 0; }
-.artisan-photo img { width: 100%; height: 100%; object-fit: cover; }
-.artisan-photo-icon { font-size: 28px; opacity: .35; }
-.artisan-nom { font-family: var(--font-titre); font-size: 26px; font-weight: 400; color: var(--c-marine); margin-bottom: 4px; }
-.artisan-role { font-family: var(--font-mono); font-size: 9px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--c-cuivre); margin-bottom: 16px; }
-.artisan-desc { font-size: 14px; color: var(--c-muted); line-height: 1.8; margin-bottom: 16px; }
-.artisan-note { font-family: var(--font-script); font-size: 16px; color: var(--c-cuivre); line-height: 1.4; }
-
-/* ── HISTOIRE ── */
-.histoire-outer { background: var(--c-brume); border-top: 1px solid var(--c-bord); border-bottom: 1px solid var(--c-bord); }
-.histoire { max-width: var(--max-width); margin: 0 auto; padding: 80px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-.histoire-h2 { font-family: var(--font-titre); font-size: var(--fs-h2); font-weight: 300; color: var(--c-marine); line-height: 1.2; margin-bottom: 16px; }
-.histoire-p { font-size: var(--fs-body); color: var(--c-muted); line-height: 1.85; margin-bottom: 28px; }
-.histoire-lien { font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--c-cuivre); border-bottom: 1px solid rgba(192,135,74,.3); padding-bottom: 2px; transition: border-color .2s; }
-.histoire-lien:hover { border-color: var(--c-cuivre); }
-.frise { display: flex; flex-direction: column; }
-.frise-item { display: grid; grid-template-columns: 52px 20px 1fr; gap: 0 14px; padding-bottom: 28px; }
-.frise-item:last-child { padding-bottom: 0; }
-.frise-annee { font-family: var(--font-titre); font-size: 20px; font-weight: 400; color: var(--c-marine); line-height: 1; padding-top: 1px; text-align: right; }
-.frise-annee.incendie { color: var(--c-rouille); }
-.frise-axe { display: flex; flex-direction: column; align-items: center; }
-.frise-point { width: 13px; height: 13px; border-radius: 50%; background: var(--c-brume); border: 2px solid var(--c-cuivre); flex-shrink: 0; margin-top: 3px; }
-.frise-item.incendie .frise-point { border-color: var(--c-rouille); background: rgba(139,58,42,.08); }
-.frise-ligne { flex: 1; width: 1px; background: var(--c-bord); margin-top: 5px; }
-.frise-item:last-child .frise-ligne { display: none; }
-.frise-corps strong { display: block; font-size: 14px; font-weight: 600; color: var(--c-nuit); margin-bottom: 3px; }
-.frise-corps span { font-size: 13px; color: var(--c-muted); line-height: 1.6; }
-
-/* ── CTA FINAL ── */
-.cta-outer { background: var(--c-marine); }
-.cta-inner { max-width: var(--max-width); margin: 0 auto; padding: 0 60px; display: grid; grid-template-columns: 1fr 1fr; min-height: 300px; }
-.cta-citation { padding: 64px 56px 64px 0; border-right: 1px solid rgba(255,255,255,.08); position: relative; display: flex; flex-direction: column; gap: 14px; }
-.cta-citation .lbl { color: #c0874a; }
-.cta-citation-texte { font-family: var(--font-script); font-size: 26px; line-height: 1.45; color: #e8c99a; font-style: italic; flex: 1; }
-.cta-citation-source { font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: #c0874a; }
-.cta-regle { position: absolute; bottom: 0; left: 0; width: 80px; height: 3px; background: linear-gradient(90deg, var(--c-cuivre), transparent); opacity: .5; }
-.cta-action { padding: 64px 0 64px 56px; display: flex; flex-direction: column; justify-content: center; gap: 24px; }
-.cta-titre { font-family: var(--font-titre); font-size: 28px; font-weight: 300; color: var(--c-parchemin); line-height: 1.25; }
-.cta-titre em { font-style: italic; color: var(--c-cuivre); }
-.cta-liste { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-.cta-liste li { font-size: 13px; color: rgba(246,242,235,.6); padding-left: 16px; position: relative; line-height: 1.5; }
-.cta-liste li::before { content: '—'; position: absolute; left: 0; color: var(--c-cuivre); font-size: 11px; }
-.cta-btns { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
-.cta-lien { font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: rgba(246,242,235,.4); text-decoration: underline; text-underline-offset: 3px; transition: color .2s; }
-.cta-lien:hover { color: var(--c-cuivre); }
-
-/* ── FOOTER ── */
-.footer { background: var(--c-nuit); border-top: 1px solid rgba(255,255,255,.05); }
-.footer-inner { max-width: var(--max-width); margin: 0 auto; padding: 48px 60px 32px; display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 48px; }
-.footer-brand { font-family: var(--font-titre); font-size: 18px; font-weight: 300; color: var(--c-parchemin); margin-bottom: 6px; }
-.footer-tagline { font-family: var(--font-mono); font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: rgba(192,135,74,.55); margin-bottom: 20px; }
-.footer-coords { display: flex; flex-direction: column; gap: 6px; }
-.footer-coords a, .footer-coords span { font-size: 12px; color: rgba(246,242,235,.38); transition: color .2s; line-height: 1.5; }
-.footer-coords a:hover { color: var(--c-cuivre); }
-.footer-col-titre { font-family: var(--font-mono); font-size: 9px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: rgba(246,242,235,.25); margin-bottom: 16px; }
-.footer-liens { display: flex; flex-direction: column; gap: 8px; }
-.footer-liens a { font-size: 12px; color: rgba(246,242,235,.38); transition: color .2s; }
-.footer-liens a:hover { color: var(--c-parchemin); }
-.footer-bottom { max-width: var(--max-width); margin: 0 auto; padding: 20px 60px 28px; border-top: 1px solid rgba(255,255,255,.05); display: flex; justify-content: space-between; align-items: center; }
-.footer-copyright { font-family: var(--font-mono); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: rgba(246,242,235,.2); }
-.footer-fab { font-family: var(--font-script); font-size: 15px; color: rgba(192,135,74,.4); }
-
-/* ── RESPONSIVE ── */
-@media (max-width: 768px) {
-  :root { --fs-h1: 34px; --fs-h2: 26px; --fs-body: 14px; }
-  .nav { padding: 0 20px; }
-  .nav-liens { display: none; }
-  .nav-hamburger { display: flex; }
-  .hero { grid-template-columns: 1fr; padding: 48px 20px 40px; gap: 40px; }
-  .hero-photo-zone { justify-content: center; }
-  .carnet-photo-inner img { max-width: 260px; }
-  .hero-p { max-width: 100%; }
-  .hero-btns { flex-direction: column; }
-  .hero-btns a { text-align: center; }
-  .mission { grid-template-columns: 1fr; padding: 56px 20px; gap: 32px; }
-  .mission-h2 { font-size: 28px; }
-  .artisans { padding: 56px 20px; }
-  .artisans-grille { grid-template-columns: 1fr; gap: 24px; }
-  .artisan-carte { grid-template-columns: 1fr; gap: 20px; }
-  .artisan-photo { width: 100%; height: 220px; }
-  .histoire { grid-template-columns: 1fr; padding: 56px 20px; gap: 40px; }
-  .cta-inner { grid-template-columns: 1fr; padding: 0 20px; }
-  .cta-citation { padding: 48px 0 36px; border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); }
-  .cta-citation-texte { font-size: 20px; }
-  .cta-action { padding: 36px 0 48px; }
-  .cta-btns .btn-accent { width: 100%; text-align: center; }
-  .footer-inner { grid-template-columns: 1fr; gap: 32px; padding: 40px 20px 28px; }
-  .footer-bottom { padding: 16px 20px 24px; flex-direction: column; align-items: flex-start; gap: 8px; }
-}
-@media (max-width: 380px) { :root { --fs-h1: 28px; } }
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -247,9 +54,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   <a href="https://acces-cible.fillout.com/t/erKz8m4uBEus" target="_blank" rel="noopener" class="nav-mobile-cta" data-fr="Demander une soumission →" data-en="Get a quote →">Demander une soumission →</a>
 </div>
 
-<!-- ══════════════════════════════════════
-     HERO — L'homme avant le produit
-     ══════════════════════════════════════ -->
+<!-- HERO -->
 <div class="hero-outer">
   <div class="hero">
     <div>
@@ -269,8 +74,6 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
         <a href="ergo.html" class="btn-ghost" data-fr="Voir la Chaise ERGO" data-en="View the ERGO Chair">Voir la Chaise ERGO</a>
       </div>
     </div>
-
-    <!-- 📸 Photo hero — Claude seul, illustration graphite -->
     <div class="hero-photo-zone">
       <div class="carnet-photo">
         <div class="carnet-scotch"></div>
@@ -287,9 +90,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     MISSION
-     ══════════════════════════════════════ -->
+<!-- MISSION -->
 <div class="mission-outer">
   <div class="mission">
     <div class="mission-gauche">
@@ -307,22 +108,14 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     LES ARTISANS — Père & fils
-     ══════════════════════════════════════ -->
+<!-- ARTISANS -->
 <div class="artisans-outer">
   <div class="artisans">
     <div class="artisans-entete">
       <span class="lbl" data-fr="Père & fils · Sainte-Anne-des-Lacs" data-en="Father & son · Sainte-Anne-des-Lacs">Père & fils · Sainte-Anne-des-Lacs</span>
-      <h2 class="artisans-h2"
-          data-fr="Un savoir-faire transmis. Une mission qui continue."
-          data-en="A craft passed down. A mission that continues.">
-        Un savoir-faire transmis. Une mission qui continue.
-      </h2>
+      <h2 class="artisans-h2" data-fr="Un savoir-faire transmis. Une mission qui continue." data-en="A craft passed down. A mission that continues.">Un savoir-faire transmis. Une mission qui continue.</h2>
     </div>
     <div class="artisans-grille">
-
-      <!-- Claude -->
       <div class="artisan-carte">
         <div class="artisan-photo" style="overflow:hidden;border:none;">
           <img src="images/claude-portrait.png" alt="Claude Poupart"
@@ -331,16 +124,10 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
         <div>
           <div class="artisan-nom">Claude Poupart</div>
           <div class="artisan-role" data-fr="Fondateur · Artisan ébéniste" data-en="Founder · Master cabinetmaker">Fondateur · Artisan ébéniste</div>
-          <p class="artisan-desc"
-             data-fr="Ébéniste de métier, Claude a dessiné la première chaise ERGO à la main en 1990. Depuis, chaque modèle, chaque gabarit, chaque amélioration est né à l'atelier. Après l'incendie de 2023 qui a tout détruit en 20 minutes, il a rebâti. À 70 ans, il transmet maintenant ce savoir à son fils."
-             data-en="A cabinetmaker by trade, Claude drew the first ERGO chair by hand in 1990. Since then, every model, every template, every improvement was born in the workshop. After the 2023 fire that destroyed everything in 20 minutes, he rebuilt. At 70, he is now passing this knowledge on to his son.">
-            Ébéniste de métier, Claude a dessiné la première chaise ERGO à la main en 1990. Depuis, chaque modèle, chaque gabarit, chaque amélioration est né à l'atelier. Après l'incendie de 2023 qui a tout détruit en 20 minutes, il a rebâti. À 70 ans, il transmet maintenant ce savoir à son fils.
-          </p>
+          <p class="artisan-desc" data-fr="Ébéniste de métier, Claude a dessiné la première chaise ERGO à la main en 1990. Depuis, chaque modèle, chaque gabarit, chaque amélioration est né à l'atelier. Après l'incendie de 2023 qui a tout détruit en 20 minutes, il a rebâti. À 70 ans, il transmet maintenant ce savoir à son fils." data-en="A cabinetmaker by trade, Claude drew the first ERGO chair by hand in 1990. Since then, every model, every template, every improvement was born in the workshop. After the 2023 fire that destroyed everything in 20 minutes, he rebuilt. At 70, he is now passing this knowledge on to his son.">Ébéniste de métier, Claude a dessiné la première chaise ERGO à la main en 1990. Depuis, chaque modèle, chaque gabarit, chaque amélioration est né à l'atelier. Après l'incendie de 2023 qui a tout détruit en 20 minutes, il a rebâti. À 70 ans, il transmet maintenant ce savoir à son fils.</p>
           <div class="artisan-note" data-fr="« Vous me décrivez l'enfant. Je dessine la chaise. »" data-en="« You describe the child. I draw the chair. »">« Vous me décrivez l'enfant. Je dessine la chaise. »</div>
         </div>
       </div>
-
-      <!-- Guillaume -->
       <div class="artisan-carte">
         <div class="artisan-photo" style="overflow:hidden;border:none;">
           <img src="images/pere-fils.png" alt="Claude et Guillaume Poupart"
@@ -348,23 +135,16 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
         </div>
         <div>
           <div class="artisan-nom">Guillaume Poupart</div>
-          <div class="artisan-role" data-fr="Fils · Repreneurs de l'entreprise" data-en="Son · Taking over the business">Fils · Repreneur de l'entreprise</div>
-          <p class="artisan-desc"
-             data-fr="Guillaume reprend Les Adaptations Accès-Cible. Il a appris le métier aux côtés de son père — la lecture des besoins, la fabrication sur mesure, la relation de confiance avec les ergothérapeutes. La mission reste la même. Le nom aussi."
-             data-en="Guillaume is taking over Les Adaptations Accès-Cible. He learned the craft alongside his father — reading needs, custom manufacturing, the trust relationship with occupational therapists. The mission stays the same. So does the name.">
-            Guillaume reprend Les Adaptations Accès-Cible. Il a appris le métier aux côtés de son père — la lecture des besoins, la fabrication sur mesure, la relation de confiance avec les ergothérapeutes. La mission reste la même. Le nom aussi.
-          </p>
+          <div class="artisan-role" data-fr="Fils · Repreneur de l'entreprise" data-en="Son · Taking over the business">Fils · Repreneur de l'entreprise</div>
+          <p class="artisan-desc" data-fr="Guillaume reprend Les Adaptations Accès-Cible. Il a appris le métier aux côtés de son père — la lecture des besoins, la fabrication sur mesure, la relation de confiance avec les ergothérapeutes. La mission reste la même. Le nom aussi." data-en="Guillaume is taking over Les Adaptations Accès-Cible. He learned the craft alongside his father — reading needs, custom manufacturing, the trust relationship with occupational therapists. The mission stays the same. So does the name.">Guillaume reprend Les Adaptations Accès-Cible. Il a appris le métier aux côtés de son père — la lecture des besoins, la fabrication sur mesure, la relation de confiance avec les ergothérapeutes. La mission reste la même. Le nom aussi.</p>
           <div class="artisan-note" data-fr="« Mon père a bâti quelque chose de rare. Je m'assure que ça dure. »" data-en="« My father built something rare. I'm making sure it lasts. »">« Mon père a bâti quelque chose de rare. Je m'assure que ça dure. »</div>
         </div>
       </div>
-
     </div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     HISTOIRE — frise condensée
-     ══════════════════════════════════════ -->
+<!-- HISTOIRE -->
 <div class="histoire-outer">
   <div class="histoire">
     <div>
@@ -410,9 +190,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     CTA FINAL — Ergothérapeutes
-     ══════════════════════════════════════ -->
+<!-- CTA FINAL -->
 <div class="cta-outer">
   <div class="cta-inner">
     <div class="cta-citation">
@@ -433,7 +211,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
       </h2>
       <ul class="cta-liste">
         <li data-fr="Réponse sous 48 h — devis sans engagement" data-en="Response within 48 h — no-obligation quote">Réponse sous 48 h — devis sans engagement</li>
-        <li data-fr="Fabrication artisanale au Québec · délai ~2 semaines" data-en="Handcrafted in Quebec · ~2 week lead time">Fabrication artisanale au Québec · délai ~2 semaines</li>
+        <li data-fr="Fabrication artisanale au Québec · délai 4 à 6 semaines" data-en="Handcrafted in Quebec · 4 to 6 week lead time">Fabrication artisanale au Québec · délai 4 à 6 semaines</li>
         <li data-fr="Ajustements possibles après livraison" data-en="Adjustments possible after delivery">Ajustements possibles après livraison</li>
       </ul>
       <div class="cta-btns">
