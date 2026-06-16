@@ -18,7 +18,7 @@
 .page-header-h1 em { font-style: italic; color: var(--c-cuivre); }
 .page-header-p { font-size: 15px; color: rgba(246,242,235,.55); max-width: 520px; line-height: 1.85; }
 .page-header-photo { width: 100%; max-height: 480px; object-fit: cover; display: block; filter: mix-blend-mode:multiply; }
-.hero-photo-outer { background: var(--c-marine); border-bottom: 1px solid rgba(255,255,255,.07); overflow: hidden; max-height: 180px; display: flex; align-items: center; justify-content: center; padding: 20px 0 32px; }
+.hero-photo-outer-hidden { display: none; }
 .hero-photo-outer img { max-height: 220px; width: auto; max-width: 480px; object-fit: contain; display: block; mix-blend-mode: multiply; filter: brightness(1.05); }
 .timeline-outer { background: var(--c-parchemin); padding: 80px 0 100px; }
 .timeline-inner { max-width: var(--max-width); margin: 0 auto; padding: 0 60px; position: relative; }
@@ -59,8 +59,8 @@
 .conclusion-citation { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius); padding: 40px; }
 .conclusion-citation-texte { font-family: var(--font-script); font-size: 22px; line-height: 1.55; color: #e8c99a; font-style: italic; margin-bottom: 16px; }
 .conclusion-citation-source { font-family: var(--font-mono); font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--c-cuivre); }
-.conclusion-stats { display: flex; margin-top: 32px; border-top: 1px solid rgba(255,255,255,.08); padding-top: 28px; }
-.conclusion-stat { flex: 1; }
+.conclusion-stats { display: flex; align-items: flex-end; gap: 0; margin-top: 32px; border-top: 1px solid rgba(255,255,255,.08); padding-top: 28px; }
+.conclusion-stat { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; }
 .conclusion-stat + .conclusion-stat { border-left: 1px solid rgba(255,255,255,.08); padding-left: 24px; }
 .conclusion-stat-n { font-family: var(--font-titre); font-size: 34px; font-weight: 400; color: var(--c-parchemin); line-height: 1; margin-bottom: 4px; }
 .conclusion-stat-l { font-family: var(--font-mono); font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: #c0874a; }
@@ -100,9 +100,12 @@
       De Camp Papillon en 1965 à l'atelier reconstruit en 2024 — une histoire d'obstination, de savoir-faire transmis, et d'un incendie qui n'a pas eu raison de la mission.
     </p>
   </div>
-  <!-- Livre en arrière-plan -->
-  <img src="images/Histoire/Croquis d'un livre ouvert_edited.jpg" alt=""
-       class="page-header-livre"
+</div>
+
+<!-- LIVRE CENTRÉ -->
+<div style="background:var(--c-parchemin);border-bottom:1px solid var(--c-bord);display:flex;align-items:center;justify-content:center;padding:32px 0;">
+  <img src="images/Histoire/Croquis d'un livre ouvert_edited.jpg" alt="Un livre ouvert"
+       style="max-height:200px;width:auto;max-width:360px;object-fit:contain;mix-blend-mode:multiply;filter:brightness(1.05);"
        onerror="this.style.display='none'">
 </div>
 
@@ -245,7 +248,7 @@
           <div class="carnet-photo" style="transform:rotate(-1.5deg);">
             <div class="carnet-scotch"></div>
             <div class="carnet-photo-inner">
-              <img src="images/Histoire/ERGO surdimensionnée.jpg" alt="ERGO surdimensionnée 2016" style="width:100%;max-width:380px;height:300px;object-fit:contain;object-position:center;display:block;"
+              <img src="images/Histoire/ERGO surdimensionnée.jpg" alt="ERGO surdimensionnée 2016" style="width:100%;max-width:380px;height:300px;object-fit:cover;object-position:center;display:block;"
                    onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
               <div class="carnet-placeholder" style="display:none;"><span>ERGO surdimensionnée · 2016</span></div>
               <div class="carnet-caption">— ERGO surdimensionnée · 2016</div>
