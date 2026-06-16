@@ -11,50 +11,12 @@
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="nav">
-  <a href="index.html" class="nav-logo">
-    <div class="nav-logo-barre"></div>
-    <div class="nav-logo-texte">
-      Les Adaptations Accès-Cible
-      <small data-fr="Partenaire des ergothérapeutes · Québec" data-en="Partner of occupational therapists · Quebec">Partenaire des ergothérapeutes · Québec</small>
-    </div>
-  </a>
-  <div class="nav-liens" id="navLiens">
-    <div class="nav-dropdown">
-      <a href="ergo.html" data-fr="Chaise ERGO" data-en="ERGO Chair">Chaise ERGO</a>
-      <div class="nav-dropdown-menu">
-        <a href="ergo.html#garderie" data-fr="Hauteur garderie" data-en="Daycare height">Hauteur garderie</a>
-        <a href="ergo.html#standard" data-fr="Standard" data-en="Standard">Standard</a>
-        <a href="ergo.html#surdimensionnee" data-fr="Surdimensionnée" data-en="Oversized">Surdimensionnée</a>
-      </div>
-    </div>
-    <a href="accessoires.html" data-fr="Accessoires" data-en="Accessories">Accessoires</a>
-    <a href="bureaux.html" data-fr="Bureaux" data-en="Desks">Bureaux</a>
-    <a href="marchepied.html" data-fr="Marchepieds" data-en="Footrests">Marchepieds</a>
-    <a href="histoire.html" data-fr="Notre histoire" data-en="Our story">Notre histoire</a>
-    <a href="contact.html" data-fr="Contact" data-en="Contact">Contact</a>
-    <button class="lang-btn" onclick="toggleLangue()" id="langBtn">EN</button>
-    <a href="https://acces-cible.fillout.com/t/erKz8m4uBEus" target="_blank" rel="noopener" class="nav-cta" data-fr="Soumission →" data-en="Get a quote →">Soumission →</a>
-  </div>
-  <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-<div class="nav-mobile" id="navMobile">
-  <a href="ergo.html" data-fr="Chaise ERGO" data-en="ERGO Chair">Chaise ERGO</a>
-  <a href="ergo.html#garderie" class="nav-mobile-sub">↳ Hauteur garderie</a>
-  <a href="ergo.html#standard" class="nav-mobile-sub">↳ Standard</a>
-  <a href="ergo.html#surdimensionnee" class="nav-mobile-sub">↳ Surdimensionnée</a>
-  <a href="accessoires.html" data-fr="Accessoires" data-en="Accessories">Accessoires</a>
-  <a href="bureaux.html" data-fr="Bureaux" data-en="Desks">Bureaux</a>
-  <a href="marchepied.html" data-fr="Marchepieds" data-en="Footrests">Marchepieds</a>
-  <a href="histoire.html" data-fr="Notre histoire" data-en="Our story">Notre histoire</a>
-  <a href="contact.html" data-fr="Contact" data-en="Contact">Contact</a>
-  <a href="https://acces-cible.fillout.com/t/erKz8m4uBEus" target="_blank" rel="noopener" class="nav-mobile-cta" data-fr="Demander une soumission →" data-en="Get a quote →">Demander une soumission →</a>
-</div>
+<!-- NAV — chargée automatiquement par scripts.js -->
+<div id="nav-container"></div>
 
-<!-- HERO -->
+<!-- ══════════════════════════════════════
+     HERO
+     ══════════════════════════════════════ -->
 <div class="hero-outer">
   <div class="hero">
     <div>
@@ -90,7 +52,9 @@
   </div>
 </div>
 
-<!-- MISSION -->
+<!-- ══════════════════════════════════════
+     MISSION
+     ══════════════════════════════════════ -->
 <div class="mission-outer">
   <div class="mission">
     <div class="mission-gauche">
@@ -108,7 +72,9 @@
   </div>
 </div>
 
-<!-- ARTISANS -->
+<!-- ══════════════════════════════════════
+     ARTISANS
+     ══════════════════════════════════════ -->
 <div class="artisans-outer">
   <div class="artisans">
     <div class="artisans-entete">
@@ -124,8 +90,8 @@
         <div>
           <div class="artisan-nom">Claude Poupart</div>
           <div class="artisan-role" data-fr="Fondateur · Artisan ébéniste" data-en="Founder · Master cabinetmaker">Fondateur · Artisan ébéniste</div>
-          <p class="artisan-desc" data-fr="Ébéniste de métier, Claude a dessiné la première chaise ERGO à la main en 1990. Depuis, chaque modèle, chaque gabarit, chaque amélioration est né à l'atelier. Après l'incendie de 2023 qui a tout détruit en 20 minutes, il a rebâti. À 70 ans, il transmet maintenant ce savoir à son fils." data-en="A cabinetmaker by trade, Claude drew the first ERGO chair by hand in 1990. Since then, every model, every template, every improvement was born in the workshop. After the 2023 fire that destroyed everything in 20 minutes, he rebuilt. At 70, he is now passing this knowledge on to his son.">Ébéniste de métier, Claude a dessiné la première chaise ERGO à la main en 1990. Depuis, chaque modèle, chaque gabarit, chaque amélioration est né à l'atelier. Après l'incendie de 2023 qui a tout détruit en 20 minutes, il a rebâti. À 70 ans, il transmet maintenant ce savoir à son fils.</p>
-          <div class="artisan-note" data-fr="« Vous me décrivez l'enfant. Je dessine la chaise. »" data-en="« You describe the child. I draw the chair. »">« Vous me décrivez l'enfant. Je dessine la chaise. »</div>
+          <p class="artisan-desc" data-fr="Ébéniste de métier, Claude a dessiné la première chaise ERGO à la main en 1990. Après l'incendie de 2023 qui a tout détruit en 20 minutes, il a rebâti. À 70 ans, il transmet maintenant ce savoir à son fils." data-en="A cabinetmaker by trade, Claude drew the first ERGO chair by hand in 1990. After the 2023 fire that destroyed everything in 20 minutes, he rebuilt. At 70, he is now passing this knowledge on to his son.">Ébéniste de métier, Claude a dessiné la première chaise ERGO à la main en 1990. Après l'incendie de 2023 qui a tout détruit en 20 minutes, il a rebâti. À 70 ans, il transmet maintenant ce savoir à son fils.</p>
+          <div class="artisan-note">« Vous me décrivez l'enfant. Je dessine la chaise. »</div>
         </div>
       </div>
       <div class="artisan-carte">
@@ -136,15 +102,17 @@
         <div>
           <div class="artisan-nom">Guillaume Poupart</div>
           <div class="artisan-role" data-fr="Fils · Repreneur de l'entreprise" data-en="Son · Taking over the business">Fils · Repreneur de l'entreprise</div>
-          <p class="artisan-desc" data-fr="Guillaume reprend Les Adaptations Accès-Cible. Il a appris le métier aux côtés de son père — la lecture des besoins, la fabrication sur mesure, la relation de confiance avec les ergothérapeutes. La mission reste la même. Le nom aussi." data-en="Guillaume is taking over Les Adaptations Accès-Cible. He learned the craft alongside his father — reading needs, custom manufacturing, the trust relationship with occupational therapists. The mission stays the same. So does the name.">Guillaume reprend Les Adaptations Accès-Cible. Il a appris le métier aux côtés de son père — la lecture des besoins, la fabrication sur mesure, la relation de confiance avec les ergothérapeutes. La mission reste la même. Le nom aussi.</p>
-          <div class="artisan-note" data-fr="« Mon père a bâti quelque chose de rare. Je m'assure que ça dure. »" data-en="« My father built something rare. I'm making sure it lasts. »">« Mon père a bâti quelque chose de rare. Je m'assure que ça dure. »</div>
+          <p class="artisan-desc" data-fr="Guillaume reprend Les Adaptations Accès-Cible. Il a appris le métier aux côtés de son père — la lecture des besoins, la fabrication sur mesure, la relation de confiance avec les ergothérapeutes. La mission reste la même. Le nom aussi." data-en="Guillaume is taking over Les Adaptations Accès-Cible. He learned the craft alongside his father. The mission stays the same. So does the name.">Guillaume reprend Les Adaptations Accès-Cible. Il a appris le métier aux côtés de son père — la lecture des besoins, la fabrication sur mesure, la relation de confiance avec les ergothérapeutes. La mission reste la même. Le nom aussi.</p>
+          <div class="artisan-note">« Mon père a bâti quelque chose de rare. Je m'assure que ça dure. »</div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- HISTOIRE -->
+<!-- ══════════════════════════════════════
+     HISTOIRE — frise condensée
+     ══════════════════════════════════════ -->
 <div class="histoire-outer">
   <div class="histoire">
     <div>
@@ -157,50 +125,38 @@
       <div class="frise-item">
         <div class="frise-annee">1965</div>
         <div class="frise-axe"><div class="frise-point"></div><div class="frise-ligne"></div></div>
-        <div class="frise-corps">
-          <strong data-fr="Camp Papillon" data-en="Camp Papillon">Camp Papillon</strong>
-          <span data-fr="Claude Poupart, 10 ans, côtoie pour la première fois des enfants en situation de handicap. Une graine est plantée." data-en="Claude Poupart, age 10, meets children with disabilities for the first time. A seed is planted.">Claude Poupart, 10 ans, côtoie pour la première fois des enfants en situation de handicap. Une graine est plantée.</span>
-        </div>
+        <div class="frise-corps"><strong>Camp Papillon</strong><span> Claude Poupart, 10 ans, côtoie pour la première fois des enfants en situation de handicap. Une graine est plantée.</span></div>
       </div>
       <div class="frise-item">
         <div class="frise-annee">1990</div>
         <div class="frise-axe"><div class="frise-point"></div><div class="frise-ligne"></div></div>
-        <div class="frise-corps">
-          <strong data-fr="La première ERGO" data-en="The first ERGO">La première ERGO</strong>
-          <span data-fr="Face au manque de solutions abordables, Claude sort sa planche à dessin au CRME et fabrique la première chaise." data-en="Faced with a lack of affordable solutions, Claude picks up his drafting board at the CRME and builds the first chair.">Face au manque de solutions abordables, Claude sort sa planche à dessin au CRME et fabrique la première chaise.</span>
-        </div>
+        <div class="frise-corps"><strong>La première ERGO</strong><span> Face au manque de solutions abordables, Claude sort sa planche à dessin au CRME et fabrique la première chaise.</span></div>
       </div>
       <div class="frise-item incendie">
         <div class="frise-annee incendie">2023</div>
         <div class="frise-axe"><div class="frise-point"></div><div class="frise-ligne"></div></div>
-        <div class="frise-corps">
-          <strong data-fr="L'incendie" data-en="The fire">L'incendie</strong>
-          <span data-fr="8 juin 2023. L'atelier brûle en 20 minutes. 30 ans d'outils, de gabarits et de souvenirs disparaissent." data-en="June 8, 2023. The workshop burns in 20 minutes. 30 years of tools, templates, and memories disappear.">8 juin 2023. L'atelier brûle en 20 minutes. 30 ans d'outils, de gabarits et de souvenirs disparaissent.</span>
-        </div>
+        <div class="frise-corps"><strong>L'incendie</strong><span> 8 juin 2023. L'atelier brûle en 20 minutes. 30 ans d'outils, de gabarits et de souvenirs disparaissent.</span></div>
       </div>
       <div class="frise-item">
         <div class="frise-annee">2024</div>
         <div class="frise-axe"><div class="frise-point"></div><div class="frise-ligne"></div></div>
-        <div class="frise-corps">
-          <strong data-fr="Nouveau départ au 156-A" data-en="New start at 156-A">Nouveau départ au 156-A</strong>
-          <span data-fr="À 70 ans, Claude rebâtit. Même mission, même exigence. Nouveau départ." data-en="At 70, Claude rebuilds. Same mission, same standard. New beginning.">À 70 ans, Claude rebâtit. Même mission, même exigence. Nouveau départ.</span>
-        </div>
+        <div class="frise-corps"><strong>Nouveau départ au 156-A</strong><span> À 70 ans, Claude rebâtit. Même mission, même exigence. Nouveau départ.</span></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- CTA FINAL -->
+<!-- ══════════════════════════════════════
+     CTA FINAL
+     ══════════════════════════════════════ -->
 <div class="cta-outer">
   <div class="cta-inner">
     <div class="cta-citation">
       <span class="lbl" data-fr="Un mot des ergothérapeutes" data-en="A word from occupational therapists">Un mot des ergothérapeutes</span>
-      <blockquote class="cta-citation-texte"
-        data-fr="« Je décris l'enfant. Claude dessine la chaise. Deux semaines plus tard, elle est parfaite. »"
-        data-en="« I describe the child. Claude designs the chair. Two weeks later, it's perfect. »">
+      <blockquote class="cta-citation-texte">
         « Je décris l'enfant. Claude dessine la chaise.<br>Deux semaines plus tard, elle est parfaite. »
       </blockquote>
-      <p class="cta-citation-source" data-fr="— Ergothérapeute, région de Montréal" data-en="— Occupational therapist, Montreal area">— Ergothérapeute, région de Montréal</p>
+      <p class="cta-citation-source">— Ergothérapeute, région de Montréal</p>
       <div class="cta-regle"></div>
     </div>
     <div class="cta-action">
@@ -223,53 +179,9 @@
   </div>
 </div>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div>
-      <div class="footer-brand">Les Adaptations Accès-Cible</div>
-      <div class="footer-tagline" data-fr="Fabrication artisanale · Québec · Depuis 1990" data-en="Artisan craftsmanship · Quebec · Since 1990">Fabrication artisanale · Québec · Depuis 1990</div>
-      <div class="footer-coords">
-        <span>156-A route 117<br>Sainte-Anne-des-Lacs, Québec  J0R 1B0</span>
-        <a href="tel:+14502271948">450 227-1948</a>
-        <a href="mailto:info@lesadaptationsacces-cible.com">info@lesadaptationsacces-cible.com</a>
-        <a href="mailto:info@acces-cible.ca">info@acces-cible.ca</a>
-      </div>
-    </div>
-    <div>
-      <div class="footer-col-titre" data-fr="Produits" data-en="Products">Produits</div>
-      <div class="footer-liens">
-        <a href="ergo.html" data-fr="Chaise ERGO" data-en="ERGO Chair">Chaise ERGO</a>
-        <a href="accessoires.html" data-fr="Accessoires posturaux" data-en="Postural accessories">Accessoires posturaux</a>
-        <a href="bureaux.html" data-fr="Bureaux adaptés" data-en="Adapted desks">Bureaux adaptés</a>
-        <a href="marchepied.html" data-fr="Marchepieds" data-en="Footrests">Marchepieds</a>
-      </div>
-    </div>
-    <div>
-      <div class="footer-col-titre" data-fr="Entreprise" data-en="Company">Entreprise</div>
-      <div class="footer-liens">
-        <a href="histoire.html" data-fr="Notre histoire" data-en="Our story">Notre histoire</a>
-        <a href="contact.html" data-fr="Contact" data-en="Contact">Contact</a>
-        <a href="https://acces-cible.fillout.com/t/erKz8m4uBEus" target="_blank" rel="noopener" data-fr="Formulaire de soumission" data-en="Quote form">Formulaire de soumission</a>
-      </div>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <div class="footer-copyright" data-fr="© 2024 Les Adaptations Accès-Cible. Tous droits réservés." data-en="© 2024 Les Adaptations Accès-Cible. All rights reserved.">© 2024 Les Adaptations Accès-Cible. Tous droits réservés.</div>
-    <div class="footer-fab" data-fr="Fait à la main · Sainte-Anne-des-Lacs" data-en="Handmade · Sainte-Anne-des-Lacs">Fait à la main · Sainte-Anne-des-Lacs</div>
-  </div>
-</footer>
+<!-- FOOTER — chargé automatiquement par scripts.js -->
+<div id="footer-container"></div>
 
-<script>
-function toggleMenu() { document.getElementById('navMobile').classList.toggle('ouvert'); }
-let langue = 'fr';
-function toggleLangue() {
-  langue = langue === 'fr' ? 'en' : 'fr';
-  document.getElementById('langBtn').textContent = langue === 'fr' ? 'EN' : 'FR';
-  document.documentElement.lang = langue;
-  document.querySelectorAll('[data-fr]').forEach(el => { el.textContent = el.dataset[langue]; });
-  document.querySelectorAll('[data-fr-html]').forEach(el => { el.innerHTML = el.dataset[langue + 'Html']; });
-}
-</script>
+<script src="scripts.js"></script>
 </body>
 </html>
