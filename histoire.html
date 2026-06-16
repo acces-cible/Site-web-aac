@@ -4,288 +4,50 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Notre Histoire — Les Adaptations Accès-Cible</title>
-<meta name="description" content="De 1965 à aujourd'hui : l'histoire de Claude Poupart et des Adaptations Accès-Cible, fabricant québécois de chaises adaptées sur mesure depuis plus de 35 ans.">
+<meta name="description" content="De 1965 à aujourd'hui : l'histoire de Claude Poupart et des Adaptations Accès-Cible.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Caveat:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 <style>
-:root {
-  --c-marine:    #1e3a4f;
-  --c-nuit:      #1a2530;
-  --c-parchemin: #f6f2eb;
-  --c-cuivre:    #c0874a;
-  --c-brume:     #e8e2d6;
-  --c-bord:      #d4cdbf;
-  --c-muted:     #7a7060;
-  --c-blanc:     #ffffff;
-  --font-titre:  'Crimson Pro', Georgia, serif;
-  --font-script: 'Caveat', cursive;
-  --font-mono:   'JetBrains Mono', monospace;
-  --font-body:   'IBM Plex Sans', sans-serif;
-  --fs-label:    10px;
-  --fs-small:    12px;
-  --fs-body:     15px;
-  --fs-h3:       20px;
-  --fs-h2:       32px;
-  --fs-h1:       48px;
-  --max-width:   1100px;
-  --radius:      4px;
-}
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body { font-family: var(--font-body); color: var(--c-nuit); background: var(--c-parchemin); font-size: var(--fs-body); line-height: 1.75; }
-img { display: block; max-width: 100%; height: auto; }
-a { color: inherit; text-decoration: none; }
-button { cursor: pointer; border: none; font-family: inherit; background: none; }
-
-.lbl { font-family: var(--font-mono); font-size: var(--fs-label); font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--c-cuivre); display: block; }
-.btn-primary { display: inline-block; background: var(--c-marine); color: var(--c-parchemin); font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; padding: 13px 26px; border-radius: var(--radius); transition: opacity .2s; }
-.btn-primary:hover { opacity: .85; }
-.btn-accent { display: inline-block; background: var(--c-cuivre); color: var(--c-blanc); font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; padding: 13px 26px; border-radius: var(--radius); transition: opacity .2s; }
-.btn-accent:hover { opacity: .88; }
-
-/* NAV */
-.nav { position: sticky; top: 0; z-index: 100; background: var(--c-marine); height: 58px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; border-bottom: 1px solid rgba(255,255,255,.07); }
-.nav-logo { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
-.nav-logo-barre { width: 2px; height: 28px; background: var(--c-cuivre); }
-.nav-logo-texte { font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--c-blanc); line-height: 1.25; }
-.nav-logo-texte small { display: block; font-family: var(--font-mono); font-size: 8px; font-weight: 400; letter-spacing: .15em; text-transform: uppercase; color: rgba(192,135,74,.7); margin-top: 1px; }
-.nav-liens { display: flex; align-items: center; gap: 24px; }
-.nav-liens a { font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.45); transition: color .2s; }
-.nav-liens a:hover, .nav-liens a.actif { color: rgba(255,255,255,.9); }
-.nav-dropdown { position: relative; }
-.nav-dropdown-menu { display: none; position: absolute; top: calc(100% + 14px); left: 50%; transform: translateX(-50%); background: var(--c-blanc); border: 1px solid var(--c-bord); border-radius: var(--radius); min-width: 210px; box-shadow: 0 8px 32px rgba(0,0,0,.1); overflow: hidden; }
-.nav-dropdown:hover .nav-dropdown-menu { display: block; }
-.nav-dropdown-menu a { display: block; padding: 11px 18px; font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em; color: var(--c-nuit) !important; border-bottom: 1px solid var(--c-bord); text-transform: uppercase; opacity: 1; }
-.nav-dropdown-menu a:last-child { border-bottom: none; }
-.nav-dropdown-menu a:hover { background: var(--c-brume); color: var(--c-marine) !important; }
-.nav-cta { background: var(--c-cuivre); color: var(--c-blanc) !important; font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; padding: 8px 16px; border-radius: var(--radius); opacity: 1 !important; transition: opacity .2s !important; }
-.nav-cta:hover { opacity: .85 !important; }
-.lang-btn { font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: .1em; color: rgba(255,255,255,.4); border: 1px solid rgba(255,255,255,.2); padding: 5px 10px; border-radius: var(--radius); cursor: pointer; transition: color .2s, border-color .2s; }
-.lang-btn:hover { color: var(--c-cuivre); border-color: var(--c-cuivre); }
-.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
-.nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--c-blanc); border-radius: 1px; transition: transform .3s, opacity .3s; }
-.nav-mobile { display: none; position: fixed; top: 58px; left: 0; right: 0; background: var(--c-marine); border-top: 1px solid rgba(255,255,255,.08); z-index: 99; padding: 16px 20px 24px; box-shadow: 0 8px 24px rgba(0,0,0,.2); }
-.nav-mobile.ouvert { display: block; }
-.nav-mobile a { display: block; color: rgba(255,255,255,.65); font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.07); }
-.nav-mobile a:hover { color: var(--c-cuivre); }
-.nav-mobile-sub { padding-left: 16px; font-size: 10px !important; color: rgba(255,255,255,.4) !important; }
-.nav-mobile-cta { display: block; text-align: center; margin-top: 14px; background: var(--c-cuivre); color: var(--c-blanc) !important; padding: 12px !important; border-radius: var(--radius); border: none !important; }
-
-/* PAGE HEADER — compact */
+/* ── HISTOIRE : styles uniques ── */
 .page-header { background: var(--c-parchemin); padding: 32px 60px 28px; border-bottom: 1px solid var(--c-bord); }
 .page-header-inner { max-width: var(--max-width); margin: 0 auto; display: flex; align-items: baseline; gap: 24px; flex-wrap: wrap; }
-.page-header .lbl { margin-bottom: 0; flex-shrink: 0; }
-.page-header-h1 { font-family: var(--font-titre); font-size: 22px; font-weight: 300; color: var(--c-marine); line-height: 1.2; }
+.page-header-h1 { font-family: var(--font-titre); font-size: 22px; font-weight: 300; color: var(--c-marine); }
 .page-header-h1 em { font-style: italic; color: var(--c-cuivre); }
-
-/* TIMELINE */
-.timeline-outer { background: var(--c-parchemin); padding: 80px 0 100px; position: relative; }
+.timeline-outer { background: var(--c-parchemin); padding: 80px 0 100px; }
 .timeline-inner { max-width: var(--max-width); margin: 0 auto; padding: 0 60px; position: relative; }
-
-/* Ligne pointillée centrale */
-.timeline-inner::before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 0;
-  bottom: 0;
-  width: 0;
-  border-left: 2px dashed var(--c-bord);
-  transform: translateX(-50%);
-  z-index: 0;
-}
-
-/* ÉTAPE */
-.etape {
-  display: grid;
-  grid-template-columns: 1fr 60px 1fr;
-  gap: 0;
-  margin-bottom: 80px;
-  align-items: center;
-  position: relative;
-}
+.timeline-inner::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 0; border-left: 2px dashed var(--c-bord); transform: translateX(-50%); z-index: 0; }
+.etape { display: grid; grid-template-columns: 1fr 60px 1fr; margin-bottom: 80px; align-items: center; }
 .etape:last-child { margin-bottom: 0; }
-
-/* Nœud central */
-.etape-noeud {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  z-index: 2;
-  gap: 6px;
-}
-.etape-noeud-cercle {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--c-parchemin);
-  border: 2px solid var(--c-cuivre);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 0 5px var(--c-parchemin);
-}
-.etape-noeud-annee {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  font-weight: 500;
-  letter-spacing: .12em;
-  color: var(--c-cuivre);
-  white-space: nowrap;
-  text-align: center;
-}
-
-/* Lignes horizontales pointillées depuis le nœud */
-.etape-ligne-h {
-  display: flex;
-  align-items: center;
-}
-.etape-ligne-h::after {
-  content: '';
-  display: block;
-  height: 1px;
-  border-top: 1.5px dashed var(--c-bord);
-  flex: 1;
-}
-.etape:nth-child(odd)  .etape-gauche .etape-ligne-h { justify-content: flex-end; }
-.etape:nth-child(odd)  .etape-gauche .etape-ligne-h::after { order: -1; }
-.etape:nth-child(even) .etape-droite .etape-ligne-h { justify-content: flex-start; }
-
-/* IMAGE — style carnet photo */
-.etape-image {
-  padding: 16px;
-}
-.carnet-photo {
-  display: inline-block;
-  transform-origin: center center;
-  transition: transform .3s ease;
-}
+.etape-noeud { display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; z-index: 2; gap: 6px; }
+.etape-noeud-cercle { width: 36px; height: 36px; border-radius: 50%; background: var(--c-parchemin); border: 2px solid var(--c-cuivre); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 5px var(--c-parchemin); }
+.etape-noeud-annee { font-family: var(--font-mono); font-size: 9px; font-weight: 500; letter-spacing: .12em; color: var(--c-cuivre); white-space: nowrap; }
+.etape-image { padding: 16px; }
+.carnet-photo { display: inline-block; transform-origin: center center; transition: transform .3s ease; }
 .carnet-photo:hover { transform: rotate(0deg) scale(1.02) !important; }
-.carnet-photo-inner {
-  background: var(--c-blanc);
-  padding: 10px 10px 36px 10px;
-  box-shadow: 0 3px 12px rgba(0,0,0,.1), 0 1px 4px rgba(0,0,0,.06);
-  position: relative;
-}
-.carnet-photo-inner img {
-  width: 100%;
-  max-width: 320px;
-  height: 240px;
-  object-fit: cover;
-  display: block;
-  filter: grayscale(15%);
-}
-.carnet-caption {
-  font-family: var(--font-script);
-  font-size: 13px;
-  color: var(--c-muted);
-  text-align: center;
-  position: absolute;
-  bottom: 8px;
-  left: 10px;
-  right: 10px;
-  line-height: 1.3;
-}
-.carnet-scotch {
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%) rotate(-2deg);
-  width: 52px;
-  height: 18px;
-  background: rgba(220,210,190,0.55);
-  background-image: repeating-linear-gradient(90deg,transparent,transparent 3px,rgba(255,255,255,.15) 3px,rgba(255,255,255,.15) 4px);
-  z-index: 2;
-}
-.carnet-placeholder {
-  width: 100%;
-  max-width: 320px;
-  height: 240px;
-  background: var(--c-brume);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  color: var(--c-muted);
-  font-size: 11px;
-  text-align: center;
-}
-
-/* TEXTE */
-.etape-texte {
-  padding: 16px 24px;
-}
-.etape-annee-mobile { display: none; }
+.carnet-photo-inner { background: var(--c-blanc); padding: 10px 10px 36px; box-shadow: 0 3px 12px rgba(0,0,0,.1); position: relative; }
+.carnet-photo-inner img { width: 100%; max-width: 320px; height: 240px; object-fit: cover; display: block; }
+.carnet-caption { font-family: var(--font-script); font-size: 13px; color: var(--c-muted); text-align: center; position: absolute; bottom: 8px; left: 10px; right: 10px; }
+.carnet-scotch { position: absolute; top: -10px; left: 50%; transform: translateX(-50%) rotate(-2deg); width: 52px; height: 18px; background: rgba(220,210,190,.55); z-index: 2; }
+.carnet-placeholder { width: 320px; height: 240px; background: var(--c-brume); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: var(--c-muted); font-size: 11px; }
+.etape-texte { padding: 16px 24px; }
 .etape-lbl { margin-bottom: 10px; }
-.etape-titre {
-  font-family: var(--font-titre);
-  font-size: 28px;
-  font-weight: 400;
-  color: var(--c-marine);
-  line-height: 1.2;
-  margin-bottom: 6px;
-}
-.etape-sous-titre {
-  font-family: var(--font-script);
-  font-size: 16px;
-  color: var(--c-cuivre);
-  margin-bottom: 14px;
-}
-.etape-desc {
-  font-size: 14px;
-  color: var(--c-muted);
-  line-height: 1.85;
-  margin-bottom: 14px;
-}
+.etape-titre { font-family: var(--font-titre); font-size: 28px; font-weight: 400; color: var(--c-marine); line-height: 1.2; margin-bottom: 6px; }
+.etape-sous-titre { font-family: var(--font-script); font-size: 16px; color: var(--c-cuivre); margin-bottom: 14px; }
+.etape-desc { font-size: 14px; color: var(--c-muted); line-height: 1.85; margin-bottom: 14px; }
 .etape-desc strong { color: var(--c-nuit); font-weight: 500; }
-.etape-detail {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.etape-detail li {
-  font-family: var(--font-body);
-  font-size: 12px;
-  color: var(--c-muted);
-  padding-left: 16px;
-  position: relative;
-  line-height: 1.5;
-}
-.etape-detail li::before {
-  content: '—';
-  position: absolute;
-  left: 0;
-  color: var(--c-cuivre);
-  font-size: 11px;
-}
-
-/* Disposition alternée : impair = image gauche, texte droite */
+.etape-detail { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.etape-detail li { font-size: 12px; color: var(--c-muted); padding-left: 16px; position: relative; line-height: 1.5; }
+.etape-detail li::before { content: '—'; position: absolute; left: 0; color: var(--c-cuivre); }
 .etape:nth-child(odd)  .etape-gauche { display: flex; justify-content: flex-end; align-items: center; }
 .etape:nth-child(odd)  .etape-droite { display: flex; justify-content: flex-start; align-items: center; }
-.etape:nth-child(even) .etape-gauche { display: flex; justify-content: flex-end; align-items: center; }
-.etape:nth-child(even) .etape-droite { display: flex; justify-content: flex-start; align-items: center; }
-
-/* Pair : texte gauche, image droite */
-.etape:nth-child(even) .etape-gauche { order: 1; }
+.etape:nth-child(even) .etape-gauche { display: flex; justify-content: flex-end; align-items: center; order: 1; }
 .etape:nth-child(even) .etape-noeud  { order: 2; }
-.etape:nth-child(even) .etape-droite { order: 3; }
-
-/* INCENDIE — section spéciale marine */
-.etape-incendie .carnet-photo-inner {
-  background: #2a1a14;
-}
-.etape-incendie .carnet-photo-inner img {
-  filter: grayscale(40%) sepia(30%) contrast(1.1);
-}
-
-/* CONCLUSION marine */
+.etape:nth-child(even) .etape-droite { display: flex; justify-content: flex-start; align-items: center; order: 3; }
+.etape-incendie .carnet-photo-inner { background: #2a1a14; }
+.etape-incendie .carnet-photo-inner img { filter: grayscale(40%) sepia(30%) contrast(1.1); }
 .conclusion-outer { background: var(--c-marine); }
 .conclusion-inner { max-width: var(--max-width); margin: 0 auto; padding: 80px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
-.conclusion-texte .lbl { margin-bottom: 18px; }
 .conclusion-h2 { font-family: var(--font-titre); font-size: 38px; font-weight: 300; color: var(--c-parchemin); line-height: 1.2; margin-bottom: 20px; }
 .conclusion-h2 em { font-style: italic; color: var(--c-cuivre); }
 .conclusion-p { font-size: 15px; color: rgba(246,242,235,.6); line-height: 1.85; margin-bottom: 28px; }
@@ -293,109 +55,32 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 .conclusion-citation { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius); padding: 40px; }
 .conclusion-citation-texte { font-family: var(--font-script); font-size: 22px; line-height: 1.55; color: #e8c99a; font-style: italic; margin-bottom: 16px; }
 .conclusion-citation-source { font-family: var(--font-mono); font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--c-cuivre); }
-.conclusion-stats { display: flex; gap: 0; margin-top: 32px; border-top: 1px solid rgba(255,255,255,.08); padding-top: 28px; }
+.conclusion-stats { display: flex; margin-top: 32px; border-top: 1px solid rgba(255,255,255,.08); padding-top: 28px; }
 .conclusion-stat { flex: 1; }
-.conclusion-stat + .conclusion-stat { border-left: 1px solid rgba(255,255,255,.08); padding-left: 24px; margin-left: 0; }
+.conclusion-stat + .conclusion-stat { border-left: 1px solid rgba(255,255,255,.08); padding-left: 24px; }
 .conclusion-stat-n { font-family: var(--font-titre); font-size: 34px; font-weight: 400; color: var(--c-parchemin); line-height: 1; margin-bottom: 4px; }
 .conclusion-stat-l { font-family: var(--font-mono); font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: #c0874a; }
-
-/* FOOTER */
-.footer { background: var(--c-nuit); border-top: 1px solid rgba(255,255,255,.05); }
-.footer-inner { max-width: var(--max-width); margin: 0 auto; padding: 48px 60px 32px; display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 48px; }
-.footer-brand { font-family: var(--font-titre); font-size: 18px; font-weight: 300; color: var(--c-parchemin); margin-bottom: 6px; }
-.footer-tagline { font-family: var(--font-mono); font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: rgba(192,135,74,.55); margin-bottom: 20px; }
-.footer-coords { display: flex; flex-direction: column; gap: 6px; }
-.footer-coords a, .footer-coords span { font-family: var(--font-body); font-size: 12px; color: rgba(246,242,235,.38); transition: color .2s; line-height: 1.5; }
-.footer-coords a:hover { color: var(--c-cuivre); }
-.footer-col-titre { font-family: var(--font-mono); font-size: 9px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: rgba(246,242,235,.25); margin-bottom: 16px; }
-.footer-liens { display: flex; flex-direction: column; gap: 8px; }
-.footer-liens a { font-family: var(--font-body); font-size: 12px; color: rgba(246,242,235,.38); transition: color .2s; }
-.footer-liens a:hover { color: var(--c-parchemin); }
-.footer-bottom { max-width: var(--max-width); margin: 0 auto; padding: 20px 60px 28px; border-top: 1px solid rgba(255,255,255,.05); display: flex; justify-content: space-between; align-items: center; gap: 16px; }
-.footer-copyright { font-family: var(--font-mono); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: rgba(246,242,235,.2); }
-.footer-fab { font-family: var(--font-script); font-size: 15px; color: rgba(192,135,74,.4); }
-
-/* RESPONSIVE */
 @media (max-width: 900px) {
   .timeline-inner::before { left: 28px; transform: none; }
   .etape { grid-template-columns: 56px 1fr; grid-template-rows: auto auto; gap: 0 16px; margin-bottom: 56px; }
-  .etape-gauche,
-  .etape:nth-child(even) .etape-gauche { order: 0 !important; grid-column: 2; grid-row: 1; justify-content: flex-start !important; }
-  .etape-noeud,
-  .etape:nth-child(even) .etape-noeud  { order: 0 !important; grid-column: 1; grid-row: 1 / 3; align-self: flex-start; padding-top: 12px; }
-  .etape-droite,
-  .etape:nth-child(even) .etape-droite { order: 0 !important; grid-column: 2; grid-row: 2; justify-content: flex-start !important; }
-  /* Réorganise : nœud à gauche, contenu à droite pour tous */
-  .etape { grid-template-columns: 56px 1fr; }
-  /* Sur mobile, image en haut, texte en bas */
-  .etape-image { padding: 0 0 16px 0; }
-  .etape-texte { padding: 0; }
-  .carnet-photo-inner img, .carnet-placeholder { max-width: 100%; height: 200px; }
+  .etape-gauche, .etape:nth-child(even) .etape-gauche { order: 0 !important; grid-column: 2; grid-row: 1; justify-content: flex-start !important; }
+  .etape-noeud, .etape:nth-child(even) .etape-noeud  { order: 0 !important; grid-column: 1; grid-row: 1 / 3; align-self: flex-start; padding-top: 12px; }
+  .etape-droite, .etape:nth-child(even) .etape-droite { order: 0 !important; grid-column: 2; grid-row: 2; justify-content: flex-start !important; }
   .timeline-inner { padding: 0 20px; }
-}
-@media (max-width: 768px) {
-  :root { --fs-h1: 30px; --fs-h2: 24px; }
-  .nav { padding: 0 20px; }
-  .nav-liens { display: none; }
-  .nav-hamburger { display: flex; }
-  .page-header { padding: 16px 20px; }
-  .page-header-inner { flex-direction: column; gap: 6px; }
-  .timeline-outer { padding: 48px 0 64px; }
-  .etape-titre { font-size: 22px; }
+  .carnet-photo-inner img, .carnet-placeholder { max-width: 100%; height: 200px; }
   .conclusion-inner { grid-template-columns: 1fr; padding: 48px 20px; gap: 32px; }
   .conclusion-h2 { font-size: 28px; }
-  .footer-inner { grid-template-columns: 1fr; gap: 32px; padding: 40px 20px 28px; }
-  .footer-bottom { padding: 16px 20px 24px; flex-direction: column; align-items: flex-start; gap: 8px; }
+}
+@media (max-width: 768px) {
+  .page-header { padding: 16px 20px; }
+  .timeline-outer { padding: 48px 0 64px; }
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="nav">
-  <a href="index.html" class="nav-logo">
-    <div class="nav-logo-barre"></div>
-    <div class="nav-logo-texte">
-      Les Adaptations Accès-Cible
-      <small>Partenaire des ergothérapeutes · Québec</small>
-    </div>
-  </a>
-  <div class="nav-liens" id="navLiens">
-    <div class="nav-dropdown">
-      <a href="ergo.html">Chaise ERGO</a>
-      <div class="nav-dropdown-menu">
-        <a href="ergo.html#garderie">Hauteur garderie</a>
-        <a href="ergo.html#standard">Standard</a>
-        <a href="ergo.html#surdimensionnee">Surdimensionnée</a>
-      </div>
-    </div>
-    <a href="accessoires.html">Accessoires</a>
-    <a href="bureaux.html">Bureaux</a>
-    <a href="marchepied.html">Marchepieds</a>
-    <a href="histoire.html" class="actif">Notre histoire</a>
-    <a href="contact.html">Contact</a>
-    <button class="lang-btn" onclick="toggleLangue()" id="langBtn">EN</button>
-    <a href="https://acces-cible.fillout.com/t/erKz8m4uBEus" target="_blank" rel="noopener" class="nav-cta">Soumission →</a>
-  </div>
-  <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
+<div id="nav-container"></div>
 
-<div class="nav-mobile" id="navMobile">
-  <a href="ergo.html">Chaise ERGO</a>
-  <a href="ergo.html#garderie" class="nav-mobile-sub">↳ Hauteur garderie</a>
-  <a href="ergo.html#standard" class="nav-mobile-sub">↳ Standard</a>
-  <a href="ergo.html#surdimensionnee" class="nav-mobile-sub">↳ Surdimensionnée</a>
-  <a href="accessoires.html">Accessoires</a>
-  <a href="bureaux.html">Bureaux</a>
-  <a href="marchepied.html">Marchepieds</a>
-  <a href="histoire.html" class="actif">Notre histoire</a>
-  <a href="contact.html">Contact</a>
-  <a href="https://acces-cible.fillout.com/t/erKz8m4uBEus" target="_blank" rel="noopener" class="nav-mobile-cta">Demander une soumission →</a>
-</div>
-
-<!-- EN-TÊTE compact -->
 <div class="page-header">
   <div class="page-header-inner">
     <span class="lbl">Une histoire vraie · Depuis 1965</span>
@@ -403,264 +88,76 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   </div>
 </div>
 
-<!-- TIMELINE ZIGZAG -->
 <div class="timeline-outer">
   <div class="timeline-inner">
 
-    <!-- ÉTAPE 1 : 1965 -->
     <div class="etape">
       <div class="etape-gauche">
-        <div class="etape-image">
-          <div class="carnet-photo" style="transform: rotate(-2deg);">
-            <div class="carnet-scotch"></div>
-            <div class="carnet-photo-inner">
-              <img src="images/claudeplage.png" alt="Claude Poupart enfant"
-                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-              <div class="carnet-placeholder" style="display:none;">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-                <span style="font-size:10px;">claudeplage.png</span>
-              </div>
-              <div class="carnet-caption">— Claude, Camp Papillon · 1965</div>
-            </div>
-          </div>
-        </div>
+        <div class="etape-image"><div class="carnet-photo" style="transform:rotate(-2deg);"><div class="carnet-scotch"></div><div class="carnet-photo-inner"><img src="images/claudeplage.png" alt="Claude Poupart enfant" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="carnet-placeholder" style="display:none;"><span style="font-size:10px;">claudeplage.png</span></div><div class="carnet-caption">— Claude, Camp Papillon · 1965</div></div></div></div>
       </div>
-      <div class="etape-noeud">
-        <div class="etape-noeud-cercle">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c0874a" stroke-width="2"><circle cx="12" cy="12" r="4"/></svg>
-        </div>
-        <div class="etape-noeud-annee">1965</div>
-      </div>
+      <div class="etape-noeud"><div class="etape-noeud-cercle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c0874a" stroke-width="2"><circle cx="12" cy="12" r="4"/></svg></div><div class="etape-noeud-annee">1965</div></div>
       <div class="etape-droite">
-        <div class="etape-texte">
-          <span class="lbl etape-lbl">L'enfance qui forge un destin</span>
-          <h2 class="etape-titre">Quand la résilience<br>forge le destin</h2>
-          <div class="etape-sous-titre">Camp Papillon — un été qui change tout</div>
-          <p class="etape-desc">
-            En 1965, Claude Poupart a déjà subi une dizaine d'opérations aux jambes. Pendant trois longues années, il passe des mois par année près de Shawbridge, au <strong>Camp Papillon</strong> — un camp spécialisé pour enfants vivant avec un handicap.
-          </p>
-          <p class="etape-desc">
-            Cette expérience unique — faite de défis physiques, de résilience et d'amitié — enseignera à Claude quelque chose d'essentiel : comprendre de l'intérieur ce que vivent les enfants qui ont besoin d'aide.
-          </p>
-          <ul class="etape-detail">
-            <li>Études en sciences — spécialisation en éducation physique</li>
-            <li>Formation complémentaire en ergonomie en milieu industriel</li>
-            <li>Expertise en fabrication du bois acquise à l'École nationale du meuble</li>
-          </ul>
-        </div>
+        <div class="etape-texte"><span class="lbl etape-lbl">L'enfance qui forge un destin</span><h2 class="etape-titre">Quand la résilience<br>forge le destin</h2><div class="etape-sous-titre">Camp Papillon — un été qui change tout</div><p class="etape-desc">En 1965, Claude Poupart a déjà subi une dizaine d'opérations aux jambes. Pendant trois longues années, il passe des mois au <strong>Camp Papillon</strong> — un camp spécialisé pour enfants vivant avec un handicap.</p><p class="etape-desc">Cette expérience lui enseignera quelque chose d'essentiel : comprendre de l'intérieur ce que vivent les enfants qui ont besoin d'aide.</p><ul class="etape-detail"><li>Études en sciences — spécialisation en éducation physique</li><li>Formation en ergonomie en milieu industriel</li><li>Expertise en fabrication du bois à l'École nationale du meuble</li></ul></div>
       </div>
     </div>
 
-    <!-- ÉTAPE 2 : 1990 -->
     <div class="etape">
       <div class="etape-gauche">
-        <div class="etape-texte">
-          <span class="lbl etape-lbl">La première création</span>
-          <h2 class="etape-titre">La naissance de<br>la Chaise ERGO</h2>
-          <div class="etape-sous-titre">Une chaise dessinée pour un enfant réel</div>
-          <p class="etape-desc">
-            En 1990, Claude dessine et fabrique sa <strong>première chaise adaptée</strong>. Pas un prototype de laboratoire — une vraie chaise, pour un enfant précis, prescrite par une ergothérapeute qui décrit le besoin et fait confiance à l'artisan.
-          </p>
-          <p class="etape-desc">
-            Dès le départ, la méthode est la même : écouter, mesurer, fabriquer sur mesure. Aucune pièce interchangeable. Aucun compromis. Chaque chaise est unique comme l'enfant qui va l'utiliser.
-          </p>
-          <ul class="etape-detail">
-            <li>Première collaboration avec les ergothérapeutes du Québec</li>
-            <li>Bois massif local, assemblage artisanal</li>
-            <li>Ajustements possibles après livraison, toujours</li>
-          </ul>
-        </div>
+        <div class="etape-texte"><span class="lbl etape-lbl">La première création</span><h2 class="etape-titre">La naissance de<br>la Chaise ERGO</h2><div class="etape-sous-titre">Une chaise dessinée pour un enfant réel</div><p class="etape-desc">En 1990, Claude dessine et fabrique sa <strong>première chaise adaptée</strong>. Pas un prototype — une vraie chaise, pour un enfant précis, prescrite par une ergothérapeute.</p><p class="etape-desc">Dès le départ, la méthode est la même : écouter, mesurer, fabriquer sur mesure. Chaque chaise est unique comme l'enfant qui va l'utiliser.</p><ul class="etape-detail"><li>Première collaboration avec les ergothérapeutes du Québec</li><li>Bois massif local, assemblage artisanal</li><li>Ajustements possibles après livraison, toujours</li></ul></div>
       </div>
-      <div class="etape-noeud">
-        <div class="etape-noeud-cercle">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c0874a" stroke-width="2"><circle cx="12" cy="12" r="4"/></svg>
-        </div>
-        <div class="etape-noeud-annee">1990</div>
-      </div>
+      <div class="etape-noeud"><div class="etape-noeud-cercle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c0874a" stroke-width="2"><circle cx="12" cy="12" r="4"/></svg></div><div class="etape-noeud-annee">1990</div></div>
       <div class="etape-droite">
-        <div class="etape-image">
-          <div class="carnet-photo" style="transform: rotate(1.5deg);">
-            <div class="carnet-scotch" style="left:30%; transform:rotate(5deg);"></div>
-            <div class="carnet-scotch" style="left:60%; top:-9px; transform:rotate(-4deg); position:absolute;"></div>
-            <div class="carnet-photo-inner">
-              <img src="images/Chaise_haute_en_bois_croquis_1990_edited_1_1.jpg" alt="Croquis de la première chaise, 1990"
-                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-              <div class="carnet-placeholder" style="display:none;">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg>
-                <span style="font-size:10px;">Chaise_haute_en_bois_croquis_1990_edited_1_1.jpg</span>
-              </div>
-              <div class="carnet-caption">— Premier croquis de la Chaise ERGO · 1990</div>
-            </div>
-          </div>
-        </div>
+        <div class="etape-image"><div class="carnet-photo" style="transform:rotate(1.5deg);"><div class="carnet-scotch"></div><div class="carnet-photo-inner"><img src="images/Chaise_haute_en_bois_croquis_1990_edited_1_1.jpg" alt="Croquis de la première chaise, 1990" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="carnet-placeholder" style="display:none;"><span style="font-size:10px;">Croquis 1990</span></div><div class="carnet-caption">— Premier croquis de la Chaise ERGO · 1990</div></div></div></div>
       </div>
     </div>
 
-    <!-- ÉTAPE 3 : 2000s -->
     <div class="etape">
       <div class="etape-gauche">
-        <div class="etape-image">
-          <div class="carnet-photo" style="transform: rotate(-1deg);">
-            <div class="carnet-scotch"></div>
-            <div class="carnet-photo-inner">
-              <img src="images/perefils.png" alt="Claude Poupart avec son fils dans l'atelier"
-                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-              <div class="carnet-placeholder" style="display:none;">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg>
-                <span style="font-size:10px;">perefils.png</span>
-              </div>
-              <div class="carnet-caption">— Claude et son fils · L'atelier de Sainte-Anne-des-Lacs</div>
-            </div>
-          </div>
-        </div>
+        <div class="etape-image"><div class="carnet-photo" style="transform:rotate(-1deg);"><div class="carnet-scotch"></div><div class="carnet-photo-inner"><img src="images/perefils.png" alt="Claude et son fils" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="carnet-placeholder" style="display:none;"><span style="font-size:10px;">perefils.png</span></div><div class="carnet-caption">— Claude et son fils · L'atelier</div></div></div></div>
       </div>
-      <div class="etape-noeud">
-        <div class="etape-noeud-cercle">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c0874a" stroke-width="2"><circle cx="12" cy="12" r="4"/></svg>
-        </div>
-        <div class="etape-noeud-annee">2000s</div>
-      </div>
+      <div class="etape-noeud"><div class="etape-noeud-cercle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c0874a" stroke-width="2"><circle cx="12" cy="12" r="4"/></svg></div><div class="etape-noeud-annee">2000s</div></div>
       <div class="etape-droite">
-        <div class="etape-texte">
-          <span class="lbl etape-lbl">La réputation se construit</span>
-          <h2 class="etape-titre">35 ans de bouche<br>à oreille</h2>
-          <div class="etape-sous-titre">Une affaire de famille et de confiance</div>
-          <p class="etape-desc">
-            Au fil des décennies, les ergothérapeutes du Québec se passent le mot. <strong>La Chaise ERGO devient une référence</strong> — non pas grâce à la publicité, mais grâce à la qualité de chaque chaise livrée et aux ajustements toujours possibles.
-          </p>
-          <p class="etape-desc">
-            L'atelier de Sainte-Anne-des-Lacs grandit. La gamme s'élargit : bureaux adaptés, marchepieds, accessoires posturaux. Mais l'esprit reste le même — une seule personne, un seul artisan, une seule promesse.
-          </p>
-          <ul class="etape-detail">
-            <li>Développement des bureaux adaptés et marchepieds</li>
-            <li>Réseau d'ergothérapeutes partenaires dans tout le Québec</li>
-            <li>Transmission du savoir-faire à la nouvelle génération</li>
-          </ul>
-        </div>
+        <div class="etape-texte"><span class="lbl etape-lbl">La réputation se construit</span><h2 class="etape-titre">35 ans de bouche<br>à oreille</h2><div class="etape-sous-titre">Une affaire de famille et de confiance</div><p class="etape-desc">Au fil des décennies, les ergothérapeutes du Québec se passent le mot. <strong>La Chaise ERGO devient une référence</strong> — non pas grâce à la publicité, mais grâce à la qualité de chaque chaise livrée.</p><ul class="etape-detail"><li>Développement des bureaux adaptés et marchepieds</li><li>Réseau d'ergothérapeutes partenaires dans tout le Québec</li><li>Transmission du savoir-faire à la nouvelle génération</li></ul></div>
       </div>
     </div>
 
-    <!-- ÉTAPE 4 : Juin 2023 -->
     <div class="etape etape-incendie">
       <div class="etape-gauche">
-        <div class="etape-texte">
-          <span class="lbl etape-lbl" style="color:#8b3a2a;">L'épreuve du feu</span>
-          <h2 class="etape-titre" style="color:#8b3a2a;">Juin 2023 —<br>L'atelier disparaît</h2>
-          <div class="etape-sous-titre" style="color:#c0874a;">Un incendie total. Tout est perdu.</div>
-          <p class="etape-desc">
-            En juin 2023, un incendie ravage complètement l'atelier. <strong>Trente-cinq ans d'outils, de gabarits, de bois et de mémoire</strong> partent en fumée en quelques heures. Les machines, les plans, les commandes en cours — tout.
-          </p>
-          <p class="etape-desc">
-            Mais pas le savoir-faire. Pas les relations bâties une chaise à la fois. Pas la confiance des ergothérapeutes qui ont toujours su que Claude livrait ce qu'il promettait.
-          </p>
-          <ul class="etape-detail">
-            <li>Perte totale des équipements et outils de l'atelier</li>
-            <li>Toutes les commandes en cours honorées malgré l'épreuve</li>
-            <li>Le réseau de partenaires mobilisé pour la reconstruction</li>
-          </ul>
-        </div>
+        <div class="etape-texte"><span class="lbl etape-lbl" style="color:#8b3a2a;">L'épreuve du feu</span><h2 class="etape-titre" style="color:#8b3a2a;">Juin 2023 —<br>L'atelier disparaît</h2><div class="etape-sous-titre" style="color:#c0874a;">Un incendie total. Tout est perdu.</div><p class="etape-desc">En juin 2023, un incendie ravage complètement l'atelier. <strong>Trente-cinq ans d'outils, de gabarits, de bois et de mémoire</strong> partent en fumée en quelques heures.</p><p class="etape-desc">Mais pas le savoir-faire. Pas les relations bâties une chaise à la fois.</p><ul class="etape-detail"><li>Perte totale des équipements et outils de l'atelier</li><li>Toutes les commandes en cours honorées malgré l'épreuve</li><li>Le réseau de partenaires mobilisé pour la reconstruction</li></ul></div>
       </div>
-      <div class="etape-noeud">
-        <div class="etape-noeud-cercle" style="border-color:#8b3a2a;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8b3a2a" stroke-width="2"><path d="M12 2c0 6-6 8-6 14a6 6 0 0 0 12 0c0-6-6-8-6-14z"/></svg>
-        </div>
-        <div class="etape-noeud-annee" style="color:#8b3a2a;">2023</div>
-      </div>
+      <div class="etape-noeud"><div class="etape-noeud-cercle" style="border-color:#8b3a2a;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8b3a2a" stroke-width="2"><path d="M12 2c0 6-6 8-6 14a6 6 0 0 0 12 0c0-6-6-8-6-14z"/></svg></div><div class="etape-noeud-annee" style="color:#8b3a2a;">2023</div></div>
       <div class="etape-droite">
-        <div class="etape-image">
-          <div class="carnet-photo" style="transform: rotate(2deg);">
-            <div class="carnet-scotch" style="background:rgba(139,58,42,0.2);"></div>
-            <div class="carnet-photo-inner" style="background:#1a1008;">
-              <img src="images/Structure_en_bois_réaliste_au_crayon_edited_1_1.jpg" alt="Atelier après l'incendie — croquis"
-                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-              <div class="carnet-placeholder" style="display:none; background:#2a1a14; color:#7a6050;">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#7a6050" stroke-width="1"><path d="M12 2c0 6-6 8-6 14a6 6 0 0 0 12 0c0-6-6-8-6-14z"/></svg>
-                <span style="font-size:10px;">Structure_en_bois_réaliste_au_crayon_edited_1_1.jpg</span>
-              </div>
-              <div class="carnet-caption" style="color:#7a6050;">— Juin 2023 · L'atelier</div>
-            </div>
-          </div>
-        </div>
+        <div class="etape-image"><div class="carnet-photo" style="transform:rotate(2deg);"><div class="carnet-scotch" style="background:rgba(139,58,42,0.2);"></div><div class="carnet-photo-inner" style="background:#1a1008;"><img src="images/Structure_en_bois_réaliste_au_crayon_edited_1_1.jpg" alt="Atelier après l'incendie" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="carnet-placeholder" style="display:none;background:#2a1a14;color:#7a6050;"><span style="font-size:10px;">Juin 2023 · L'atelier</span></div><div class="carnet-caption" style="color:#7a6050;">— Juin 2023 · L'atelier</div></div></div></div>
       </div>
     </div>
 
-    <!-- ÉTAPE 5 : 2024 -->
     <div class="etape">
       <div class="etape-gauche">
-        <div class="etape-image">
-          <div class="carnet-photo" style="transform: rotate(-1.5deg);">
-            <div class="carnet-scotch"></div>
-            <div class="carnet-photo-inner">
-              <img src="images/Gemini_Generated_Image_dyiw0udyiw0udyiw_1_Réduite_edited.jpg" alt="Nouveau départ 2024"
-                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-              <div class="carnet-placeholder" style="display:none;">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg>
-                <span style="font-size:10px;">Gemini_Generated_Image_dyiw0udyiw0udyiw_1_Réduite_edited.jpg</span>
-              </div>
-              <div class="carnet-caption">— Le nouvel atelier · 2024</div>
-            </div>
-          </div>
-        </div>
+        <div class="etape-image"><div class="carnet-photo" style="transform:rotate(-1.5deg);"><div class="carnet-scotch"></div><div class="carnet-photo-inner"><img src="images/Gemini_Generated_Image_dyiw0udyiw0udyiw_1_Réduite_edited.jpg" alt="Nouveau départ 2024" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="carnet-placeholder" style="display:none;"><span style="font-size:10px;">Le nouvel atelier · 2024</span></div><div class="carnet-caption">— Le nouvel atelier · 2024</div></div></div></div>
       </div>
-      <div class="etape-noeud">
-        <div class="etape-noeud-cercle" style="border-color:#c0874a; background:#c0874a;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <div class="etape-noeud-annee" style="color:#c0874a; font-weight:600;">2024</div>
-      </div>
+      <div class="etape-noeud"><div class="etape-noeud-cercle" style="border-color:#c0874a;background:#c0874a;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><div class="etape-noeud-annee" style="color:#c0874a;font-weight:600;">2024</div></div>
       <div class="etape-droite">
-        <div class="etape-texte">
-          <span class="lbl etape-lbl">Le nouveau départ</span>
-          <h2 class="etape-titre">2024 — La pérennité<br>est confirmée</h2>
-          <div class="etape-sous-titre">Un atelier reconstruit. Une promesse renouvelée.</div>
-          <p class="etape-desc">
-            En 2024, <strong>Les Adaptations Accès-Cible renaissent</strong>. Le nouvel atelier est opérationnel. Les commandes reprennent. Les ergothérapeutes partenaires sont là, fidèles.
-          </p>
-          <p class="etape-desc">
-            Ce nouveau départ n'est pas seulement une reconstruction physique — c'est la preuve que 35 ans de confiance bâtie chaise par chaise ne disparaissent pas dans un incendie. Le savoir-faire, lui, est intact.
-          </p>
-          <ul class="etape-detail">
-            <li>Atelier reconstruit à Sainte-Anne-des-Lacs</li>
-            <li>Toute la gamme ERGO de nouveau disponible</li>
-            <li>Délai de fabrication : 4 à 6 semaines</li>
-            <li>La même promesse : sur mesure, toujours</li>
-          </ul>
-        </div>
+        <div class="etape-texte"><span class="lbl etape-lbl">Le nouveau départ</span><h2 class="etape-titre">2024 — La pérennité<br>est confirmée</h2><div class="etape-sous-titre">Un atelier reconstruit. Une promesse renouvelée.</div><p class="etape-desc">En 2024, <strong>Les Adaptations Accès-Cible renaissent</strong>. Le nouvel atelier est opérationnel. Les commandes reprennent. Les ergothérapeutes partenaires sont là, fidèles.</p><ul class="etape-detail"><li>Atelier reconstruit à Sainte-Anne-des-Lacs</li><li>Toute la gamme ERGO de nouveau disponible</li><li>Délai de fabrication : 4 à 6 semaines</li><li>La même promesse : sur mesure, toujours</li></ul></div>
       </div>
     </div>
 
-  </div><!-- /timeline-inner -->
-</div><!-- /timeline-outer -->
+  </div>
+</div>
 
-<!-- CONCLUSION -->
 <div class="conclusion-outer">
   <div class="conclusion-inner">
-    <div class="conclusion-texte">
-      <span class="lbl" style="color:rgba(192,135,74,.7);">Aujourd'hui · Sainte-Anne-des-Lacs</span>
+    <div>
+      <span class="lbl" style="color:rgba(192,135,74,.7);margin-bottom:18px;">Aujourd'hui · Sainte-Anne-des-Lacs</span>
       <h2 class="conclusion-h2">Une chaise à la fois,<br>depuis <em>35 ans.</em></h2>
-      <p class="conclusion-p">
-        Chaque chaise qui sort de l'atelier est le résultat d'une conversation entre Claude Poupart et un ergothérapeute — une conversation sur un enfant précis, avec des besoins précis.
-      </p>
-      <p class="conclusion-p">
-        Ce n'est pas un catalogue. C'est un engagement artisanal renouvelé à chaque commande.
-      </p>
+      <p class="conclusion-p">Chaque chaise qui sort de l'atelier est le résultat d'une conversation entre Claude Poupart et un ergothérapeute — une conversation sur un enfant précis, avec des besoins précis.</p>
       <div class="conclusion-btns">
         <a href="ergo.html" class="btn-primary">Voir la Chaise ERGO →</a>
         <a href="https://acces-cible.fillout.com/t/erKz8m4uBEus" target="_blank" rel="noopener" class="btn-accent">Demander une soumission →</a>
       </div>
       <div class="conclusion-stats">
-        <div class="conclusion-stat">
-          <div class="conclusion-stat-n">35+</div>
-          <div class="conclusion-stat-l">ans d'expertise</div>
-        </div>
-        <div class="conclusion-stat" style="padding-left:24px;">
-          <div class="conclusion-stat-n">100%</div>
-          <div class="conclusion-stat-l">sur mesure</div>
-        </div>
-        <div class="conclusion-stat" style="padding-left:24px;">
-          <div class="conclusion-stat-n">4–6</div>
-          <div class="conclusion-stat-l">semaines de fabrication</div>
-        </div>
+        <div class="conclusion-stat"><div class="conclusion-stat-n">35+</div><div class="conclusion-stat-l">ans d'expertise</div></div>
+        <div class="conclusion-stat"><div class="conclusion-stat-n">100%</div><div class="conclusion-stat-l">sur mesure</div></div>
+        <div class="conclusion-stat"><div class="conclusion-stat-n">4–6</div><div class="conclusion-stat-l">semaines fabrication</div></div>
       </div>
     </div>
     <div class="conclusion-citation">
@@ -670,52 +167,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   </div>
 </div>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div>
-      <div class="footer-brand">Les Adaptations Accès-Cible</div>
-      <div class="footer-tagline">Fabrication artisanale · Québec · Depuis 1990</div>
-      <div class="footer-coords">
-        <span>156-A route 117<br>Sainte-Anne-des-Lacs, Québec  J0R 1B0</span>
-        <a href="tel:+14502271948">450 227-1948</a>
-        <a href="mailto:info@lesadaptationsacces-cible.com">info@lesadaptationsacces-cible.com</a>
-        <a href="mailto:info@acces-cible.ca">info@acces-cible.ca</a>
-      </div>
-    </div>
-    <div>
-      <div class="footer-col-titre">Produits</div>
-      <div class="footer-liens">
-        <a href="ergo.html">Chaise ERGO</a>
-        <a href="accessoires.html">Accessoires posturaux</a>
-        <a href="bureaux.html">Bureaux adaptés</a>
-        <a href="marchepied.html">Marchepieds</a>
-      </div>
-    </div>
-    <div>
-      <div class="footer-col-titre">Entreprise</div>
-      <div class="footer-liens">
-        <a href="histoire.html">Notre histoire</a>
-        <a href="contact.html">Contact</a>
-        <a href="https://acces-cible.fillout.com/t/erKz8m4uBEus" target="_blank" rel="noopener">Formulaire de soumission</a>
-      </div>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <div class="footer-copyright">© 2024 Les Adaptations Accès-Cible. Tous droits réservés.</div>
-    <div class="footer-fab">Fait à la main · Sainte-Anne-des-Lacs</div>
-  </div>
-</footer>
-
-<script>
-function toggleMenu() {
-  document.getElementById('navMobile').classList.toggle('ouvert');
-}
-let langue = 'fr';
-function toggleLangue() {
-  langue = langue === 'fr' ? 'en' : 'fr';
-  document.getElementById('langBtn').textContent = langue === 'fr' ? 'EN' : 'FR';
-}
-</script>
+<div id="footer-container"></div>
+<script src="scripts.js"></script>
 </body>
 </html>
