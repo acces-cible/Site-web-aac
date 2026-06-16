@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contactez-nous — Les Adaptations Accès-Cible</title>
+<meta name="description" content="Contactez Les Adaptations Accès-Cible. Envoyez-nous un message, une question ou une demande d'information.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Caveat:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.page-header { border-bottom: 1px solid var(--c-bord); background: var(--c-parchemin); }
+.page-header-inner { max-width: var(--max-width); margin: 0 auto; padding: 56px 60px 48px; }
+.page-header-inner .lbl { margin-bottom: 12px; }
+.page-h1 { font-family: var(--font-titre); font-size: 44px; font-weight: 300; color: var(--c-marine); line-height: 1.1; margin-bottom: 14px; }
+.page-h1 em { font-style: italic; color: var(--c-cuivre); }
+.page-sous-titre { font-size: 13px; color: var(--c-muted); line-height: 1.7; max-width: 520px; }
+
+.contact-outer { background: var(--c-blanc); border-bottom: 1px solid var(--c-bord); }
+.contact-inner { max-width: var(--max-width); margin: 0 auto; padding: 56px 60px; display: grid; grid-template-columns: 1fr 340px; gap: 80px; align-items: start; }
+
+.form-groupe { margin-bottom: 22px; }
+.form-groupe label { display: block; font-family: var(--font-body); font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--c-muted); margin-bottom: 7px; }
+.form-groupe input,
+.form-groupe textarea {
+  width: 100%; font-family: var(--font-body); font-size: 14px; color: var(--c-nuit);
+  background: var(--c-parchemin); border: 1px solid var(--c-bord); border-radius: var(--radius);
+  padding: 11px 14px; transition: border-color .2s, box-shadow .2s; outline: none; -webkit-appearance: none;
+}
+.form-groupe input:focus,
+.form-groupe textarea:focus { border-color: var(--c-marine); box-shadow: 0 0 0 3px rgba(30,58,79,.08); }
+.form-groupe textarea { resize: vertical; min-height: 130px; line-height: 1.6; }
+.form-deux-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+.form-submit {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--c-marine); color: var(--c-blanc);
+  font-family: var(--font-body); font-size: 13px; font-weight: 500;
+  padding: 13px 28px; border-radius: var(--radius); border: none;
+  cursor: pointer; transition: opacity .2s; margin-top: 6px; letter-spacing: .02em;
+}
+.form-submit:hover { opacity: .85; }
+.form-submit:disabled { opacity: .5; cursor: not-allowed; }
+.form-submit svg { transition: transform .2s; }
+.form-submit:hover:not(:disabled) svg { transform: translateX(3px); }
+
+.form-note { font-size: 11px; color: var(--c-muted); font-style: italic; margin-top: 12px; }
+.form-note a { color: var(--c-cuivre); text-decoration: underline; text-underline-offset: 3px; }
+
+.form-succes {
+  display: none; background: var(--c-brume); border: 1px solid var(--c-bord);
+  border-left: 3px solid var(--c-cuivre); border-radius: var(--radius);
+  padding: 20px 24px; margin-top: 20px;
+}
+.form-succes p { font-size: 14px; color: var(--c-nuit); line-height: 1.6; }
+
+.contact-info { padding-top: 8px; }
+.info-bloc { margin-bottom: 36px; }
+.info-bloc:last-child { margin-bottom: 0; }
+.info-titre { font-family: var(--font-body); font-size: 9px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--c-muted); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--c-bord); }
+.info-ligne { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px; }
+.info-ligne:last-child { margin-bottom: 0; }
+.info-ligne svg { flex-shrink: 0; color: var(--c-cuivre); margin-top: 2px; }
+.info-ligne span, .info-ligne a { font-size: 13px; color: var(--c-muted); line-height: 1.5; transition: color .2s; }
+.info-ligne a:hover { color: var(--c-cuivre); }
+.info-note { font-size: 12px; color: var(--c-muted); line-height: 1.7; margin-top: 10px; }
+
+@media (max-width: 900px) {
+  .page-header-inner { padding: 40px 20px 32px; }
+  .page-h1 { font-size: 32px; }
+  .contact-inner { grid-template-columns: 1fr; gap: 40px; padding: 40px 20px; }
+  .form-deux-col { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div id="nav-container"></div>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <span class="lbl">Contactez-nous</span>
+    <h1 class="page-h1">Une question ?<br>Écrivez-nous <em>directement.</em></h1>
+    <p class="page-sous-titre">Pour toute question générale, demande d'information ou suivi de commande. Pour une soumission de chaise adaptée, utilisez notre formulaire dédié.</p>
+  </div>
+</div>
+
+<div class="contact-outer">
+  <div class="contact-inner">
+
+    <div>
+      <span class="lbl" style="margin-bottom:24px;display:block;">Formulaire de contact</span>
+
+      <form id="contact-form" action="https://formspree.io/f/mjgdzrvw" method="POST">
+
+        <div class="form-deux-col">
+          <div class="form-groupe">
+            <label for="prenom">Prénom *</label>
+            <input type="text" id="prenom" name="prenom" required autocomplete="given-name" placeholder="Marie">
+          </div>
+          <div class="form-groupe">
+            <label for="nom">Nom *</label>
+            <input type="text" id="nom" name="nom" required autocomplete="family-name" placeholder="Tremblay">
+          </div>
+        </div>
+
+        <div class="form-deux-col">
+          <div class="form-groupe">
+            <label for="courriel">Courriel *</label>
+            <input type="email" id="courriel" name="email" required autocomplete="email" placeholder="marie@exemple.com">
+          </div>
+          <div class="form-groupe">
+            <label for="telephone">Téléphone</label>
+            <input type="tel" id="telephone" name="telephone" autocomplete="tel" placeholder="514 000-0000">
+          </div>
+        </div>
+
+        <div class="form-groupe">
+          <label for="message">Message *</label>
+          <textarea id="message" name="message" required placeholder="Votre message..."></textarea>
+        </div>
+
+        <!-- Honeypot anti-spam -->
+        <input type="text" name="_gotcha" style="display:none">
+
+        <button type="submit" class="form-submit" id="submit-btn">
+          <span>Envoyer le message</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </button>
+
+        <p class="form-note">Pour joindre un document, écrivez-nous à <a href="mailto:info@lesadaptationsacces-cible.com">info@lesadaptationsacces-cible.com</a></p>
+
+        <div class="form-succes" id="form-succes">
+          <p><strong>Message envoyé !</strong> Nous vous répondrons dans les meilleurs délais.</p>
+        </div>
+
+      </form>
+    </div>
+
+    <div class="contact-info">
+      <div class="info-bloc">
+        <div class="info-titre">Coordonnées</div>
+        <div class="info-ligne">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.95-.95a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <a href="tel:+14502271948">450 227-1948</a>
+        </div>
+        <div class="info-ligne">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <a href="mailto:info@lesadaptationsacces-cible.com">info@lesadaptationsacces-cible.com</a>
+        </div>
+        <div class="info-ligne">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>156-A route 117<br>Sainte-Anne-des-Lacs, Québec  J0R 1B0</span>
+        </div>
+      </div>
+
+      <div class="info-bloc">
+        <div class="info-titre">Soumission de chaise adaptée</div>
+        <p class="info-note">Pour une soumission complète de chaise ERGO ou de bureau adapté, utilisez notre formulaire dédié — il guide l'ergothérapeute à travers toutes les options.</p>
+        <a href="soumission.html" class="btn-ghost" style="margin-top:14px;display:inline-block;font-size:12px;">Formulaire de soumission →</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="footer-container"></div>
+<script src="scripts.js"></script>
+<script>
+document.getElementById('contact-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submit-btn');
+  const succes = document.getElementById('form-succes');
+  const span = btn.querySelector('span');
+
+  btn.disabled = true;
+  span.textContent = 'Envoi en cours…';
+
+  try {
+    const res = await fetch(this.action, {
+      method: 'POST',
+      body: new FormData(this),
+      headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      this.reset();
+      succes.style.display = 'block';
+      succes.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } else {
+      span.textContent = 'Erreur — réessayez';
+    }
+  } catch {
+    span.textContent = 'Erreur — réessayez';
+  }
+
+  btn.disabled = false;
+  if (btn.querySelector('span').textContent === 'Envoi en cours…') {
+    span.textContent = 'Envoyer le message';
+  }
+});
+</script>
+</body>
+</html>
