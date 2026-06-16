@@ -16,8 +16,8 @@
 .page-header-h1 em { font-style: italic; color: var(--c-cuivre); }
 .page-header-p { font-size: 15px; color: rgba(246,242,235,.55); max-width: 520px; line-height: 1.85; }
 .page-header-photo { width: 100%; max-height: 480px; object-fit: cover; display: block; filter: mix-blend-mode:multiply; }
-.hero-photo-outer { background: var(--c-parchemin); border-bottom: 1px solid var(--c-bord); overflow: hidden; max-height: 480px; }
-.hero-photo-outer img { width: 100%; max-height: 480px; object-fit: cover; object-position: center 30%; display: block; mix-blend-mode: multiply; filter: brightness(1.05); }
+.hero-photo-outer { background: var(--c-parchemin); border-bottom: 1px solid var(--c-bord); overflow: hidden; max-height: 300px; display: flex; align-items: center; justify-content: center; padding: 32px 0; }
+.hero-photo-outer img { max-height: 220px; width: auto; max-width: 480px; object-fit: contain; display: block; mix-blend-mode: multiply; filter: brightness(1.05); }
 .timeline-outer { background: var(--c-parchemin); padding: 80px 0 100px; }
 .timeline-inner { max-width: var(--max-width); margin: 0 auto; padding: 0 60px; position: relative; }
 .timeline-inner::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 0; border-left: 2px dashed var(--c-bord); transform: translateX(-50%); z-index: 0; }
@@ -29,11 +29,11 @@
 .etape-image { padding: 16px; }
 .carnet-photo { display: inline-block; transform-origin: center center; transition: transform .3s ease; }
 .carnet-photo:hover { transform: rotate(0deg) scale(1.02) !important; }
-.carnet-photo-inner { background: var(--c-blanc); padding: 10px 10px 36px; box-shadow: 0 3px 12px rgba(0,0,0,.1); position: relative; }
-.carnet-photo-inner img { width: 100%; max-width: 320px; height: 240px; object-fit: cover; display: block; mix-blend-mode: multiply; filter: brightness(1.08) contrast(1.05); }
+.carnet-photo-inner { background: var(--c-blanc); padding: 12px 12px 44px; box-shadow: 0 3px 12px rgba(0,0,0,.1); position: relative; }
+.carnet-photo-inner img { width: 100%; max-width: 380px; height: 300px; object-fit: cover; display: block; mix-blend-mode: multiply; filter: brightness(1.08) contrast(1.05); }
 .carnet-caption { font-family: var(--font-script); font-size: 13px; color: var(--c-muted); text-align: center; position: absolute; bottom: 8px; left: 10px; right: 10px; }
 .carnet-scotch { position: absolute; top: -10px; left: 50%; transform: translateX(-50%) rotate(-2deg); width: 52px; height: 18px; background: rgba(220,210,190,.55); z-index: 2; }
-.carnet-placeholder { width: 320px; height: 240px; background: var(--c-brume); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: var(--c-muted); font-size: 11px; }
+.carnet-placeholder { width: 380px; height: 300px; background: var(--c-brume); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: var(--c-muted); font-size: 11px; }
 .etape-texte { padding: 16px 24px; }
 .etape-lbl { margin-bottom: 10px; }
 .etape-titre { font-family: var(--font-titre); font-size: 28px; font-weight: 400; color: var(--c-marine); line-height: 1.2; margin-bottom: 14px; }
@@ -69,7 +69,7 @@
   .etape-noeud, .etape:nth-child(even) .etape-noeud  { order: 0 !important; grid-column: 1; grid-row: 1 / 3; align-self: flex-start; padding-top: 12px; }
   .etape-droite, .etape:nth-child(even) .etape-droite { order: 0 !important; grid-column: 2; grid-row: 2; justify-content: flex-start !important; }
   .timeline-inner { padding: 0 20px; }
-  .carnet-photo-inner img, .carnet-placeholder { max-width: 100%; height: 200px; }
+  .carnet-photo-inner img, .carnet-placeholder { max-width: 100%; height: 240px; }
   .conclusion-inner { grid-template-columns: 1fr; padding: 48px 20px; gap: 32px; }
   .conclusion-h2 { font-size: 28px; }
   .page-header { padding: 40px 20px 32px; }
@@ -102,7 +102,7 @@
 
 <!-- PHOTO OUVERTURE -->
 <div class="hero-photo-outer">
-  <img src="images/Histoire/claude-plage.png" alt="Claude Poupart"
+  <img src="images/Histoire/Croquis d'un livre ouvert_edited.jpg" alt="Claude Poupart"
        onerror="this.style.display='none'">
 </div>
 
