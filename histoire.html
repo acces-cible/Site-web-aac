@@ -59,7 +59,7 @@
 .conclusion-citation { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius); padding: 40px; }
 .conclusion-citation-texte { font-family: var(--font-script); font-size: 22px; line-height: 1.55; color: #e8c99a; font-style: italic; margin-bottom: 16px; }
 .conclusion-citation-source { font-family: var(--font-mono); font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--c-cuivre); }
-.conclusion-stats { display: flex; align-items: flex-end; gap: 0; margin-top: 32px; border-top: 1px solid rgba(255,255,255,.08); padding-top: 28px; }
+.conclusion-stats { display: flex; align-items: baseline; gap: 0; margin-top: 32px; border-top: 1px solid rgba(255,255,255,.08); padding-top: 28px; }
 .conclusion-stat { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; }
 .conclusion-stat + .conclusion-stat { border-left: 1px solid rgba(255,255,255,.08); padding-left: 24px; }
 .conclusion-stat-n { font-family: var(--font-titre); font-size: 34px; font-weight: 400; color: var(--c-parchemin); line-height: 1; margin-bottom: 4px; }
@@ -83,30 +83,30 @@
 
 <div id="nav-container" style="height:58px;"></div>
 
-<!-- HEADER -->
-<div class="page-header">
-  <div class="page-header-inner">
-    <span class="lbl page-header-lbl"
-      data-fr="Notre histoire · Depuis 1965"
-      data-en="Our story · Since 1965">Notre histoire · Depuis 1965</span>
-    <h1 class="page-header-h1"
-        data-fr-html="Une vocation née<br>de <em>l'expérience.</em>"
-        data-en-html="A calling born<br>from <em>experience.</em>">
-      Une vocation née<br>de <em>l'expérience.</em>
-    </h1>
-    <p class="page-header-p"
-       data-fr="De Camp Papillon en 1965 à l'atelier reconstruit en 2024 — une histoire d'obstination, de savoir-faire transmis, et d'un incendie qui n'a pas eu raison de la mission."
-       data-en="From Camp Papillon in 1965 to the rebuilt workshop in 2024 — a story of stubbornness, transmitted craft, and a fire that couldn't stop the mission.">
-      De Camp Papillon en 1965 à l'atelier reconstruit en 2024 — une histoire d'obstination, de savoir-faire transmis, et d'un incendie qui n'a pas eu raison de la mission.
-    </p>
+<!-- HEADER — texte gauche, livre droite -->
+<div style="background:var(--c-parchemin);border-bottom:1px solid var(--c-bord);">
+  <div style="max-width:var(--max-width);margin:0 auto;padding:64px 60px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;">
+    <div>
+      <span class="lbl page-header-lbl" style="margin-bottom:20px;display:block;"
+        data-fr="Notre histoire · Depuis 1965"
+        data-en="Our story · Since 1965">Notre histoire · Depuis 1965</span>
+      <h1 style="font-family:var(--font-titre);font-size:42px;font-weight:300;color:var(--c-marine);line-height:1.12;margin-bottom:20px;"
+          data-fr-html="Une vocation née<br>de <em style='font-style:italic;color:var(--c-cuivre)'>l'expérience.</em>"
+          data-en-html="A calling born<br>from <em style='font-style:italic;color:var(--c-cuivre)'>experience.</em>">
+        Une vocation née<br>de <em style="font-style:italic;color:var(--c-cuivre)">l'expérience.</em>
+      </h1>
+      <p style="font-size:15px;color:var(--c-muted);line-height:1.85;max-width:440px;"
+         data-fr="De Camp Papillon en 1965 à l'atelier reconstruit en 2024 — une histoire d'obstination, de savoir-faire transmis, et d'un incendie qui n'a pas eu raison de la mission."
+         data-en="From Camp Papillon in 1965 to the rebuilt workshop in 2024 — a story of stubbornness, transmitted craft, and a fire that couldn't stop the mission.">
+        De Camp Papillon en 1965 à l'atelier reconstruit en 2024 — une histoire d'obstination, de savoir-faire transmis, et d'un incendie qui n'a pas eu raison de la mission.
+      </p>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:center;">
+      <img src="images/Histoire/Croquis d'un livre ouvert_edited.jpg" alt="Un livre ouvert"
+           style="max-height:320px;width:auto;max-width:100%;object-fit:contain;mix-blend-mode:multiply;filter:brightness(1.05);"
+           onerror="this.style.display='none'">
+    </div>
   </div>
-</div>
-
-<!-- LIVRE CENTRÉ -->
-<div style="background:var(--c-parchemin);border-bottom:1px solid var(--c-bord);display:flex;align-items:center;justify-content:center;padding:32px 0;">
-  <img src="images/Histoire/Croquis d'un livre ouvert_edited.jpg" alt="Un livre ouvert"
-       style="max-height:200px;width:auto;max-width:360px;object-fit:contain;mix-blend-mode:multiply;filter:brightness(1.05);"
-       onerror="this.style.display='none'">
 </div>
 
 <!-- FRISE -->
@@ -248,7 +248,7 @@
           <div class="carnet-photo" style="transform:rotate(-1.5deg);">
             <div class="carnet-scotch"></div>
             <div class="carnet-photo-inner">
-              <img src="images/Histoire/ERGO surdimensionnée.jpg" alt="ERGO surdimensionnée 2016" style="width:100%;max-width:380px;height:300px;object-fit:cover;object-position:center;display:block;"
+              <img src="images/Histoire/ERGO surdimensionnée.jpg" alt="ERGO surdimensionnée 2016" style="width:380px;height:300px;object-fit:cover;object-position:center top;display:block;"
                    onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
               <div class="carnet-placeholder" style="display:none;"><span>ERGO surdimensionnée · 2016</span></div>
               <div class="carnet-caption">— ERGO surdimensionnée · 2016</div>
