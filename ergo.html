@@ -218,8 +218,17 @@ function selectionnerModele(i) {
 // Attendre que le DOM soit prêt pour construire la barre
 document.addEventListener('DOMContentLoaded', ()=>{ construireBarre(); afficherFiche(0); });
 // Reconstruire si la langue change
-const _toggleLangueOriginal = window.toggleLangue;
-window.toggleLangue = function() { if(_toggleLangueOriginal) _toggleLangueOriginal(); construireBarre(); afficherFiche(modeleActif); };
+  let langue = window.langue || 'fr';
+  window.toggleLangue = function() {
+  langue = langue === 'fr' ? 'en' : 'fr';
+  const btn = document.getElementById('langBtn');
+  if (btn) btn.textContent = langue === 'fr' ? 'EN' : 'FR';
+  document.documentElement.lang = langue;
+  document.querySelectorAll('[data-fr]').forEach(el => { const val = el.dataset[langue]; if (!val) return; if (val.includes('<')) el.innerHTML = val; else el.textContent = val; });
+  document.querySelectorAll('[data-fr-html]').forEach(el => { const val = el.dataset[langue + 'Html']; if (val) el.innerHTML = val; });
+  construireBarre();
+  afficherFiche(modeleActif);
+};
 </script>
 </body>
 </html>
