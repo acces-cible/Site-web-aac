@@ -7,813 +7,258 @@
 <meta name="description" content="Bureaux adaptés sur mesure pour enfants handicapés et fauteuils roulants. Pattes en bois ou ajustables, caissons latéraux, découpe ventrale. Fabricant québécois depuis 1990.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Caveat:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 <style>
+/* ── BUREAUX : styles uniques ── */
+:root { --pad-section: 72px 60px; --pad-mobile: 40px 20px; }
 
-/* ============================================================
-   ⚙️  CONFIG — modifiez ici pour changer couleurs / tailles
-   ============================================================ */
-:root {
-  /* Couleurs (identiques sur tout le site) */
-  --c-marine:    #1e3a4f;
-  --c-nuit:      #1a2530;
-  --c-parchemin: #f6f2eb;
-  --c-cuivre:    #c0874a;
-  --c-brume:     #e8e2d6;
-  --c-bord:      #d4cdbf;
-  --c-muted:     #7a7060;
-  --c-blanc:     #ffffff;
-
-  /* Typographie (identique sur tout le site) */
-  --font-titre:  'Crimson Pro', Georgia, serif;
-  --font-script: 'Caveat', cursive;
-  --font-mono:   'JetBrains Mono', monospace;
-  --font-body:   'IBM Plex Sans', sans-serif;
-
-  /* Tailles de police */
-  --fs-label: 10px;
-  --fs-small: 12px;
-  --fs-body:  15px;
-  --fs-h3:    20px;
-  --fs-h2:    32px;
-  --fs-h1:    48px;
-
-  /* Espacement sections — modifier ici pour resserrer ou aérer */
-  --pad-section: 72px 60px;
-  --pad-mobile:  40px 20px;
-
-  --max-width: 1100px;
-  --radius:    4px;
-}
-
-/* ============================================================
-   RESET
-   ============================================================ */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body { font-family: var(--font-body); color: var(--c-nuit); background: var(--c-parchemin); font-size: var(--fs-body); line-height: 1.75; }
-img  { display: block; max-width: 100%; height: auto; }
-a    { color: inherit; text-decoration: none; }
-button { cursor: pointer; border: none; font-family: inherit; background: none; }
-
-/* ============================================================
-   UTILITAIRES (réutilisés sur toutes les pages)
-   ============================================================ */
-.lbl {
-  font-family: var(--font-mono); font-size: var(--fs-label);
-  font-weight: 500; letter-spacing: .18em; text-transform: uppercase;
-  color: var(--c-cuivre); display: block;
-}
-.btn-primary {
-  display: inline-block; background: var(--c-marine); color: var(--c-parchemin);
-  font-family: var(--font-mono); font-size: 11px; font-weight: 500;
-  letter-spacing: .12em; text-transform: uppercase;
-  padding: 13px 26px; border-radius: var(--radius); transition: opacity .2s;
-}
-.btn-primary:hover { opacity: .85; }
-.btn-accent {
-  display: inline-block; background: var(--c-cuivre); color: var(--c-blanc);
-  font-family: var(--font-mono); font-size: 11px; font-weight: 500;
-  letter-spacing: .12em; text-transform: uppercase;
-  padding: 13px 26px; border-radius: var(--radius); transition: opacity .2s;
-}
-.btn-accent:hover { opacity: .88; }
-.btn-ghost {
-  display: inline-block; border: 1.5px solid var(--c-bord); color: var(--c-nuit);
-  font-family: var(--font-mono); font-size: 11px; font-weight: 500;
-  letter-spacing: .12em; text-transform: uppercase;
-  padding: 12px 24px; border-radius: var(--radius);
-  transition: border-color .2s, color .2s;
-}
-.btn-ghost:hover { border-color: var(--c-cuivre); color: var(--c-cuivre); }
-
-/* ============================================================
-   NAV (copier-coller identique sur toutes les pages)
-   ============================================================ */
-.nav {
-  position: sticky; top: 0; z-index: 100; background: var(--c-marine);
-  height: 58px; display: flex; align-items: center; justify-content: space-between;
-  padding: 0 48px; border-bottom: 1px solid rgba(255,255,255,.07);
-}
-.nav-logo            { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
-.nav-logo-barre      { width: 2px; height: 28px; background: var(--c-cuivre); }
-.nav-logo-texte      { font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--c-blanc); line-height: 1.25; }
-.nav-logo-texte small { display: block; font-family: var(--font-mono); font-size: 8px; letter-spacing: .15em; text-transform: uppercase; color: rgba(192,135,74,.7); margin-top: 1px; }
-.nav-liens           { display: flex; align-items: center; gap: 24px; }
-.nav-liens a         { font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.45); transition: color .2s; }
-.nav-liens a:hover, .nav-liens a.actif { color: rgba(255,255,255,.9); }
-.nav-dropdown        { position: relative; }
-.nav-dropdown-menu   { display: none; position: absolute; top: calc(100% + 14px); left: 50%; transform: translateX(-50%); background: var(--c-blanc); border: 1px solid var(--c-bord); border-radius: var(--radius); min-width: 210px; box-shadow: 0 8px 32px rgba(0,0,0,.1); overflow: hidden; }
-.nav-dropdown:hover .nav-dropdown-menu { display: block; }
-.nav-dropdown-menu a { display: block; padding: 11px 18px; font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em; color: var(--c-nuit) !important; border-bottom: 1px solid var(--c-bord); text-transform: uppercase; }
-.nav-dropdown-menu a:last-child { border-bottom: none; }
-.nav-dropdown-menu a:hover { background: var(--c-brume); }
-.nav-cta             { background: var(--c-cuivre); color: var(--c-blanc) !important; font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; padding: 8px 16px; border-radius: var(--radius); transition: opacity .2s !important; }
-.nav-cta:hover       { opacity: .85 !important; }
-.lang-btn            { font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,.4); border: 1px solid rgba(255,255,255,.2); padding: 5px 10px; border-radius: var(--radius); cursor: pointer; transition: color .2s, border-color .2s; }
-.lang-btn:hover      { color: var(--c-cuivre); border-color: var(--c-cuivre); }
-.nav-hamburger       { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
-.nav-hamburger span  { display: block; width: 22px; height: 2px; background: var(--c-blanc); border-radius: 1px; }
-.nav-mobile          { display: none; position: fixed; top: 58px; left: 0; right: 0; background: var(--c-marine); z-index: 99; padding: 16px 20px 24px; box-shadow: 0 8px 24px rgba(0,0,0,.2); }
-.nav-mobile.ouvert   { display: block; }
-.nav-mobile a        { display: block; color: rgba(255,255,255,.65); font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.07); }
-.nav-mobile a:hover  { color: var(--c-cuivre); }
-.nav-mobile-sub      { padding-left: 16px; font-size: 10px !important; color: rgba(255,255,255,.4) !important; }
-.nav-mobile-cta      { display: block; text-align: center; margin-top: 14px; background: var(--c-cuivre); color: var(--c-blanc) !important; padding: 12px !important; border-radius: var(--radius); border: none !important; }
-
-/* ============================================================
-   HERO
-   ============================================================ */
 .hero-outer { background: var(--c-parchemin); border-bottom: 1px solid var(--c-bord); }
-.hero {
-  max-width: var(--max-width); margin: 0 auto;
-  padding: 72px 60px 0;
-  display: grid; grid-template-columns: 1fr 420px;
-  gap: 56px; align-items: end;
-}
-.hero-texte          { padding-bottom: 56px; }
-.hero-texte .lbl     { margin-bottom: 18px; }
-.hero-h1 {
-  font-family: var(--font-titre); font-size: var(--fs-h1);
-  font-weight: 300; line-height: 1.12; color: var(--c-marine); margin-bottom: 20px;
-}
-.hero-h1 em          { font-style: italic; color: var(--c-cuivre); }
-.hero-sous-titre     { font-size: var(--fs-body); color: var(--c-muted); line-height: 1.8; max-width: 460px; margin-bottom: 36px; }
-.hero-btns           { display: flex; gap: 12px; flex-wrap: wrap; }
-/* carnet photo (identique ergo.html) */
-.hero-image          { display: flex; align-items: flex-end; justify-content: center; }
-.carnet-photo        { position: relative; display: inline-block; transform: rotate(-1.5deg); transform-origin: center bottom; transition: transform .3s; }
-.carnet-photo:hover  { transform: rotate(0deg) scale(1.01); }
-.carnet-photo-inner  { background: var(--c-blanc); padding: 12px 12px 40px; box-shadow: 0 2px 8px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.06); }
+.hero { max-width: var(--max-width); margin: 0 auto; padding: 72px 60px 0; display: grid; grid-template-columns: 1fr 420px; gap: 56px; align-items: end; }
+.hero-texte { padding-bottom: 56px; }
+.hero-texte .lbl { margin-bottom: 18px; }
+.hero-h1 { font-family: var(--font-titre); font-size: 48px; font-weight: 300; line-height: 1.12; color: var(--c-marine); margin-bottom: 20px; }
+.hero-h1 em { font-style: italic; color: var(--c-cuivre); }
+.hero-sous-titre { font-size: var(--fs-body); color: var(--c-muted); line-height: 1.8; max-width: 460px; margin-bottom: 36px; }
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero-image { display: flex; align-items: flex-end; justify-content: center; }
+.carnet-photo { position: relative; display: inline-block; transform: rotate(-1.5deg); transform-origin: center bottom; transition: transform .3s; }
+.carnet-photo:hover { transform: rotate(0deg) scale(1.01); }
+.carnet-photo-inner { background: var(--c-blanc); padding: 12px 12px 40px; box-shadow: 0 2px 8px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.06); }
 .carnet-photo-inner img { display: block; width: 100%; max-width: 340px; }
-.carnet-caption      { font-family: var(--font-script); font-size: 14px; color: var(--c-muted); text-align: center; position: absolute; bottom: 10px; left: 12px; right: 12px; }
-.carnet-scotch       { position: absolute; top: -10px; left: 50%; transform: translateX(-50%) rotate(-2deg); width: 52px; height: 18px; background: rgba(220,210,190,.55); background-image: repeating-linear-gradient(90deg,transparent,transparent 3px,rgba(255,255,255,.15) 3px,rgba(255,255,255,.15) 4px); z-index: 2; }
+.carnet-caption { font-family: var(--font-script); font-size: 14px; color: var(--c-muted); text-align: center; position: absolute; bottom: 10px; left: 12px; right: 12px; }
+.carnet-scotch { position: absolute; top: -10px; left: 50%; transform: translateX(-50%) rotate(-2deg); width: 52px; height: 18px; background: rgba(220,210,190,.55); background-image: repeating-linear-gradient(90deg,transparent,transparent 3px,rgba(255,255,255,.15) 3px,rgba(255,255,255,.15) 4px); z-index: 2; }
 
-/* ============================================================
-   SECTION PATTES — fond marine, 4 cartes
-   ============================================================ */
 .pattes-outer { background: var(--c-marine); border-bottom: 1px solid rgba(255,255,255,.06); }
-.pattes       { max-width: var(--max-width); margin: 0 auto; padding: var(--pad-section); }
-
-/* en-tête de section sur fond sombre */
-.entete-sombre            { margin-bottom: 44px; }
-.entete-sombre .lbl       { color: rgba(192,135,74,.75); margin-bottom: 12px; }
-.entete-sombre h2         { font-family: var(--font-titre); font-size: var(--fs-h2); font-weight: 300; color: var(--c-parchemin); line-height: 1.2; margin-bottom: 10px; }
-.entete-sombre p          { font-size: var(--fs-body); color: rgba(246,242,235,.5); max-width: 560px; line-height: 1.8; }
-
-/* grille 2×2 plus compacte */
-.pattes-grille            { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.1); }
-.patte-carte              { background: rgba(30,58,79,.6); padding: 24px 28px; transition: background .2s; display: grid; grid-template-columns: 56px 1fr; gap: 0 20px; align-items: start; }
-.patte-carte:hover        { background: rgba(30,58,79,.9); }
-/* pictogramme SVG — colonne gauche */
-.patte-icone              { margin-top: 4px; opacity: .75; grid-row: span 4; }
-/* contenu — colonne droite */
-.patte-carte .lbl         { color: var(--c-cuivre); margin-bottom: 4px; }
-.patte-carte h3           { font-family: var(--font-titre); font-size: 24px; font-weight: 300; color: var(--c-parchemin); margin-bottom: 12px; }
-/* tableau dimensions */
-.dim-table                { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
-.dim-table tr             { border-bottom: 1px solid rgba(255,255,255,.1); }
-.dim-table tr:last-child  { border-bottom: none; }
-.dim-table td             { padding: 5px 0; font-size: 12px; line-height: 1.5; }
+.pattes { max-width: var(--max-width); margin: 0 auto; padding: var(--pad-section); }
+.entete-sombre { margin-bottom: 44px; }
+.entete-sombre .lbl { color: rgba(192,135,74,.75); margin-bottom: 12px; }
+.entete-sombre h2 { font-family: var(--font-titre); font-size: var(--fs-h2); font-weight: 300; color: var(--c-parchemin); line-height: 1.2; margin-bottom: 10px; }
+.entete-sombre p { font-size: var(--fs-body); color: rgba(246,242,235,.5); max-width: 560px; line-height: 1.8; }
+.pattes-grille { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.1); }
+.patte-carte { background: rgba(30,58,79,.6); padding: 24px 28px; transition: background .2s; display: grid; grid-template-columns: 56px 1fr; gap: 0 20px; align-items: start; }
+.patte-carte:hover { background: rgba(30,58,79,.9); }
+.patte-icone { margin-top: 4px; opacity: .75; grid-row: span 4; }
+.patte-carte .lbl { color: var(--c-cuivre); margin-bottom: 4px; }
+.patte-carte h3 { font-family: var(--font-titre); font-size: 24px; font-weight: 300; color: var(--c-parchemin); margin-bottom: 12px; }
+.dim-table { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
+.dim-table tr { border-bottom: 1px solid rgba(255,255,255,.1); }
+.dim-table tr:last-child { border-bottom: none; }
+.dim-table td { padding: 5px 0; font-size: 12px; line-height: 1.5; }
 .dim-table td:first-child { color: rgba(246,242,235,.65); width: 55%; }
-.dim-table td:last-child  { color: var(--c-parchemin); font-weight: 600; }
-.patte-note               { font-size: 12px; color: rgba(246,242,235,.65); line-height: 1.6; font-style: italic; }
+.dim-table td:last-child { color: var(--c-parchemin); font-weight: 600; }
+.patte-note { font-size: 12px; color: rgba(246,242,235,.65); line-height: 1.6; font-style: italic; }
 
-/* ============================================================
-   SECTION OPTIONS PLATEAU — fond blanc, 2 colonnes
-   ============================================================ */
 .plateau-outer { background: var(--c-blanc); border-bottom: 1px solid var(--c-bord); }
-.plateau       { max-width: var(--max-width); margin: 0 auto; padding: var(--pad-section); display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+.plateau { max-width: var(--max-width); margin: 0 auto; padding: var(--pad-section); display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+.entete-claire .lbl { margin-bottom: 12px; }
+.entete-claire h2 { font-family: var(--font-titre); font-size: var(--fs-h2); font-weight: 300; color: var(--c-marine); line-height: 1.2; margin-bottom: 14px; }
+.entete-claire > p { color: var(--c-muted); line-height: 1.85; margin-bottom: 24px; }
+.options-liste { border: 1px solid var(--c-bord); }
+.option-item { display: flex; gap: 14px; align-items: flex-start; padding: 14px 16px; border-bottom: 1px solid var(--c-bord); transition: background .15s; }
+.option-item:last-child { border-bottom: none; }
+.option-item:hover { background: var(--c-brume); }
+.option-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--c-cuivre); flex-shrink: 0; margin-top: 7px; }
+.option-item strong { display: block; font-size: 13px; font-weight: 600; color: var(--c-nuit); margin-bottom: 2px; }
+.option-item span { font-size: 12px; color: var(--c-muted); line-height: 1.55; }
+.plateau-image { position: sticky; top: 80px; }
+.plateau-image img { width: 100%; border: 1px solid var(--c-bord); }
+.plateau-image-legende { margin-top: 10px; font-family: var(--font-script); font-size: 14px; color: var(--c-muted); text-align: center; }
 
-/* en-tête de section sur fond clair */
-.entete-claire h2         { font-family: var(--font-titre); font-size: var(--fs-h2); font-weight: 300; color: var(--c-marine); line-height: 1.2; margin-bottom: 14px; }
-.entete-claire .lbl       { margin-bottom: 12px; }
-.entete-claire > p        { color: var(--c-muted); line-height: 1.85; margin-bottom: 24px; }
-/* footer — meilleure lisibilité */
-.footer-coords a, .footer-coords span { font-size: 13px; color: rgba(246,242,235,.6); }
+.caissons-outer { background: var(--c-brume); border-top: 1px solid var(--c-bord); border-bottom: 1px solid var(--c-bord); }
+.caissons { max-width: var(--max-width); margin: 0 auto; padding: var(--pad-section); }
+.caissons-grille { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--c-bord); border: 1px solid var(--c-bord); margin-bottom: 20px; }
+.caisson-carte { background: var(--c-blanc); overflow: hidden; transition: box-shadow .2s; }
+.caisson-carte:hover { box-shadow: 0 4px 20px rgba(0,0,0,.08); position: relative; z-index: 1; }
+.caisson-carte img { width: 100%; height: 180px; object-fit: cover; object-position: center top; }
+.caisson-corps { padding: 16px 18px; }
+.caisson-corps .lbl { margin-bottom: 6px; }
+.caisson-corps h3 { font-family: var(--font-titre); font-size: 18px; font-weight: 400; color: var(--c-marine); margin-bottom: 5px; }
+.caisson-corps p { font-size: 12px; color: var(--c-muted); line-height: 1.55; }
+.caissons-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.caissons-option { background: var(--c-blanc); border: 1px solid var(--c-bord); padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start; }
+.caissons-option strong { display: block; font-size: 13px; font-weight: 600; color: var(--c-nuit); margin-bottom: 2px; }
+.caissons-option span { font-size: 12px; color: var(--c-muted); line-height: 1.55; }
 
-/* liste options à points */
-.options-liste            { border: 1px solid var(--c-bord); }
-.option-item              { display: flex; gap: 14px; align-items: flex-start; padding: 14px 16px; border-bottom: 1px solid var(--c-bord); transition: background .15s; }
-.option-item:last-child   { border-bottom: none; }
-.option-item:hover        { background: var(--c-brume); }
-.option-dot               { width: 6px; height: 6px; border-radius: 50%; background: var(--c-cuivre); flex-shrink: 0; margin-top: 7px; }
-.option-item strong       { display: block; font-size: 13px; font-weight: 600; color: var(--c-nuit); margin-bottom: 2px; }
-.option-item span         { font-size: 12px; color: var(--c-muted); line-height: 1.55; }
+.processus-outer { background: var(--c-parchemin); border-bottom: 1px solid var(--c-bord); }
+.processus { max-width: var(--max-width); margin: 0 auto; padding: var(--pad-section); }
+.processus-entete { text-align: center; margin-bottom: 48px; }
+.processus-entete .lbl { display: block; margin-bottom: 10px; }
+.processus-entete h2 { font-family: var(--font-titre); font-size: var(--fs-h2); font-weight: 300; color: var(--c-marine); }
+.etapes { display: grid; grid-template-columns: repeat(4, 1fr); position: relative; }
+.etapes::before { content: ''; position: absolute; top: 18px; left: calc(12.5% + 10px); right: calc(12.5% + 10px); height: 1px; background: var(--c-bord); }
+.etape { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 20px; position: relative; z-index: 1; }
+.etape-num { width: 38px; height: 38px; border-radius: 50%; background: var(--c-marine); display: flex; align-items: center; justify-content: center; font-family: var(--font-titre); font-size: 18px; color: var(--c-parchemin); margin-bottom: 16px; }
+.etape-num.actif { background: var(--c-cuivre); }
+.etape h3 { font-family: var(--font-titre); font-size: 17px; color: var(--c-marine); margin-bottom: 6px; }
+.etape p { font-size: 12px; color: var(--c-muted); line-height: 1.6; }
 
-/* image sticky côté droit */
-.plateau-image            { position: sticky; top: 80px; }
-.plateau-image img        { width: 100%; border: 1px solid var(--c-bord); }
-.plateau-image-legende    { margin-top: 10px; font-family: var(--font-script); font-size: 14px; color: var(--c-muted); text-align: center; }
+.cta-outer { background: var(--c-marine); }
+.cta-inner { max-width: var(--max-width); margin: 0 auto; padding: 0 60px; display: grid; grid-template-columns: 1fr 1fr; min-height: 300px; }
+.cta-citation { padding: 64px 56px 64px 0; border-right: 1px solid rgba(255,255,255,.08); position: relative; display: flex; flex-direction: column; gap: 14px; }
+.cta-citation .lbl { color: #c0874a; }
+.cta-citation-texte { font-family: var(--font-script); font-size: 26px; line-height: 1.45; color: #e8c99a; font-style: italic; flex: 1; }
+.cta-citation-source { font-family: var(--font-body); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #c0874a; }
+.cta-regle { position: absolute; bottom: 0; left: 0; width: 80px; height: 3px; background: linear-gradient(90deg, var(--c-cuivre), transparent); opacity: .5; }
+.cta-action { padding: 64px 0 64px 56px; display: flex; flex-direction: column; justify-content: center; gap: 24px; }
+.cta-titre { font-family: var(--font-titre); font-size: 28px; font-weight: 300; color: var(--c-parchemin); line-height: 1.25; }
+.cta-titre em { font-style: italic; color: var(--c-cuivre); }
+.cta-liste { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.cta-liste li { font-size: 13px; color: rgba(246,242,235,.6); padding-left: 16px; position: relative; line-height: 1.5; }
+.cta-liste li::before { content: '—'; position: absolute; left: 0; color: var(--c-cuivre); }
+.cta-btns { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+.cta-lien { font-family: var(--font-body); font-size: 11px; color: rgba(246,242,235,.4); text-decoration: underline; text-underline-offset: 3px; transition: color .2s; }
+.cta-lien:hover { color: var(--c-cuivre); }
 
-/* ============================================================
-   SECTION CAISSONS — fond brume, grille photos
-   ============================================================ */
-.caissons-outer           { background: var(--c-brume); border-top: 1px solid var(--c-bord); border-bottom: 1px solid var(--c-bord); }
-.caissons                 { max-width: var(--max-width); margin: 0 auto; padding: var(--pad-section); }
-.caissons-grille          { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--c-bord); border: 1px solid var(--c-bord); margin-bottom: 20px; }
-.caisson-carte            { background: var(--c-blanc); overflow: hidden; transition: box-shadow .2s; }
-.caisson-carte:hover      { box-shadow: 0 4px 20px rgba(0,0,0,.08); position: relative; z-index: 1; }
-.caisson-carte img        { width: 100%; height: 180px; object-fit: cover; object-position: center top; }
-.caisson-corps            { padding: 16px 18px; }
-.caisson-corps .lbl       { margin-bottom: 6px; }
-.caisson-corps h3         { font-family: var(--font-titre); font-size: 18px; font-weight: 400; color: var(--c-marine); margin-bottom: 5px; }
-.caisson-corps p          { font-size: 12px; color: var(--c-muted); line-height: 1.55; }
-/* sous-options caissons */
-.caissons-options         { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.caissons-option          { background: var(--c-blanc); border: 1px solid var(--c-bord); padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start; }
-.caissons-option strong   { display: block; font-size: 13px; font-weight: 600; color: var(--c-nuit); margin-bottom: 2px; }
-.caissons-option span     { font-size: 12px; color: var(--c-muted); line-height: 1.55; }
-
-/* ============================================================
-   SECTION PROCESSUS — fond parchemin, 4 étapes
-   ============================================================ */
-.processus-outer          { background: var(--c-parchemin); border-bottom: 1px solid var(--c-bord); }
-.processus                { max-width: var(--max-width); margin: 0 auto; padding: var(--pad-section); }
-.processus-entete         { text-align: center; margin-bottom: 48px; }
-.processus-entete .lbl    { display: block; margin-bottom: 10px; }
-.processus-entete h2      { font-family: var(--font-titre); font-size: var(--fs-h2); font-weight: 300; color: var(--c-marine); }
-.etapes                   { display: grid; grid-template-columns: repeat(4, 1fr); position: relative; }
-.etapes::before           { content: ''; position: absolute; top: 18px; left: calc(12.5% + 10px); right: calc(12.5% + 10px); height: 1px; background: var(--c-bord); }
-.etape                    { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 20px; position: relative; z-index: 1; }
-.etape-num                { width: 38px; height: 38px; border-radius: 50%; background: var(--c-marine); display: flex; align-items: center; justify-content: center; font-family: var(--font-titre); font-size: 18px; color: var(--c-parchemin); margin-bottom: 16px; }
-.etape-num.actif          { background: var(--c-cuivre); }
-.etape h3                 { font-family: var(--font-titre); font-size: 17px; color: var(--c-marine); margin-bottom: 6px; }
-.etape p                  { font-size: 12px; color: var(--c-muted); line-height: 1.6; }
-
-/* ============================================================
-   CTA ERGOTHÉRAPEUTES — fond marine (identique toutes les pages)
-   ============================================================ */
-.cta-outer                { background: var(--c-marine); }
-.cta-inner                { max-width: var(--max-width); margin: 0 auto; padding: 0 60px; display: grid; grid-template-columns: 1fr 1fr; min-height: 300px; }
-.cta-citation             { padding: 64px 56px 64px 0; border-right: 1px solid rgba(255,255,255,.08); position: relative; display: flex; flex-direction: column; gap: 14px; }
-.cta-citation .lbl        { color: #c0874a; }
-.cta-citation-texte       { font-family: var(--font-script); font-size: 26px; line-height: 1.45; color: #e8c99a; font-style: italic; flex: 1; }
-.cta-citation-source      { font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: #c0874a; }
-.cta-regle                { position: absolute; bottom: 0; left: 0; width: 80px; height: 3px; background: linear-gradient(90deg, var(--c-cuivre), transparent); opacity: .5; }
-.cta-action               { padding: 64px 0 64px 56px; display: flex; flex-direction: column; justify-content: center; gap: 24px; }
-.cta-titre                { font-family: var(--font-titre); font-size: 28px; font-weight: 300; color: var(--c-parchemin); line-height: 1.25; }
-.cta-titre em             { font-style: italic; color: var(--c-cuivre); }
-.cta-liste                { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-.cta-liste li             { font-size: 13px; color: rgba(246,242,235,.6); padding-left: 16px; position: relative; line-height: 1.5; }
-.cta-liste li::before     { content: '—'; position: absolute; left: 0; color: var(--c-cuivre); font-size: 11px; }
-.cta-btns                 { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
-.cta-lien                 { font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: rgba(246,242,235,.4); text-decoration: underline; text-underline-offset: 3px; transition: color .2s; }
-.cta-lien:hover           { color: var(--c-cuivre); }
-
-/* ============================================================
-   FOOTER (identique toutes les pages)
-   ============================================================ */
-.footer                   { background: var(--c-nuit); border-top: 1px solid rgba(255,255,255,.05); }
-.footer-inner             { max-width: var(--max-width); margin: 0 auto; padding: 48px 60px 32px; display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 48px; }
-.footer-brand             { font-family: var(--font-titre); font-size: 20px; font-weight: 300; color: #ffffff; margin-bottom: 6px; }
-.footer-tagline           { font-family: var(--font-mono); font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--c-cuivre); margin-bottom: 20px; }
-.footer-coords            { display: flex; flex-direction: column; gap: 6px; }
-.footer-coords a, .footer-coords span { font-size: 13px; color: rgba(246,242,235,.8); transition: color .2s; line-height: 1.65; }
-.footer-coords a:hover    { color: var(--c-cuivre); }
-.footer-col-titre         { font-family: var(--font-mono); font-size: 9px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--c-cuivre); margin-bottom: 14px; }
-.footer-liens             { display: flex; flex-direction: column; gap: 10px; }
-.footer-liens a           { font-size: 13px; color: rgba(246,242,235,.75); transition: color .2s; }
-.footer-liens a:hover     { color: #ffffff; }
-.footer-bottom            { max-width: var(--max-width); margin: 0 auto; padding: 20px 60px 28px; border-top: 1px solid rgba(255,255,255,.1); display: flex; justify-content: space-between; align-items: center; }
-.footer-copyright         { font-family: var(--font-mono); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: rgba(246,242,235,.45); }
-.footer-fab               { font-family: var(--font-script); font-size: 16px; color: rgba(192,135,74,.7); }
-
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
 @media (max-width: 900px) {
-  :root { --fs-h1: 32px; --fs-h2: 24px; }
-  .nav { padding: 0 20px; }
-  .nav-liens { display: none; }
-  .nav-hamburger { display: flex; }
   .hero { grid-template-columns: 1fr; padding: 40px 20px 0; gap: 32px; }
   .hero-texte { padding-bottom: 0; }
   .hero-image { padding-bottom: 32px; justify-content: center; }
-  .pattes     { padding: var(--pad-mobile); }
+  .hero-h1 { font-size: 32px; }
+  .pattes { padding: var(--pad-mobile); }
   .pattes-grille { grid-template-columns: 1fr 1fr; }
-  .patte-carte { grid-template-columns: 44px 1fr; gap: 0 14px; }
-  .plateau    { grid-template-columns: 1fr; gap: 32px; padding: var(--pad-mobile); }
+  .plateau { grid-template-columns: 1fr; gap: 32px; padding: var(--pad-mobile); }
   .plateau-image { position: static; }
-  .caissons   { padding: var(--pad-mobile); }
+  .caissons { padding: var(--pad-mobile); }
   .caissons-grille { grid-template-columns: 1fr 1fr; }
   .caissons-options { grid-template-columns: 1fr; }
-  .processus  { padding: var(--pad-mobile); }
-  .etapes     { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .processus { padding: var(--pad-mobile); }
+  .etapes { grid-template-columns: 1fr 1fr; gap: 32px; }
   .etapes::before { display: none; }
-  .cta-inner  { grid-template-columns: 1fr; padding: 0 20px; }
+  .cta-inner { grid-template-columns: 1fr; padding: 0 20px; }
   .cta-citation { padding: 48px 0 36px; border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); }
   .cta-action { padding: 36px 0 48px; }
-  .footer-inner { grid-template-columns: 1fr; gap: 32px; padding: 40px 20px 28px; }
-  .footer-bottom { padding: 16px 20px 24px; flex-direction: column; align-items: flex-start; gap: 8px; }
 }
 @media (max-width: 540px) {
-  .pattes-grille   { grid-template-columns: 1fr; }
-  .patte-carte     { grid-template-columns: 1fr; }
-  .patte-icone     { display: none; }
+  .pattes-grille { grid-template-columns: 1fr; }
   .caissons-grille { grid-template-columns: 1fr; }
-  .etapes          { grid-template-columns: 1fr; }
+  .etapes { grid-template-columns: 1fr; }
 }
 </style>
 </head>
 <body>
 
-<!-- ============================================================
-     NAV
-     ============================================================ -->
-<nav class="nav">
-  <a href="index.html" class="nav-logo">
-    <div class="nav-logo-barre"></div>
-    <div class="nav-logo-texte">
-      Les Adaptations Accès-Cible
-      <small data-fr="Partenaire des ergothérapeutes · Québec" data-en="Partner of occupational therapists · Quebec">Partenaire des ergothérapeutes · Québec</small>
-    </div>
-  </a>
-  <div class="nav-liens" id="navLiens">
-    <div class="nav-dropdown">
-      <a href="ergo.html" data-fr="Chaise ERGO" data-en="ERGO Chair">Chaise ERGO</a>
-      <div class="nav-dropdown-menu">
-        <a href="ergo.html#garderie">Hauteur garderie</a>
-        <a href="ergo.html#standard">Standard</a>
-        <a href="ergo.html#surdimensionnee">Surdimensionnée</a>
-      </div>
-    </div>
-    <a href="accessoires.html" data-fr="Accessoires" data-en="Accessories">Accessoires</a>
-    <a href="bureaux.html" class="actif" data-fr="Bureaux" data-en="Desks">Bureaux</a>
-    <a href="marchepied.html" data-fr="Marchepieds" data-en="Footrests">Marchepieds</a>
-    <a href="histoire.html" data-fr="Notre histoire" data-en="Our story">Notre histoire</a>
-    <a href="contact.html" data-fr="Contact" data-en="Contact">Contact</a>
-    <button class="lang-btn" onclick="toggleLangue()" id="langBtn">EN</button>
-    <a href="https://acces-cible.fillout.com/t/erKz8m4uBEus" target="_blank" rel="noopener" class="nav-cta" data-fr="Soumission →" data-en="Get a quote →">Soumission →</a>
-  </div>
-  <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
-</nav>
-<div class="nav-mobile" id="navMobile">
-  <a href="ergo.html">Chaise ERGO</a>
-  <a href="ergo.html#garderie" class="nav-mobile-sub">↳ Hauteur garderie</a>
-  <a href="ergo.html#standard" class="nav-mobile-sub">↳ Standard</a>
-  <a href="ergo.html#surdimensionnee" class="nav-mobile-sub">↳ Surdimensionnée</a>
-  <a href="accessoires.html">Accessoires</a>
-  <a href="bureaux.html">Bureaux</a>
-  <a href="marchepied.html">Marchepieds</a>
-  <a href="histoire.html">Notre histoire</a>
-  <a href="contact.html">Contact</a>
-  <a href="https://acces-cible.fillout.com/t/erKz8m4uBEus" target="_blank" rel="noopener" class="nav-mobile-cta">Demander une soumission →</a>
-</div>
+<div id="nav-container"></div>
 
-
-<!-- ============================================================
-     HERO
-     🖼️  Changer : Bureau_sketch01.png → votre photo réelle quand disponible
-     ============================================================ -->
 <div class="hero-outer">
   <div class="hero">
-
     <div class="hero-texte">
       <span class="lbl" data-fr="Bureaux adaptés · Fabriqués au Québec · Depuis 1990" data-en="Adapted desks · Made in Quebec · Since 1990">Bureaux adaptés · Fabriqués au Québec · Depuis 1990</span>
-      <h1 class="hero-h1"
-          data-fr-html="La table qui s'adapte<br>à <em>chaque enfant.</em>"
-          data-en-html="The desk that adapts<br>to <em>every child.</em>">
-        La table qui s'adapte<br>à <em>chaque enfant.</em>
-      </h1>
-      <p class="hero-sous-titre"
-         data-fr="Chaque bureau est fabriqué selon les dimensions de l'enfant et de son environnement — hauteur exacte, espace fauteuil roulant, caissons de rangement, surface inclinable. Rien n'est standard."
-         data-en="Every desk is built to the child's exact dimensions and environment — precise height, wheelchair clearance, side storage, tiltable surface. Nothing is off the shelf.">
-        Chaque bureau est fabriqué selon les dimensions de l'enfant et de son environnement — hauteur exacte, espace fauteuil roulant, caissons de rangement, surface inclinable. Rien n'est standard.
-      </p>
+      <h1 class="hero-h1" data-fr-html="La table qui s'adapte<br>à <em>chaque enfant.</em>" data-en-html="The desk that adapts<br>to <em>every child.</em>">La table qui s'adapte<br>à <em>chaque enfant.</em></h1>
+      <p class="hero-sous-titre" data-fr="Chaque bureau est fabriqué selon les dimensions de l'enfant et de son environnement — hauteur exacte, espace fauteuil roulant, caissons de rangement, surface inclinable. Rien n'est standard." data-en="Every desk is built to the child's exact dimensions and environment — precise height, wheelchair clearance, side storage, tiltable surface. Nothing is off the shelf.">Chaque bureau est fabriqué selon les dimensions de l'enfant et de son environnement — hauteur exacte, espace fauteuil roulant, caissons de rangement, surface inclinable. Rien n'est standard.</p>
       <div class="hero-btns">
-        <a href="https://acces-cible.fillout.com/t/erKz8m4uBEus" target="_blank" rel="noopener" class="btn-primary"
-           data-fr="Demander une soumission →" data-en="Request a quote →">Demander une soumission →</a>
-        <a href="#pattes" class="btn-ghost"
-           data-fr="Voir les options" data-en="See options">Voir les options</a>
+        <a href="https://acces-cible.fillout.com/t/erKz8m4uBEus" target="_blank" rel="noopener" class="btn-primary" data-fr="Demander une soumission →" data-en="Request a quote →">Demander une soumission →</a>
+        <a href="#pattes" class="btn-ghost" data-fr="Voir les options" data-en="See options">Voir les options</a>
       </div>
     </div>
-
     <div class="hero-image">
       <div class="carnet-photo">
         <div class="carnet-scotch"></div>
         <div class="carnet-photo-inner">
-          <img src="Bureau_sketch01.png" alt="Bureau adapté Accès-Cible — vue complète avec caissons"
-               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-          <div style="display:none; width:300px; height:320px; background:var(--c-brume); align-items:center; justify-content:center; flex-direction:column; gap:8px; color:var(--c-muted); font-size:12px; text-align:center; padding:20px;">
-            <span style="font-size:28px;opacity:.3">📐</span><span>Bureau_sketch01.png</span>
-          </div>
+          <img src="Bureau_sketch01.png" alt="Bureau adapté Accès-Cible" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div style="display:none;width:300px;height:320px;background:var(--c-brume);align-items:center;justify-content:center;flex-direction:column;gap:8px;color:var(--c-muted);font-size:12px;text-align:center;padding:20px;"><span style="font-size:28px;opacity:.3">📐</span><span>Bureau_sketch01.png</span></div>
           <div class="carnet-caption" data-fr="— Bureau adapté · vue complète avec caissons" data-en="— Adapted desk · full view with storage">— Bureau adapté · vue complète avec caissons</div>
         </div>
       </div>
     </div>
-
   </div>
 </div>
 
-
-<!-- ============================================================
-     PATTES (fond marine)
-     ============================================================ -->
 <div id="pattes" class="pattes-outer">
   <div class="pattes">
-
     <div class="entete-sombre">
       <span class="lbl" data-fr="Types de pattes" data-en="Leg types">Types de pattes</span>
-      <h2 data-fr="Quatre options — du bois massif à l'électrique."
-          data-en="Four options — from solid wood to electric.">Quatre options — du bois massif à l'électrique.</h2>
-      <p data-fr="Les pattes en bois massif s'accordent avec la chaise ERGO. Les modèles ajustables répondent aux milieux scolaires et aux enfants en croissance."
-         data-en="Solid wood legs visually match the ERGO chair. Adjustable models serve school environments and growing children.">
-        Les pattes en bois massif s'accordent avec la chaise ERGO. Les modèles ajustables répondent aux milieux scolaires et aux enfants en croissance.
-      </p>
+      <h2 data-fr="Quatre options — du bois massif à l'électrique." data-en="Four options — from solid wood to electric.">Quatre options — du bois massif à l'électrique.</h2>
+      <p data-fr="Les pattes en bois massif s'accordent avec la chaise ERGO. Les modèles ajustables répondent aux milieux scolaires et aux enfants en croissance." data-en="Solid wood legs visually match the ERGO chair. Adjustable models serve school environments and growing children.">Les pattes en bois massif s'accordent avec la chaise ERGO. Les modèles ajustables répondent aux milieux scolaires et aux enfants en croissance.</p>
     </div>
-
     <div class="pattes-grille">
-
-      <!-- Ajustable manuel — Petite (poignées + fentes) -->
       <div class="patte-carte">
-        <svg class="patte-icone" width="48" height="40" viewBox="0 0 48 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="4" y="7" width="40" height="5" rx="1.5" fill="#c0874a" opacity=".8"/>
-          <rect x="7" y="12" width="3.5" height="20" rx="1" fill="#c0874a" opacity=".55"/>
-          <rect x="37.5" y="12" width="3.5" height="20" rx="1" fill="#c0874a" opacity=".55"/>
-          <!-- fentes d'ajustement -->
-          <line x1="7" y1="17" x2="10.5" y2="17" stroke="#c0874a" stroke-width="1.2" opacity=".9"/>
-          <line x1="7" y1="21" x2="10.5" y2="21" stroke="#c0874a" stroke-width="1.2" opacity=".9"/>
-          <line x1="7" y1="25" x2="10.5" y2="25" stroke="#c0874a" stroke-width="1.2" opacity=".9"/>
-          <line x1="37.5" y1="17" x2="41" y2="17" stroke="#c0874a" stroke-width="1.2" opacity=".9"/>
-          <line x1="37.5" y1="21" x2="41" y2="21" stroke="#c0874a" stroke-width="1.2" opacity=".9"/>
-          <line x1="37.5" y1="25" x2="41" y2="25" stroke="#c0874a" stroke-width="1.2" opacity=".9"/>
-        </svg>
-        <div>
-          <span class="lbl" data-fr="Ajustable manuel" data-en="Manual adjustable">Ajustable manuel</span>
-          <h3 data-fr="Petite" data-en="Small">Petite</h3>
-          <table class="dim-table">
-            <tr><td data-fr="Dessus de table" data-en="Table top">Dessus de table</td><td>19″ – 31″</td></tr>
-            <tr><td data-fr="Dessous de table" data-en="Table underside">Dessous de table</td><td>16″ – 28″</td></tr>
-          </table>
-          <p class="patte-note" data-fr="Poignées et fentes — grande flexibilité de hauteur. Idéale pour les tables basses, garderies et CPE."
-             data-en="Handles and slots — maximum height flexibility. Ideal for low tables, daycares and CPE.">Poignées et fentes — grande flexibilité de hauteur. Idéale pour les tables basses, garderies et CPE.</p>
-        </div>
+        <svg class="patte-icone" width="48" height="40" viewBox="0 0 48 40" fill="none"><rect x="4" y="7" width="40" height="5" rx="1.5" fill="#c0874a" opacity=".8"/><rect x="7" y="12" width="3.5" height="20" rx="1" fill="#c0874a" opacity=".55"/><rect x="37.5" y="12" width="3.5" height="20" rx="1" fill="#c0874a" opacity=".55"/><line x1="7" y1="17" x2="10.5" y2="17" stroke="#c0874a" stroke-width="1.2" opacity=".9"/><line x1="7" y1="21" x2="10.5" y2="21" stroke="#c0874a" stroke-width="1.2" opacity=".9"/><line x1="7" y1="25" x2="10.5" y2="25" stroke="#c0874a" stroke-width="1.2" opacity=".9"/><line x1="37.5" y1="17" x2="41" y2="17" stroke="#c0874a" stroke-width="1.2" opacity=".9"/><line x1="37.5" y1="21" x2="41" y2="21" stroke="#c0874a" stroke-width="1.2" opacity=".9"/><line x1="37.5" y1="25" x2="41" y2="25" stroke="#c0874a" stroke-width="1.2" opacity=".9"/></svg>
+        <div><span class="lbl">Ajustable manuel</span><h3>Petite</h3><table class="dim-table"><tr><td>Dessus de table</td><td>19″ – 31″</td></tr><tr><td>Dessous de table</td><td>16″ – 28″</td></tr></table><p class="patte-note">Poignées et fentes — grande flexibilité de hauteur. Idéale pour les tables basses, garderies et CPE.</p></div>
       </div>
-
-      <!-- Ajustable manuel — Moyenne -->
       <div class="patte-carte">
-        <svg class="patte-icone" width="48" height="40" viewBox="0 0 48 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="4" y="5" width="40" height="5" rx="1.5" fill="#c0874a" opacity=".8"/>
-          <rect x="7" y="10" width="3.5" height="24" rx="1" fill="#c0874a" opacity=".55"/>
-          <rect x="37.5" y="10" width="3.5" height="24" rx="1" fill="#c0874a" opacity=".55"/>
-          <line x1="7" y1="16" x2="10.5" y2="16" stroke="#c0874a" stroke-width="1.2" opacity=".9"/>
-          <line x1="7" y1="20" x2="10.5" y2="20" stroke="#c0874a" stroke-width="1.2" opacity=".9"/>
-          <line x1="7" y1="24" x2="10.5" y2="24" stroke="#c0874a" stroke-width="1.2" opacity=".9"/>
-          <line x1="37.5" y1="16" x2="41" y2="16" stroke="#c0874a" stroke-width="1.2" opacity=".9"/>
-          <line x1="37.5" y1="20" x2="41" y2="20" stroke="#c0874a" stroke-width="1.2" opacity=".9"/>
-          <line x1="37.5" y1="24" x2="41" y2="24" stroke="#c0874a" stroke-width="1.2" opacity=".9"/>
-        </svg>
-        <div>
-          <span class="lbl" data-fr="Ajustable manuel" data-en="Manual adjustable">Ajustable manuel</span>
-          <h3 data-fr="Moyenne" data-en="Medium">Moyenne</h3>
-          <table class="dim-table">
-            <tr><td data-fr="Dessus de table" data-en="Table top">Dessus de table</td><td>23″ – 35″</td></tr>
-            <tr><td data-fr="Dessous de table" data-en="Table underside">Dessous de table</td><td>20″ – 32″</td></tr>
-          </table>
-          <p class="patte-note" data-fr="Poignées et fentes — grande flexibilité. Pour les écoles, CPE et milieux institutionnels à hauteur standard."
-             data-en="Handles and slots — maximum flexibility. For schools, CPEs and institutional settings at standard height.">Poignées et fentes — grande flexibilité. Pour les écoles, CPE et milieux institutionnels à hauteur standard.</p>
-        </div>
+        <svg class="patte-icone" width="48" height="40" viewBox="0 0 48 40" fill="none"><rect x="4" y="5" width="40" height="5" rx="1.5" fill="#c0874a" opacity=".8"/><rect x="7" y="10" width="3.5" height="24" rx="1" fill="#c0874a" opacity=".55"/><rect x="37.5" y="10" width="3.5" height="24" rx="1" fill="#c0874a" opacity=".55"/><line x1="7" y1="16" x2="10.5" y2="16" stroke="#c0874a" stroke-width="1.2" opacity=".9"/><line x1="7" y1="20" x2="10.5" y2="20" stroke="#c0874a" stroke-width="1.2" opacity=".9"/><line x1="7" y1="24" x2="10.5" y2="24" stroke="#c0874a" stroke-width="1.2" opacity=".9"/><line x1="37.5" y1="16" x2="41" y2="16" stroke="#c0874a" stroke-width="1.2" opacity=".9"/><line x1="37.5" y1="20" x2="41" y2="20" stroke="#c0874a" stroke-width="1.2" opacity=".9"/><line x1="37.5" y1="24" x2="41" y2="24" stroke="#c0874a" stroke-width="1.2" opacity=".9"/></svg>
+        <div><span class="lbl">Ajustable manuel</span><h3>Moyenne</h3><table class="dim-table"><tr><td>Dessus de table</td><td>23″ – 35″</td></tr><tr><td>Dessous de table</td><td>20″ – 32″</td></tr></table><p class="patte-note">Poignées et fentes — grande flexibilité. Pour les écoles, CPE et milieux institutionnels.</p></div>
       </div>
-
-      <!-- Manivelle -->
       <div class="patte-carte">
-        <svg class="patte-icone" width="48" height="40" viewBox="0 0 48 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="4" y="4" width="40" height="5" rx="1.5" fill="#c0874a" opacity=".8"/>
-          <!-- cadre extérieur -->
-          <rect x="6" y="9" width="5" height="28" rx="1" fill="#c0874a" opacity=".55"/>
-          <rect x="37" y="9" width="5" height="28" rx="1" fill="#c0874a" opacity=".55"/>
-          <!-- colonne intérieure télescopique -->
-          <rect x="8" y="21" width="1.5" height="16" rx=".5" fill="#c0874a" opacity=".85"/>
-          <rect x="38.5" y="21" width="1.5" height="16" rx=".5" fill="#c0874a" opacity=".85"/>
-          <!-- trait séparation -->
-          <line x1="5" y1="21" x2="12" y2="21" stroke="#c0874a" stroke-width="1" opacity=".6"/>
-          <line x1="36" y1="21" x2="43" y2="21" stroke="#c0874a" stroke-width="1" opacity=".6"/>
-        </svg>
-        <div>
-          <span class="lbl" data-fr="Ajustable" data-en="Adjustable">Ajustable</span>
-          <h3 data-fr="Manivelle" data-en="Hand crank">Manivelle</h3>
-          <table class="dim-table">
-            <tr><td data-fr="Dessus de table" data-en="Table top">Dessus de table</td><td>27″ – 47″</td></tr>
-            <tr><td data-fr="Dessous de table" data-en="Table underside">Dessous de table</td><td>24″ – 44″</td></tr>
-          </table>
-          <p class="patte-note" data-fr="Réglage facile à la manivelle. Cadre plus large et plus haut — prévoir l'espace requis sous et autour de la table."
-             data-en="Easy crank adjustment. Wider and taller frame — plan for the required clearance under and around the table.">Réglage facile à la manivelle. Cadre plus large et plus haut — prévoir l'espace requis sous et autour de la table.</p>
-        </div>
+        <svg class="patte-icone" width="48" height="40" viewBox="0 0 48 40" fill="none"><rect x="4" y="4" width="40" height="5" rx="1.5" fill="#c0874a" opacity=".8"/><rect x="6" y="9" width="5" height="28" rx="1" fill="#c0874a" opacity=".55"/><rect x="37" y="9" width="5" height="28" rx="1" fill="#c0874a" opacity=".55"/><rect x="8" y="21" width="1.5" height="16" rx=".5" fill="#c0874a" opacity=".85"/><rect x="38.5" y="21" width="1.5" height="16" rx=".5" fill="#c0874a" opacity=".85"/><line x1="5" y1="21" x2="12" y2="21" stroke="#c0874a" stroke-width="1" opacity=".6"/><line x1="36" y1="21" x2="43" y2="21" stroke="#c0874a" stroke-width="1" opacity=".6"/></svg>
+        <div><span class="lbl">Ajustable</span><h3>Manivelle</h3><table class="dim-table"><tr><td>Dessus de table</td><td>27″ – 47″</td></tr><tr><td>Dessous de table</td><td>24″ – 44″</td></tr></table><p class="patte-note">Réglage facile à la manivelle. Cadre plus large et plus haut — prévoir l'espace requis.</p></div>
       </div>
-
-      <!-- Électrique -->
       <div class="patte-carte">
-        <svg class="patte-icone" width="48" height="40" viewBox="0 0 48 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="4" y="4" width="40" height="5" rx="1.5" fill="#c0874a" opacity=".8"/>
-          <rect x="6" y="9" width="5" height="28" rx="1" fill="#c0874a" opacity=".55"/>
-          <rect x="37" y="9" width="5" height="28" rx="1" fill="#c0874a" opacity=".55"/>
-          <rect x="8" y="21" width="1.5" height="16" rx=".5" fill="#c0874a" opacity=".85"/>
-          <rect x="38.5" y="21" width="1.5" height="16" rx=".5" fill="#c0874a" opacity=".85"/>
-          <line x1="5" y1="21" x2="12" y2="21" stroke="#c0874a" stroke-width="1" opacity=".6"/>
-          <line x1="36" y1="21" x2="43" y2="21" stroke="#c0874a" stroke-width="1" opacity=".6"/>
-          <!-- éclair -->
-          <path d="M22 17 L20 24 L24.5 21.5 L22.5 28" stroke="#c0874a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".95"/>
-        </svg>
-        <div>
-          <span class="lbl" data-fr="Ajustable" data-en="Adjustable">Ajustable</span>
-          <h3 data-fr="Électrique" data-en="Electric">Électrique</h3>
-          <table class="dim-table">
-            <tr><td data-fr="Dessus de table" data-en="Table top">Dessus de table</td><td>27″ – 47″</td></tr>
-            <tr><td data-fr="Dessous de table" data-en="Table underside">Dessous de table</td><td>24″ – 44″</td></tr>
-          </table>
-          <p class="patte-note" data-fr="Réglage motorisé à un bouton. Même cadre que la manivelle — pour les enfants qui ne peuvent pas actionner une manivelle."
-             data-en="One-button motorized. Same frame as hand crank — for children who cannot operate a crank.">Réglage motorisé à un bouton. Même cadre que la manivelle — pour les enfants qui ne peuvent pas actionner une manivelle.</p>
-        </div>
+        <svg class="patte-icone" width="48" height="40" viewBox="0 0 48 40" fill="none"><rect x="4" y="4" width="40" height="5" rx="1.5" fill="#c0874a" opacity=".8"/><rect x="6" y="9" width="5" height="28" rx="1" fill="#c0874a" opacity=".55"/><rect x="37" y="9" width="5" height="28" rx="1" fill="#c0874a" opacity=".55"/><rect x="8" y="21" width="1.5" height="16" rx=".5" fill="#c0874a" opacity=".85"/><rect x="38.5" y="21" width="1.5" height="16" rx=".5" fill="#c0874a" opacity=".85"/><line x1="5" y1="21" x2="12" y2="21" stroke="#c0874a" stroke-width="1" opacity=".6"/><line x1="36" y1="21" x2="43" y2="21" stroke="#c0874a" stroke-width="1" opacity=".6"/><path d="M22 17 L20 24 L24.5 21.5 L22.5 28" stroke="#c0874a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".95"/></svg>
+        <div><span class="lbl">Ajustable</span><h3>Électrique</h3><table class="dim-table"><tr><td>Dessus de table</td><td>27″ – 47″</td></tr><tr><td>Dessous de table</td><td>24″ – 44″</td></tr></table><p class="patte-note">Réglage motorisé à un bouton. Pour les enfants qui ne peuvent pas actionner une manivelle.</p></div>
       </div>
-
     </div>
   </div>
 </div>
 
-
-<!-- ============================================================
-     OPTIONS PLATEAU (fond blanc)
-     🖼️  Changer : Bureau_sketch02.png → photo réelle quand disponible
-     ============================================================ -->
 <div id="plateau" class="plateau-outer">
   <div class="plateau">
-
     <div class="entete-claire">
       <span class="lbl" data-fr="Surface de travail" data-en="Work surface">Surface de travail</span>
-      <h2 data-fr="Une surface conçue pour chaque situation."
-          data-en="A surface designed for every situation.">Une surface conçue pour chaque situation.</h2>
-      <p data-fr="Au-delà des dimensions, le plateau peut être configuré avec plusieurs options cliniques selon les besoins de l'enfant."
-         data-en="Beyond dimensions, the surface can be configured with several clinical options based on the child's needs.">
-        Au-delà des dimensions, le plateau peut être configuré avec plusieurs options cliniques selon les besoins de l'enfant.
-      </p>
+      <h2 data-fr="Une surface conçue pour chaque situation." data-en="A surface designed for every situation.">Une surface conçue pour chaque situation.</h2>
+      <p data-fr="Au-delà des dimensions, le plateau peut être configuré avec plusieurs options cliniques selon les besoins de l'enfant." data-en="Beyond dimensions, the surface can be configured with several clinical options based on the child's needs.">Au-delà des dimensions, le plateau peut être configuré avec plusieurs options cliniques selon les besoins de l'enfant.</p>
       <div class="options-liste">
-        <div class="option-item">
-          <div class="option-dot"></div>
-          <div>
-            <strong data-fr="Rebord en plastique" data-en="Plastic edge guard">Rebord en plastique</strong>
-            <span data-fr="Contour complet ou partiel pour retenir les objets. Position et détails sur mesure."
-                  data-en="Full or partial perimeter. Position and details custom-made.">Contour complet ou partiel pour retenir les objets. Position et détails sur mesure.</span>
-          </div>
-        </div>
-        <div class="option-item">
-          <div class="option-dot"></div>
-          <div>
-            <strong data-fr="Découpe ventrale" data-en="Ventral cutout">Découpe ventrale</strong>
-            <span data-fr="Encastrement semi-circulaire : au centre, à gauche ou à droite. Largeur et profondeur sur mesure."
-                  data-en="Semi-circular cutout: center, left, or right. Width and depth custom-made.">Encastrement semi-circulaire : au centre, à gauche ou à droite. Largeur et profondeur sur mesure.</span>
-          </div>
-        </div>
-        <div class="option-item">
-          <div class="option-dot"></div>
-          <div>
-            <strong data-fr="Surface inclinable + lutrin amovible" data-en="Tilt surface + removable book holder">Surface inclinable + lutrin amovible</strong>
-            <span data-fr="Toute la surface, section gauche, droite, ou en U. Vient avec un lutrin amovible."
-                  data-en="Full surface, left, right, or U-shape. Includes a removable book holder.">Toute la surface, section gauche, droite, ou en U. Vient avec un lutrin amovible.</span>
-          </div>
-        </div>
-        <div class="option-item">
-          <div class="option-dot"></div>
-          <div>
-            <strong data-fr="Espace fauteuil roulant" data-en="Wheelchair clearance">Espace fauteuil roulant</strong>
-            <span data-fr="Largeur minimale entre les pattes calculée selon les dimensions du fauteuil. Joystick pris en compte."
-                  data-en="Minimum leg clearance from wheelchair dimensions. Joystick clearance included.">Largeur minimale entre les pattes calculée selon les dimensions du fauteuil. Joystick pris en compte.</span>
-          </div>
-        </div>
+        <div class="option-item"><div class="option-dot"></div><div><strong data-fr="Rebord en plastique" data-en="Plastic edge guard">Rebord en plastique</strong><span data-fr="Contour complet ou partiel pour retenir les objets. Position et détails sur mesure." data-en="Full or partial perimeter to hold objects. Position and details custom-made.">Contour complet ou partiel pour retenir les objets. Position et détails sur mesure.</span></div></div>
+        <div class="option-item"><div class="option-dot"></div><div><strong data-fr="Découpe ventrale" data-en="Ventral cutout">Découpe ventrale</strong><span data-fr="Encastrement semi-circulaire : au centre, à gauche ou à droite. Largeur et profondeur sur mesure." data-en="Semi-circular cutout: center, left, or right. Width and depth custom-made.">Encastrement semi-circulaire : au centre, à gauche ou à droite. Largeur et profondeur sur mesure.</span></div></div>
+        <div class="option-item"><div class="option-dot"></div><div><strong data-fr="Surface inclinable + lutrin amovible" data-en="Tilt surface + removable book holder">Surface inclinable + lutrin amovible</strong><span data-fr="Toute la surface, section gauche, droite, ou en U. Vient avec un lutrin amovible." data-en="Full surface, left, right, or U-shape. Includes a removable book holder.">Toute la surface, section gauche, droite, ou en U. Vient avec un lutrin amovible.</span></div></div>
+        <div class="option-item"><div class="option-dot"></div><div><strong data-fr="Espace fauteuil roulant" data-en="Wheelchair clearance">Espace fauteuil roulant</strong><span data-fr="Largeur minimale entre les pattes calculée selon les dimensions du fauteuil. Joystick pris en compte." data-en="Minimum leg clearance from wheelchair dimensions. Joystick clearance included.">Largeur minimale entre les pattes calculée selon les dimensions du fauteuil. Joystick pris en compte.</span></div></div>
       </div>
     </div>
-
     <div class="plateau-image">
-      <img src="Bureau_sketch02.png" alt="Bureau adapté — vue plateau et caissons">
-      <p class="plateau-image-legende"
-         data-fr="— Vue de dessus · découpe ventrale et caissons latéraux"
-         data-en="— Top view · ventral cutout and side storage">— Vue de dessus · découpe ventrale et caissons latéraux</p>
+      <img src="Bureau_sketch02.png" alt="Bureau adapté — vue plateau et caissons" onerror="this.style.display='none'">
+      <p class="plateau-image-legende" data-fr="— Vue de dessus · découpe ventrale et caissons latéraux" data-en="— Top view · ventral cutout and side storage">— Vue de dessus · découpe ventrale et caissons latéraux</p>
     </div>
-
   </div>
 </div>
 
-
-<!-- ============================================================
-     CAISSONS (fond brume)
-     🖼️  Images déjà dans le dossier projet — chemins relatifs
-     ============================================================ -->
 <div id="caissons" class="caissons-outer">
   <div class="caissons">
-
     <div class="entete-claire" style="margin-bottom:36px;">
       <span class="lbl" data-fr="Options de caisson" data-en="Storage options">Options de caisson</span>
-      <h2 data-fr="Le rangement intégré, à portée de l'enfant."
-          data-en="Integrated storage, within the child's reach.">Le rangement intégré, à portée de l'enfant.</h2>
-      <p data-fr="Les caissons s'accrochent directement à la table. Plusieurs configurations selon les besoins — ouverture sur le dessus, sur le devant, ou tiroir rétractable."
-         data-en="Storage units attach directly to the desk. Multiple configurations — top opening, front opening, or retractable drawer.">
-        Les caissons s'accrochent directement à la table. Plusieurs configurations — ouverture sur le dessus, sur le devant, ou tiroir rétractable.
-      </p>
+      <h2 data-fr="Le rangement intégré, à portée de l'enfant." data-en="Integrated storage, within the child's reach.">Le rangement intégré, à portée de l'enfant.</h2>
+      <p data-fr="Les caissons s'accrochent directement à la table. Plusieurs configurations — ouverture sur le dessus, sur le devant, ou tiroir rétractable." data-en="Storage units attach directly to the desk. Multiple configurations — top opening, front opening, or retractable drawer.">Les caissons s'accrochent directement à la table. Plusieurs configurations — ouverture sur le dessus, sur le devant, ou tiroir rétractable.</p>
     </div>
-
     <div class="caissons-grille">
-
-      <div class="caisson-carte">
-        <img src="Caisson_2_sections__Ouverture_sur_le_dessus.png"
-             alt="Caisson 2 sections — ouverture sur le dessus">
-        <div class="caisson-corps">
-          <span class="lbl" data-fr="2 sections" data-en="2 sections">2 sections</span>
-          <h3 data-fr="Ouverture sur le dessus" data-en="Top opening">Ouverture sur le dessus</h3>
-          <p data-fr="Accès par le haut. Idéal pour crayons et petits matériels."
-             data-en="Top access. Ideal for pencils and small materials.">Accès par le haut. Idéal pour crayons et petits matériels.</p>
-        </div>
-      </div>
-
-      <div class="caisson-carte">
-        <img src="Caisson_2_sections_extérieur__Ouverture_sur_le_devant.jpg"
-             alt="Caisson 2 sections extérieur — ouverture sur le devant">
-        <div class="caisson-corps">
-          <span class="lbl" data-fr="2 sections · Extérieur" data-en="2 sections · Exterior">2 sections · Extérieur</span>
-          <h3 data-fr="Ouverture sur le devant" data-en="Front opening">Ouverture sur le devant</h3>
-          <p data-fr="Accès frontal, fixé à l'extérieur des pattes."
-             data-en="Front access, mounted outside the legs.">Accès frontal, fixé à l'extérieur des pattes.</p>
-        </div>
-      </div>
-
-      <div class="caisson-carte">
-        <img src="Caisson_3_sections_extérieur__Ouverture_sur_le_devant.png"
-             alt="Caisson 3 sections extérieur — ouverture sur le devant">
-        <div class="caisson-corps">
-          <span class="lbl" data-fr="3 sections · Extérieur" data-en="3 sections · Exterior">3 sections · Extérieur</span>
-          <h3 data-fr="Ouverture sur le devant" data-en="Front opening">Ouverture sur le devant</h3>
-          <p data-fr="Trois compartiments distincts. Idéal pour livres, cahiers et matériaux."
-             data-en="Three separate compartments. Ideal for books, notebooks, and materials.">Trois compartiments distincts. Idéal pour livres, cahiers et matériaux.</p>
-        </div>
-      </div>
-
+      <div class="caisson-carte"><img src="Caisson_2_sections__Ouverture_sur_le_dessus.png" alt="Caisson 2 sections — ouverture sur le dessus"><div class="caisson-corps"><span class="lbl">2 sections</span><h3>Ouverture sur le dessus</h3><p>Accès par le haut. Idéal pour crayons et petits matériels.</p></div></div>
+      <div class="caisson-carte"><img src="Caisson_2_sections_extérieur__Ouverture_sur_le_devant.jpg" alt="Caisson 2 sections — ouverture sur le devant"><div class="caisson-corps"><span class="lbl">2 sections · Extérieur</span><h3>Ouverture sur le devant</h3><p>Accès frontal, fixé à l'extérieur des pattes.</p></div></div>
+      <div class="caisson-carte"><img src="Caisson_3_sections_extérieur__Ouverture_sur_le_devant.png" alt="Caisson 3 sections — ouverture sur le devant"><div class="caisson-corps"><span class="lbl">3 sections · Extérieur</span><h3>Ouverture sur le devant</h3><p>Trois compartiments distincts. Idéal pour livres, cahiers et matériaux.</p></div></div>
     </div>
-
     <div class="caissons-options">
-      <div class="caissons-option">
-        <div class="option-dot"></div>
-        <div>
-          <strong data-fr="Caisson rétractable" data-en="Retractable storage">Caisson rétractable</strong>
-          <span data-fr="Tiroir coulissant — intérieur ou extérieur. 2 sections."
-                data-en="Sliding drawer — interior or exterior. 2 sections.">Tiroir coulissant — intérieur ou extérieur. 2 sections.</span>
-        </div>
-      </div>
-      <div class="caissons-option">
-        <div class="option-dot"></div>
-        <div>
-          <strong data-fr="Position au choix" data-en="Position of choice">Position au choix</strong>
-          <span data-fr="Gauche, droite, ou des deux côtés de la table."
-                data-en="Left, right, or on both sides of the table.">Gauche, droite, ou des deux côtés de la table.</span>
-        </div>
-      </div>
-      <div class="caissons-option">
-        <div class="option-dot"></div>
-        <div>
-          <strong data-fr="Caisson amovible" data-en="Removable storage">Caisson amovible</strong>
-          <span data-fr="Option pour déplacer le caisson des deux côtés librement."
-                data-en="Option to freely move the storage unit from side to side.">Option pour déplacer le caisson des deux côtés librement.</span>
-        </div>
-      </div>
-      <div class="caissons-option">
-        <div class="option-dot"></div>
-        <div>
-          <strong data-fr="2 ou 3 sections intérieures" data-en="2 or 3 interior sections">2 ou 3 sections intérieures</strong>
-          <span data-fr="Fixé à l'intérieur des pattes — différentes configurations d'ouverture."
-                data-en="Mounted inside the legs — different opening configurations.">Fixé à l'intérieur des pattes — différentes configurations d'ouverture.</span>
-        </div>
-      </div>
+      <div class="caissons-option"><div class="option-dot"></div><div><strong>Caisson rétractable</strong><span>Tiroir coulissant — intérieur ou extérieur. 2 sections.</span></div></div>
+      <div class="caissons-option"><div class="option-dot"></div><div><strong>Position au choix</strong><span>Gauche, droite, ou des deux côtés de la table.</span></div></div>
+      <div class="caissons-option"><div class="option-dot"></div><div><strong>Caisson amovible</strong><span>Option pour déplacer le caisson des deux côtés librement.</span></div></div>
+      <div class="caissons-option"><div class="option-dot"></div><div><strong>2 ou 3 sections intérieures</strong><span>Fixé à l'intérieur des pattes — différentes configurations d'ouverture.</span></div></div>
     </div>
-
   </div>
 </div>
 
-
-<!-- ============================================================
-     PROCESSUS (fond parchemin)
-     ============================================================ -->
 <div class="processus-outer">
   <div class="processus">
     <div class="processus-entete">
-      <span class="lbl" data-fr="Comment commander" data-en="How to order">Comment commander</span>
-      <h2 data-fr="Du formulaire à la livraison — en 4 étapes."
-          data-en="From form to delivery — in 4 steps.">Du formulaire à la livraison — en 4 étapes.</h2>
+      <span class="lbl">Comment commander</span>
+      <h2 data-fr="Du formulaire à la livraison — en 4 étapes." data-en="From form to delivery — in 4 steps.">Du formulaire à la livraison — en 4 étapes.</h2>
     </div>
     <div class="etapes">
-      <div class="etape">
-        <div class="etape-num actif">1</div>
-        <h3 data-fr="Soumission" data-en="Quote">Soumission</h3>
-        <p data-fr="L'ergothérapeute remplit le formulaire de mesures en ligne ou par PDF."
-           data-en="The OT completes the measurement form online or by PDF.">L'ergothérapeute remplit le formulaire de mesures en ligne ou par PDF.</p>
-      </div>
-      <div class="etape">
-        <div class="etape-num">2</div>
-        <h3 data-fr="Confirmation" data-en="Confirmation">Confirmation</h3>
-        <p data-fr="On valide ensemble les dimensions et les options, puis on confirme."
-           data-en="We validate dimensions and options together, then confirm.">On valide ensemble les dimensions et les options, puis on confirme.</p>
-      </div>
-      <div class="etape">
-        <div class="etape-num">3</div>
-        <h3 data-fr="Fabrication" data-en="Manufacturing">Fabrication</h3>
-        <p data-fr="Fabrication artisanale à Sainte-Anne-des-Lacs. Délai : 2 à 4 semaines."
-           data-en="Handcrafted in Sainte-Anne-des-Lacs. Lead time: 2 to 4 weeks.">Fabrication artisanale à Sainte-Anne-des-Lacs. Délai : 2 à 4 semaines.</p>
-      </div>
-      <div class="etape">
-        <div class="etape-num">4</div>
-        <h3 data-fr="Livraison" data-en="Delivery">Livraison</h3>
-        <p data-fr="Livraison directe ou coordination avec l'établissement."
-           data-en="Direct delivery or coordination with the facility.">Livraison directe ou coordination avec l'établissement.</p>
-      </div>
+      <div class="etape"><div class="etape-num actif">1</div><h3>Soumission</h3><p>L'ergothérapeute remplit le formulaire de mesures en ligne ou par PDF.</p></div>
+      <div class="etape"><div class="etape-num">2</div><h3>Confirmation</h3><p>On valide ensemble les dimensions et les options, puis on confirme.</p></div>
+      <div class="etape"><div class="etape-num">3</div><h3>Fabrication</h3><p>Fabrication artisanale à Sainte-Anne-des-Lacs. Délai : 4 à 6 semaines.</p></div>
+      <div class="etape"><div class="etape-num">4</div><h3>Livraison</h3><p>Livraison directe ou coordination avec l'établissement.</p></div>
     </div>
   </div>
 </div>
 
-
-<!-- ============================================================
-     CTA ERGOTHÉRAPEUTES (fond marine — identique toutes les pages)
-     ============================================================ -->
 <div class="cta-outer">
   <div class="cta-inner">
-    <div class="cta-citation">
-      <span class="lbl" data-fr="Un mot des ergothérapeutes" data-en="A word from occupational therapists">Un mot des ergothérapeutes</span>
-      <blockquote class="cta-citation-texte"
-        data-fr="« Je décris l'enfant. Claude dessine la table. Deux semaines plus tard, elle est parfaite. »"
-        data-en="« I describe the child. Claude designs the desk. Two weeks later, it's perfect. »">
-        « Je décris l'enfant. Claude dessine la table.<br>Deux semaines plus tard, elle est parfaite. »
-      </blockquote>
-      <p class="cta-citation-source" data-fr="— Ergothérapeute, région de Montréal" data-en="— Occupational therapist, Montreal area">— Ergothérapeute, région de Montréal</p>
-      <div class="cta-regle"></div>
-    </div>
+    <div class="cta-citation"><span class="lbl">Un mot des ergothérapeutes</span><blockquote class="cta-citation-texte">« Je décris l'enfant. Claude dessine la table.<br>Deux semaines plus tard, elle est parfaite. »</blockquote><p class="cta-citation-source">— Ergothérapeute, région de Montréal</p><div class="cta-regle"></div></div>
     <div class="cta-action">
-      <h2 class="cta-titre"
-          data-fr-html="Vous cherchez un bureau<br>pour un <em>enfant en particulier ?</em>"
-          data-en-html="Looking for a desk<br>for <em>a specific child?</em>">
-        Vous cherchez un bureau<br>pour un <em>enfant en particulier ?</em>
-      </h2>
-      <ul class="cta-liste">
-        <li data-fr="Réponse sous 48 h — devis sans engagement" data-en="Response within 48 h — no-obligation quote">Réponse sous 48 h — devis sans engagement</li>
-        <li data-fr="Fabrication artisanale au Québec · délai 4 à 6 semaines" data-en="Handcrafted in Quebec · 4 to 6 week lead time">Fabrication artisanale au Québec · délai 4 à 6 semaines</li>
-        <li data-fr="Compatible avec toutes les chaises ERGO" data-en="Compatible with all ERGO chairs">Compatible avec toutes les chaises ERGO</li>
-      </ul>
-      <div class="cta-btns">
-        <a href="contact.html#formulaire" class="btn-accent"
-           data-fr="Remplir le formulaire de soumission →" data-en="Fill out the quote form →">Remplir le formulaire de soumission →</a>
-        <a href="contact.html" class="cta-lien" data-fr="Ou nous écrire directement" data-en="Or write to us directly">Ou nous écrire directement</a>
-      </div>
+      <h2 class="cta-titre" data-fr-html="Vous cherchez un bureau<br>pour un <em>enfant en particulier ?</em>" data-en-html="Looking for a desk<br>for <em>a specific child?</em>">Vous cherchez un bureau<br>pour un <em>enfant en particulier ?</em></h2>
+      <ul class="cta-liste"><li>Réponse sous 48 h — devis sans engagement</li><li>Fabrication artisanale au Québec · délai 4 à 6 semaines</li><li>Compatible avec toutes les chaises ERGO</li></ul>
+      <div class="cta-btns"><a href="https://acces-cible.fillout.com/t/erKz8m4uBEus" target="_blank" rel="noopener" class="btn-accent">Remplir le formulaire de soumission →</a><a href="contact.html" class="cta-lien">Ou nous écrire directement</a></div>
     </div>
   </div>
 </div>
 
-
-<!-- ============================================================
-     FOOTER (identique toutes les pages)
-     ============================================================ -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div>
-      <div class="footer-brand">Les Adaptations Accès-Cible</div>
-      <div class="footer-tagline" data-fr="Fabrication artisanale · Québec · Depuis 1990" data-en="Artisan craftsmanship · Quebec · Since 1990">Fabrication artisanale · Québec · Depuis 1990</div>
-      <div class="footer-coords">
-        <span>156-A route 117<br>Sainte-Anne-des-Lacs, Québec  J0R 1B0</span>
-        <a href="tel:+14502271948">450 227-1948</a>
-        <a href="mailto:info@lesadaptationsacces-cible.com">info@lesadaptationsacces-cible.com</a>
-        <a href="mailto:info@acces-cible.ca">info@acces-cible.ca</a>
-      </div>
-    </div>
-    <div>
-      <div class="footer-col-titre" data-fr="Produits" data-en="Products">Produits</div>
-      <div class="footer-liens">
-        <a href="ergo.html"        data-fr="Chaise ERGO"          data-en="ERGO Chair">Chaise ERGO</a>
-        <a href="accessoires.html" data-fr="Accessoires posturaux" data-en="Postural accessories">Accessoires posturaux</a>
-        <a href="bureaux.html"     data-fr="Bureaux adaptés"       data-en="Adapted desks">Bureaux adaptés</a>
-        <a href="marchepied.html"  data-fr="Marchepieds"           data-en="Footrests">Marchepieds</a>
-      </div>
-    </div>
-    <div>
-      <div class="footer-col-titre" data-fr="Entreprise" data-en="Company">Entreprise</div>
-      <div class="footer-liens">
-        <a href="histoire.html" data-fr="Notre histoire"         data-en="Our story">Notre histoire</a>
-        <a href="contact.html"  data-fr="Contact"                data-en="Contact">Contact</a>
-        <a href="https://acces-cible.fillout.com/t/erKz8m4uBEus" target="_blank" rel="noopener"
-           data-fr="Formulaire de soumission" data-en="Quote form">Formulaire de soumission</a>
-      </div>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <div class="footer-copyright" data-fr="© 2024 Les Adaptations Accès-Cible. Tous droits réservés." data-en="© 2024 Les Adaptations Accès-Cible. All rights reserved.">© 2024 Les Adaptations Accès-Cible. Tous droits réservés.</div>
-    <div class="footer-fab" data-fr="Fait à la main · Sainte-Anne-des-Lacs" data-en="Handmade · Sainte-Anne-des-Lacs">Fait à la main · Sainte-Anne-des-Lacs</div>
-  </div>
-</footer>
-
-
-<script>
-function toggleMenu() { document.getElementById('navMobile').classList.toggle('ouvert'); }
-
-let langue = 'fr';
-function toggleLangue() {
-  langue = langue === 'fr' ? 'en' : 'fr';
-  document.getElementById('langBtn').textContent = langue === 'fr' ? 'EN' : 'FR';
-  document.documentElement.lang = langue;
-  document.querySelectorAll('[data-fr]').forEach(el => { el.textContent = el.dataset[langue]; });
-  document.querySelectorAll('[data-fr-html]').forEach(el => { el.innerHTML = el.dataset[langue + 'Html']; });
-}
-</script>
+<div id="footer-container"></div>
+<script src="scripts.js"></script>
 </body>
 </html>
