@@ -40,7 +40,7 @@ function toggleMenu() {
 }
 
 /* ── LANGUE FR / EN ── */
-let langue = 'fr';
+window.langue = 'fr'
 
 function toggleLangue() {
   langue = langue === 'fr' ? 'en' : 'fr';
