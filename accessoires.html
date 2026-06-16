@@ -193,7 +193,7 @@
       <!-- Photo chaise -->
       <div style="width:100%;max-width:380px;height:340px;display:flex;align-items:center;justify-content:center;">
         <img id="couleur-chaise-img"
-          src="images/Chaise_Grise_R193_B193_G193_1.png"
+          src="images/Couleur/Chaise Grise R193 B193 G193 (1).png"
           alt="Chaise ERGO Gris moyen"
           style="max-width:100%;max-height:100%;object-fit:contain;transition:opacity .25s ease;">
       </div>
@@ -306,19 +306,19 @@ window.addEventListener('scroll', () => {
 // ── SÉLECTEUR COULEURS ──────────────────────────────────────────
 (function() {
   const COULEURS = [
-    { fr:'Gris moyen',       en:'Medium grey',     hex:'#b0b0b0', img:'Chaise_Grise_R193_B193_G193_1.png' },
-    { fr:'Bleu marine',      en:'Navy blue',        hex:'#1e3a5f', img:'Chaise_Marine_1.png' },
-    { fr:'Bleu royal',       en:'Royal blue',       hex:'#3355cc', img:'Chaise_bleu_royal_R0_G34_B255_edited_edited.png' },
-    { fr:'Rouge vin',        en:'Wine red',         hex:'#7b1d30', img:'Chaise_rouge_vin_1.png' },
-    { fr:'Rouge',            en:'Red',              hex:'#cc1111', img:'Chaise_rouge_R226_G0_B0_1.png' },
-    { fr:'Caramel / Beige',  en:'Caramel / Beige',  hex:'#c07a35', img:'Chaise_beigecaramel_R240_G217_B124_1.png' },
-    { fr:'Noir',             en:'Black',            hex:'#1a1a1a', img:'Chaise_Noir_1.png' },
-    { fr:'Vert forêt',      en:'Forest green',     hex:'#2d5a27', img:'Chaise_vert_foret_1.png' },
-    { fr:'Vert lime',        en:'Lime green',       hex:'#2be831', img:'Chaise_vert_lime_R43_G233_B49_1.png' },
-    { fr:'Orange',           en:'Orange',           hex:'#e88a18', img:'Chaise_Orange_R238_G138_B24_1.png' },
-    { fr:'Aqua',             en:'Aqua',             hex:'#1bac8a', img:'Chaise_Aqua_R27_G172_B138_1.png' },
-    { fr:'Mauve',            en:'Mauve',            hex:'#b54df0', img:'Chaise_mauve_R181_G77_B240_1.png' },
-    { fr:'Rose',             en:'Pink',             hex:'#ff09e7', img:'Chaise_rose_R255_G9_B231_1.png' },
+    { fr:'Gris moyen',       en:'Medium grey',     hex:'#b0b0b0', img:'images/Couleur/Chaise Grise R193 B193 G193 (1).png' },
+    { fr:'Bleu marine',      en:'Navy blue',        hex:'#1e3a5f', img:'images/Couleur/Chaise Marine (1).png' },
+    { fr:'Bleu royal',       en:'Royal blue',       hex:'#3355cc', img:'images/Couleur/Chaise bleu royal R0 G34 B255 (1).png' },
+    { fr:'Rouge vin',        en:'Wine red',         hex:'#7b1d30', img:'images/Couleur/Chaise rouge vin (1).png' },
+    { fr:'Rouge',            en:'Red',              hex:'#cc1111', img:'images/Couleur/Chaise rouge R226 G0 B0 (1).png' },
+    { fr:'Caramel / Beige',  en:'Caramel / Beige',  hex:'#c07a35', img:'images/Couleur/Chaise beige-caramel R240 G217 B124 (1).png' },
+    { fr:'Noir',             en:'Black',            hex:'#1a1a1a', img:'images/Couleur/Chaise Noir (1).png' },
+    { fr:'Vert forêt',      en:'Forest green',     hex:'#2d5a27', img:'images/Couleur/Chaise vert foret (1).png' },
+    { fr:'Vert lime',        en:'Lime green',       hex:'#2be831', img:'images/Couleur/Chaise vert lime R43 G233 B49 (1).png' },
+    { fr:'Orange',           en:'Orange',           hex:'#e88a18', img:'images/Couleur/Chaise Orange R238 G138 B24 (1).png' },
+    { fr:'Aqua',             en:'Aqua',             hex:'#1bac8a', img:'images/Couleur/Chaise Aqua R27 G172 B138 (1).png' },
+    { fr:'Mauve',            en:'Mauve',            hex:'#b54df0', img:'images/Couleur/Chaise mauve R181 G77 B240 (1).png' },
+    { fr:'Rose',             en:'Pink',             hex:'#ff09e7', img:'images/Couleur/Chaise rose R255 G9 B231 (1).png' },
   ];
 
   const swatchContainer = document.getElementById('couleur-swatches');
@@ -347,7 +347,7 @@ window.addEventListener('scroll', () => {
     });
     chaiseImg.style.opacity = '0';
     setTimeout(function() {
-      chaiseImg.src = 'images/' + COULEURS[i].img;
+      chaiseImg.src = COULEURS[i].img;
       chaiseImg.alt = 'Chaise ERGO ' + COULEURS[i].fr;
       chaiseImg.style.opacity = '1';
     }, 220);
