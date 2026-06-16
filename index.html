@@ -3,16 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Les Adaptations Accès-Cible — Chaises adaptées sur mesure au Québec</title>
-<meta name="description" content="Fabricant artisanal québécois de chaises adaptées depuis 1990. Claude Poupart et Guillaume fabriquent chaque chaise sur mesure, en dialogue avec les ergothérapeutes.">
+<title>Les Adaptations Accès-Cible — Équipements adaptés sur mesure au Québec</title>
+<meta name="description" content="Fabricant artisanal québécois d'équipements de positionnement sur mesure depuis 1990. Claude et Guillaume Poupart conçoivent chaque solution en dialogue direct avec les ergothérapeutes.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Caveat:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<style>
+/* Logo nom plus grand */
+.nav-logo-texte { font-size: 15px !important; }
+/* Section artisans — nouvelle structure */
+.artisans-photo-principale { width: 100%; max-height: 440px; object-fit: cover; border-radius: var(--radius); margin-bottom: 40px; display: block; }
+.artisans-photo-placeholder { width: 100%; height: 360px; background: var(--c-brume); border: 1.5px dashed var(--c-bord); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: var(--c-muted); font-size: 12px; margin-bottom: 40px; }
+.artisans-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+.artisan-col { display: flex; flex-direction: column; gap: 10px; }
+.artisan-sep { width: 32px; height: 2px; background: var(--c-cuivre); margin-bottom: 6px; }
+@media (max-width: 768px) {
+  .artisans-duo { grid-template-columns: 1fr; gap: 32px; }
+  .artisans-photo-placeholder { height: 240px; }
+}
+</style>
 </head>
 <body>
 
-<!-- NAV — chargée automatiquement par scripts.js -->
-<div id="nav-container" style="height:58px;position:sticky;top:0;z-index:100;"></div>
+<div id="nav-container" style="height:58px;"></div>
 
 <!-- ══════════════════════════════════════
      HERO
@@ -20,32 +33,40 @@
 <div class="hero-outer">
   <div class="hero">
     <div>
-      <span class="lbl hero-lbl" data-fr="Sainte-Anne-des-Lacs, Québec · Depuis 1990" data-en="Sainte-Anne-des-Lacs, Quebec · Since 1990">Sainte-Anne-des-Lacs, Québec · Depuis 1990</span>
+      <span class="lbl hero-lbl"
+        data-fr="Fabriqué au Québec · Depuis 1990"
+        data-en="Made in Quebec · Since 1990">Fabriqué au Québec · Depuis 1990</span>
       <h1 class="hero-h1"
-          data-fr-html="Chaque enfant mérite<br>une chaise <em>dessinée pour lui.</em>"
-          data-en-html="Every child deserves<br>a chair <em>made for them.</em>">
-        Chaque enfant mérite<br>une chaise <em>dessinée pour lui.</em>
+          data-fr-html="Parce que chacun mérite<br>un équipement <em>conçu pour sa réalité.</em>"
+          data-en-html="Because everyone deserves<br>equipment <em>made for their reality.</em>">
+        Parce que chacun mérite<br>un équipement <em>conçu pour sa réalité.</em>
       </h1>
       <p class="hero-p"
-         data-fr="Claude Poupart fabrique des chaises adaptées depuis 35 ans. Pas en série — une à la fois, sur mesure, en dialogue direct avec l'ergothérapeute. Parce que la bonne chaise change tout."
-         data-en="Claude Poupart has been building adaptive chairs for 35 years. Not in series — one at a time, custom-made, in direct dialogue with the occupational therapist. Because the right chair changes everything.">
-        Claude Poupart fabrique des chaises adaptées depuis 35 ans. Pas en série — une à la fois, sur mesure, en dialogue direct avec l'ergothérapeute. Parce que la bonne chaise change tout.
+         data-fr="Depuis 35 ans, Les Adaptations Accès-Cible fabriquent des équipements de positionnement sur mesure. Pas en série — un à la fois, en dialogue direct avec l'ergothérapeute. Parce que le bon équipement change tout."
+         data-en="For 35 years, Les Adaptations Accès-Cible has been crafting custom positioning equipment. Not in series — one at a time, in direct dialogue with the occupational therapist. Because the right equipment changes everything.">
+        Depuis 35 ans, Les Adaptations Accès-Cible fabriquent des équipements de positionnement sur mesure. Pas en série — un à la fois, en dialogue direct avec l'ergothérapeute. Parce que le bon équipement change tout.
       </p>
       <div class="hero-btns">
-        <a href="histoire.html" class="btn-primary" data-fr="Découvrir notre histoire →" data-en="Discover our story →">Découvrir notre histoire →</a>
-        <a href="ergo.html" class="btn-ghost" data-fr="Voir la Chaise ERGO" data-en="View the ERGO Chair">Voir la Chaise ERGO</a>
+        <a href="histoire.html" class="btn-primary"
+           data-fr="Découvrir notre histoire →"
+           data-en="Discover our story →">Découvrir notre histoire →</a>
+        <a href="ergo.html" class="btn-ghost"
+           data-fr="Voir la Chaise ERGO"
+           data-en="View the ERGO Chair">Voir la Chaise ERGO</a>
       </div>
     </div>
     <div class="hero-photo-zone">
       <div class="carnet-photo">
         <div class="carnet-scotch"></div>
         <div class="carnet-photo-inner">
-          <img src="images/Chaises/claudeplage.png" alt="Claude Poupart"
+          <img src="images/Histoire/claudeplage.png" alt="Claude Poupart"
                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div style="display:none;width:260px;height:320px;background:var(--c-brume);align-items:center;justify-content:center;color:var(--c-muted);font-size:11px;text-align:center;flex-direction:column;gap:8px;padding:20px;">
-            <span style="font-size:28px;opacity:.3">👤</span><span>Photo · Claude à l'atelier</span>
+            <span style="font-size:28px;opacity:.3">👤</span><span>Photo · Claude Poupart</span>
           </div>
-          <div class="carnet-caption" data-fr="— Claude Poupart, artisan ébéniste" data-en="— Claude Poupart, master craftsman">— Claude Poupart, artisan ébéniste</div>
+          <div class="carnet-caption"
+               data-fr="— Claude Poupart, artisan ébéniste"
+               data-en="— Claude Poupart, master craftsman">— Claude Poupart, artisan ébéniste</div>
         </div>
       </div>
     </div>
@@ -58,7 +79,9 @@
 <div class="mission-outer">
   <div class="mission">
     <div class="mission-gauche">
-      <span class="lbl" data-fr="Notre raison d'être" data-en="Our purpose">Notre raison d'être</span>
+      <span class="lbl"
+        data-fr="Notre raison d'être"
+        data-en="Our purpose">Notre raison d'être</span>
       <h2 class="mission-h2"
           data-fr-html="Résoudre ce que<br>le marché <em>n'a pas résolu.</em>"
           data-en-html="Solving what<br>the market <em>hasn't solved.</em>">
@@ -66,8 +89,14 @@
       </h2>
     </div>
     <div class="mission-droite">
-      <p data-fr="En 1990, Claude travaillait au CRME quand il a constaté que les familles n'avaient pas les moyens de se procurer une chaise adaptée de qualité. <strong>Il a sorti sa planche à dessin et il en a fabriqué une.</strong>" data-en="In 1990, Claude was working at the CRME when he realized families couldn't afford a quality adaptive chair. <strong>He picked up his drafting board and built one.</strong>">En 1990, Claude travaillait au CRME quand il a constaté que les familles n'avaient pas les moyens de se procurer une chaise adaptée de qualité. <strong>Il a sorti sa planche à dessin et il en a fabriqué une.</strong></p>
-      <p data-fr="35 ans plus tard, la méthode n'a pas changé. Vous décrivez l'enfant. On pose des questions. On dessine. On fabrique. <strong>Pas de gabarit. Pas de catalogue. Une chaise — la vôtre.</strong>" data-en="35 years later, the method hasn't changed. You describe the child. We ask questions. We draw. We build. <strong>No template. No catalogue. One chair — yours.</strong>">35 ans plus tard, la méthode n'a pas changé. Vous décrivez l'enfant. On pose des questions. On dessine. On fabrique. <strong>Pas de gabarit. Pas de catalogue. Une chaise — la vôtre.</strong></p>
+      <p data-fr="En 1990, au CRME, le constat était clair : des équipements standardisés qu'on modifiait, ajustait, bricolait — sans jamais vraiment y arriver. Claude a décidé de faire l'inverse : concevoir à partir de la personne, pas d'un gabarit."
+         data-en="In 1990, at the CRME, the reality was clear: standardized equipment that was constantly modified, adjusted, patched together — never truly right. Claude decided to do the opposite: design from the person, not from a template.">
+        En 1990, au CRME, le constat était clair : des équipements standardisés qu'on modifiait, ajustait, bricolait — sans jamais vraiment y arriver. Claude a décidé de faire l'inverse : concevoir à partir de la personne, pas d'un gabarit.
+      </p>
+      <p data-fr="35 ans plus tard, notre philosophie reste la même. Vous décrivez la personne. On discute, on dessine, on fabrique. <strong>Pas de gabarit rigide. Toujours une solution — la vôtre.</strong>"
+         data-en="35 years later, our philosophy remains the same. You describe the person. We discuss, draw, build. <strong>No rigid template. Always one solution — yours.</strong>">
+        35 ans plus tard, notre philosophie reste la même. Vous décrivez la personne. On discute, on dessine, on fabrique. <strong>Pas de gabarit rigide. Toujours une solution — la vôtre.</strong>
+      </p>
     </div>
   </div>
 </div>
@@ -78,35 +107,52 @@
 <div class="artisans-outer">
   <div class="artisans">
     <div class="artisans-entete">
-      <span class="lbl" data-fr="Père & fils · Sainte-Anne-des-Lacs" data-en="Father & son · Sainte-Anne-des-Lacs">Père & fils · Sainte-Anne-des-Lacs</span>
-      <h2 class="artisans-h2" data-fr="Un savoir-faire transmis. Une mission qui continue." data-en="A craft passed down. A mission that continues.">Un savoir-faire transmis. Une mission qui continue.</h2>
+      <span class="lbl"
+        data-fr="Père & fils · Sainte-Anne-des-Lacs"
+        data-en="Father & son · Sainte-Anne-des-Lacs">Père & fils · Sainte-Anne-des-Lacs</span>
+      <h2 class="artisans-h2"
+          data-fr="Un savoir-faire transmis. Une mission qui continue."
+          data-en="A craft passed down. A mission that continues.">Un savoir-faire transmis. Une mission qui continue.</h2>
     </div>
-    <div class="artisans-grille">
-      <div class="artisan-carte">
-        <div class="artisan-photo" style="overflow:hidden;border:none;">
-          <img src="images/Chaises/claudeplage.png" alt="Claude Poupart"
-               onerror="this.style.display='none';this.parentElement.style.border='1.5px dashed var(--c-bord)'">
-        </div>
-        <div>
-          <div class="artisan-nom">Claude Poupart</div>
-          <div class="artisan-role" data-fr="Fondateur · Artisan ébéniste" data-en="Founder · Master cabinetmaker">Fondateur · Artisan ébéniste</div>
-          <p class="artisan-desc" data-fr="Ébéniste de métier, Claude a dessiné la première chaise ERGO à la main en 1990. Après l'incendie de 2023 qui a tout détruit en 20 minutes, il a rebâti. À 70 ans, il transmet maintenant ce savoir à son fils." data-en="A cabinetmaker by trade, Claude drew the first ERGO chair by hand in 1990. After the 2023 fire that destroyed everything in 20 minutes, he rebuilt. At 70, he is now passing this knowledge on to his son.">Ébéniste de métier, Claude a dessiné la première chaise ERGO à la main en 1990. Après l'incendie de 2023 qui a tout détruit en 20 minutes, il a rebâti. À 70 ans, il transmet maintenant ce savoir à son fils.</p>
-          <div class="artisan-note">« Vous me décrivez l'enfant. Je dessine la chaise. »</div>
-        </div>
+
+    <!-- Photo unique père & fils -->
+    <img src="images/Histoire/perefils.png" alt="Claude et Guillaume Poupart"
+         class="artisans-photo-principale"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="artisans-photo-placeholder" style="display:none;">
+      <span data-fr="Photo · Claude & Guillaume Poupart" data-en="Photo · Claude & Guillaume Poupart">Photo · Claude & Guillaume Poupart</span>
+    </div>
+
+    <!-- Deux textes côte à côte -->
+    <div class="artisans-duo">
+      <div class="artisan-col">
+        <div class="artisan-sep"></div>
+        <div class="artisan-nom">Claude Poupart</div>
+        <div class="artisan-role"
+             data-fr="Fondateur · Artisan ébéniste"
+             data-en="Founder · Master cabinetmaker">Fondateur · Artisan ébéniste</div>
+        <p class="artisan-desc"
+           data-fr="Ébéniste et spécialiste en ergonomie, Claude a consacré 35 ans à concevoir des équipements de positionnement sur mesure. Ancien professeur à l'École du meuble de Montréal et spécialisé en maux de dos et ergonomie industrielle, il a fabriqué la première chaise ERGO à la main en 1990. Après l'incendie de juin 2023 qui a tout détruit, il a rebâti. Parce que la mission était plus grande que le sinistre."
+           data-en="A cabinetmaker and ergonomics specialist, Claude devoted 35 years to designing custom positioning equipment. A former teacher at the École du meuble de Montréal and specialist in back pain and industrial ergonomics, he built the first ERGO chair by hand in 1990. After the June 2023 fire that destroyed everything, he rebuilt. Because the mission was greater than the disaster.">
+          Ébéniste et spécialiste en ergonomie, Claude a consacré 35 ans à concevoir des équipements de positionnement sur mesure. Ancien professeur à l'École du meuble de Montréal et spécialisé en maux de dos et ergonomie industrielle, il a fabriqué la première chaise ERGO à la main en 1990. Après l'incendie de juin 2023 qui a tout détruit, il a rebâti. Parce que la mission était plus grande que le sinistre.
+        </p>
+        <div class="artisan-note">« Vous me décrivez la réalité. Je fabrique la solution. »</div>
       </div>
-      <div class="artisan-carte">
-        <div class="artisan-photo" style="overflow:hidden;border:none;">
-          <img src="images/Chaises/perefils.png" alt="Claude et Guillaume Poupart"
-               onerror="this.style.display='none';this.parentElement.style.border='1.5px dashed var(--c-bord)'">
-        </div>
-        <div>
-          <div class="artisan-nom">Guillaume Poupart</div>
-          <div class="artisan-role" data-fr="Fils · Repreneur de l'entreprise" data-en="Son · Taking over the business">Fils · Repreneur de l'entreprise</div>
-          <p class="artisan-desc" data-fr="Guillaume reprend Les Adaptations Accès-Cible. Il a appris le métier aux côtés de son père — la lecture des besoins, la fabrication sur mesure, la relation de confiance avec les ergothérapeutes. La mission reste la même. Le nom aussi." data-en="Guillaume is taking over Les Adaptations Accès-Cible. He learned the craft alongside his father. The mission stays the same. So does the name.">Guillaume reprend Les Adaptations Accès-Cible. Il a appris le métier aux côtés de son père — la lecture des besoins, la fabrication sur mesure, la relation de confiance avec les ergothérapeutes. La mission reste la même. Le nom aussi.</p>
-          <div class="artisan-note">« Mon père a bâti quelque chose de rare. Je m'assure que ça dure. »</div>
-        </div>
+      <div class="artisan-col">
+        <div class="artisan-sep"></div>
+        <div class="artisan-nom">Guillaume Chiasson-Poupart</div>
+        <div class="artisan-role"
+             data-fr="Fils · Continuité & relève"
+             data-en="Son · Continuity & succession">Fils · Continuité & relève</div>
+        <p class="artisan-desc"
+           data-fr="Guillaume a grandi avec l'entreprise. Il connaît Les Adaptations Accès-Cible de l'intérieur — les procédés, chaque détail de fabrication, et la relation de confiance tissée avec les ergothérapeutes au fil des ans. Il prend la relève avec une seule conviction : ce qui a été bâti mérite de durer."
+           data-en="Guillaume grew up with the company. He knows Les Adaptations Accès-Cible from the inside — the processes, every manufacturing detail, and the trust built with occupational therapists over the years. He takes over with one conviction: what has been built deserves to last.">
+          Guillaume a grandi avec l'entreprise. Il connaît Les Adaptations Accès-Cible de l'intérieur — les procédés, chaque détail de fabrication, et la relation de confiance tissée avec les ergothérapeutes au fil des ans. Il prend la relève avec une seule conviction : ce qui a été bâti mérite de durer.
+        </p>
+        <div class="artisan-note">« Mon père a bâti quelque chose de rare. Je m'assure que ça dure. »</div>
       </div>
     </div>
+
   </div>
 </div>
 
@@ -117,15 +163,23 @@
   <div class="histoire">
     <div>
       <span class="lbl" data-fr="Notre histoire" data-en="Our story">Notre histoire</span>
-      <h2 class="histoire-h2" data-fr="35 ans de chaises dessinées à la main." data-en="35 years of hand-drawn chairs.">35 ans de chaises dessinées à la main.</h2>
-      <p class="histoire-p" data-fr="De Camp Papillon en 1965 à l'atelier reconstruit en 2024 — une histoire d'obstination, de savoir-faire transmis, et d'un incendie qui n'a pas eu raison de la mission." data-en="From Camp Papillon in 1965 to the rebuilt workshop in 2024 — a story of stubbornness, transmitted craft, and a fire that couldn't stop the mission.">De Camp Papillon en 1965 à l'atelier reconstruit en 2024 — une histoire d'obstination, de savoir-faire transmis, et d'un incendie qui n'a pas eu raison de la mission.</p>
-      <a href="histoire.html" class="histoire-lien" data-fr="Lire toute l'histoire →" data-en="Read the full story →">Lire toute l'histoire →</a>
+      <h2 class="histoire-h2"
+          data-fr="35 ans d'équipements dessinés à la main."
+          data-en="35 years of hand-drawn equipment.">35 ans d'équipements dessinés à la main.</h2>
+      <p class="histoire-p"
+         data-fr="De Camp Papillon en 1965 à l'atelier reconstruit en 2024 — une histoire d'obstination, de savoir-faire transmis, et d'un incendie qui n'a pas eu raison de la mission."
+         data-en="From Camp Papillon in 1965 to the rebuilt workshop in 2024 — a story of stubbornness, transmitted craft, and a fire that couldn't stop the mission.">
+        De Camp Papillon en 1965 à l'atelier reconstruit en 2024 — une histoire d'obstination, de savoir-faire transmis, et d'un incendie qui n'a pas eu raison de la mission.
+      </p>
+      <a href="histoire.html" class="histoire-lien"
+         data-fr="Lire toute l'histoire →"
+         data-en="Read the full story →">Lire toute l'histoire →</a>
     </div>
     <div class="frise">
       <div class="frise-item">
         <div class="frise-annee">1965</div>
         <div class="frise-axe"><div class="frise-point"></div><div class="frise-ligne"></div></div>
-        <div class="frise-corps"><strong>Camp Papillon</strong><span> Claude Poupart, 10 ans, côtoie pour la première fois des enfants en situation de handicap. Une graine est plantée.</span></div>
+        <div class="frise-corps"><strong>Camp Papillon</strong><span> Claude Poupart, 10 ans, côtoie pour la première fois des enfants handicapés. Cette expérience marquera toute sa vie.</span></div>
       </div>
       <div class="frise-item">
         <div class="frise-annee">1990</div>
@@ -135,12 +189,17 @@
       <div class="frise-item incendie">
         <div class="frise-annee incendie">2023</div>
         <div class="frise-axe"><div class="frise-point"></div><div class="frise-ligne"></div></div>
-        <div class="frise-corps"><strong>L'incendie</strong><span> 8 juin 2023. L'atelier brûle en 20 minutes. 30 ans d'outils, de gabarits et de souvenirs disparaissent.</span></div>
+        <div class="frise-corps"><strong>L'incendie</strong><span> 8 juin 2023. L'atelier brûle. 30 ans d'outils, de gabarits et de souvenirs disparaissent.</span></div>
       </div>
       <div class="frise-item">
         <div class="frise-annee">2024</div>
         <div class="frise-axe"><div class="frise-point"></div><div class="frise-ligne"></div></div>
         <div class="frise-corps"><strong>Nouveau départ au 156-A</strong><span> À 70 ans, Claude rebâtit. Même mission, même exigence. Nouveau départ.</span></div>
+      </div>
+      <div class="frise-item">
+        <div class="frise-annee">2026</div>
+        <div class="frise-axe"><div class="frise-point"></div><div class="frise-ligne"></div></div>
+        <div class="frise-corps"><strong>La relève</strong><span> Nouvelle génération, même ADN. Guillaume assure la continuité des Adaptations Accès-Cible.</span></div>
       </div>
     </div>
   </div>
@@ -152,36 +211,42 @@
 <div class="cta-outer">
   <div class="cta-inner">
     <div class="cta-citation">
-      <span class="lbl" data-fr="Un mot des ergothérapeutes" data-en="A word from occupational therapists">Un mot des ergothérapeutes</span>
+      <span class="lbl"
+        data-fr="Un mot des ergothérapeutes"
+        data-en="A word from occupational therapists">Un mot des ergothérapeutes</span>
       <blockquote class="cta-citation-texte">
-        « Je décris l'enfant. Claude dessine la chaise.<br>Quelques semaines plus tard, elle est parfaite. »
+        « Je décris le bénéficiaire. On conçoit ensemble. Le résultat dépasse toujours mes attentes. »
       </blockquote>
       <p class="cta-citation-source">— Ergothérapeute, région de Montréal</p>
       <div class="cta-regle"></div>
     </div>
     <div class="cta-action">
       <h2 class="cta-titre"
-          data-fr-html="Vous cherchez une solution<br>pour un <em>enfant en particulier ?</em>"
-          data-en-html="Looking for a solution<br>for <em>a specific child?</em>">
-        Vous cherchez une solution<br>pour un <em>enfant en particulier ?</em>
+          data-fr-html="Vous cherchez une<br><em>solution sur mesure ?</em>"
+          data-en-html="Looking for a<br><em>custom solution?</em>">
+        Vous cherchez une<br><em>solution sur mesure ?</em>
       </h2>
       <ul class="cta-liste">
-        <li data-fr="Réponse sous 48 h — devis sans engagement" data-en="Response within 48 h — no-obligation quote">Réponse sous 48 h — devis sans engagement</li>
-        <li data-fr="Fabrication artisanale au Québec · délai 4 à 6 semaines" data-en="Handcrafted in Quebec · 4 to 6 week lead time">Fabrication artisanale au Québec · délai 4 à 6 semaines</li>
-        <li data-fr="Ajustements possibles après livraison" data-en="Adjustments possible after delivery">Ajustements possibles après livraison</li>
+        <li data-fr="Réponse rapide — devis sans engagement"
+            data-en="Quick response — no-obligation quote">Réponse rapide — devis sans engagement</li>
+        <li data-fr="Fabriqué sur mesure au Québec, une pièce à la fois"
+            data-en="Custom-made in Quebec, one piece at a time">Fabriqué sur mesure au Québec, une pièce à la fois</li>
+        <li data-fr="Accompagnement après livraison — nous restons disponibles"
+            data-en="Post-delivery support — we remain available">Accompagnement après livraison — nous restons disponibles</li>
       </ul>
       <div class="cta-btns">
         <a href="soumission.html" class="btn-accent"
-           data-fr="Remplir le formulaire de soumission →" data-en="Fill out the quote form →">Remplir le formulaire de soumission →</a>
-        <a href="contactez-nous.html" class="cta-lien" data-fr="Ou nous écrire directement" data-en="Or write to us directly">Ou nous écrire directement</a>
+           data-fr="Remplir le formulaire de soumission →"
+           data-en="Fill out the quote form →">Remplir le formulaire de soumission →</a>
+        <a href="contactez-nous.html" class="cta-lien"
+           data-fr="Ou nous écrire directement"
+           data-en="Or write to us directly">Ou nous écrire directement</a>
       </div>
     </div>
   </div>
 </div>
 
-<!-- FOOTER — chargé automatiquement par scripts.js -->
 <div id="footer-container"></div>
-
 <script src="scripts.js"></script>
 </body>
 </html>
