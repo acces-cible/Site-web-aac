@@ -40,18 +40,18 @@ function toggleMenu() {
 }
 
 /* ── LANGUE FR / EN ── */
-window.langue = 'fr'
+window.langue = 'fr';
 
 function toggleLangue() {
-  langue = langue === 'fr' ? 'en' : 'fr';
+  window.langue = window.langue === 'fr' ? 'en' : 'fr';
 
   const btn = document.getElementById('langBtn');
-  if (btn) btn.textContent = langue === 'fr' ? 'EN' : 'FR';
-  document.documentElement.lang = langue;
+  if (btn) btn.textContent = window.langue === 'fr' ? 'EN' : 'FR';
+  document.documentElement.lang = window.langue;
 
   /* Texte simple */
   document.querySelectorAll('[data-fr]').forEach(el => {
-    const val = el.dataset[langue];
+    const val = el.dataset[window.langue];
     if (!val) return;
     if (val.includes('<')) el.innerHTML = val;
     else el.textContent = val;
@@ -59,7 +59,7 @@ function toggleLangue() {
 
   /* HTML riche (titres avec <em>, <br>) */
   document.querySelectorAll('[data-fr-html]').forEach(el => {
-    const val = el.dataset[langue + 'Html'];
+    const val = el.dataset[window.langue + 'Html'];
     if (val) el.innerHTML = val;
   });
 }
