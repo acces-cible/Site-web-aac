@@ -4,80 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sur mesure — Les Adaptations Accès-Cible</title>
-<meta name="description" content="Solutions sur mesure fabriquées au Québec : tables adaptées, bancs au sol, caissons et tout ce que l'ergothérapeute imagine. Si vous le décrivez, Claude le fabrique.">
+<meta name="description" content="Solutions sur mesure fabriquées au Québec : tables adaptées, bancs au sol, caissons et tout ce que l'ergothérapeute imagine.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Caveat:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 <style>
-:root {
-  --c-marine:    #1e3a4f;
-  --c-nuit:      #1a2530;
-  --c-parchemin: #f6f2eb;
-  --c-cuivre:    #c0874a;
-  --c-brume:     #e8e2d6;
-  --c-bord:      #d4cdbf;
-  --c-muted:     #7a7060;
-  --c-blanc:     #ffffff;
-  --font-titre:  'Crimson Pro', Georgia, serif;
-  --font-script: 'Caveat', cursive;
-  --font-mono:   'JetBrains Mono', monospace;
-  --font-body:   'IBM Plex Sans', sans-serif;
-  --fs-label:    10px;
-  --fs-body:     15px;
-  --fs-h2:       32px;
-  --max-width:   1100px;
-  --radius:      4px;
-}
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body { font-family: var(--font-body); color: var(--c-nuit); background: var(--c-parchemin); font-size: var(--fs-body); line-height: 1.75; }
-img { display: block; max-width: 100%; height: auto; }
-a { color: inherit; text-decoration: none; }
-button { cursor: pointer; border: none; font-family: inherit; background: none; }
-
-.lbl { font-family: var(--font-mono); font-size: var(--fs-label); font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--c-cuivre); display: block; }
-.btn-primary { display: inline-block; background: var(--c-marine); color: var(--c-parchemin); font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; padding: 13px 26px; border-radius: var(--radius); transition: opacity .2s; }
-.btn-primary:hover { opacity: .85; }
-.btn-accent { display: inline-block; background: var(--c-cuivre); color: var(--c-blanc); font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; padding: 13px 26px; border-radius: var(--radius); transition: opacity .2s; }
-.btn-accent:hover { opacity: .88; }
-.btn-ghost { display: inline-block; border: 1.5px solid var(--c-bord); color: var(--c-nuit); font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; padding: 12px 24px; border-radius: var(--radius); transition: border-color .2s, color .2s; }
-.btn-ghost:hover { border-color: var(--c-cuivre); color: var(--c-cuivre); }
-
-/* NAV */
-.nav { position: sticky; top: 0; z-index: 100; background: var(--c-marine); height: 58px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; border-bottom: 1px solid rgba(255,255,255,.07); }
-.nav-logo { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
-.nav-logo-barre { width: 2px; height: 28px; background: var(--c-cuivre); }
-.nav-logo-texte { font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--c-blanc); line-height: 1.25; }
-.nav-logo-texte small { display: block; font-family: var(--font-mono); font-size: 8px; font-weight: 400; letter-spacing: .15em; text-transform: uppercase; color: rgba(192,135,74,.7); margin-top: 1px; }
-.nav-liens { display: flex; align-items: center; gap: 24px; }
-.nav-liens a { font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.45); transition: color .2s; }
-.nav-liens a:hover, .nav-liens a.actif { color: rgba(255,255,255,.9); }
-.nav-dropdown { position: relative; }
-.nav-dropdown-menu { display: none; position: absolute; top: calc(100% + 14px); left: 50%; transform: translateX(-50%); background: var(--c-blanc); border: 1px solid var(--c-bord); border-radius: var(--radius); min-width: 210px; box-shadow: 0 8px 32px rgba(0,0,0,.1); overflow: hidden; }
-.nav-dropdown:hover .nav-dropdown-menu { display: block; }
-.nav-dropdown-menu a { display: block; padding: 11px 18px; font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em; color: var(--c-nuit) !important; border-bottom: 1px solid var(--c-bord); text-transform: uppercase; }
-.nav-dropdown-menu a:last-child { border-bottom: none; }
-.nav-dropdown-menu a:hover { background: var(--c-brume); color: var(--c-marine) !important; }
-.nav-cta { background: var(--c-cuivre); color: var(--c-blanc) !important; font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; padding: 8px 16px; border-radius: var(--radius); opacity: 1 !important; transition: opacity .2s !important; }
-.nav-cta:hover { opacity: .85 !important; }
-.lang-btn { font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: .1em; color: rgba(255,255,255,.4); border: 1px solid rgba(255,255,255,.2); padding: 5px 10px; border-radius: var(--radius); cursor: pointer; transition: color .2s, border-color .2s; }
-.lang-btn:hover { color: var(--c-cuivre); border-color: var(--c-cuivre); }
-.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
-.nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--c-blanc); border-radius: 1px; }
-.nav-mobile { display: none; position: fixed; top: 58px; left: 0; right: 0; background: var(--c-marine); border-top: 1px solid rgba(255,255,255,.08); z-index: 99; padding: 16px 20px 24px; box-shadow: 0 8px 24px rgba(0,0,0,.2); }
-.nav-mobile.ouvert { display: block; }
-.nav-mobile a { display: block; color: rgba(255,255,255,.65); font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.07); }
-.nav-mobile a:hover { color: var(--c-cuivre); }
-.nav-mobile-sub { padding-left: 16px; font-size: 10px !important; color: rgba(255,255,255,.4) !important; }
-.nav-mobile-cta { display: block; text-align: center; margin-top: 14px; background: var(--c-cuivre); color: var(--c-blanc) !important; padding: 12px !important; border-radius: var(--radius); border: none !important; }
-
-/* EN-TÊTE compact */
+/* ── SUR MESURE : styles uniques ── */
 .page-header { background: var(--c-parchemin); padding: 32px 60px 28px; border-bottom: 1px solid var(--c-bord); }
 .page-header-inner { max-width: var(--max-width); margin: 0 auto; display: flex; align-items: baseline; gap: 24px; flex-wrap: wrap; }
-.page-header .lbl { margin-bottom: 0; flex-shrink: 0; }
-.page-header-h1 { font-family: var(--font-titre); font-size: 22px; font-weight: 300; color: var(--c-marine); line-height: 1.2; }
+.page-header-h1 { font-family: var(--font-titre); font-size: 22px; font-weight: 300; color: var(--c-marine); }
 .page-header-h1 em { font-style: italic; color: var(--c-cuivre); }
 
-/* INTRO */
 .intro-outer { background: var(--c-parchemin); border-bottom: 1px solid var(--c-bord); }
 .intro-inner { max-width: var(--max-width); margin: 0 auto; padding: 56px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
 .intro-h2 { font-family: var(--font-titre); font-size: 38px; font-weight: 300; color: var(--c-marine); line-height: 1.2; margin-bottom: 16px; }
@@ -88,77 +25,21 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 .intro-citation-texte { font-family: var(--font-script); font-size: 22px; line-height: 1.55; color: #e8c99a; font-style: italic; margin-bottom: 14px; }
 .intro-citation-source { font-family: var(--font-mono); font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--c-cuivre); }
 
-/* GRILLE PRODUITS */
 .produits-outer { background: var(--c-parchemin); }
 .produits-inner { max-width: var(--max-width); margin: 0 auto; padding: 64px 60px; }
 .produits-titre-section { font-family: var(--font-mono); font-size: 9px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--c-muted); margin-bottom: 32px; padding-bottom: 12px; border-bottom: 1px solid var(--c-bord); }
-
-/* Carte produit */
 .produit-card { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--c-bord); border-radius: var(--radius); overflow: hidden; background: var(--c-blanc); margin-bottom: 24px; }
 .produit-card:last-child { margin-bottom: 0; }
 .produit-card.inverse { direction: rtl; }
 .produit-card.inverse > * { direction: ltr; }
-
-/* Zone photo réservée */
-.produit-photo {
-  background: var(--c-brume);
-  border-right: 1px solid var(--c-bord);
-  min-height: 320px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  position: relative;
-  overflow: hidden;
-}
-.produit-card.inverse .produit-photo {
-  border-right: none;
-  border-left: 1px solid var(--c-bord);
-}
-.produit-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  inset: 0;
-  display: none; /* Affiché quand src chargée */
-}
-.produit-photo-placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  text-align: center;
-  padding: 24px;
-}
+.produit-photo { background: var(--c-brume); border-right: 1px solid var(--c-bord); min-height: 320px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; position: relative; overflow: hidden; }
+.produit-card.inverse .produit-photo { border-right: none; border-left: 1px solid var(--c-bord); }
+.produit-photo img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+.produit-photo-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; padding: 24px; }
 .produit-photo-placeholder svg { opacity: .2; }
-.produit-photo-placeholder-lbl {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--c-muted);
-  opacity: .6;
-}
-.produit-photo-tag {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  font-family: var(--font-mono);
-  font-size: 8px;
-  font-weight: 500;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  background: var(--c-marine);
-  color: var(--c-parchemin);
-  padding: 4px 10px;
-  border-radius: 2px;
-}
-
-/* Contenu carte */
-.produit-contenu { padding: 40px 40px; display: flex; flex-direction: column; justify-content: center; }
+.produit-photo-placeholder-lbl { font-family: var(--font-mono); font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: var(--c-muted); opacity: .6; }
+.produit-photo-tag { position: absolute; top: 16px; left: 16px; font-family: var(--font-mono); font-size: 8px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; background: var(--c-marine); color: var(--c-parchemin); padding: 4px 10px; border-radius: 2px; }
+.produit-contenu { padding: 40px; display: flex; flex-direction: column; justify-content: center; }
 .produit-contenu .lbl { margin-bottom: 12px; }
 .produit-titre { font-family: var(--font-titre); font-size: 28px; font-weight: 400; color: var(--c-marine); line-height: 1.2; margin-bottom: 8px; }
 .produit-sous { font-family: var(--font-script); font-size: 16px; color: var(--c-cuivre); margin-bottom: 16px; }
@@ -166,40 +47,8 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 .produit-desc strong { color: var(--c-nuit); font-weight: 500; }
 .produit-points { list-style: none; display: flex; flex-direction: column; gap: 6px; margin-bottom: 24px; }
 .produit-points li { font-size: 13px; color: var(--c-muted); padding-left: 16px; position: relative; line-height: 1.5; }
-.produit-points li::before { content: '—'; position: absolute; left: 0; color: var(--c-cuivre); font-size: 11px; }
+.produit-points li::before { content: '—'; position: absolute; left: 0; color: var(--c-cuivre); }
 
-/* GALERIE multi-photos (pour produits avec plusieurs angles) */
-.galerie-outer { background: var(--c-brume); border-top: 1px solid var(--c-bord); border-bottom: 1px solid var(--c-bord); }
-.galerie-inner { max-width: var(--max-width); margin: 0 auto; padding: 48px 60px; }
-.galerie-titre { font-family: var(--font-mono); font-size: 9px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--c-muted); margin-bottom: 24px; }
-.galerie-grille { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-.galerie-item {
-  background: var(--c-blanc);
-  border: 1px solid var(--c-bord);
-  border-radius: var(--radius);
-  aspect-ratio: 3/4;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  overflow: hidden;
-  position: relative;
-}
-.galerie-item img { width: 100%; height: 100%; object-fit: cover; display: none; }
-.galerie-item-placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 16px;
-  text-align: center;
-}
-.galerie-item-placeholder svg { opacity: .15; }
-.galerie-item-lbl { font-family: var(--font-mono); font-size: 8px; letter-spacing: .1em; text-transform: uppercase; color: var(--c-muted); opacity: .5; }
-
-/* CTA FINAL */
 .cta-outer { background: var(--c-marine); }
 .cta-inner { max-width: var(--max-width); margin: 0 auto; padding: 72px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
 .cta-texte .lbl { color: rgba(192,135,74,.7); margin-bottom: 18px; }
@@ -207,38 +56,15 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 .cta-h2 em { font-style: italic; color: var(--c-cuivre); }
 .cta-p { font-size: 15px; color: rgba(246,242,235,.55); line-height: 1.85; margin-bottom: 28px; }
 .cta-btns { display: flex; gap: 12px; flex-wrap: wrap; }
-.cta-etapes { display: flex; flex-direction: column; gap: 0; }
+.cta-etapes { display: flex; flex-direction: column; }
 .cta-etape { display: flex; gap: 20px; align-items: flex-start; padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,.06); }
 .cta-etape:last-child { border-bottom: none; }
 .cta-etape-num { font-family: var(--font-titre); font-size: 28px; font-weight: 300; color: var(--c-cuivre); line-height: 1; flex-shrink: 0; width: 32px; }
-.cta-etape-contenu { flex: 1; }
 .cta-etape-titre { font-family: var(--font-body); font-size: 14px; font-weight: 500; color: var(--c-parchemin); margin-bottom: 4px; }
 .cta-etape-desc { font-size: 13px; color: rgba(246,242,235,.45); line-height: 1.6; }
 
-/* FOOTER */
-.footer { background: var(--c-nuit); border-top: 1px solid rgba(255,255,255,.05); }
-.footer-inner { max-width: var(--max-width); margin: 0 auto; padding: 48px 60px 32px; display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 48px; }
-.footer-brand { font-family: var(--font-titre); font-size: 18px; font-weight: 300; color: var(--c-parchemin); margin-bottom: 6px; }
-.footer-tagline { font-family: var(--font-mono); font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: rgba(192,135,74,.55); margin-bottom: 20px; }
-.footer-coords { display: flex; flex-direction: column; gap: 6px; }
-.footer-coords a, .footer-coords span { font-family: var(--font-body); font-size: 12px; color: rgba(246,242,235,.38); transition: color .2s; line-height: 1.5; }
-.footer-coords a:hover { color: var(--c-cuivre); }
-.footer-col-titre { font-family: var(--font-mono); font-size: 9px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: rgba(246,242,235,.25); margin-bottom: 16px; }
-.footer-liens { display: flex; flex-direction: column; gap: 8px; }
-.footer-liens a { font-family: var(--font-body); font-size: 12px; color: rgba(246,242,235,.38); transition: color .2s; }
-.footer-liens a:hover { color: var(--c-parchemin); }
-.footer-bottom { max-width: var(--max-width); margin: 0 auto; padding: 20px 60px 28px; border-top: 1px solid rgba(255,255,255,.05); display: flex; justify-content: space-between; align-items: center; gap: 16px; }
-.footer-copyright { font-family: var(--font-mono); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: rgba(246,242,235,.2); }
-.footer-fab { font-family: var(--font-script); font-size: 15px; color: rgba(192,135,74,.4); }
-
-/* RESPONSIVE */
 @media (max-width: 768px) {
-  :root { --fs-body: 14px; }
-  .nav { padding: 0 20px; }
-  .nav-liens { display: none; }
-  .nav-hamburger { display: flex; }
   .page-header { padding: 16px 20px; }
-  .page-header-inner { flex-direction: column; gap: 6px; }
   .intro-inner { grid-template-columns: 1fr; padding: 40px 20px; gap: 32px; }
   .intro-h2 { font-size: 28px; }
   .produits-inner { padding: 40px 20px; }
@@ -247,65 +73,15 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   .produit-photo { min-height: 220px; border-right: none; border-bottom: 1px solid var(--c-bord); }
   .produit-card.inverse .produit-photo { border-left: none; border-bottom: 1px solid var(--c-bord); }
   .produit-contenu { padding: 24px 20px; }
-  .produit-titre { font-size: 22px; }
-  .galerie-inner { padding: 32px 20px; }
-  .galerie-grille { grid-template-columns: repeat(2, 1fr); }
   .cta-inner { grid-template-columns: 1fr; padding: 48px 20px; gap: 32px; }
   .cta-h2 { font-size: 26px; }
-  .footer-inner { grid-template-columns: 1fr; gap: 32px; padding: 40px 20px 28px; }
-  .footer-bottom { padding: 16px 20px 24px; flex-direction: column; align-items: flex-start; gap: 8px; }
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="nav">
-  <a href="index.html" class="nav-logo">
-    <div class="nav-logo-barre"></div>
-    <div class="nav-logo-texte">
-      Les Adaptations Accès-Cible
-      <small>Partenaire des ergothérapeutes · Québec</small>
-    </div>
-  </a>
-  <div class="nav-liens">
-    <div class="nav-dropdown">
-      <a href="ergo.html">Chaise ERGO</a>
-      <div class="nav-dropdown-menu">
-        <a href="ergo.html#garderie">Hauteur garderie</a>
-        <a href="ergo.html#standard">Standard</a>
-        <a href="ergo.html#surdimensionnee">Surdimensionnée</a>
-      </div>
-    </div>
-    <a href="accessoires.html">Accessoires</a>
-    <a href="bureaux.html">Bureaux</a>
-    <a href="marchepied.html">Marchepieds</a>
-    <a href="surmesure.html" class="actif">Sur mesure</a>
-    <a href="histoire.html">Notre histoire</a>
-    <a href="contact.html">Contact</a>
-    <button class="lang-btn" onclick="toggleLangue()" id="langBtn">EN</button>
-    <a href="https://acces-cible.fillout.com/t/erKz8m4uBEus" target="_blank" rel="noopener" class="nav-cta">Soumission →</a>
-  </div>
-  <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
+<div id="nav-container"></div>
 
-<div class="nav-mobile" id="navMobile">
-  <a href="ergo.html">Chaise ERGO</a>
-  <a href="ergo.html#garderie" class="nav-mobile-sub">↳ Hauteur garderie</a>
-  <a href="ergo.html#standard" class="nav-mobile-sub">↳ Standard</a>
-  <a href="ergo.html#surdimensionnee" class="nav-mobile-sub">↳ Surdimensionnée</a>
-  <a href="accessoires.html">Accessoires</a>
-  <a href="bureaux.html">Bureaux</a>
-  <a href="marchepied.html">Marchepieds</a>
-  <a href="surmesure.html" class="actif">Sur mesure</a>
-  <a href="histoire.html">Notre histoire</a>
-  <a href="contact.html">Contact</a>
-  <a href="https://acces-cible.fillout.com/t/erKz8m4uBEus" target="_blank" rel="noopener" class="nav-mobile-cta">Demander une soumission →</a>
-</div>
-
-<!-- EN-TÊTE -->
 <div class="page-header">
   <div class="page-header-inner">
     <span class="lbl">Fabrication unique · Sur mesure · Québec</span>
@@ -313,7 +89,6 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   </div>
 </div>
 
-<!-- INTRO -->
 <div class="intro-outer">
   <div class="intro-inner">
     <div>
@@ -328,107 +103,66 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   </div>
 </div>
 
-<!-- PRODUITS SUR MESURE -->
 <div class="produits-outer">
   <div class="produits-inner">
     <div class="produits-titre-section">Exemples de réalisations</div>
 
-    <!-- TABLE ADAPTÉE -->
     <div class="produit-card">
       <div class="produit-photo">
         <span class="produit-photo-tag">Sur mesure</span>
-        <img src="images/[photo-table-adaptee].jpg" alt="Table adaptée sur mesure">
-        <div class="produit-photo-placeholder">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#7a7060" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-          <div class="produit-photo-placeholder-lbl">Photo à venir</div>
-        </div>
+        <div class="produit-photo-placeholder"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#7a7060" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><div class="produit-photo-placeholder-lbl">Photo à venir</div></div>
       </div>
       <div class="produit-contenu">
         <span class="lbl">Réalisation · 01</span>
         <h2 class="produit-titre">Table adaptée</h2>
         <div class="produit-sous">Conçue autour du fauteuil roulant</div>
         <p class="produit-desc">Quand les tables standard ne conviennent pas, Claude conçoit une surface de travail taillée pour le fauteuil roulant spécifique de l'utilisateur. Hauteur, découpe d'accès, support latéral — tout est calculé à partir des mesures réelles.</p>
-        <ul class="produit-points">
-          <li>Découpe d'accès personnalisée selon le fauteuil</li>
-          <li>Hauteur ajustée au millimètre</li>
-          <li>Supports et rangements intégrés si requis</li>
-          <li>Bois massif, finition durable</li>
-        </ul>
+        <ul class="produit-points"><li>Découpe d'accès personnalisée selon le fauteuil</li><li>Hauteur ajustée au millimètre</li><li>Supports et rangements intégrés si requis</li><li>Bois massif, finition durable</li></ul>
         <a href="https://acces-cible.fillout.com/t/erKz8m4uBEus" target="_blank" rel="noopener" class="btn-primary">Discuter de votre projet →</a>
       </div>
     </div>
 
-    <!-- BANC AU SOL -->
     <div class="produit-card inverse">
       <div class="produit-photo">
         <span class="produit-photo-tag">Sur mesure</span>
-        <img src="images/[photo-banc-sol].jpg" alt="Banc au sol">
-        <div class="produit-photo-placeholder">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#7a7060" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-          <div class="produit-photo-placeholder-lbl">Photo à venir</div>
-        </div>
+        <div class="produit-photo-placeholder"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#7a7060" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><div class="produit-photo-placeholder-lbl">Photo à venir</div></div>
       </div>
       <div class="produit-contenu">
         <span class="lbl">Réalisation · 02</span>
         <h2 class="produit-titre">Banc au sol</h2>
         <div class="produit-sous">Positionnement au niveau du sol</div>
-        <p class="produit-desc">Pour les enfants ou adultes dont le travail thérapeutique se fait au sol. Le banc au sol offre un appui structuré et stable, permettant une posture correcte sans chaise conventionnelle. Chaque pièce est adaptée à la morphologie de l'utilisateur.</p>
-        <ul class="produit-points">
-          <li>Hauteur d'assise très basse, sur mesure</li>
-          <li>Appui dorsal ajustable</li>
-          <li>Stable sur toute surface</li>
-          <li>Léger et facile à déplacer</li>
-        </ul>
+        <p class="produit-desc">Pour les enfants ou adultes dont le travail thérapeutique se fait au sol. Le banc au sol offre un appui structuré et stable, permettant une posture correcte sans chaise conventionnelle.</p>
+        <ul class="produit-points"><li>Hauteur d'assise très basse, sur mesure</li><li>Appui dorsal ajustable</li><li>Stable sur toute surface</li><li>Léger et facile à déplacer</li></ul>
         <a href="https://acces-cible.fillout.com/t/erKz8m4uBEus" target="_blank" rel="noopener" class="btn-primary">Discuter de votre projet →</a>
       </div>
     </div>
 
-    <!-- CAISSON -->
     <div class="produit-card">
       <div class="produit-photo">
         <span class="produit-photo-tag">Sur mesure</span>
-        <img src="images/[photo-caisson].jpg" alt="Caisson de rangement adapté">
-        <div class="produit-photo-placeholder">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#7a7060" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-          <div class="produit-photo-placeholder-lbl">Photo à venir</div>
-        </div>
+        <div class="produit-photo-placeholder"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#7a7060" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><div class="produit-photo-placeholder-lbl">Photo à venir</div></div>
       </div>
       <div class="produit-contenu">
         <span class="lbl">Réalisation · 03</span>
         <h2 class="produit-titre">Caisson adapté</h2>
         <div class="produit-sous">Rangement et support intégrés</div>
-        <p class="produit-desc">Des caissons conçus pour s'intégrer à l'environnement de travail ou de vie d'une personne handicapée. Ouverture sur le dessus, sur le devant ou rétractable — la configuration est choisie selon les capacités motrices de l'utilisateur.</p>
-        <ul class="produit-points">
-          <li>2 ou 3 sections selon les besoins</li>
-          <li>Ouverture adaptée aux capacités motrices</li>
-          <li>Peut se combiner avec un bureau ou une table</li>
-          <li>Finition soignée, bois de qualité</li>
-        </ul>
+        <p class="produit-desc">Des caissons conçus pour s'intégrer à l'environnement de travail ou de vie. Ouverture sur le dessus, sur le devant ou rétractable — la configuration est choisie selon les capacités motrices de l'utilisateur.</p>
+        <ul class="produit-points"><li>2 ou 3 sections selon les besoins</li><li>Ouverture adaptée aux capacités motrices</li><li>Peut se combiner avec un bureau ou une table</li><li>Finition soignée, bois de qualité</li></ul>
         <a href="https://acces-cible.fillout.com/t/erKz8m4uBEus" target="_blank" rel="noopener" class="btn-primary">Discuter de votre projet →</a>
       </div>
     </div>
 
-    <!-- AUTRE / GÉNÉRIQUE -->
     <div class="produit-card inverse">
       <div class="produit-photo">
         <span class="produit-photo-tag">Sur mesure</span>
-        <img src="images/[photo-autre].jpg" alt="Solution sur mesure">
-        <div class="produit-photo-placeholder">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#7a7060" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-          <div class="produit-photo-placeholder-lbl">Photo à venir</div>
-        </div>
+        <div class="produit-photo-placeholder"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#7a7060" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><div class="produit-photo-placeholder-lbl">Photo à venir</div></div>
       </div>
       <div class="produit-contenu">
         <span class="lbl">Réalisation · 04</span>
         <h2 class="produit-titre">Votre projet</h2>
         <div class="produit-sous">Une idée que personne n'a encore fabriquée</div>
         <p class="produit-desc">Vous avez un besoin qui ne ressemble à rien dans notre catalogue ? C'est justement ce type de défi que Claude préfère. Décrivez l'utilisateur, l'environnement, la contrainte — et laissez l'atelier travailler.</p>
-        <ul class="produit-points">
-          <li>Aucun projet trop complexe ou trop spécifique</li>
-          <li>Consultation gratuite avec l'ergothérapeute</li>
-          <li>Délai de fabrication : 4 à 6 semaines</li>
-          <li>Ajustements possibles après livraison</li>
-        </ul>
+        <ul class="produit-points"><li>Aucun projet trop complexe ou trop spécifique</li><li>Consultation gratuite avec l'ergothérapeute</li><li>Délai de fabrication : 4 à 6 semaines</li><li>Ajustements possibles après livraison</li></ul>
         <a href="https://acces-cible.fillout.com/t/erKz8m4uBEus" target="_blank" rel="noopener" class="btn-primary">Nous soumettre votre idée →</a>
       </div>
     </div>
@@ -436,128 +170,26 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   </div>
 </div>
 
-<!-- GALERIE SUPPLÉMENTAIRE -->
-<div class="galerie-outer">
-  <div class="galerie-inner">
-    <div class="galerie-titre">Galerie — autres réalisations</div>
-    <div class="galerie-grille">
-      <div class="galerie-item">
-        <img src="" alt="">
-        <div class="galerie-item-placeholder">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#7a7060" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg>
-          <div class="galerie-item-lbl">Photo à venir</div>
-        </div>
-      </div>
-      <div class="galerie-item">
-        <img src="" alt="">
-        <div class="galerie-item-placeholder">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#7a7060" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg>
-          <div class="galerie-item-lbl">Photo à venir</div>
-        </div>
-      </div>
-      <div class="galerie-item">
-        <img src="" alt="">
-        <div class="galerie-item-placeholder">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#7a7060" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg>
-          <div class="galerie-item-lbl">Photo à venir</div>
-        </div>
-      </div>
-      <div class="galerie-item">
-        <img src="" alt="">
-        <div class="galerie-item-placeholder">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#7a7060" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg>
-          <div class="galerie-item-lbl">Photo à venir</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- CTA FINAL -->
 <div class="cta-outer">
   <div class="cta-inner">
     <div class="cta-texte">
-      <span class="lbl" style="color:rgba(192,135,74,.7);">Comment ça fonctionne</span>
+      <span class="lbl">Comment ça fonctionne</span>
       <h2 class="cta-h2">Un projet sur mesure<br>en <em>3 étapes simples.</em></h2>
       <p class="cta-p">Pas besoin d'avoir tout planifié. Une description du besoin suffit pour commencer.</p>
       <div class="cta-btns">
         <a href="https://acces-cible.fillout.com/t/erKz8m4uBEus" target="_blank" rel="noopener" class="btn-accent">Soumettre votre projet →</a>
-        <a href="contact.html" class="btn-ghost" style="border-color:rgba(255,255,255,.2); color:rgba(246,242,235,.6);">Nous écrire →</a>
+        <a href="contact.html" class="btn-ghost" style="border-color:rgba(255,255,255,.2);color:rgba(246,242,235,.6);">Nous écrire →</a>
       </div>
     </div>
     <div class="cta-etapes">
-      <div class="cta-etape">
-        <div class="cta-etape-num">1</div>
-        <div class="cta-etape-contenu">
-          <div class="cta-etape-titre">Vous décrivez le besoin</div>
-          <div class="cta-etape-desc">L'ergothérapeute nous transmet les mesures, le contexte d'utilisation et les contraintes de l'utilisateur.</div>
-        </div>
-      </div>
-      <div class="cta-etape">
-        <div class="cta-etape-num">2</div>
-        <div class="cta-etape-contenu">
-          <div class="cta-etape-titre">Claude dessine la solution</div>
-          <div class="cta-etape-desc">On discute du concept, on valide les dimensions et on s'entend sur le devis avant de commencer.</div>
-        </div>
-      </div>
-      <div class="cta-etape">
-        <div class="cta-etape-num">3</div>
-        <div class="cta-etape-contenu">
-          <div class="cta-etape-titre">L'atelier fabrique</div>
-          <div class="cta-etape-desc">Fabrication artisanale en 4 à 6 semaines. Ajustements possibles après livraison, toujours.</div>
-        </div>
-      </div>
+      <div class="cta-etape"><div class="cta-etape-num">1</div><div><div class="cta-etape-titre">Vous décrivez le besoin</div><div class="cta-etape-desc">L'ergothérapeute nous transmet les mesures, le contexte d'utilisation et les contraintes de l'utilisateur.</div></div></div>
+      <div class="cta-etape"><div class="cta-etape-num">2</div><div><div class="cta-etape-titre">Claude dessine la solution</div><div class="cta-etape-desc">On discute du concept, on valide les dimensions et on s'entend sur le devis avant de commencer.</div></div></div>
+      <div class="cta-etape"><div class="cta-etape-num">3</div><div><div class="cta-etape-titre">L'atelier fabrique</div><div class="cta-etape-desc">Fabrication artisanale en 4 à 6 semaines. Ajustements possibles après livraison, toujours.</div></div></div>
     </div>
   </div>
 </div>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div>
-      <div class="footer-brand">Les Adaptations Accès-Cible</div>
-      <div class="footer-tagline">Fabrication artisanale · Québec · Depuis 1990</div>
-      <div class="footer-coords">
-        <span>156-A route 117<br>Sainte-Anne-des-Lacs, Québec  J0R 1B0</span>
-        <a href="tel:+14502271948">450 227-1948</a>
-        <a href="mailto:info@lesadaptationsacces-cible.com">info@lesadaptationsacces-cible.com</a>
-        <a href="mailto:info@acces-cible.ca">info@acces-cible.ca</a>
-      </div>
-    </div>
-    <div>
-      <div class="footer-col-titre">Produits</div>
-      <div class="footer-liens">
-        <a href="ergo.html">Chaise ERGO</a>
-        <a href="accessoires.html">Accessoires posturaux</a>
-        <a href="bureaux.html">Bureaux adaptés</a>
-        <a href="marchepied.html">Marchepieds</a>
-        <a href="surmesure.html">Sur mesure</a>
-      </div>
-    </div>
-    <div>
-      <div class="footer-col-titre">Entreprise</div>
-      <div class="footer-liens">
-        <a href="histoire.html">Notre histoire</a>
-        <a href="contact.html">Contact</a>
-        <a href="https://acces-cible.fillout.com/t/erKz8m4uBEus" target="_blank" rel="noopener">Formulaire de soumission</a>
-      </div>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <div class="footer-copyright">© 2024 Les Adaptations Accès-Cible. Tous droits réservés.</div>
-    <div class="footer-fab">Fait à la main · Sainte-Anne-des-Lacs</div>
-  </div>
-</footer>
-
-<script>
-function toggleMenu() {
-  document.getElementById('navMobile').classList.toggle('ouvert');
-}
-let langue = 'fr';
-function toggleLangue() {
-  langue = langue === 'fr' ? 'en' : 'fr';
-  document.getElementById('langBtn').textContent = langue === 'fr' ? 'EN' : 'FR';
-}
-</script>
+<div id="footer-container"></div>
+<script src="scripts.js"></script>
 </body>
 </html>
