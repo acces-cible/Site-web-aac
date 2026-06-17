@@ -3,6 +3,8 @@
    Feuille de style globale · Toutes les pages
    ═══════════════════════════════════════════════ */
 
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&display=swap');
+
 /* ── VARIABLES ── */
 :root {
   --c-marine:    #1e3a4f;
@@ -19,6 +21,7 @@
   --font-script: 'Caveat', cursive;
   --font-mono:   'JetBrains Mono', monospace;
   --font-body:   'IBM Plex Sans', sans-serif;
+  --font-label:  'Outfit', sans-serif;
   --fs-label:    10px;
   --fs-body:     15px;
   --fs-h2:       32px;
@@ -37,10 +40,10 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 
 /* ── UTILITAIRES ── */
 .lbl {
-  font-family: var(--font-mono);
-  font-size: var(--fs-label);
-  font-weight: 500;
-  letter-spacing: .18em;
+  font-family: var(--font-label);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--c-cuivre);
   display: block;
@@ -237,7 +240,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 /* ── MISSION ── */
 .mission-outer { background: var(--c-marine); }
 .mission { max-width: var(--max-width); margin: 0 auto; padding: 72px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-.mission-gauche .lbl { color: rgba(192,135,74,.7); margin-bottom: 20px; }
+.mission-gauche .lbl { color: var(--c-cuivre); margin-bottom: 20px; }
 .mission-h2 { font-family: var(--font-titre); font-size: 36px; font-weight: 300; color: var(--c-parchemin); line-height: 1.2; }
 .mission-h2 em { font-style: italic; color: var(--c-cuivre); }
 .mission-droite p { font-size: var(--fs-body); color: rgba(246,242,235,.6); line-height: 1.85; margin-bottom: 20px; }
@@ -283,9 +286,9 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 .cta-outer { background: var(--c-marine); }
 .cta-inner { max-width: var(--max-width); margin: 0 auto; padding: 0 60px; display: grid; grid-template-columns: 1fr 1fr; min-height: 300px; }
 .cta-citation { padding: 64px 56px 64px 0; border-right: 1px solid rgba(255,255,255,.08); position: relative; display: flex; flex-direction: column; gap: 14px; }
-.cta-citation .lbl { color: #c0874a; }
-.cta-citation-texte { font-family: var(--font-script); font-size: 26px; line-height: 1.45; color: #e8c99a; font-style: italic; flex: 1; }
-.cta-citation-source { font-family: var(--font-body); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #c0874a; }
+.cta-citation .lbl { color: var(--c-cuivre); }
+.cta-citation-texte { font-family: var(--font-script); font-size: 32px; line-height: 1.45; color: #e8c99a; font-style: italic; flex: 1; }
+.cta-citation-source { font-family: var(--font-label); font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--c-cuivre); }
 .cta-regle { position: absolute; bottom: 0; left: 0; width: 80px; height: 3px; background: linear-gradient(90deg, var(--c-cuivre), transparent); opacity: .5; }
 .cta-action { padding: 64px 0 64px 56px; display: flex; flex-direction: column; justify-content: center; gap: 24px; }
 .cta-titre { font-family: var(--font-titre); font-size: 28px; font-weight: 300; color: var(--c-parchemin); line-height: 1.25; }
@@ -303,11 +306,11 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 .footer-brand { font-family: var(--font-titre); font-size: 18px; font-weight: 300; color: var(--c-parchemin); margin-bottom: 6px; }
 .footer-tagline { font-family: var(--font-body); font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: rgba(192,135,74,.55); margin-bottom: 20px; }
 .footer-coords { display: flex; flex-direction: column; gap: 6px; }
-.footer-coords a, .footer-coords span { font-size: 12px; color: rgba(246,242,235,.38); transition: color .2s; line-height: 1.5; }
+.footer-coords a, .footer-coords span { font-size: 13px; color: rgba(246,242,235,.65); transition: color .2s; line-height: 1.5; }
 .footer-coords a:hover { color: var(--c-cuivre); }
 .footer-col-titre { font-family: var(--font-body); font-size: 9px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: rgba(246,242,235,.25); margin-bottom: 16px; }
 .footer-liens { display: flex; flex-direction: column; gap: 8px; }
-.footer-liens a { font-size: 12px; color: rgba(246,242,235,.38); transition: color .2s; }
+.footer-liens a { font-size: 13px; color: rgba(246,242,235,.65); transition: color .2s; }
 .footer-liens a:hover { color: var(--c-parchemin); }
 .footer-bottom { max-width: var(--max-width); margin: 0 auto; padding: 20px 60px 28px; border-top: 1px solid rgba(255,255,255,.05); display: flex; justify-content: space-between; align-items: center; }
 .footer-copyright { font-family: var(--font-body); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: rgba(246,242,235,.2); }
@@ -334,7 +337,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   .histoire { grid-template-columns: 1fr; padding: 56px 20px; gap: 40px; }
   .cta-inner { grid-template-columns: 1fr; padding: 0 20px; }
   .cta-citation { padding: 48px 0 36px; border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); }
-  .cta-citation-texte { font-size: 20px; }
+  .cta-citation-texte { font-size: 22px; }
   .cta-action { padding: 36px 0 48px; }
   .cta-btns .btn-accent { width: 100%; text-align: center; }
   .footer-inner { grid-template-columns: 1fr; gap: 32px; padding: 40px 20px 28px; }
