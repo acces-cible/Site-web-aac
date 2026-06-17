@@ -87,22 +87,7 @@
 .couleur-swatch:hover { transform: scale(1.1); }
 .couleur-swatch.actif { border-color: var(--c-marine); transform: scale(1.15); }
 
-.cta-outer { background: var(--c-marine); }
-.cta-inner { max-width: var(--max-width); margin: 0 auto; padding: 0 60px; display: grid; grid-template-columns: 1fr 1fr; min-height: 300px; }
-.cta-citation { padding: 64px 56px 64px 0; border-right: 1px solid rgba(255,255,255,.08); position: relative; display: flex; flex-direction: column; gap: 14px; }
-.cta-citation .lbl { color: #c0874a; }
-.cta-citation-texte { font-family: var(--font-script); font-size: 26px; line-height: 1.45; color: #e8c99a; font-style: italic; flex: 1; }
-.cta-citation-source { font-family: var(--font-body); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #c0874a; }
-.cta-regle { position: absolute; bottom: 0; left: 0; width: 80px; height: 3px; background: linear-gradient(90deg, var(--c-cuivre), transparent); opacity: .5; }
-.cta-action { padding: 64px 0 64px 56px; display: flex; flex-direction: column; justify-content: center; gap: 24px; }
-.cta-titre { font-family: var(--font-titre); font-size: 28px; font-weight: 300; color: var(--c-parchemin); line-height: 1.25; }
-.cta-titre em { font-style: italic; color: var(--c-cuivre); }
-.cta-liste { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-.cta-liste li { font-size: 13px; color: rgba(246,242,235,.6); padding-left: 16px; position: relative; line-height: 1.5; }
-.cta-liste li::before { content: '—'; position: absolute; left: 0; color: var(--c-cuivre); }
-.cta-btns { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
-.cta-lien { font-family: var(--font-body); font-size: 11px; color: rgba(246,242,235,.4); text-decoration: underline; text-underline-offset: 3px; transition: color .2s; }
-.cta-lien:hover { color: var(--c-cuivre); }
+/* CTA : styles partagés dans style.css (.cta-outer, .cta-citation-texte, etc.) — ne pas dupliquer ici */
 @media (max-width: 900px) {
   .hero { padding: var(--pad-mobile); }
   .hero-h1 { font-size: 32px; }
@@ -112,9 +97,6 @@
   .coussin-grille-3 { grid-template-columns: 1fr 1fr; }
   .deux-col { grid-template-columns: 1fr; gap: 32px; }
   .expand-item.ouvert .expand-panel { grid-template-columns: 1fr; }
-  .cta-inner { grid-template-columns: 1fr; padding: 0 20px; }
-  .cta-citation { padding: 48px 0 36px; border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); }
-  .cta-action { padding: 36px 0 48px; }
 }
 @media (max-width: 540px) { .coussin-grille { grid-template-columns: 1fr; } }
 </style>
