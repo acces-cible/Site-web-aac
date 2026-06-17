@@ -47,40 +47,26 @@
 .modele-btn.actif .modele-btn-nom { color: var(--c-parchemin); }
 .modele-btn-age { font-family: var(--font-mono); font-size: 9px; color: var(--c-muted); letter-spacing: .06em; }
 .modele-btn.actif .modele-btn-age { color: rgba(246,242,235,.45); }
-.modele-btn-badge { display: inline-block; font-family: var(--font-mono); font-size: 8px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; background: rgba(192,135,74,.15); color: var(--c-cuivre); border: 1px solid rgba(192,135,74,.3); padding: 2px 6px; border-radius: 2px; margin-top: 5px; }
+.modele-btn-badge { display: inline-block; font-family: var(--font-mono); font-size: 9px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; background: rgba(192,135,74,.15); color: var(--c-cuivre); border: 1px solid rgba(192,135,74,.3); padding: 3px 7px; border-radius: 2px; margin-top: 5px; }
+.modele-btn.actif .modele-btn-badge { background: rgba(255,255,255,.12); color: #f0c896; border-color: rgba(255,255,255,.25); }
 .modele-fiche { border: 1px solid var(--c-bord); border-radius: var(--radius); overflow: hidden; background: var(--c-blanc); display: grid; grid-template-columns: 280px 1fr; }
-.fiche-photo { background: var(--c-brume); border-right: 1px solid var(--c-bord); display: flex; align-items: center; justify-content: center; padding: 32px 24px; }
+.fiche-photo { background: var(--c-brume); border-right: 1px solid var(--c-bord); display: flex; align-items: center; justify-content: center; padding: 40px 28px; }
 .fiche-contenu { padding: 36px 40px; }
 .fiche-contenu .lbl { margin-bottom: 10px; }
-.fiche-titre { font-family: var(--font-titre); font-size: var(--fs-h2); font-weight: 300; color: var(--c-marine); line-height: 1.15; margin-bottom: 10px; }
+.fiche-titre { font-family: var(--font-titre); font-size: 38px; font-weight: 400; color: var(--c-marine); line-height: 1.15; margin-bottom: 12px; }
 .fiche-badge { display: inline-flex; font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--c-cuivre); border: 1px solid var(--c-cuivre); padding: 4px 12px; border-radius: 2px; margin-bottom: 20px; }
 .fiche-desc { font-size: var(--fs-body); color: var(--c-muted); line-height: 1.8; margin-bottom: 24px; max-width: 500px; }
 .fiche-specs-titre { font-family: var(--font-mono); font-size: 9px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--c-muted); padding-bottom: 8px; border-bottom: 1px solid var(--c-bord); }
 .fiche-specs-table { width: 100%; border-collapse: collapse; }
 .fiche-specs-table tr { border-bottom: 1px solid var(--c-bord); }
 .fiche-specs-table tr:last-child { border-bottom: none; }
-.fiche-specs-table td { padding: 8px 0; font-size: 12px; line-height: 1.5; }
-.fiche-specs-table td:first-child { color: var(--c-muted); width: 50%; padding-right: 16px; }
+.fiche-specs-table td { padding: 6px 0; font-size: 12px; line-height: 1.5; }
+.fiche-specs-table td:first-child { color: var(--c-muted); width: 42%; padding-right: 12px; }
 .fiche-specs-table td:last-child { color: var(--c-nuit); font-weight: 500; }
-.fiche-specs-note { font-family: var(--font-script); font-size: 13px; color: var(--c-muted); margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--c-bord); }
+.fiche-specs-note { font-family: var(--font-script); font-size: 17px; color: var(--c-muted); margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--c-bord); }
 .fiche-cta { margin-top: 24px; }
 
-.ergo-cta-outer { background: var(--c-marine); }
-.ergo-cta-inner { max-width: var(--max-width); margin: 0 auto; padding: 0 60px; display: grid; grid-template-columns: 1fr 1fr; min-height: 320px; }
-.ergo-cta-citation { padding: 64px 56px 64px 0; border-right: 1px solid rgba(255,255,255,.08); position: relative; display: flex; flex-direction: column; gap: 14px; }
-.ergo-cta-citation .lbl { color: #c0874a; }
-.ergo-citation-texte { font-family: var(--font-script); font-size: 28px; line-height: 1.45; color: #e8c99a; font-style: italic; flex: 1; }
-.ergo-citation-source { font-family: var(--font-body); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #c0874a; }
-.ergo-cta-regle { position: absolute; bottom: 0; left: 0; width: 80px; height: 3px; background: linear-gradient(90deg, var(--c-cuivre), transparent); opacity: .5; }
-.ergo-cta-action { padding: 64px 0 64px 56px; display: flex; flex-direction: column; justify-content: center; gap: 24px; }
-.ergo-cta-titre { font-family: var(--font-titre); font-size: 30px; font-weight: 300; color: var(--c-parchemin); line-height: 1.25; }
-.ergo-cta-titre em { font-style: italic; color: var(--c-cuivre); }
-.ergo-cta-liste { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-.ergo-cta-liste li { font-size: 13px; color: rgba(246,242,235,.6); padding-left: 16px; position: relative; line-height: 1.5; }
-.ergo-cta-liste li::before { content: '—'; position: absolute; left: 0; color: var(--c-cuivre); }
-.ergo-cta-btns { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
-.ergo-cta-lien { font-family: var(--font-body); font-size: 11px; color: rgba(246,242,235,.4); text-decoration: underline; text-underline-offset: 3px; transition: color .2s; }
-.ergo-cta-lien:hover { color: var(--c-cuivre); }
+/* CTA : styles partagés dans style.css (.cta-outer, .cta-citation-texte, .cta-titre, etc.) — ne pas dupliquer ici */
 
 @media (max-width: 768px) {
   .hero { grid-template-columns: 1fr; padding: 24px 20px 0; gap: 0; }
@@ -93,9 +79,6 @@
   .modele-fiche { grid-template-columns: 1fr; }
   .fiche-photo { border-right: none; border-bottom: 1px solid var(--c-bord); }
   .fiche-contenu { padding: 24px 20px; }
-  .ergo-cta-inner { grid-template-columns: 1fr; padding: 0 20px; }
-  .ergo-cta-citation { padding: 48px 0 36px; border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); }
-  .ergo-cta-action { padding: 36px 0 48px; }
 }
 </style>
 </head>
@@ -108,15 +91,15 @@
     <div class="hero-texte">
       <span class="lbl" data-fr="Chaise adaptée · Fabriquée au Québec · Depuis 1990" data-en="Adaptive chair · Made in Quebec · Since 1990">Chaise adaptée · Fabriquée au Québec · Depuis 1990</span>
       <h1 class="hero-h1" data-fr-html="La chaise que vous<br>prescrivez avec <em>confiance.</em>" data-en-html="The chair you prescribe<br>with <em>confidence.</em>">La chaise que vous<br>prescrivez avec <em>confiance.</em></h1>
-      <p class="hero-sous-titre" data-fr="35 ans de fabrication artisanale sur mesure, élaborée chaise par chaise avec les ergothérapeutes du Québec. Trois modèles pour chaque âge et chaque morphologie." data-en="35 years of custom craftsmanship, built chair by chair alongside Quebec occupational therapists. Three models for every age and morphology.">35 ans de fabrication artisanale sur mesure, élaborée chaise par chaise avec les ergothérapeutes du Québec. Trois modèles pour chaque âge et chaque morphologie.</p>
+      <p class="hero-sous-titre" data-fr="35 ans de fabrication artisanale sur mesure, élaborée chaise par chaise avec les ergothérapeutes du Québec. Quatre modèles pour chaque âge et chaque morphologie." data-en="35 years of custom craftsmanship, built chair by chair alongside Quebec occupational therapists. Four models for every age and morphology.">35 ans de fabrication artisanale sur mesure, élaborée chaise par chaise avec les ergothérapeutes du Québec. Quatre modèles pour chaque âge et chaque morphologie.</p>
       <div class="hero-btns">
         <a href="soumission.html" class="btn-primary" data-fr="Demander une soumission →" data-en="Request a quote →">Demander une soumission →</a>
         <a href="accessoires.html" class="btn-ghost" data-fr="Voir les accessoires" data-en="View accessories">Voir les accessoires</a>
       </div>
       <div class="hero-stats">
-        <div class="hero-stat"><div class="hero-stat-n">35+</div><div class="hero-stat-l" data-fr="années d'expertise" data-en="years of expertise">années d'expertise</div></div>
-        <div class="hero-stat"><div class="hero-stat-n">3</div><div class="hero-stat-l" data-fr="modèles disponibles" data-en="available models">modèles disponibles</div></div>
-        <div class="hero-stat"><div class="hero-stat-n">100%</div><div class="hero-stat-l" data-fr="sur mesure" data-en="custom built">sur mesure</div></div>
+        <div class="hero-stat"><div class="hero-stat-n">35+</div><div class="hero-stat-l" data-fr="années d'amélioration" data-en="years of refinement">années d'amélioration</div></div>
+        <div class="hero-stat"><div class="hero-stat-n">4</div><div class="hero-stat-l" data-fr="modèles disponibles" data-en="available models">modèles disponibles</div></div>
+        <div class="hero-stat"><div class="hero-stat-n">∞</div><div class="hero-stat-l" data-fr="possibilités sur mesure" data-en="custom possibilities">possibilités sur mesure</div></div>
       </div>
     </div>
     <div class="hero-image">
@@ -159,24 +142,24 @@
   </div>
 </div>
 
-<div class="ergo-cta-outer">
-  <div class="ergo-cta-inner">
-    <div class="ergo-cta-citation">
+<div class="cta-outer">
+  <div class="cta-inner">
+    <div class="cta-citation">
       <span class="lbl">Un mot des ergothérapeutes</span>
-      <blockquote class="ergo-citation-texte">« Je décris l'enfant. Claude dessine la chaise.<br>Quelques semaines plus tard, elle est parfaite. »</blockquote>
-      <p class="ergo-citation-source">— Ergothérapeute, région de Montréal</p>
-      <div class="ergo-cta-regle"></div>
+      <blockquote class="cta-citation-texte">« Je décris l'enfant. Claude dessine la chaise.<br>Quelques semaines plus tard, elle est parfaite. »</blockquote>
+      <p class="cta-citation-source">— Ergothérapeute, région de Montréal</p>
+      <div class="cta-regle"></div>
     </div>
-    <div class="ergo-cta-action">
-      <h2 class="ergo-cta-titre" data-fr-html="Vous travaillez avec<br>un enfant qui a besoin<br>d'une <em>chaise sur mesure ?</em>" data-en-html="Working with a child<br>who needs a<br><em>custom chair?</em>">Vous travaillez avec<br>un enfant qui a besoin<br>d'une <em>chaise sur mesure ?</em></h2>
-      <ul class="ergo-cta-liste">
+    <div class="cta-action">
+      <h2 class="cta-titre" data-fr-html="Vous travaillez avec<br>un enfant qui a besoin<br>d'une <em>chaise sur mesure ?</em>" data-en-html="Working with a child<br>who needs a<br><em>custom chair?</em>">Vous travaillez avec<br>un enfant qui a besoin<br>d'une <em>chaise sur mesure ?</em></h2>
+      <ul class="cta-liste">
         <li>Réponse sous 48 h — devis sans engagement</li>
         <li>Fabrication artisanale au Québec · délai 4 à 6 semaines</li>
         <li>Ajustements possibles après livraison</li>
       </ul>
-      <div class="ergo-cta-btns">
+      <div class="cta-btns">
         <a href="soumission.html" class="btn-accent">Remplir le formulaire de soumission →</a>
-        <a href="contactez-nous.html" class="ergo-cta-lien">Ou nous écrire directement</a>
+        <a href="contactez-nous.html" class="cta-lien">Ou nous écrire directement</a>
       </div>
     </div>
   </div>
