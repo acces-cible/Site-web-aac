@@ -128,15 +128,15 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 /* Liens nav — majuscules espacées (Option 3) */
 .nav-liens { display: flex; align-items: center; gap: 24px; }
 .nav-liens a {
-  font-family: var(--font-body);
-  font-size: 10px;
-  font-weight: 400;
-  letter-spacing: .1em;
+  font-family: var(--font-label);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .05em;
   text-transform: uppercase;
-  color: rgba(255,255,255,.55);
+  color: rgba(255,255,255,.85);
   transition: color .2s;
 }
-.nav-liens a:hover, .nav-liens a.actif { color: rgba(255,255,255,.9); }
+.nav-liens a:hover, .nav-liens a.actif { color: rgba(255,255,255,1); }
 
 .nav-dropdown { position: relative; }
 .nav-dropdown-menu {
