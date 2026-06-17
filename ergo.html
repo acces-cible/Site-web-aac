@@ -148,7 +148,7 @@
   <div class="modeles-inner">
     <button class="btn-comparer" id="btnComparer" onclick="basculerComparatif()">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 4 7l4 4"/><path d="M4 7h16"/><path d="m16 21 4-4-4-4"/><path d="M20 17H4"/></svg>
-      <span id="btnComparerTexte" data-fr="Comparer les 4 modèles côte à côte" data-en="Compare all 4 models side by side">Comparer les 4 modèles côte à côte</span>
+      <span id="btnComparerTexte" data-fr="Comparer les 3 modèles côte à côte" data-en="Compare 3 models side by side">Comparer les 3 modèles côte à côte</span>
     </button>
     <div class="modeles-barre" id="modelesBarre"></div>
     <div class="modele-fiche">
@@ -174,6 +174,7 @@
     </div>
     <div class="comparatif-outer" id="comparatifOuter">
       <table class="comparatif-table" id="comparatifTable"></table>
+      <p style="font-family: var(--font-script); font-size: 15px; color: var(--c-muted); margin-top: 14px;" data-fr="Besoin de dimensions adultes ? L'ERGO XL est réalisée entièrement sur mesure, sur demande." data-en="Need adult dimensions? The ERGO XL is fully custom-built, on request.">Besoin de dimensions adultes ? L'ERGO XL est réalisée entièrement sur mesure, sur demande.</p>
       <span class="btn-retour" onclick="basculerComparatif()">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
         <span data-fr="Retour à la fiche détaillée" data-en="Back to detailed sheet">Retour à la fiche détaillée</span>
@@ -241,12 +242,13 @@ function selectionnerModele(i) {
 let comparatifVisible = false;
 function construireComparatif() {
   const l = langue;
+  const modelesComparables = MODELES.filter(m => m.id !== 'xl');
   const labels = l==='fr'
     ? ["Hauteur du dossier*","Profondeur de l'appui-pied*","Profondeur de siège*","Hauteur de table","Hauteur de siège max.","Largeur intérieure","Poids maximal"]
     : ["Backrest height*","Footrest depth*","Seat depth*","Table height","Max. seat height","Interior width","Max. weight"];
-  let html = '<thead><tr><th>' + (l==='fr'?'Spécification':'Specification') + '</th>' + MODELES.map(m=>`<th>${m.nom[l]}</th>`).join('') + '</tr></thead><tbody>';
+  let html = '<thead><tr><th>' + (l==='fr'?'Spécification':'Specification') + '</th>' + modelesComparables.map(m=>`<th>${m.nom[l]}</th>`).join('') + '</tr></thead><tbody>';
   labels.forEach((lbl,row)=>{
-    html += `<tr><td>${lbl}</td>` + MODELES.map(m=>{
+    html += `<tr><td>${lbl}</td>` + modelesComparables.map(m=>{
       const sp = m.specs.find(s=>s[l]===lbl) || m.specs[row];
       return `<td>${sp ? sp.val : '—'}</td>`;
     }).join('') + '</tr>';
@@ -265,9 +267,9 @@ function basculerComparatif() {
     span.dataset.en = 'Back to detailed sheet';
     span.textContent = langue === 'fr' ? 'Revenir à la fiche détaillée' : 'Back to detailed sheet';
   } else {
-    span.dataset.fr = 'Comparer les 4 modèles côte à côte';
-    span.dataset.en = 'Compare all 4 models side by side';
-    span.textContent = langue === 'fr' ? 'Comparer les 4 modèles côte à côte' : 'Compare all 4 models side by side';
+    span.dataset.fr = 'Comparer les 3 modèles côte à côte';
+    span.dataset.en = 'Compare 3 models side by side';
+    span.textContent = langue === 'fr' ? 'Comparer les 3 modèles côte à côte' : 'Compare 3 models side by side';
   }
 }
 // Attendre que le DOM soit prêt pour construire la barre
