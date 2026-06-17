@@ -107,9 +107,9 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 .nav-logo { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
 .nav-logo-barre { width: 2px; height: 28px; background: var(--c-cuivre); }
 .nav-logo-texte {
-  font-family: var(--font-body);
-  font-size: 15px;
-  font-weight: 600;
+  font-family: var(--font-titre);
+  font-size: 19px;
+  font-weight: 500;
   color: var(--c-blanc);
   line-height: 1.25;
 }
