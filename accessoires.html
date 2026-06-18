@@ -96,6 +96,26 @@
 .couleur-swatch:hover { transform: scale(1.1); }
 .couleur-swatch.actif { border-color: var(--c-marine); transform: scale(1.15); }
 
+/* ── SÉLECTEUR COUSSIN DE SIÈGE ── */
+.siege-config { display: grid; grid-template-columns: 280px 1fr; gap: 36px; align-items: start; }
+.siege-groupe { margin-bottom: 22px; }
+.siege-groupe:last-child { margin-bottom: 0; }
+.siege-groupe-titre { font-family: var(--font-label); font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--c-muted); margin-bottom: 10px; display: block; }
+.siege-options { display: flex; flex-wrap: wrap; gap: 8px; }
+.siege-btn { font-family: var(--font-body); font-size: 12.5px; font-weight: 500; padding: 9px 14px; border: 1px solid var(--c-bord); border-radius: var(--radius); color: var(--c-nuit); background: var(--c-blanc); transition: border-color .15s, background .15s, color .15s, opacity .15s; }
+.siege-btn:hover:not(.siege-btn-disabled) { border-color: var(--c-cuivre); }
+.siege-btn.actif { background: var(--c-marine); border-color: var(--c-marine); color: var(--c-parchemin); }
+.siege-btn-disabled { opacity: .35; cursor: not-allowed; pointer-events: none; }
+.siege-affichage { background: var(--c-blanc); border: 1px solid var(--c-bord); border-radius: var(--radius); padding: 28px; min-height: 280px; }
+.siege-photo { width: 100%; height: 200px; background: var(--c-brume); display: flex; align-items: center; justify-content: center; margin-bottom: 18px; overflow: hidden; }
+.siege-photo img { width: 100%; height: 100%; object-fit: cover; }
+.siege-photo-placeholder { display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--c-bord); }
+.siege-photo-placeholder span { font-family: var(--font-mono); font-size: 9px; color: var(--c-bord); }
+.siege-resume-titre { font-family: var(--font-titre); font-size: 19px; font-weight: 400; color: var(--c-marine); margin-bottom: 6px; }
+.siege-resume-desc { font-size: 13px; color: var(--c-muted); line-height: 1.6; }
+.siege-resume-mesure { font-size: 12px; color: var(--c-cuivre); font-style: italic; margin-top: 10px; }
+@media (max-width: 900px) { .siege-config { grid-template-columns: 1fr; } }
+
 /* CTA : styles partagés dans style.css (.cta-outer, .cta-citation-texte, etc.) — ne pas dupliquer ici */
 @media (max-width: 900px) {
   .hero { padding: var(--pad-mobile); flex-direction: column; align-items: flex-start; gap: 24px; }
@@ -131,7 +151,7 @@
       <div class="hero-carnet">
         <div class="hero-carnet-scotch"></div>
         <div class="hero-carnet-inner">
-          <img src="images/Accessoires/coussin-couleurs.jpg" alt="Accessoires posturaux ERGO"
+          <img class="zoomable" src="images/Accessoires/coussin-couleurs.jpg" alt="Accessoires posturaux ERGO"
                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="hero-carnet-placeholder" style="display:none;"><span>Photo à venir</span></div>
           <div class="hero-carnet-caption">— Coussins & couleurs</div>
@@ -163,18 +183,46 @@
       <div class="sous-titre-ligne" data-fr="Coussin de dos" data-en="Back cushion">Coussin de dos</div>
       <div class="coussin-grille">
         <div class="coussin-carte"><div class="coussin-photo"><div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div><div class="coussin-corps"><h3>Contour léger</h3><p>Légère inclinaison latérale pour un soutien doux du tronc.</p></div></div>
-        <div class="coussin-carte"><div class="coussin-photo"><div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div><div class="coussin-corps"><h3>Contour moyen</h3><p>Contour marqué pour un soutien latéral modéré.</p></div></div>
-        <div class="coussin-carte"><div class="coussin-photo"><div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div><div class="coussin-corps"><h3>Contour accentué</h3><p>Soutien latéral prononcé pour les besoins posturaux importants.</p></div></div>
-        <div class="coussin-carte"><div class="coussin-photo"><div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div><div class="coussin-corps"><h3>Appui thoracique</h3><p>Pour un soutien sévère. Vient avec un coussin lombaire et un petit coussin plat dans le haut du dossier.</p></div></div>
+        <div class="coussin-carte"><div class="coussin-photo"><div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div><div class="coussin-corps"><h3>Contour moyen</h3><p>Contour marqué pour un soutien latéral modéré.</p><p style="font-size:11px;color:var(--c-cuivre);font-style:italic;margin-top:8px;">* Mesure anthropométrique requise</p></div></div>
+        <div class="coussin-carte"><div class="coussin-photo"><div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div><div class="coussin-corps"><h3>Contour accentué</h3><p>Soutien latéral prononcé pour les besoins posturaux importants.</p><p style="font-size:11px;color:var(--c-cuivre);font-style:italic;margin-top:8px;">* Mesure anthropométrique requise</p></div></div>
+        <div class="coussin-carte"><div class="coussin-photo"><div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div><div class="coussin-corps"><h3>Appui thoracique</h3><p>Pour un soutien sévère. Vient avec un coussin lombaire et un petit coussin plat dans le haut du dossier.</p><p style="font-size:11px;color:var(--c-cuivre);font-style:italic;margin-top:8px;">* Mesure anthropométrique requise</p></div></div>
       </div>
     </div>
     <div class="sous-section">
-      <div class="sous-titre-ligne"><span data-fr="Coussin de siège" data-en="Seat cushion">Coussin de siège</span><span class="sous-titre-note">* Coussin contour : 2 po de surplus de bassin requis</span></div>
-      <p style="font-size:13px;color:var(--c-muted);line-height:1.7;margin-bottom:20px;max-width:680px;" data-fr="On choisit d'abord une base — plat ou contour. Pour un coussin contour, des options s'ajoutent au besoin, combinables entre elles : biseauté (postérieur ou antérieur), bloc ABD, bloc d'ischion. Un, deux ou les trois à la fois, chacun avec supplément." data-en="Start by choosing a base — flat or contoured. For a contoured cushion, options can be added as needed and combined: bevel (posterior or anterior), ABD block, ischial block. One, two, or all three together, each with a surcharge.">On choisit d'abord une base — plat ou contour. Pour un coussin contour, des options s'ajoutent au besoin, combinables entre elles : biseauté (postérieur ou antérieur), bloc ABD, bloc d'ischion. Un, deux ou les trois à la fois, chacun avec supplément.</p>
-      <div class="coussin-grille coussin-grille-3">
-        <div class="coussin-carte"><div class="coussin-photo"><div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div><div class="coussin-corps"><h3>Coussin plat</h3><p>Coussin de base sans contour. Compatible avec l'appui-pelvien.</p></div></div>
-        <div class="coussin-carte"><div class="coussin-photo"><div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div><div class="coussin-corps"><h3>Coussin contour</h3><p>Base avec contour. Options ci-dessous combinables au besoin, avec supplément.</p><div class="variantes"><span class="variante">Biseauté postérieur</span><span class="variante">Biseauté antérieur</span><span class="variante">+ Bloc ABD</span><span class="variante">+ Bloc d'ischion</span></div></div></div>
-        <div class="coussin-carte"><div class="coussin-photo"><div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div><div class="coussin-corps"><h3>Appui-pelvien</h3><p>Support rembourré pour le positionnement pelvien latéral. Vient avec un coussin plat.</p></div></div>
+      <div class="sous-titre-ligne"><span data-fr="Coussin de siège" data-en="Seat cushion">Coussin de siège</span></div>
+      <div class="note-clinique" style="margin-top:0;margin-bottom:24px;">
+        <p data-fr="<strong>Coussin contour :</strong> il faut ajouter 2 po de chaque côté du bassin. Ex. : bassin de 11 po → calculer une largeur totale de 15 po → choisir une chaise de 16 po de largeur." data-en="<strong>Contoured cushion:</strong> add 2 in. on each side of the pelvis. E.g.: 11 in. pelvis → calculate a total width of 15 in. → choose a 16 in. wide chair."><strong>Coussin contour :</strong> il faut ajouter 2 po de chaque côté du bassin. Ex. : bassin de 11 po → calculer une largeur totale de 15 po → choisir une chaise de 16 po de largeur.</p>
+      </div>
+
+      <div class="siege-config">
+        <div>
+          <div class="siege-groupe">
+            <span class="siege-groupe-titre" data-fr="Base" data-en="Base">Base</span>
+            <div class="siege-options" id="siege-base-options"></div>
+          </div>
+          <div class="siege-groupe" id="siege-groupe-biseau">
+            <span class="siege-groupe-titre" data-fr="Biseauté (au besoin)" data-en="Bevel (optional)">Biseauté (au besoin)</span>
+            <div class="siege-options" id="siege-biseau-options"></div>
+          </div>
+          <div class="siege-groupe" id="siege-groupe-blocs">
+            <span class="siege-groupe-titre" data-fr="Options combinables (au besoin)" data-en="Combinable options (optional)">Options combinables (au besoin)</span>
+            <div class="siege-options" id="siege-blocs-options"></div>
+          </div>
+          <div class="siege-groupe">
+            <span class="siege-groupe-titre" data-fr="Appui-pelvien" data-en="Pelvic support">Appui-pelvien</span>
+            <div class="siege-options" id="siege-pelvien-options"></div>
+          </div>
+          <p style="font-size:12px;color:var(--c-muted);line-height:1.6;margin-top:6px;" data-fr="Les options de coussins peuvent se mélanger entre elles au besoin." data-en="Cushion options can be combined with one another as needed.">Les options de coussins peuvent se mélanger entre elles au besoin.</p>
+        </div>
+
+        <div class="siege-affichage">
+          <div class="siege-photo" id="siege-photo">
+            <div class="siege-photo-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div>
+          </div>
+          <div class="siege-resume-titre" id="siege-resume-titre">Coussin plat</div>
+          <div class="siege-resume-desc" id="siege-resume-desc">Coussin de base sans contour.</div>
+          <div class="siege-resume-mesure" id="siege-resume-mesure" style="display:none;">* Mesure anthropométrique requise</div>
+        </div>
       </div>
     </div>
   </div>
@@ -199,7 +247,7 @@
 
       <!-- Photo chaise -->
       <div style="width:100%;max-width:560px;height:480px;display:flex;align-items:center;justify-content:center;background:var(--c-parchemin);border-radius:8px;">
-        <img id="couleur-chaise-img"
+        <img id="couleur-chaise-img" class="zoomable"
           src="images/Couleur/Chaise Grise R193 B193 G193 (1).png"
           alt="Chaise ERGO Gris moyen"
           style="max-width:100%;max-height:100%;object-fit:contain;transition:opacity .25s ease;mix-blend-mode:multiply;filter:brightness(1.08) contrast(1.05);">
@@ -309,6 +357,125 @@ window.addEventListener('scroll', () => {
   sections.forEach((id, i) => { const el = document.getElementById(id); if (el && el.getBoundingClientRect().top <= 130) actif = i; });
   document.querySelectorAll('.ancre-btn').forEach((b, i) => b.classList.toggle('actif', i === actif));
 });
+
+// ── SÉLECTEUR COUSSIN DE SIÈGE ────────────────────────────────────
+(function() {
+  const baseEl    = document.getElementById('siege-base-options');
+  const biseauEl  = document.getElementById('siege-biseau-options');
+  const blocsEl   = document.getElementById('siege-blocs-options');
+  const pelvienEl = document.getElementById('siege-pelvien-options');
+  if (!baseEl) return;
+
+  const groupeBiseau = document.getElementById('siege-groupe-biseau');
+  const groupeBlocs  = document.getElementById('siege-groupe-blocs');
+  const photoEl   = document.getElementById('siege-photo');
+  const titreEl   = document.getElementById('siege-resume-titre');
+  const descEl    = document.getElementById('siege-resume-desc');
+  const mesureEl  = document.getElementById('siege-resume-mesure');
+
+  // État courant
+  let etat = { base: 'plat', biseau: null, abd: false, ischion: false, pelvien: false };
+
+  function bouton(conteneur, label, value, groupe) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'siege-btn';
+    b.textContent = label;
+    b.dataset.value = value;
+    b.dataset.groupe = groupe;
+    conteneur.appendChild(b);
+    return b;
+  }
+
+  bouton(baseEl, 'Plat', 'plat', 'base');
+  bouton(baseEl, 'Contour', 'contour', 'base');
+  bouton(biseauEl, 'Aucun', 'aucun', 'biseau');
+  bouton(biseauEl, 'Postérieur', 'posterieur', 'biseau');
+  bouton(biseauEl, 'Antérieur', 'anterieur', 'biseau');
+  bouton(blocsEl, '+ Bloc ABD', 'abd', 'abd');
+  bouton(blocsEl, "+ Bloc d'ischion", 'ischion', 'ischion');
+  bouton(pelvienEl, 'Aucun', 'non', 'pelvien');
+  bouton(pelvienEl, 'Avec appui-pelvien', 'oui', 'pelvien');
+
+  function maj() {
+    // Visibilité des groupes selon la base
+    var contourActif = etat.base === 'contour';
+    groupeBiseau.style.display = contourActif ? '' : 'none';
+    groupeBlocs.style.display  = contourActif ? '' : 'none';
+    if (!contourActif) { etat.biseau = null; etat.abd = false; etat.ischion = false; }
+
+    // Biseauté antérieur exclut ABD et ischion
+    var anterieurActif = etat.biseau === 'anterieur';
+    if (anterieurActif) { etat.abd = false; etat.ischion = false; }
+
+    // Rendu visuel des boutons base
+    baseEl.querySelectorAll('.siege-btn').forEach(function(b) {
+      b.classList.toggle('actif', b.dataset.value === etat.base);
+    });
+    // Rendu visuel biseauté
+    biseauEl.querySelectorAll('.siege-btn').forEach(function(b) {
+      var val = b.dataset.value === 'aucun' ? null : b.dataset.value;
+      b.classList.toggle('actif', val === etat.biseau);
+    });
+    // Rendu visuel blocs (+ désactivation si antérieur)
+    blocsEl.querySelectorAll('.siege-btn').forEach(function(b) {
+      var actif = (b.dataset.value === 'abd' && etat.abd) || (b.dataset.value === 'ischion' && etat.ischion);
+      b.classList.toggle('actif', actif);
+      b.classList.toggle('siege-btn-disabled', anterieurActif);
+    });
+    // Rendu visuel pelvien
+    pelvienEl.querySelectorAll('.siege-btn').forEach(function(b) {
+      var val = b.dataset.value === 'oui';
+      b.classList.toggle('actif', val === etat.pelvien);
+    });
+
+    // Construction du résumé
+    var titre = etat.base === 'contour' ? 'Coussin contour' : 'Coussin plat';
+    var details = [];
+    if (etat.biseau === 'posterieur') details.push('biseauté postérieur');
+    if (etat.biseau === 'anterieur')   details.push('biseauté antérieur');
+    if (etat.abd)     details.push('bloc ABD');
+    if (etat.ischion) details.push("bloc d'ischion");
+    if (etat.pelvien) details.push('appui-pelvien');
+
+    titreEl.textContent = titre;
+    descEl.textContent = details.length
+      ? 'Avec ' + details.join(', ') + '.'
+      : (etat.base === 'contour' ? 'Base avec contour, sans option additionnelle.' : 'Coussin de base sans contour.');
+
+    // Mesure anthropométrique requise : tout sauf plat seul sans rien
+    var requiertMesure = etat.base === 'contour' || etat.pelvien;
+    mesureEl.style.display = requiertMesure ? '' : 'none';
+  }
+
+  baseEl.addEventListener('click', function(e) {
+    var b = e.target.closest('.siege-btn');
+    if (!b) return;
+    etat.base = b.dataset.value;
+    maj();
+  });
+  biseauEl.addEventListener('click', function(e) {
+    var b = e.target.closest('.siege-btn');
+    if (!b) return;
+    etat.biseau = b.dataset.value === 'aucun' ? null : b.dataset.value;
+    maj();
+  });
+  blocsEl.addEventListener('click', function(e) {
+    var b = e.target.closest('.siege-btn');
+    if (!b || b.classList.contains('siege-btn-disabled')) return;
+    if (b.dataset.value === 'abd')     etat.abd = !etat.abd;
+    if (b.dataset.value === 'ischion') etat.ischion = !etat.ischion;
+    maj();
+  });
+  pelvienEl.addEventListener('click', function(e) {
+    var b = e.target.closest('.siege-btn');
+    if (!b) return;
+    etat.pelvien = b.dataset.value === 'oui';
+    maj();
+  });
+
+  maj();
+})();
 
 // ── SÉLECTEUR COULEURS ──────────────────────────────────────────
 (function() {
