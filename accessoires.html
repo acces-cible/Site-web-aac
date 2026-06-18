@@ -197,20 +197,16 @@
       <div class="siege-config">
         <div>
           <div class="siege-groupe">
-            <span class="siege-groupe-titre" data-fr="Base" data-en="Base">Base</span>
+            <span class="siege-groupe-titre" data-fr="Base (un choix)" data-en="Base (choose one)">Base (un choix)</span>
             <div class="siege-options" id="siege-base-options"></div>
           </div>
-          <div class="siege-groupe" id="siege-groupe-biseau">
+          <div class="siege-groupe">
             <span class="siege-groupe-titre" data-fr="Biseauté (au besoin)" data-en="Bevel (optional)">Biseauté (au besoin)</span>
             <div class="siege-options" id="siege-biseau-options"></div>
           </div>
-          <div class="siege-groupe" id="siege-groupe-blocs">
+          <div class="siege-groupe">
             <span class="siege-groupe-titre" data-fr="Options combinables (au besoin)" data-en="Combinable options (optional)">Options combinables (au besoin)</span>
             <div class="siege-options" id="siege-blocs-options"></div>
-          </div>
-          <div class="siege-groupe">
-            <span class="siege-groupe-titre" data-fr="Appui-pelvien" data-en="Pelvic support">Appui-pelvien</span>
-            <div class="siege-options" id="siege-pelvien-options"></div>
           </div>
           <p style="font-size:12px;color:var(--c-muted);line-height:1.6;margin-top:6px;" data-fr="Les options de coussins peuvent se mélanger entre elles au besoin." data-en="Cushion options can be combined with one another as needed.">Les options de coussins peuvent se mélanger entre elles au besoin.</p>
         </div>
@@ -360,21 +356,18 @@ window.addEventListener('scroll', () => {
 
 // ── SÉLECTEUR COUSSIN DE SIÈGE ────────────────────────────────────
 (function() {
-  const baseEl    = document.getElementById('siege-base-options');
-  const biseauEl  = document.getElementById('siege-biseau-options');
-  const blocsEl   = document.getElementById('siege-blocs-options');
-  const pelvienEl = document.getElementById('siege-pelvien-options');
+  const baseEl   = document.getElementById('siege-base-options');
+  const biseauEl = document.getElementById('siege-biseau-options');
+  const blocsEl  = document.getElementById('siege-blocs-options');
   if (!baseEl) return;
 
-  const groupeBiseau = document.getElementById('siege-groupe-biseau');
-  const groupeBlocs  = document.getElementById('siege-groupe-blocs');
-  const photoEl   = document.getElementById('siege-photo');
-  const titreEl   = document.getElementById('siege-resume-titre');
-  const descEl    = document.getElementById('siege-resume-desc');
-  const mesureEl  = document.getElementById('siege-resume-mesure');
+  const photoEl  = document.getElementById('siege-photo');
+  const titreEl  = document.getElementById('siege-resume-titre');
+  const descEl   = document.getElementById('siege-resume-desc');
+  const mesureEl = document.getElementById('siege-resume-mesure');
 
-  // État courant
-  let etat = { base: 'plat', biseau: null, abd: false, ischion: false, pelvien: false };
+  // État courant — base : 'plat' | 'contour' | 'pelvien'
+  let etat = { base: 'plat', biseau: null, abd: false, ischion: false };
 
   function bouton(conteneur, label, value, groupe) {
     var b = document.createElement('button');
@@ -389,68 +382,60 @@ window.addEventListener('scroll', () => {
 
   bouton(baseEl, 'Plat', 'plat', 'base');
   bouton(baseEl, 'Contour', 'contour', 'base');
+  bouton(baseEl, 'Appui-pelvien', 'pelvien', 'base');
   bouton(biseauEl, 'Aucun', 'aucun', 'biseau');
   bouton(biseauEl, 'Postérieur', 'posterieur', 'biseau');
   bouton(biseauEl, 'Antérieur', 'anterieur', 'biseau');
   bouton(blocsEl, '+ Bloc ABD', 'abd', 'abd');
   bouton(blocsEl, "+ Bloc d'ischion", 'ischion', 'ischion');
-  bouton(pelvienEl, 'Aucun', 'non', 'pelvien');
-  bouton(pelvienEl, 'Avec appui-pelvien', 'oui', 'pelvien');
 
   function maj() {
-    // Visibilité des groupes selon la base
-    var contourActif = etat.base === 'contour';
-    groupeBiseau.style.display = contourActif ? '' : 'none';
-    groupeBlocs.style.display  = contourActif ? '' : 'none';
-    if (!contourActif) { etat.biseau = null; etat.abd = false; etat.ischion = false; }
-
-    // Biseauté antérieur exclut ABD et ischion
-    var anterieurActif = etat.biseau === 'anterieur';
+    var contourActif   = etat.base === 'contour';
+    var anterieurActif  = etat.biseau === 'anterieur';
     if (anterieurActif) { etat.abd = false; etat.ischion = false; }
 
-    // Rendu visuel des boutons base
+    // Rendu visuel base — Contour désactive Appui-pelvien ; Appui-pelvien active aussi visuellement Plat
     baseEl.querySelectorAll('.siege-btn').forEach(function(b) {
-      b.classList.toggle('actif', b.dataset.value === etat.base);
+      var estActif = b.dataset.value === etat.base || (b.dataset.value === 'plat' && etat.base === 'pelvien');
+      b.classList.toggle('actif', estActif);
+      var doitDesactiver = b.dataset.value === 'pelvien' && contourActif;
+      b.classList.toggle('siege-btn-disabled', doitDesactiver);
     });
     // Rendu visuel biseauté
     biseauEl.querySelectorAll('.siege-btn').forEach(function(b) {
       var val = b.dataset.value === 'aucun' ? null : b.dataset.value;
       b.classList.toggle('actif', val === etat.biseau);
     });
-    // Rendu visuel blocs (+ désactivation si antérieur)
+    // Rendu visuel blocs (désactivés si biseauté antérieur)
     blocsEl.querySelectorAll('.siege-btn').forEach(function(b) {
       var actif = (b.dataset.value === 'abd' && etat.abd) || (b.dataset.value === 'ischion' && etat.ischion);
       b.classList.toggle('actif', actif);
       b.classList.toggle('siege-btn-disabled', anterieurActif);
     });
-    // Rendu visuel pelvien
-    pelvienEl.querySelectorAll('.siege-btn').forEach(function(b) {
-      var val = b.dataset.value === 'oui';
-      b.classList.toggle('actif', val === etat.pelvien);
-    });
 
-    // Construction du résumé
-    var titre = etat.base === 'contour' ? 'Coussin contour' : 'Coussin plat';
+    // Résumé
+    var titres = { plat: 'Coussin plat', contour: 'Coussin contour', pelvien: 'Appui-pelvien' };
+    var titre = titres[etat.base];
     var details = [];
     if (etat.biseau === 'posterieur') details.push('biseauté postérieur');
-    if (etat.biseau === 'anterieur')   details.push('biseauté antérieur');
+    if (etat.biseau === 'anterieur')  details.push('biseauté antérieur');
     if (etat.abd)     details.push('bloc ABD');
     if (etat.ischion) details.push("bloc d'ischion");
-    if (etat.pelvien) details.push('appui-pelvien');
 
     titreEl.textContent = titre;
-    descEl.textContent = details.length
-      ? 'Avec ' + details.join(', ') + '.'
-      : (etat.base === 'contour' ? 'Base avec contour, sans option additionnelle.' : 'Coussin de base sans contour.');
+    var base = etat.base === 'pelvien'
+      ? 'Support rembourré pour le positionnement pelvien latéral. Vient avec un coussin plat.'
+      : (etat.base === 'contour' ? 'Base avec contour.' : 'Coussin de base sans contour.');
+    descEl.textContent = details.length ? base + ' Avec ' + details.join(', ') + '.' : base;
 
-    // Mesure anthropométrique requise : tout sauf plat seul sans rien
-    var requiertMesure = etat.base === 'contour' || etat.pelvien;
+    // Mesure anthropométrique requise : tout sauf Plat seul sans aucune option
+    var requiertMesure = etat.base !== 'plat' || etat.biseau || etat.abd || etat.ischion;
     mesureEl.style.display = requiertMesure ? '' : 'none';
   }
 
   baseEl.addEventListener('click', function(e) {
     var b = e.target.closest('.siege-btn');
-    if (!b) return;
+    if (!b || b.classList.contains('siege-btn-disabled')) return;
     etat.base = b.dataset.value;
     maj();
   });
@@ -465,12 +450,6 @@ window.addEventListener('scroll', () => {
     if (!b || b.classList.contains('siege-btn-disabled')) return;
     if (b.dataset.value === 'abd')     etat.abd = !etat.abd;
     if (b.dataset.value === 'ischion') etat.ischion = !etat.ischion;
-    maj();
-  });
-  pelvienEl.addEventListener('click', function(e) {
-    var b = e.target.closest('.siege-btn');
-    if (!b) return;
-    etat.pelvien = b.dataset.value === 'oui';
     maj();
   });
 
