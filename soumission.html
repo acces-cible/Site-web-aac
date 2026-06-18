@@ -3,64 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact & Soumission — Les Adaptations Accès-Cible</title>
-<meta name="description" content="Demandez une soumission pour une chaise adaptée sur mesure. Formulaire de contact pour les ergothérapeutes et les familles.">
+<title>Soumission — Les Adaptations Accès-Cible</title>
+<meta name="description" content="Demandez une soumission pour une chaise adaptée sur mesure. Formulaire de soumission pour les ergothérapeutes et les familles.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Caveat:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 <style>
-:root {
-  --c-marine:    #1e3a4f;
-  --c-nuit:      #1a2530;
-  --c-parchemin: #f6f2eb;
-  --c-cuivre:    #c0874a;
-  --c-brume:     #e8e2d6;
-  --c-bord:      #d4cdbf;
-  --c-muted:     #7a7060;
-  --c-blanc:     #ffffff;
-  --font-titre:  'Crimson Pro', Georgia, serif;
-  --font-script: 'Caveat', cursive;
-  --font-mono:   'JetBrains Mono', monospace;
-  --font-body:   'IBM Plex Sans', sans-serif;
-  --max-width:   1100px;
-  --radius:      4px;
-}
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body { font-family: var(--font-body); color: var(--c-nuit); background: var(--c-parchemin); font-size: 15px; line-height: 1.75; }
-a { color: inherit; text-decoration: none; }
-button { cursor: pointer; border: none; font-family: inherit; background: none; }
-.lbl { font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--c-cuivre); display: block; }
-
-/* NAV */
-.nav { position: sticky; top: 0; z-index: 100; background: var(--c-marine); height: 58px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; border-bottom: 1px solid rgba(255,255,255,.07); }
-.nav-logo { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
-.nav-logo-barre { width: 2px; height: 28px; background: var(--c-cuivre); }
-.nav-logo-texte { font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--c-blanc); line-height: 1.25; }
-.nav-logo-texte small { display: block; font-family: var(--font-mono); font-size: 8px; letter-spacing: .15em; text-transform: uppercase; color: rgba(192,135,74,.7); margin-top: 1px; }
-.nav-liens { display: flex; align-items: center; gap: 24px; }
-.nav-liens a { font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.45); transition: color .2s; }
-.nav-liens a:hover, .nav-liens a.actif { color: rgba(255,255,255,.9); }
-.nav-dropdown { position: relative; }
-.nav-dropdown-menu { display: none; position: absolute; top: calc(100% + 14px); left: 50%; transform: translateX(-50%); background: var(--c-blanc); border: 1px solid var(--c-bord); border-radius: var(--radius); min-width: 210px; box-shadow: 0 8px 32px rgba(0,0,0,.1); overflow: hidden; }
-.nav-dropdown:hover .nav-dropdown-menu { display: block; }
-.nav-dropdown-menu a { display: block; padding: 11px 18px; font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em; color: var(--c-nuit) !important; border-bottom: 1px solid var(--c-bord); text-transform: uppercase; }
-.nav-dropdown-menu a:last-child { border-bottom: none; }
-.nav-dropdown-menu a:hover { background: var(--c-brume); }
-.nav-cta { background: var(--c-cuivre); color: var(--c-blanc) !important; font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; padding: 8px 16px; border-radius: var(--radius); transition: opacity .2s !important; }
-.nav-cta:hover { opacity: .85 !important; }
-.lang-btn { font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,.4); border: 1px solid rgba(255,255,255,.2); padding: 5px 10px; border-radius: var(--radius); cursor: pointer; transition: color .2s, border-color .2s; }
-.lang-btn:hover { color: var(--c-cuivre); border-color: var(--c-cuivre); }
-.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
-.nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--c-blanc); border-radius: 1px; }
-.nav-mobile { display: none; position: fixed; top: 58px; left: 0; right: 0; background: var(--c-marine); z-index: 99; padding: 16px 20px 24px; box-shadow: 0 8px 24px rgba(0,0,0,.2); }
-.nav-mobile.ouvert { display: block; }
-.nav-mobile a { display: block; color: rgba(255,255,255,.65); font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.07); }
-.nav-mobile a:hover { color: var(--c-cuivre); }
-.nav-mobile-sub { padding-left: 16px; font-size: 10px !important; color: rgba(255,255,255,.4) !important; }
-.nav-mobile-cta { display: block; text-align: center; margin-top: 14px; background: var(--c-cuivre); color: var(--c-blanc) !important; padding: 12px !important; border-radius: var(--radius); border: none !important; }
-
-/* EN-TÊTE LÉGÈRE */
-.page-header { border-bottom: 1px solid var(--c-bord); }
+/* ── SOUMISSION : styles uniques ── */
+.page-header { border-bottom: 1px solid var(--c-bord); background: var(--c-parchemin); }
 .page-header-inner { max-width: var(--max-width); margin: 0 auto; padding: 48px 60px 44px; }
 .page-header-inner .lbl { margin-bottom: 12px; }
 .page-h1 { font-family: var(--font-titre); font-size: 40px; font-weight: 300; color: var(--c-marine); line-height: 1.1; margin-bottom: 14px; }
@@ -70,112 +20,46 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 .page-sous-titre a { color: var(--c-muted); transition: color .2s; }
 .page-sous-titre a:hover { color: var(--c-cuivre); }
 
-/* FORMULAIRE PLEINE LARGEUR */
 .formulaire-outer { background: var(--c-blanc); border-bottom: 1px solid var(--c-bord); }
 .formulaire-inner { max-width: var(--max-width); margin: 0 auto; padding: 48px 60px 56px; }
 .formulaire-inner .lbl { margin-bottom: 6px; }
 .formulaire-sous-titre { font-size: 13px; color: var(--c-muted); margin-bottom: 32px; }
 .fillout-wrap { width: 100%; }
 
-/* Fallback réseau bloqué */
 .formulaire-fallback { margin-top: 20px; padding: 14px 20px; background: var(--c-brume); border: 1px solid var(--c-bord); border-radius: var(--radius); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-.formulaire-fallback span { font-family: var(--font-mono); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: var(--c-muted); }
-.formulaire-fallback a { font-family: var(--font-mono); font-size: 9px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--c-cuivre); text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
+.formulaire-fallback span { font-family: var(--font-label); font-size: 11px; letter-spacing: .04em; color: var(--c-muted); }
+.formulaire-fallback a { font-family: var(--font-label); font-size: 11px; font-weight: 600; letter-spacing: .04em; color: var(--c-cuivre); text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
 
-/* SECTION PDF */
 .pdf-outer { background: var(--c-brume); border-top: 1px solid var(--c-bord); border-bottom: 1px solid var(--c-bord); }
 .pdf-inner { max-width: var(--max-width); margin: 0 auto; padding: 40px 60px; }
 .pdf-entete { margin-bottom: 24px; }
 .pdf-entete .lbl { margin-bottom: 8px; }
 .pdf-desc { font-size: 13px; color: var(--c-muted); max-width: 560px; line-height: 1.6; }
 .pdf-grille { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; max-width: 640px; }
-.pdf-col-titre { font-family: var(--font-mono); font-size: 9px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--c-muted); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--c-bord); }
+.pdf-col-titre { font-family: var(--font-label); font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--c-muted); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--c-bord); }
 .pdf-lien { display: flex; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--c-bord); color: var(--c-nuit); font-size: 13px; transition: color .2s; }
 .pdf-lien:last-child { border-bottom: none; }
 .pdf-lien:hover { color: var(--c-cuivre); }
 .pdf-lien svg { flex-shrink: 0; color: var(--c-cuivre); }
 
-/* FOOTER */
-.footer { background: var(--c-nuit); border-top: 1px solid rgba(255,255,255,.05); }
-.footer-inner { max-width: var(--max-width); margin: 0 auto; padding: 48px 60px 32px; display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 48px; }
-.footer-brand { font-family: var(--font-titre); font-size: 18px; font-weight: 300; color: var(--c-parchemin); margin-bottom: 6px; }
-.footer-tagline { font-family: var(--font-mono); font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: rgba(192,135,74,.55); margin-bottom: 20px; }
-.footer-coords { display: flex; flex-direction: column; gap: 6px; }
-.footer-coords a, .footer-coords span { font-size: 12px; color: rgba(246,242,235,.38); transition: color .2s; line-height: 1.5; }
-.footer-coords a:hover { color: var(--c-cuivre); }
-.footer-col-titre { font-family: var(--font-mono); font-size: 9px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: rgba(246,242,235,.25); margin-bottom: 16px; }
-.footer-liens { display: flex; flex-direction: column; gap: 8px; }
-.footer-liens a { font-size: 12px; color: rgba(246,242,235,.38); transition: color .2s; }
-.footer-liens a:hover { color: var(--c-parchemin); }
-.footer-bottom { max-width: var(--max-width); margin: 0 auto; padding: 20px 60px 28px; border-top: 1px solid rgba(255,255,255,.05); display: flex; justify-content: space-between; align-items: center; }
-.footer-copyright { font-family: var(--font-mono); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: rgba(246,242,235,.2); }
-.footer-fab { font-family: var(--font-script); font-size: 15px; color: rgba(192,135,74,.4); }
-
 @media (max-width: 768px) {
-  .nav { padding: 0 20px; }
-  .nav-liens { display: none; }
-  .nav-hamburger { display: flex; }
   .page-header-inner { flex-direction: column; align-items: flex-start; padding: 36px 20px 28px; gap: 24px; }
   .page-h1 { font-size: 28px; }
-  .page-header-coords { flex-direction: column; gap: 16px; }
   .formulaire-inner { padding: 36px 20px 48px; }
   .formulaire-fallback { flex-direction: column; align-items: flex-start; gap: 8px; }
   .pdf-inner { padding: 32px 20px; }
   .pdf-grille { grid-template-columns: 1fr; gap: 24px; }
-  .footer-inner { grid-template-columns: 1fr; gap: 32px; padding: 40px 20px 28px; }
-  .footer-bottom { padding: 16px 20px 24px; flex-direction: column; align-items: flex-start; gap: 8px; }
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="nav">
-  <a href="index.html" class="nav-logo">
-    <div class="nav-logo-barre"></div>
-    <div class="nav-logo-texte">
-      Les Adaptations Accès-Cible
-      <small data-fr="Partenaire des ergothérapeutes · Québec" data-en="Partner of occupational therapists · Quebec">Partenaire des ergothérapeutes · Québec</small>
-    </div>
-  </a>
-  <div class="nav-liens" id="navLiens">
-    <div class="nav-dropdown">
-      <a href="ergo.html" data-fr="Chaise ERGO" data-en="ERGO Chair">Chaise ERGO</a>
-      <div class="nav-dropdown-menu">
-        <a href="ergo.html#garderie">Hauteur garderie</a>
-        <a href="ergo.html#standard">Standard</a>
-        <a href="ergo.html#surdimensionnee">Surdimensionnée</a>
-      </div>
-    </div>
-    <a href="accessoires.html" data-fr="Accessoires" data-en="Accessories">Accessoires</a>
-    <a href="bureaux.html" data-fr="Bureaux" data-en="Desks">Bureaux</a>
-    <a href="marchepied.html" data-fr="Marchepieds" data-en="Footrests">Marchepieds</a>
-    <a href="histoire.html" data-fr="Notre histoire" data-en="Our story">Notre histoire</a>
-    <a href="contact.html" class="actif" data-fr="Contact" data-en="Contact">Contact</a>
-    <button class="lang-btn" onclick="toggleLangue()" id="langBtn">EN</button>
-    <a href="https://acces-cible.fillout.com/t/erKz8m4uBEus" target="_blank" rel="noopener" class="nav-cta" data-fr="Soumission →" data-en="Get a quote →">Soumission →</a>
-  </div>
-  <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-<div class="nav-mobile" id="navMobile">
-  <a href="ergo.html">Chaise ERGO</a>
-  <a href="ergo.html#garderie" class="nav-mobile-sub">↳ Hauteur garderie</a>
-  <a href="ergo.html#standard" class="nav-mobile-sub">↳ Standard</a>
-  <a href="ergo.html#surdimensionnee" class="nav-mobile-sub">↳ Surdimensionnée</a>
-  <a href="accessoires.html">Accessoires</a>
-  <a href="bureaux.html">Bureaux</a>
-  <a href="marchepied.html">Marchepieds</a>
-  <a href="histoire.html">Notre histoire</a>
-  <a href="contact.html" class="actif">Contact</a>
-  <a href="https://acces-cible.fillout.com/t/erKz8m4uBEus" target="_blank" rel="noopener" class="nav-mobile-cta">Demander une soumission →</a>
-</div>
+<div id="nav-container" style="height:58px;position:sticky;top:0;z-index:100;"></div>
 
 <!-- EN-TÊTE -->
 <div class="page-header">
   <div class="page-header-inner">
-    <span class="lbl" data-fr="Contact & Soumission" data-en="Contact & Quote">Contact & Soumission</span>
+    <span class="lbl" data-fr="Soumission" data-en="Quote">Soumission</span>
     <h1 class="page-h1"
         data-fr-html="Vous décrivez l'enfant.<br>On dessine la <em>chaise.</em>"
         data-en-html="You describe the child.<br>We design the <em>chair.</em>">
@@ -274,53 +158,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   </div>
 </div>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div>
-      <div class="footer-brand">Les Adaptations Accès-Cible</div>
-      <div class="footer-tagline">Fabrication artisanale · Québec · Depuis 1990</div>
-      <div class="footer-coords">
-        <span>156-A route 117<br>Sainte-Anne-des-Lacs, Québec  J0R 1B0</span>
-        <a href="tel:+14502271948">450 227-1948</a>
-        <a href="mailto:info@lesadaptationsacces-cible.com">info@lesadaptationsacces-cible.com</a>
-        <a href="mailto:info@acces-cible.ca">info@acces-cible.ca</a>
-      </div>
-    </div>
-    <div>
-      <div class="footer-col-titre">Produits</div>
-      <div class="footer-liens">
-        <a href="ergo.html">Chaise ERGO</a>
-        <a href="accessoires.html">Accessoires posturaux</a>
-        <a href="bureaux.html">Bureaux adaptés</a>
-        <a href="marchepied.html">Marchepieds</a>
-      </div>
-    </div>
-    <div>
-      <div class="footer-col-titre">Entreprise</div>
-      <div class="footer-liens">
-        <a href="histoire.html">Notre histoire</a>
-        <a href="contact.html">Contact</a>
-        <a href="https://acces-cible.fillout.com/t/erKz8m4uBEus" target="_blank" rel="noopener">Formulaire de soumission</a>
-      </div>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <div class="footer-copyright">© 2024 Les Adaptations Accès-Cible. Tous droits réservés.</div>
-    <div class="footer-fab">Fait à la main · Sainte-Anne-des-Lacs</div>
-  </div>
-</footer>
-
-<script>
-function toggleMenu() { document.getElementById('navMobile').classList.toggle('ouvert'); }
-let langue = 'fr';
-function toggleLangue() {
-  langue = langue === 'fr' ? 'en' : 'fr';
-  document.getElementById('langBtn').textContent = langue === 'fr' ? 'EN' : 'FR';
-  document.documentElement.lang = langue;
-  document.querySelectorAll('[data-fr]').forEach(el => { el.textContent = el.dataset[langue]; });
-  document.querySelectorAll('[data-fr-html]').forEach(el => { el.innerHTML = el.dataset[langue + 'Html']; });
-}
-</script>
+<div id="footer-container"></div>
+<script src="scripts.js"></script>
 </body>
 </html>
