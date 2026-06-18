@@ -21,15 +21,33 @@ function marquerPageActive() {
     }
   });
 }
-/* ── NAV : cacher au scroll vers le bas, réafficher au scroll vers le haut ── */
+/* ── NAV : cacher au scroll vers le bas, réafficher au scroll vers le haut ──
+   Ajuste aussi le "top" de toute barre secondaire sticky (ex: .ancres sur
+   accessoires.html, .tab-bar sur marchepied.html) pour qu'elle colle au
+   bord de l'écran quand la nav est cachée, et sous la nav quand elle est visible. */
 function initNavScroll() {
   const nav = document.querySelector('.nav');
   if (!nav) return;
+
+  const navHauteur = nav.offsetHeight || 58;
+  const barreSecondaire = document.querySelector('.ancres, .tab-bar');
 
   let dernierScroll = window.scrollY;
   const seuil = 6; // ignore les micro-mouvements pour éviter le tremblement
 
   nav.style.transition = 'transform .25s ease';
+  if (barreSecondaire) barreSecondaire.style.transition = 'top .25s ease';
+
+  function afficherNav() {
+    nav.style.transform = 'translateY(0)';
+    if (barreSecondaire) barreSecondaire.style.top = navHauteur + 'px';
+  }
+  function cacherNav() {
+    nav.style.transform = 'translateY(-100%)';
+    if (barreSecondaire) barreSecondaire.style.top = '0px';
+  }
+
+  afficherNav(); // état initial cohérent
 
   window.addEventListener('scroll', () => {
     const actuel = window.scrollY;
@@ -37,12 +55,12 @@ function initNavScroll() {
 
     if (Math.abs(diff) < seuil) return;
 
-    if (diff > 0 && actuel > nav.offsetHeight) {
+    if (diff > 0 && actuel > navHauteur) {
       // scroll vers le bas → cacher la nav
-      nav.style.transform = 'translateY(-100%)';
+      cacherNav();
     } else {
       // scroll vers le haut (ou tout en haut de la page) → réafficher la nav
-      nav.style.transform = 'translateY(0)';
+      afficherNav();
     }
     dernierScroll = actuel;
   }, { passive: true });
