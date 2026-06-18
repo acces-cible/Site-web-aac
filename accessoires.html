@@ -190,9 +190,6 @@
     </div>
     <div class="sous-section">
       <div class="sous-titre-ligne"><span data-fr="Coussin de siège" data-en="Seat cushion">Coussin de siège</span></div>
-      <div class="note-clinique" style="margin-top:0;margin-bottom:24px;">
-        <p data-fr="<strong>Coussin contour :</strong> il faut ajouter 2 po de chaque côté du bassin. Ex. : bassin de 11 po → calculer une largeur totale de 15 po → choisir une chaise de 16 po de largeur." data-en="<strong>Contoured cushion:</strong> add 2 in. on each side of the pelvis. E.g.: 11 in. pelvis → calculate a total width of 15 in. → choose a 16 in. wide chair."><strong>Coussin contour :</strong> il faut ajouter 2 po de chaque côté du bassin. Ex. : bassin de 11 po → calculer une largeur totale de 15 po → choisir une chaise de 16 po de largeur.</p>
-      </div>
 
       <div class="siege-config">
         <div>
@@ -218,6 +215,9 @@
           <div class="siege-resume-titre" id="siege-resume-titre">Coussin plat</div>
           <div class="siege-resume-desc" id="siege-resume-desc">Coussin de base sans contour.</div>
           <div class="siege-resume-mesure" id="siege-resume-mesure" style="display:none;">* Mesure anthropométrique requise</div>
+          <div class="note-clinique" id="siege-note-contour" style="display:none;margin-top:16px;">
+            <p data-fr="<strong>Coussin contour :</strong> il faut ajouter 2 po de chaque côté du bassin. Ex. : bassin de 11 po → calculer une largeur totale de 15 po → choisir une chaise de 16 po de largeur." data-en="<strong>Contoured cushion:</strong> add 2 in. on each side of the pelvis. E.g.: 11 in. pelvis → calculate a total width of 15 in. → choose a 16 in. wide chair."><strong>Coussin contour :</strong> il faut ajouter 2 po de chaque côté du bassin. Ex. : bassin de 11 po → calculer une largeur totale de 15 po → choisir une chaise de 16 po de largeur.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -365,6 +365,7 @@ window.addEventListener('scroll', () => {
   const titreEl  = document.getElementById('siege-resume-titre');
   const descEl   = document.getElementById('siege-resume-desc');
   const mesureEl = document.getElementById('siege-resume-mesure');
+  const noteContourEl = document.getElementById('siege-note-contour');
 
   // État courant — base : 'plat' | 'contour' | 'pelvien'
   let etat = { base: 'plat', biseau: null, abd: false, ischion: false };
@@ -431,6 +432,9 @@ window.addEventListener('scroll', () => {
     // Mesure anthropométrique requise : tout sauf Plat seul sans aucune option
     var requiertMesure = etat.base !== 'plat' || etat.biseau || etat.abd || etat.ischion;
     mesureEl.style.display = requiertMesure ? '' : 'none';
+
+    // Note sur le surplus de largeur requis — uniquement pour la base Contour
+    noteContourEl.style.display = contourActif ? '' : 'none';
   }
 
   baseEl.addEventListener('click', function(e) {
