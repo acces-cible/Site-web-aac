@@ -21,8 +21,35 @@ function marquerPageActive() {
     }
   });
 }
+/* ── NAV : cacher au scroll vers le bas, réafficher au scroll vers le haut ── */
+function initNavScroll() {
+  const nav = document.querySelector('.nav');
+  if (!nav) return;
+
+  let dernierScroll = window.scrollY;
+  const seuil = 6; // ignore les micro-mouvements pour éviter le tremblement
+
+  nav.style.transition = 'transform .25s ease';
+
+  window.addEventListener('scroll', () => {
+    const actuel = window.scrollY;
+    const diff = actuel - dernierScroll;
+
+    if (Math.abs(diff) < seuil) return;
+
+    if (diff > 0 && actuel > nav.offsetHeight) {
+      // scroll vers le bas → cacher la nav
+      nav.style.transform = 'translateY(-100%)';
+    } else {
+      // scroll vers le haut (ou tout en haut de la page) → réafficher la nav
+      nav.style.transform = 'translateY(0)';
+    }
+    dernierScroll = actuel;
+  }, { passive: true });
+}
 function initNav() {
   marquerPageActive();
+  initNavScroll();
 }
 document.addEventListener('DOMContentLoaded', () => {
   chargerComposant('nav.html',    'nav-container',    initNav);
@@ -54,21 +81,17 @@ function toggleLangue() {
     if (val) el.innerHTML = val;
   });
 }
-
 /* ── LIGHTBOX (zoom image, partagée sur tout le site) ──
    Usage : ajouter class="zoomable" sur n'importe quelle <img>.
    Le clic ouvre l'image en grand. Échap ou clic hors-image ferme.
    N'affecte jamais les images sans cette classe (ex: swatches couleur). */
 function initLightbox() {
   if (document.getElementById('lightbox-overlay')) return; // déjà injecté
-
   const overlay = document.createElement('div');
   overlay.id = 'lightbox-overlay';
   overlay.innerHTML = '<button id="lightbox-close" aria-label="Fermer">&times;</button><img id="lightbox-img" src="" alt="">';
   document.body.appendChild(overlay);
-
   const imgEl = document.getElementById('lightbox-img');
-
   function ouvrir(src, alt) {
     imgEl.src = src;
     imgEl.alt = alt || '';
@@ -80,7 +103,6 @@ function initLightbox() {
     document.body.style.overflow = '';
     imgEl.src = '';
   }
-
   // Délégation d'événement : capte aussi les images chargées dynamiquement plus tard
   document.addEventListener('click', (e) => {
     const img = e.target.closest('img.zoomable');
