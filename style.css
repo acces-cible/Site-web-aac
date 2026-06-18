@@ -113,7 +113,6 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   color: var(--c-blanc);
   line-height: 1.25;
 }
-/* "Partenaire des ergothérapeutes" en doré */
 .nav-logo-texte small {
   display: block;
   font-family: var(--font-body);
@@ -124,8 +123,6 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   color: var(--c-or);
   margin-top: 2px;
 }
-
-/* Liens nav — majuscules espacées (Option 3) */
 .nav-liens { display: flex; align-items: center; gap: 24px; }
 .nav-liens a {
   font-family: 'Work Sans', sans-serif;
@@ -162,7 +159,6 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 .nav-dropdown-menu a:last-child { border-bottom: none; }
 .nav-dropdown-menu a:hover { background: var(--c-brume); }
 
-/* Bouton Soumission — garde majuscules (CTA nav) */
 .nav-cta {
   background: var(--c-cuivre);
   color: var(--c-blanc) !important;
@@ -315,6 +311,41 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 .footer-bottom { max-width: var(--max-width); margin: 0 auto; padding: 20px 60px 28px; border-top: 1px solid rgba(255,255,255,.05); display: flex; justify-content: space-between; align-items: center; }
 .footer-copyright { font-family: var(--font-body); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: rgba(246,242,235,.2); }
 .footer-fab { font-family: var(--font-script); font-size: 15px; color: rgba(192,135,74,.4); }
+
+/* ── LIGHTBOX (zoom image, partagée sur tout le site) ── */
+.zoomable { cursor: zoom-in; }
+#lightbox-overlay {
+  display: none;
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(20,16,12,.88);
+  align-items: center; justify-content: center;
+  padding: 40px;
+  animation: lightboxFadeIn .18s ease;
+}
+#lightbox-overlay.ouvert { display: flex; }
+#lightbox-overlay img {
+  max-width: 92vw; max-height: 88vh;
+  width: auto; height: auto;
+  object-fit: contain;
+  box-shadow: 0 12px 48px rgba(0,0,0,.4);
+  border-radius: 2px;
+}
+#lightbox-close {
+  position: absolute; top: 20px; right: 28px;
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,.75);
+  font-size: 28px; line-height: 1;
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 50%;
+  transition: color .2s, border-color .2s, background .2s;
+}
+#lightbox-close:hover { color: #fff; border-color: rgba(255,255,255,.5); background: rgba(255,255,255,.06); }
+@keyframes lightboxFadeIn { from { opacity: 0; } to { opacity: 1; } }
+@media (max-width: 768px) {
+  #lightbox-overlay { padding: 20px; }
+  #lightbox-close { top: 12px; right: 12px; width: 36px; height: 36px; font-size: 24px; }
+}
 
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
