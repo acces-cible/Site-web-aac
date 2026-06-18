@@ -282,28 +282,81 @@
     <div class="deux-col">
       <div class="liste-groupe">
         <h3>Ceintures</h3>
-        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Ceinture 2 points <span style="font-size:10px;color:var(--c-cuivre);font-weight:600;">(option A)</span></span><span class="expand-desc">Standard ou rembourrée</span></div></button><div class="expand-panel"><div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div><div style="width:100%;"><p class="expand-panel-desc">Ceinture à deux points d'ancrage.</p>
-          <div class="attache-groupe">
-            <span class="attache-groupe-titre">Type</span>
-            <div class="attache-btns" id="c2-type-btns"></div>
-            <span class="attache-groupe-titre">Attaches disponibles</span>
-            <div class="attache-resultat" id="c2-attaches"></div>
+        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Ceinture 2 points</span><span class="expand-desc">Standard ou rembourrée</span></div></button><div class="expand-panel" id="ceinture-panel-c2points">
+          <div class="expand-photo" id="ceinture-photo-c2points"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div>
+          <div style="width:100%;"><p class="expand-panel-desc">Ceinture à deux points d'ancrage.</p>
+            <div class="attache-groupe">
+              <span class="attache-groupe-titre">Type</span>
+              <div class="attache-btns" id="ceinture-type-c2points"></div>
+              <span class="attache-groupe-titre">Attache</span>
+              <div class="attache-btns" id="ceinture-attache-c2points"></div>
+              <p class="expand-panel-note" id="ceinture-note-c2points" style="display:none;margin-top:8px;"></p>
+            </div>
           </div>
-        </div></div></div>
-        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Ceinture 3 points <span style="font-size:10px;color:var(--c-cuivre);font-weight:600;">(option B)</span></span><span class="expand-desc">Standard ou rembourrée</span></div></button><div class="expand-panel"><div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div><div style="width:100%;"><p class="expand-panel-desc">Trois points d'ancrage pour un maintien accru. Compatible avec le coussin contour avec bloc ABD.</p>
-          <table class="attache-tableau">
-            <tr><th>Type</th><th>Attaches disponibles</th></tr>
-            <tr><td>Standard</td><td><span class="attache-puce">Boucle</span></td></tr>
-            <tr><td>Rembourrée</td><td><span class="attache-puce">Boucle</span><span class="attache-puce">Velcro/velcro</span></td></tr>
-          </table>
-        </div></div></div>
-        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Ceinture couche</span><span class="expand-desc">4 tailles : Garderie, Petite, Moyenne, Grande</span></div></button><div class="expand-panel"><div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div><div><p class="expand-panel-desc">Ceinture large pour un maintien au niveau de l'abdomen et des hanches.</p></div></div></div>
-        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Ceinture thoracique</span><span class="expand-desc">Standard ou rembourrée</span></div></button><div class="expand-panel"><div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div><div><p class="expand-panel-desc">Ceinture au niveau thoracique pour le maintien du tronc supérieur.</p></div></div></div>
+        </div></div>
+        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Ceinture 3 points</span><span class="expand-desc">Standard ou rembourrée</span></div></button><div class="expand-panel" id="ceinture-panel-c3points">
+          <div class="expand-photo" id="ceinture-photo-c3points"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div>
+          <div style="width:100%;"><p class="expand-panel-desc">Trois points d'ancrage pour un maintien accru. Compatible avec le coussin contour avec bloc ABD.</p>
+            <div class="attache-groupe">
+              <span class="attache-groupe-titre">Type</span>
+              <div class="attache-btns" id="ceinture-type-c3points"></div>
+              <span class="attache-groupe-titre">Attache</span>
+              <div class="attache-btns" id="ceinture-attache-c3points"></div>
+              <p class="expand-panel-note" id="ceinture-note-c3points" style="display:none;margin-top:8px;"></p>
+            </div>
+          </div>
+        </div></div>
+        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Ceinture couche</span><span class="expand-desc">4 tailles : Garderie, Petite, Moyenne, Grande</span></div></button><div class="expand-panel" id="ceinture-panel-couche">
+          <div class="expand-photo" id="ceinture-photo-couche"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div>
+          <div style="width:100%;"><p class="expand-panel-desc">Ceinture large pour un maintien au niveau de l'abdomen et des hanches.</p>
+            <div class="attache-groupe">
+              <span class="attache-groupe-titre">Taille</span>
+              <div class="attache-btns" id="ceinture-type-couche"></div>
+              <span class="attache-groupe-titre">Attache</span>
+              <div class="attache-btns" id="ceinture-attache-couche"></div>
+              <p class="expand-panel-note" id="ceinture-note-couche" style="display:none;margin-top:8px;"></p>
+            </div>
+          </div>
+        </div></div>
+        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Ceinture thoracique</span><span class="expand-desc">Standard ou rembourrée</span></div></button><div class="expand-panel" id="ceinture-panel-thoracique">
+          <div class="expand-photo" id="ceinture-photo-thoracique"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div>
+          <div style="width:100%;"><p class="expand-panel-desc">Ceinture au niveau thoracique pour le maintien du tronc supérieur.</p>
+            <div class="attache-groupe">
+              <span class="attache-groupe-titre">Type</span>
+              <div class="attache-btns" id="ceinture-type-thoracique"></div>
+              <span class="attache-groupe-titre">Attache</span>
+              <div class="attache-btns" id="ceinture-attache-thoracique"></div>
+              <p class="expand-panel-note" id="ceinture-note-thoracique" style="display:none;margin-top:8px;"></p>
+            </div>
+          </div>
+        </div></div>
       </div>
       <div class="liste-groupe">
         <h3>Plastrons</h3>
-        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Plastron standard</span><span class="expand-desc">5 tailles selon la largeur des épaules — de Garderie à Très grand</span></div></button><div class="expand-panel"><div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div><div><p class="expand-panel-desc">Plastron en V pour le maintien du tronc supérieur. Taille selon la largeur des épaules.</p></div></div></div>
-        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Plastron en H</span><span class="expand-desc">2 tailles : Petit et Moyen</span></div></button><div class="expand-panel"><div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div><div><p class="expand-panel-desc">Plastron en H pour un maintien bilatéral du tronc. Deux tailles disponibles.</p></div></div></div>
+        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Plastron standard</span><span class="expand-desc">5 tailles selon la largeur des épaules — de Garderie à Très grand</span></div></button><div class="expand-panel" id="ceinture-panel-plastron-standard">
+          <div class="expand-photo" id="ceinture-photo-plastron-standard"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div>
+          <div style="width:100%;"><p class="expand-panel-desc">Plastron en V pour le maintien du tronc supérieur. Taille selon la largeur des épaules.</p>
+            <div class="attache-groupe">
+              <span class="attache-groupe-titre">Taille</span>
+              <div class="attache-btns" id="ceinture-type-plastron-standard"></div>
+              <span class="attache-groupe-titre">Attache</span>
+              <div class="attache-btns" id="ceinture-attache-plastron-standard"></div>
+              <p class="expand-panel-note" id="ceinture-note-plastron-standard" style="display:none;margin-top:8px;"></p>
+            </div>
+          </div>
+        </div></div>
+        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Plastron en H</span><span class="expand-desc">2 tailles : Petit et Moyen</span></div></button><div class="expand-panel" id="ceinture-panel-plastron-h">
+          <div class="expand-photo" id="ceinture-photo-plastron-h"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div>
+          <div style="width:100%;"><p class="expand-panel-desc">Plastron en H pour un maintien bilatéral du tronc.</p>
+            <div class="attache-groupe">
+              <span class="attache-groupe-titre">Taille</span>
+              <div class="attache-btns" id="ceinture-type-plastron-h"></div>
+              <span class="attache-groupe-titre">Attache</span>
+              <div class="attache-btns" id="ceinture-attache-plastron-h"></div>
+              <p class="expand-panel-note" id="ceinture-note-plastron-h" style="display:none;margin-top:8px;"></p>
+            </div>
+          </div>
+        </div></div>
       </div>
     </div>
     <div class="note-clinique"><p><strong>Attaches :</strong> le type d'attache disponible (boucle, velcro/velcro, velcro/anneau, boucle d'auto) varie selon la ceinture choisie. La sélection se fait dans le formulaire de soumission.</p></div>
@@ -486,32 +539,170 @@ window.addEventListener('scroll', () => {
   maj();
 })();
 
-// ── DÉMO COMPARATIVE — Option A (ceinture 2 points) ──────────────
-(function() {
-  const btnsEl = document.getElementById('c2-type-btns');
-  const resEl  = document.getElementById('c2-attaches');
-  if (!btnsEl) return;
-  const ATTACHES = {
-    standard:   ['Boucle', 'Velcro/velcro', 'Velcro/anneau', "Boucle d'auto"],
-    rembourree: ['Boucle', 'Velcro/velcro', 'Velcro/anneau', "Boucle d'auto"]
-  };
-  function bouton(label, value) {
+// ── SÉLECTEUR CEINTURES (Type + Attache, photo dynamique) ────────
+function initSelecteurCeinture(id, config) {
+  const typeEl    = document.getElementById('ceinture-type-' + id);
+  const attacheEl = document.getElementById('ceinture-attache-' + id);
+  const photoEl   = document.getElementById('ceinture-photo-' + id);
+  const noteEl    = document.getElementById('ceinture-note-' + id);
+  if (!typeEl) return;
+
+  let etat = { type: config.groupe1Ordre[0], attache: 'boucle' };
+
+  function bouton(conteneur, label, value) {
     var b = document.createElement('button');
     b.type = 'button'; b.className = 'attache-btn'; b.textContent = label; b.dataset.value = value;
-    btnsEl.appendChild(b); return b;
+    conteneur.appendChild(b); return b;
   }
-  bouton('Standard', 'standard');
-  bouton('Rembourrée', 'rembourree');
-  function maj(val) {
-    btnsEl.querySelectorAll('.attache-btn').forEach(b => b.classList.toggle('actif', b.dataset.value === val));
-    resEl.innerHTML = ATTACHES[val].map(a => '<span class="attache-puce">' + a + '</span>').join('');
+  config.groupe1Ordre.forEach(function(v) { bouton(typeEl, config.groupe1Labels[v], v); });
+  config.attachesOrdre.forEach(function(a) { bouton(attacheEl, config.attachesLabels[a], a); });
+
+  function attachesValides() { return config.attaches[etat.type]; }
+
+  function photoKey() {
+    return config.photoParAttacheSeule ? etat.attache : (etat.type + '_' + etat.attache);
   }
-  btnsEl.addEventListener('click', function(e) {
+
+  function maj() {
+    var valides = attachesValides();
+    // Si l'attache choisie n'est plus valide pour ce groupe1, basculer sur la 1ère valide
+    if (!valides.includes(etat.attache)) etat.attache = valides[0];
+
+    typeEl.querySelectorAll('.attache-btn').forEach(function(b) {
+      b.classList.toggle('actif', b.dataset.value === etat.type);
+    });
+    attacheEl.querySelectorAll('.attache-btn').forEach(function(b) {
+      var valide = valides.includes(b.dataset.value);
+      b.classList.toggle('actif', valide && b.dataset.value === etat.attache);
+      b.classList.toggle('siege-btn-disabled', !valide);
+    });
+
+    // Photo : par attache seule, ou par combinaison groupe1+attache selon la config
+    var src = config.photos && config.photos[photoKey()];
+    if (src) {
+      photoEl.innerHTML = '<img class="zoomable" src="' + src + '" alt="' + config.nom + ' — ' + config.attachesLabels[etat.attache] + '" onerror="this.parentElement.innerHTML=\'<div class=&quot;expand-photo-placeholder&quot;><span>Photo à venir</span></div>\'">';
+    } else {
+      photoEl.innerHTML = '<div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div>';
+    }
+
+    // Note d'avertissement Velcro/velcro
+    if (etat.attache === 'velcro_velcro') {
+      noteEl.style.display = '';
+      noteEl.textContent = "Velcro/velcro : cette attache peut se dégrader avec le temps et l'usage. Nous n'avons pas de contrôle sur sa durabilité et ne pouvons en garantir la tenue à long terme.";
+    } else {
+      noteEl.style.display = 'none';
+    }
+  }
+
+  typeEl.addEventListener('click', function(e) {
     var b = e.target.closest('.attache-btn');
     if (!b) return;
-    maj(b.dataset.value);
+    etat.type = b.dataset.value;
+    maj();
   });
-  maj('standard');
+  attacheEl.addEventListener('click', function(e) {
+    var b = e.target.closest('.attache-btn');
+    if (!b || b.classList.contains('siege-btn-disabled')) return;
+    etat.attache = b.dataset.value;
+    maj();
+  });
+
+  maj();
+}
+
+(function() {
+  const LABELS = {
+    boucle: 'Boucle',
+    velcro_velcro: 'Velcro/velcro',
+    velcro_anneau: 'Velcro/anneau',
+    boucle_auto: "Boucle d'auto"
+  };
+  const TYPE_LABELS = { standard: 'Standard', rembourree: 'Rembourrée' };
+
+  initSelecteurCeinture('c2points', {
+    nom: 'Ceinture 2 points',
+    groupe1Ordre: ['standard', 'rembourree'],
+    groupe1Labels: TYPE_LABELS,
+    attachesLabels: LABELS,
+    attachesOrdre: ['boucle', 'velcro_velcro', 'velcro_anneau', 'boucle_auto'],
+    attaches: {
+      standard:   ['boucle', 'velcro_velcro', 'velcro_anneau', 'boucle_auto'],
+      rembourree: ['boucle', 'velcro_velcro', 'velcro_anneau', 'boucle_auto']
+    },
+    photos: {} // à compléter : 'standard_boucle': 'images/Ceinture/2pts-standard-boucle.jpg', etc.
+  });
+  initSelecteurCeinture('c3points', {
+    nom: 'Ceinture 3 points',
+    groupe1Ordre: ['standard', 'rembourree'],
+    groupe1Labels: TYPE_LABELS,
+    attachesLabels: LABELS,
+    attachesOrdre: ['boucle', 'velcro_velcro'],
+    attaches: {
+      standard:   ['boucle'],
+      rembourree: ['boucle', 'velcro_velcro']
+    },
+    photos: {}
+  });
+  initSelecteurCeinture('thoracique', {
+    nom: 'Ceinture thoracique',
+    groupe1Ordre: ['standard', 'rembourree'],
+    groupe1Labels: TYPE_LABELS,
+    attachesLabels: LABELS,
+    attachesOrdre: ['velcro_velcro', 'boucle', 'velcro_anneau'],
+    attaches: {
+      standard:   ['velcro_velcro', 'boucle', 'velcro_anneau'],
+      rembourree: ['velcro_velcro', 'boucle', 'velcro_anneau']
+    },
+    photos: {}
+  });
+
+  // Ceinture couche — groupe1 = Taille (pas Type), photo basée sur l'attache seule
+  initSelecteurCeinture('couche', {
+    nom: 'Ceinture couche',
+    groupe1Ordre: ['garderie', 'petite', 'moyenne', 'grande'],
+    groupe1Labels: { garderie: 'Garderie', petite: 'Petite', moyenne: 'Moyenne', grande: 'Grande' },
+    attachesLabels: LABELS,
+    attachesOrdre: ['boucle', 'velcro_velcro', 'velcro_anneau'],
+    attaches: {
+      garderie: ['boucle', 'velcro_velcro', 'velcro_anneau'],
+      petite:   ['boucle', 'velcro_velcro'],
+      moyenne:  ['boucle', 'velcro_velcro'],
+      grande:   ['boucle', 'velcro_velcro']
+    },
+    photoParAttacheSeule: true,
+    photos: {} // à compléter : 'boucle': 'images/Ceinture/couche-boucle.jpg', etc.
+  });
+
+  // Plastron standard — groupe1 = Taille, photo basée sur l'attache seule (mêmes attaches partout)
+  initSelecteurCeinture('plastron-standard', {
+    nom: 'Plastron standard',
+    groupe1Ordre: ['garderie', 'petit', 'moyen', 'grand', 'tres-grand'],
+    groupe1Labels: { garderie: 'Garderie', petit: 'Petit', moyen: 'Moyen', grand: 'Grand', 'tres-grand': 'Très grand' },
+    attachesLabels: LABELS,
+    attachesOrdre: ['boucle', 'velcro_velcro'],
+    attaches: {
+      garderie: ['boucle', 'velcro_velcro'], petit: ['boucle', 'velcro_velcro'],
+      moyen: ['boucle', 'velcro_velcro'], grand: ['boucle', 'velcro_velcro'],
+      'tres-grand': ['boucle', 'velcro_velcro']
+    },
+    photoParAttacheSeule: true,
+    photos: {}
+  });
+
+  // Plastron en H — groupe1 = Taille, photo basée sur l'attache seule
+  initSelecteurCeinture('plastron-h', {
+    nom: 'Plastron en H',
+    groupe1Ordre: ['petit', 'moyen'],
+    groupe1Labels: { petit: 'Petit', moyen: 'Moyen' },
+    attachesLabels: LABELS,
+    attachesOrdre: ['boucle', 'velcro_velcro'],
+    attaches: {
+      petit: ['boucle', 'velcro_velcro'],
+      moyen: ['boucle', 'velcro_velcro']
+    },
+    photoParAttacheSeule: true,
+    photos: {}
+  });
 })();
 
 // ── SÉLECTEUR COULEURS ──────────────────────────────────────────
