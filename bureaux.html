@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bureaux adaptés sur mesure — Les Adaptations Accès-Cible</title>
-<meta name="description" content="Bureaux adaptés sur mesure pour enfants handicapés et fauteuils roulants. Pattes en bois ou ajustables, caissons latéraux, découpe ventrale. Fabricant québécois depuis 1990.">
+<meta name="description" content="Bureaux adaptés sur mesure pour enfants handicapés et fauteuils roulants. Structure plywood ou cadre métal ajustable, caissons latéraux, découpe ventrale. Fabricant québécois depuis 1990.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Caveat:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
@@ -24,7 +24,7 @@
 .carnet-photo { position: relative; display: inline-block; transform: rotate(-1.5deg); transform-origin: center bottom; transition: transform .3s; }
 .carnet-photo:hover { transform: rotate(0deg) scale(1.01); }
 .carnet-photo-inner { background: var(--c-blanc); padding: 12px 12px 40px; box-shadow: 0 2px 8px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.06); }
-.carnet-photo-inner img { display: block; width: 100%; max-width: 340px; }
+.carnet-photo-inner img { display: block; width: 100%; max-width: 340px; height: 320px; object-fit: cover; }
 .carnet-caption { font-family: var(--font-script); font-size: 14px; color: var(--c-muted); text-align: center; position: absolute; bottom: 10px; left: 12px; right: 12px; }
 .carnet-scotch { position: absolute; top: -10px; left: 50%; transform: translateX(-50%) rotate(-2deg); width: 52px; height: 18px; background: rgba(220,210,190,.55); background-image: repeating-linear-gradient(90deg,transparent,transparent 3px,rgba(255,255,255,.15) 3px,rgba(255,255,255,.15) 4px); z-index: 2; }
 
@@ -35,8 +35,9 @@
 .entete-sombre h2 { font-family: var(--font-titre); font-size: var(--fs-h2); font-weight: 300; color: var(--c-parchemin); line-height: 1.2; margin-bottom: 10px; }
 .entete-sombre p { font-size: var(--fs-body); color: rgba(246,242,235,.5); max-width: 560px; line-height: 1.8; }
 .pattes-grille { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.1); }
-.patte-carte { background: rgba(30,58,79,.6); padding: 24px 28px; transition: background .2s; display: grid; grid-template-columns: 56px 1fr; gap: 0 20px; align-items: start; }
+.patte-carte { background: rgba(30,58,79,.6); padding: 24px 28px; transition: background .2s; }
 .patte-carte:hover { background: rgba(30,58,79,.9); }
+.patte-haut { display: grid; grid-template-columns: 56px 1fr; gap: 0 20px; align-items: start; margin-bottom: 14px; }
 .patte-icone { margin-top: 4px; opacity: .75; grid-row: span 4; }
 .patte-carte .lbl { color: var(--c-cuivre); margin-bottom: 4px; }
 .patte-carte h3 { font-family: var(--font-titre); font-size: 24px; font-weight: 300; color: var(--c-parchemin); margin-bottom: 12px; }
@@ -47,22 +48,26 @@
 .dim-table td:first-child { color: rgba(246,242,235,.65); width: 55%; }
 .dim-table td:last-child { color: var(--c-parchemin); font-weight: 600; }
 .patte-note { font-size: 12px; color: rgba(246,242,235,.65); line-height: 1.6; font-style: italic; }
+.patte-photo { width: 100%; height: 140px; background: rgba(255,255,255,.04); border: 1px dashed rgba(255,255,255,.15); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; overflow: hidden; margin-top: 4px; }
+.patte-photo img { width: 100%; height: 100%; object-fit: cover; }
+.patte-photo-placeholder { display: flex; flex-direction: column; align-items: center; gap: 6px; color: rgba(255,255,255,.25); }
+.patte-photo-placeholder span { font-family: var(--font-mono); font-size: 9px; }
 
-.plateau-outer { background: var(--c-blanc); border-bottom: 1px solid var(--c-bord); }
-.plateau { max-width: var(--max-width); margin: 0 auto; padding: var(--pad-section); display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+.plateau-outer { background: var(--c-parchemin); border-bottom: 1px solid var(--c-bord); }
+.plateau { max-width: var(--max-width); margin: 0 auto; padding: var(--pad-section); }
+.entete-claire { margin-bottom: 44px; }
 .entete-claire .lbl { margin-bottom: 12px; }
 .entete-claire h2 { font-family: var(--font-titre); font-size: var(--fs-h2); font-weight: 300; color: var(--c-marine); line-height: 1.2; margin-bottom: 14px; }
-.entete-claire > p { color: var(--c-muted); line-height: 1.85; margin-bottom: 24px; }
-.options-liste { border: 1px solid var(--c-bord); }
-.option-item { display: flex; gap: 14px; align-items: flex-start; padding: 14px 16px; border-bottom: 1px solid var(--c-bord); transition: background .15s; }
-.option-item:last-child { border-bottom: none; }
-.option-item:hover { background: var(--c-brume); }
-.option-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--c-cuivre); flex-shrink: 0; margin-top: 7px; }
-.option-item strong { display: block; font-size: 13px; font-weight: 600; color: var(--c-nuit); margin-bottom: 2px; }
-.option-item span { font-size: 12px; color: var(--c-muted); line-height: 1.55; }
-.plateau-image { position: sticky; top: 80px; }
-.plateau-image img { width: 100%; border: 1px solid var(--c-bord); }
-.plateau-image-legende { margin-top: 10px; font-family: var(--font-script); font-size: 14px; color: var(--c-muted); text-align: center; }
+.entete-claire > p { color: var(--c-muted); line-height: 1.85; max-width: 620px; }
+.surface-grille { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--c-bord); border: 1px solid var(--c-bord); }
+.surface-carte { background: var(--c-blanc); padding: 22px 24px; transition: box-shadow .2s; }
+.surface-carte:hover { box-shadow: 0 4px 20px rgba(0,0,0,.06); position: relative; z-index: 1; }
+.surface-photo { width: 100%; height: 150px; background: var(--c-brume); border: 1px dashed var(--c-bord); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 14px; }
+.surface-photo img { width: 100%; height: 100%; object-fit: cover; }
+.surface-photo-placeholder { display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--c-bord); }
+.surface-photo-placeholder span { font-family: var(--font-mono); font-size: 9px; color: var(--c-bord); }
+.surface-carte h3 { font-family: var(--font-titre); font-size: 18px; font-weight: 400; color: var(--c-marine); margin-bottom: 6px; }
+.surface-carte p { font-size: 13px; color: var(--c-muted); line-height: 1.65; }
 
 .caissons-outer { background: var(--c-brume); border-top: 1px solid var(--c-bord); border-bottom: 1px solid var(--c-bord); }
 .caissons { max-width: var(--max-width); margin: 0 auto; padding: var(--pad-section); }
@@ -78,8 +83,9 @@
 .caissons-option { background: var(--c-blanc); border: 1px solid var(--c-bord); padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start; }
 .caissons-option strong { display: block; font-size: 13px; font-weight: 600; color: var(--c-nuit); margin-bottom: 2px; }
 .caissons-option span { font-size: 12px; color: var(--c-muted); line-height: 1.55; }
+.option-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--c-cuivre); flex-shrink: 0; margin-top: 7px; }
 
-.processus-outer { background: var(--c-parchemin); border-bottom: 1px solid var(--c-bord); }
+.processus-outer { background: var(--c-blanc); border-bottom: 1px solid var(--c-bord); }
 .processus { max-width: var(--max-width); margin: 0 auto; padding: var(--pad-section); }
 .processus-entete { text-align: center; margin-bottom: 48px; }
 .processus-entete .lbl { display: block; margin-bottom: 10px; }
@@ -116,8 +122,8 @@
   .hero-h1 { font-size: 32px; }
   .pattes { padding: var(--pad-mobile); }
   .pattes-grille { grid-template-columns: 1fr 1fr; }
-  .plateau { grid-template-columns: 1fr; gap: 32px; padding: var(--pad-mobile); }
-  .plateau-image { position: static; }
+  .plateau { padding: var(--pad-mobile); }
+  .surface-grille { grid-template-columns: 1fr 1fr; }
   .caissons { padding: var(--pad-mobile); }
   .caissons-grille { grid-template-columns: 1fr 1fr; }
   .caissons-options { grid-template-columns: 1fr; }
@@ -130,6 +136,7 @@
 }
 @media (max-width: 540px) {
   .pattes-grille { grid-template-columns: 1fr; }
+  .surface-grille { grid-template-columns: 1fr; }
   .caissons-grille { grid-template-columns: 1fr; }
   .etapes { grid-template-columns: 1fr; }
 }
@@ -143,7 +150,7 @@
   <div class="hero">
     <div class="hero-texte">
       <span class="lbl" data-fr="Bureaux adaptés · Fabriqués au Québec · Depuis 1990" data-en="Adapted desks · Made in Quebec · Since 1990">Bureaux adaptés · Fabriqués au Québec · Depuis 1990</span>
-      <h1 class="hero-h1" data-fr-html="La table qui s'adapte<br>à <em>chaque enfant.</em>" data-en-html="The desk that adapts<br>to <em>every child.</em>">La table qui s'adapte<br>à <em>chaque enfant.</em></h1>
+      <h1 class="hero-h1" data-fr-html="Le bureau qui s'adapte<br>à <em>chaque enfant.</em>" data-en-html="The desk that adapts<br>to <em>every child.</em>">Le bureau qui s'adapte<br>à <em>chaque enfant.</em></h1>
       <p class="hero-sous-titre" data-fr="Chaque bureau est fabriqué selon les dimensions de l'enfant et de son environnement — hauteur exacte, espace fauteuil roulant, caissons de rangement, surface inclinable. Rien n'est standard." data-en="Every desk is built to the child's exact dimensions and environment — precise height, wheelchair clearance, side storage, tiltable surface. Nothing is off the shelf.">Chaque bureau est fabriqué selon les dimensions de l'enfant et de son environnement — hauteur exacte, espace fauteuil roulant, caissons de rangement, surface inclinable. Rien n'est standard.</p>
       <div class="hero-btns">
         <a href="soumission.html" class="btn-primary" data-fr="Demander une soumission →" data-en="Request a quote →">Demander une soumission →</a>
@@ -166,26 +173,38 @@
 <div id="pattes" class="pattes-outer">
   <div class="pattes">
     <div class="entete-sombre">
-      <span class="lbl" data-fr="Types de pattes" data-en="Leg types">Types de pattes</span>
-      <h2 data-fr="Quatre options — du bois massif à l'électrique." data-en="Four options — from solid wood to electric.">Quatre options — du bois massif à l'électrique.</h2>
-      <p data-fr="Les pattes en bois massif s'accordent avec la chaise ERGO. Les modèles ajustables répondent aux milieux scolaires et aux enfants en croissance." data-en="Solid wood legs visually match the ERGO chair. Adjustable models serve school environments and growing children.">Les pattes en bois massif s'accordent avec la chaise ERGO. Les modèles ajustables répondent aux milieux scolaires et aux enfants en croissance.</p>
+      <span class="lbl" data-fr="Types de structure" data-en="Structure types">Types de structure</span>
+      <h2 data-fr="Quatre options — du plywood à l'électrique." data-en="Four options — from plywood to electric.">Quatre options — du plywood à l'électrique.</h2>
+      <p data-fr="La structure en plywood s'accorde avec la chaise ERGO. Les cadres métalliques ajustables répondent aux milieux scolaires et aux enfants en croissance." data-en="The plywood structure visually matches the ERGO chair. Adjustable metal frames serve school environments and growing children.">La structure en plywood s'accorde avec la chaise ERGO. Les cadres métalliques ajustables répondent aux milieux scolaires et aux enfants en croissance.</p>
     </div>
     <div class="pattes-grille">
       <div class="patte-carte">
-        <svg class="patte-icone" width="48" height="40" viewBox="0 0 48 40" fill="none"><rect x="4" y="7" width="40" height="5" rx="1.5" fill="#c0874a" opacity=".8"/><rect x="7" y="12" width="3.5" height="20" rx="1" fill="#c0874a" opacity=".55"/><rect x="37.5" y="12" width="3.5" height="20" rx="1" fill="#c0874a" opacity=".55"/><line x1="7" y1="17" x2="10.5" y2="17" stroke="#c0874a" stroke-width="1.2" opacity=".9"/><line x1="7" y1="21" x2="10.5" y2="21" stroke="#c0874a" stroke-width="1.2" opacity=".9"/><line x1="7" y1="25" x2="10.5" y2="25" stroke="#c0874a" stroke-width="1.2" opacity=".9"/><line x1="37.5" y1="17" x2="41" y2="17" stroke="#c0874a" stroke-width="1.2" opacity=".9"/><line x1="37.5" y1="21" x2="41" y2="21" stroke="#c0874a" stroke-width="1.2" opacity=".9"/><line x1="37.5" y1="25" x2="41" y2="25" stroke="#c0874a" stroke-width="1.2" opacity=".9"/></svg>
-        <div><span class="lbl">Ajustable manuel</span><h3>Petite</h3><table class="dim-table"><tr><td>Dessus de table</td><td>19″ – 31″</td></tr><tr><td>Dessous de table</td><td>16″ – 28″</td></tr></table><p class="patte-note">Poignées et fentes — grande flexibilité de hauteur. Idéale pour les tables basses, garderies et CPE.</p></div>
+        <div class="patte-haut">
+          <svg class="patte-icone" width="48" height="40" viewBox="0 0 48 40" fill="none"><rect x="4" y="7" width="40" height="5" rx="1.5" fill="#c0874a" opacity=".8"/><rect x="7" y="12" width="3.5" height="20" rx="1" fill="#c0874a" opacity=".55"/><rect x="37.5" y="12" width="3.5" height="20" rx="1" fill="#c0874a" opacity=".55"/><line x1="7" y1="17" x2="10.5" y2="17" stroke="#c0874a" stroke-width="1.2" opacity=".9"/><line x1="7" y1="21" x2="10.5" y2="21" stroke="#c0874a" stroke-width="1.2" opacity=".9"/><line x1="7" y1="25" x2="10.5" y2="25" stroke="#c0874a" stroke-width="1.2" opacity=".9"/><line x1="37.5" y1="17" x2="41" y2="17" stroke="#c0874a" stroke-width="1.2" opacity=".9"/><line x1="37.5" y1="21" x2="41" y2="21" stroke="#c0874a" stroke-width="1.2" opacity=".9"/><line x1="37.5" y1="25" x2="41" y2="25" stroke="#c0874a" stroke-width="1.2" opacity=".9"/></svg>
+          <div><span class="lbl">Plywood</span><h3>Petite</h3><table class="dim-table"><tr><td>Dessus de bureau</td><td>19″ – 31″</td></tr><tr><td>Dessous de bureau</td><td>16″ – 28″</td></tr></table><p class="patte-note">Poignées et fentes — grande flexibilité de hauteur. Idéale pour les bureaux bas, garderies et CPE.</p></div>
+        </div>
+        <div class="patte-photo"><div class="patte-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div>
       </div>
       <div class="patte-carte">
-        <svg class="patte-icone" width="48" height="40" viewBox="0 0 48 40" fill="none"><rect x="4" y="5" width="40" height="5" rx="1.5" fill="#c0874a" opacity=".8"/><rect x="7" y="10" width="3.5" height="24" rx="1" fill="#c0874a" opacity=".55"/><rect x="37.5" y="10" width="3.5" height="24" rx="1" fill="#c0874a" opacity=".55"/><line x1="7" y1="16" x2="10.5" y2="16" stroke="#c0874a" stroke-width="1.2" opacity=".9"/><line x1="7" y1="20" x2="10.5" y2="20" stroke="#c0874a" stroke-width="1.2" opacity=".9"/><line x1="7" y1="24" x2="10.5" y2="24" stroke="#c0874a" stroke-width="1.2" opacity=".9"/><line x1="37.5" y1="16" x2="41" y2="16" stroke="#c0874a" stroke-width="1.2" opacity=".9"/><line x1="37.5" y1="20" x2="41" y2="20" stroke="#c0874a" stroke-width="1.2" opacity=".9"/><line x1="37.5" y1="24" x2="41" y2="24" stroke="#c0874a" stroke-width="1.2" opacity=".9"/></svg>
-        <div><span class="lbl">Ajustable manuel</span><h3>Moyenne</h3><table class="dim-table"><tr><td>Dessus de table</td><td>23″ – 35″</td></tr><tr><td>Dessous de table</td><td>20″ – 32″</td></tr></table><p class="patte-note">Poignées et fentes — grande flexibilité. Pour les écoles, CPE et milieux institutionnels.</p></div>
+        <div class="patte-haut">
+          <svg class="patte-icone" width="48" height="40" viewBox="0 0 48 40" fill="none"><rect x="4" y="5" width="40" height="5" rx="1.5" fill="#c0874a" opacity=".8"/><rect x="7" y="10" width="3.5" height="24" rx="1" fill="#c0874a" opacity=".55"/><rect x="37.5" y="10" width="3.5" height="24" rx="1" fill="#c0874a" opacity=".55"/><line x1="7" y1="16" x2="10.5" y2="16" stroke="#c0874a" stroke-width="1.2" opacity=".9"/><line x1="7" y1="20" x2="10.5" y2="20" stroke="#c0874a" stroke-width="1.2" opacity=".9"/><line x1="7" y1="24" x2="10.5" y2="24" stroke="#c0874a" stroke-width="1.2" opacity=".9"/><line x1="37.5" y1="16" x2="41" y2="16" stroke="#c0874a" stroke-width="1.2" opacity=".9"/><line x1="37.5" y1="20" x2="41" y2="20" stroke="#c0874a" stroke-width="1.2" opacity=".9"/><line x1="37.5" y1="24" x2="41" y2="24" stroke="#c0874a" stroke-width="1.2" opacity=".9"/></svg>
+          <div><span class="lbl">Plywood</span><h3>Moyenne</h3><table class="dim-table"><tr><td>Dessus de bureau</td><td>23″ – 35″</td></tr><tr><td>Dessous de bureau</td><td>20″ – 32″</td></tr></table><p class="patte-note">Poignées et fentes — grande flexibilité. Pour les écoles, CPE et milieux institutionnels.</p></div>
+        </div>
+        <div class="patte-photo"><div class="patte-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div>
       </div>
       <div class="patte-carte">
-        <svg class="patte-icone" width="48" height="40" viewBox="0 0 48 40" fill="none"><rect x="4" y="4" width="40" height="5" rx="1.5" fill="#c0874a" opacity=".8"/><rect x="6" y="9" width="5" height="28" rx="1" fill="#c0874a" opacity=".55"/><rect x="37" y="9" width="5" height="28" rx="1" fill="#c0874a" opacity=".55"/><rect x="8" y="21" width="1.5" height="16" rx=".5" fill="#c0874a" opacity=".85"/><rect x="38.5" y="21" width="1.5" height="16" rx=".5" fill="#c0874a" opacity=".85"/><line x1="5" y1="21" x2="12" y2="21" stroke="#c0874a" stroke-width="1" opacity=".6"/><line x1="36" y1="21" x2="43" y2="21" stroke="#c0874a" stroke-width="1" opacity=".6"/></svg>
-        <div><span class="lbl">Ajustable</span><h3>Manivelle</h3><table class="dim-table"><tr><td>Dessus de table</td><td>27″ – 47″</td></tr><tr><td>Dessous de table</td><td>24″ – 44″</td></tr></table><p class="patte-note">Réglage facile à la manivelle. Cadre plus large et plus haut — prévoir l'espace requis.</p></div>
+        <div class="patte-haut">
+          <svg class="patte-icone" width="48" height="40" viewBox="0 0 48 40" fill="none"><rect x="4" y="4" width="40" height="5" rx="1.5" fill="#c0874a" opacity=".8"/><rect x="6" y="9" width="5" height="28" rx="1" fill="#c0874a" opacity=".55"/><rect x="37" y="9" width="5" height="28" rx="1" fill="#c0874a" opacity=".55"/><rect x="8" y="21" width="1.5" height="16" rx=".5" fill="#c0874a" opacity=".85"/><rect x="38.5" y="21" width="1.5" height="16" rx=".5" fill="#c0874a" opacity=".85"/><line x1="5" y1="21" x2="12" y2="21" stroke="#c0874a" stroke-width="1" opacity=".6"/><line x1="36" y1="21" x2="43" y2="21" stroke="#c0874a" stroke-width="1" opacity=".6"/></svg>
+          <div><span class="lbl">Cadre métal</span><h3>Manivelle</h3><table class="dim-table"><tr><td>Dessus de bureau</td><td>27″ – 47″</td></tr><tr><td>Dessous de bureau</td><td>24″ – 44″</td></tr></table><p class="patte-note">Réglage facile à la manivelle. Cadre plus large et plus haut — prévoir l'espace requis.</p></div>
+        </div>
+        <div class="patte-photo"><div class="patte-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div>
       </div>
       <div class="patte-carte">
-        <svg class="patte-icone" width="48" height="40" viewBox="0 0 48 40" fill="none"><rect x="4" y="4" width="40" height="5" rx="1.5" fill="#c0874a" opacity=".8"/><rect x="6" y="9" width="5" height="28" rx="1" fill="#c0874a" opacity=".55"/><rect x="37" y="9" width="5" height="28" rx="1" fill="#c0874a" opacity=".55"/><rect x="8" y="21" width="1.5" height="16" rx=".5" fill="#c0874a" opacity=".85"/><rect x="38.5" y="21" width="1.5" height="16" rx=".5" fill="#c0874a" opacity=".85"/><line x1="5" y1="21" x2="12" y2="21" stroke="#c0874a" stroke-width="1" opacity=".6"/><line x1="36" y1="21" x2="43" y2="21" stroke="#c0874a" stroke-width="1" opacity=".6"/><path d="M22 17 L20 24 L24.5 21.5 L22.5 28" stroke="#c0874a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".95"/></svg>
-        <div><span class="lbl">Ajustable</span><h3>Électrique</h3><table class="dim-table"><tr><td>Dessus de table</td><td>27″ – 47″</td></tr><tr><td>Dessous de table</td><td>24″ – 44″</td></tr></table><p class="patte-note">Réglage motorisé à un bouton. Pour les enfants qui ne peuvent pas actionner une manivelle.</p></div>
+        <div class="patte-haut">
+          <svg class="patte-icone" width="48" height="40" viewBox="0 0 48 40" fill="none"><rect x="4" y="4" width="40" height="5" rx="1.5" fill="#c0874a" opacity=".8"/><rect x="6" y="9" width="5" height="28" rx="1" fill="#c0874a" opacity=".55"/><rect x="37" y="9" width="5" height="28" rx="1" fill="#c0874a" opacity=".55"/><rect x="8" y="21" width="1.5" height="16" rx=".5" fill="#c0874a" opacity=".85"/><rect x="38.5" y="21" width="1.5" height="16" rx=".5" fill="#c0874a" opacity=".85"/><line x1="5" y1="21" x2="12" y2="21" stroke="#c0874a" stroke-width="1" opacity=".6"/><line x1="36" y1="21" x2="43" y2="21" stroke="#c0874a" stroke-width="1" opacity=".6"/><path d="M22 17 L20 24 L24.5 21.5 L22.5 28" stroke="#c0874a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".95"/></svg>
+          <div><span class="lbl">Cadre métal</span><h3>Électrique</h3><table class="dim-table"><tr><td>Dessus de bureau</td><td>27″ – 47″</td></tr><tr><td>Dessous de bureau</td><td>24″ – 44″</td></tr></table><p class="patte-note">Réglage motorisé à un bouton. Pour les enfants qui ne peuvent pas actionner une manivelle.</p></div>
+        </div>
+        <div class="patte-photo"><div class="patte-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div>
       </div>
     </div>
   </div>
@@ -197,16 +216,28 @@
       <span class="lbl" data-fr="Surface de travail" data-en="Work surface">Surface de travail</span>
       <h2 data-fr="Une surface conçue pour chaque situation." data-en="A surface designed for every situation.">Une surface conçue pour chaque situation.</h2>
       <p data-fr="Au-delà des dimensions, le plateau peut être configuré avec plusieurs options cliniques selon les besoins de l'enfant." data-en="Beyond dimensions, the surface can be configured with several clinical options based on the child's needs.">Au-delà des dimensions, le plateau peut être configuré avec plusieurs options cliniques selon les besoins de l'enfant.</p>
-      <div class="options-liste">
-        <div class="option-item"><div class="option-dot"></div><div><strong data-fr="Rebord en plastique" data-en="Plastic edge guard">Rebord en plastique</strong><span data-fr="Contour complet ou partiel pour retenir les objets. Position et détails sur mesure." data-en="Full or partial perimeter to hold objects. Position and details custom-made.">Contour complet ou partiel pour retenir les objets. Position et détails sur mesure.</span></div></div>
-        <div class="option-item"><div class="option-dot"></div><div><strong data-fr="Découpe ventrale" data-en="Ventral cutout">Découpe ventrale</strong><span data-fr="Encastrement semi-circulaire : au centre, à gauche ou à droite. Largeur et profondeur sur mesure." data-en="Semi-circular cutout: center, left, or right. Width and depth custom-made.">Encastrement semi-circulaire : au centre, à gauche ou à droite. Largeur et profondeur sur mesure.</span></div></div>
-        <div class="option-item"><div class="option-dot"></div><div><strong data-fr="Surface inclinable + lutrin amovible" data-en="Tilt surface + removable book holder">Surface inclinable + lutrin amovible</strong><span data-fr="Toute la surface, section gauche, droite, ou en U. Vient avec un lutrin amovible." data-en="Full surface, left, right, or U-shape. Includes a removable book holder.">Toute la surface, section gauche, droite, ou en U. Vient avec un lutrin amovible.</span></div></div>
-        <div class="option-item"><div class="option-dot"></div><div><strong data-fr="Espace fauteuil roulant" data-en="Wheelchair clearance">Espace fauteuil roulant</strong><span data-fr="Largeur minimale entre les pattes calculée selon les dimensions du fauteuil. Joystick pris en compte." data-en="Minimum leg clearance from wheelchair dimensions. Joystick clearance included.">Largeur minimale entre les pattes calculée selon les dimensions du fauteuil. Joystick pris en compte.</span></div></div>
-      </div>
     </div>
-    <div class="plateau-image">
-      <img src="images/Bureaux/Bureau_sketch02.png" alt="Bureau adapté — vue plateau et caissons" onerror="this.style.display='none'">
-      <p class="plateau-image-legende" data-fr="— Vue de dessus · découpe ventrale et caissons latéraux" data-en="— Top view · ventral cutout and side storage">— Vue de dessus · découpe ventrale et caissons latéraux</p>
+    <div class="surface-grille">
+      <div class="surface-carte">
+        <div class="surface-photo"><div class="surface-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div>
+        <h3 data-fr="Rebord en plastique" data-en="Plastic edge guard">Rebord en plastique</h3>
+        <p data-fr="Contour complet ou partiel pour retenir les objets. Position et détails sur mesure." data-en="Full or partial perimeter to hold objects. Position and details custom-made.">Contour complet ou partiel pour retenir les objets. Position et détails sur mesure.</p>
+      </div>
+      <div class="surface-carte">
+        <div class="surface-photo"><div class="surface-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div>
+        <h3 data-fr="Découpe ventrale" data-en="Ventral cutout">Découpe ventrale</h3>
+        <p data-fr="Encastrement semi-circulaire : au centre, à gauche ou à droite. Largeur et profondeur sur mesure." data-en="Semi-circular cutout: center, left, or right. Width and depth custom-made.">Encastrement semi-circulaire : au centre, à gauche ou à droite. Largeur et profondeur sur mesure.</p>
+      </div>
+      <div class="surface-carte">
+        <div class="surface-photo"><div class="surface-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div>
+        <h3 data-fr="Surface inclinable + lutrin amovible" data-en="Tilt surface + removable book holder">Surface inclinable + lutrin amovible</h3>
+        <p data-fr="Toute la surface, section gauche, droite, ou en U. Vient avec un lutrin amovible." data-en="Full surface, left, right, or U-shape. Includes a removable book holder.">Toute la surface, section gauche, droite, ou en U. Vient avec un lutrin amovible.</p>
+      </div>
+      <div class="surface-carte">
+        <div class="surface-photo"><div class="surface-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div>
+        <h3 data-fr="Espace fauteuil roulant" data-en="Wheelchair clearance">Espace fauteuil roulant</h3>
+        <p data-fr="Largeur minimale entre les pattes calculée selon les dimensions du fauteuil. Joystick pris en compte." data-en="Minimum leg clearance from wheelchair dimensions. Joystick clearance included.">Largeur minimale entre les pattes calculée selon les dimensions du fauteuil. Joystick pris en compte.</p>
+      </div>
     </div>
   </div>
 </div>
@@ -216,7 +247,7 @@
     <div class="entete-claire" style="margin-bottom:36px;">
       <span class="lbl" data-fr="Options de caisson" data-en="Storage options">Options de caisson</span>
       <h2 data-fr="Le rangement intégré, à portée de l'enfant." data-en="Integrated storage, within the child's reach.">Le rangement intégré, à portée de l'enfant.</h2>
-      <p data-fr="Les caissons s'accrochent directement à la table. Plusieurs configurations — ouverture sur le dessus, sur le devant, ou tiroir rétractable." data-en="Storage units attach directly to the desk. Multiple configurations — top opening, front opening, or retractable drawer.">Les caissons s'accrochent directement à la table. Plusieurs configurations — ouverture sur le dessus, sur le devant, ou tiroir rétractable.</p>
+      <p data-fr="Les caissons s'accrochent directement au bureau. Plusieurs configurations — ouverture sur le dessus, sur le devant, ou tiroir rétractable." data-en="Storage units attach directly to the desk. Multiple configurations — top opening, front opening, or retractable drawer.">Les caissons s'accrochent directement au bureau. Plusieurs configurations — ouverture sur le dessus, sur le devant, ou tiroir rétractable.</p>
     </div>
     <div class="caissons-grille">
       <div class="caisson-carte"><img src="images/Bureaux/Caisson_2_sections__Ouverture_sur_le_dessus.png" alt="Caisson 2 sections — ouverture sur le dessus"><div class="caisson-corps"><span class="lbl">2 sections</span><h3>Ouverture sur le dessus</h3><p>Accès par le haut. Idéal pour crayons et petits matériels.</p></div></div>
@@ -225,7 +256,7 @@
     </div>
     <div class="caissons-options">
       <div class="caissons-option"><div class="option-dot"></div><div><strong>Caisson rétractable</strong><span>Tiroir coulissant — intérieur ou extérieur. 2 sections.</span></div></div>
-      <div class="caissons-option"><div class="option-dot"></div><div><strong>Position au choix</strong><span>Gauche, droite, ou des deux côtés de la table.</span></div></div>
+      <div class="caissons-option"><div class="option-dot"></div><div><strong>Position au choix</strong><span>Gauche, droite, ou des deux côtés du bureau.</span></div></div>
       <div class="caissons-option"><div class="option-dot"></div><div><strong>Caisson amovible</strong><span>Option pour déplacer le caisson des deux côtés librement.</span></div></div>
       <div class="caissons-option"><div class="option-dot"></div><div><strong>2 ou 3 sections intérieures</strong><span>Fixé à l'intérieur des pattes — différentes configurations d'ouverture.</span></div></div>
     </div>
@@ -249,7 +280,7 @@
 
 <div class="cta-outer">
   <div class="cta-inner">
-    <div class="cta-citation"><span class="lbl">Un mot des ergothérapeutes</span><blockquote class="cta-citation-texte">« Je décris l'enfant. Claude dessine la table.<br>Deux semaines plus tard, elle est parfaite. »</blockquote><p class="cta-citation-source">— Ergothérapeute, région de Montréal</p><div class="cta-regle"></div></div>
+    <div class="cta-citation"><span class="lbl">Un mot des ergothérapeutes</span><blockquote class="cta-citation-texte">« Je décris l'enfant. Claude dessine le bureau.<br>Quelques semaines plus tard, il est parfait. »</blockquote><p class="cta-citation-source">— Ergothérapeute, région de Montréal</p><div class="cta-regle"></div></div>
     <div class="cta-action">
       <h2 class="cta-titre" data-fr-html="Vous cherchez un bureau<br>pour un <em>enfant en particulier ?</em>" data-en-html="Looking for a desk<br>for <em>a specific child?</em>">Vous cherchez un bureau<br>pour un <em>enfant en particulier ?</em></h2>
       <ul class="cta-liste"><li>Réponse sous 48 h — devis sans engagement</li><li>Fabrication artisanale au Québec · délai 4 à 6 semaines</li><li>Compatible avec toutes les chaises ERGO</li></ul>
