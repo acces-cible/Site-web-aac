@@ -54,7 +54,7 @@
 .sous-section { margin-bottom: 52px; }
 .sous-section:last-child { margin-bottom: 0; }
 .sous-titre-ligne { font-family: var(--font-titre); font-size: 22px; font-weight: 400; color: var(--c-marine); padding-bottom: 10px; border-bottom: 1px solid var(--c-bord); margin-bottom: 20px; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
-.sous-titre-note { font-family: var(--font-mono); font-size: 9px; color: var(--c-muted); }
+.sous-titre-note { font-family: var(--font-mono); font-size: 12px; color: var(--c-muted); }
 .coussin-grille { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--c-bord); border: 1px solid var(--c-bord); }
 .coussin-grille-3 { grid-template-columns: repeat(3, 1fr); }
 .coussin-carte { background: var(--c-blanc); overflow: hidden; transition: box-shadow .15s; }
@@ -157,23 +157,24 @@
     <div class="entete-section">
       <span class="lbl">Section 01</span>
       <h2 data-fr="Coussins" data-en="Cushions">Coussins</h2>
-      <p data-fr="Fabriqués sur mesure selon les dimensions de la chaise. Disponibles en vinyle qualité marine dans les 13 couleurs de la gamme." data-en="Custom-made to the chair's dimensions. Available in marine-grade vinyl in 13 colours.">Fabriqués sur mesure selon les dimensions de la chaise. Disponibles en vinyle qualité marine dans les 13 couleurs de la gamme.</p>
+      <p data-fr-html="Fabriqués sur mesure selon les dimensions de la chaise. Disponibles en vinyle qualité marine dans les <a href=&quot;#couleurs&quot; style=&quot;color:var(--c-cuivre);text-decoration:underline;&quot;>13 couleurs de la gamme</a>." data-en-html="Custom-made to the chair's dimensions. Available in marine-grade vinyl in <a href=&quot;#couleurs&quot; style=&quot;color:var(--c-cuivre);text-decoration:underline;&quot;>13 colours</a>.">Fabriqués sur mesure selon les dimensions de la chaise. Disponibles en vinyle qualité marine dans les <a href="#couleurs" style="color:var(--c-cuivre);text-decoration:underline;">13 couleurs de la gamme</a>.</p>
     </div>
     <div class="sous-section">
       <div class="sous-titre-ligne" data-fr="Coussin de dos" data-en="Back cushion">Coussin de dos</div>
       <div class="coussin-grille">
-        <div class="coussin-carte"><div class="coussin-photo"><div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div><div class="coussin-corps"><span class="lbl">Dos</span><h3>Contour léger</h3><p>Légère inclinaison latérale pour un soutien doux du tronc.</p></div></div>
-        <div class="coussin-carte"><div class="coussin-photo"><div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div><div class="coussin-corps"><span class="lbl">Dos</span><h3>Contour moyen</h3><p>Contour marqué pour un soutien latéral modéré.</p></div></div>
-        <div class="coussin-carte"><div class="coussin-photo"><div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div><div class="coussin-corps"><span class="lbl">Dos</span><h3>Contour accentué</h3><p>Soutien latéral prononcé pour les besoins posturaux importants.</p></div></div>
-        <div class="coussin-carte"><div class="coussin-photo"><div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div><div class="coussin-corps"><span class="lbl">Dos</span><h3>Appui thoracique</h3><p>Vient avec un coussin lombaire et un petit coussin plat dans le haut du dossier.</p></div></div>
+        <div class="coussin-carte"><div class="coussin-photo"><div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div><div class="coussin-corps"><h3>Contour léger</h3><p>Légère inclinaison latérale pour un soutien doux du tronc.</p></div></div>
+        <div class="coussin-carte"><div class="coussin-photo"><div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div><div class="coussin-corps"><h3>Contour moyen</h3><p>Contour marqué pour un soutien latéral modéré.</p></div></div>
+        <div class="coussin-carte"><div class="coussin-photo"><div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div><div class="coussin-corps"><h3>Contour accentué</h3><p>Soutien latéral prononcé pour les besoins posturaux importants.</p></div></div>
+        <div class="coussin-carte"><div class="coussin-photo"><div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div><div class="coussin-corps"><h3>Appui thoracique</h3><p>Pour un soutien sévère. Vient avec un coussin lombaire et un petit coussin plat dans le haut du dossier.</p></div></div>
       </div>
     </div>
     <div class="sous-section">
       <div class="sous-titre-ligne"><span data-fr="Coussin de siège" data-en="Seat cushion">Coussin de siège</span><span class="sous-titre-note">* Coussin contour : 2 po de surplus de bassin requis</span></div>
+      <p style="font-size:13px;color:var(--c-muted);line-height:1.7;margin-bottom:20px;max-width:680px;" data-fr="On choisit d'abord une base — plat ou contour. Pour un coussin contour, des options s'ajoutent au besoin, combinables entre elles : biseauté (postérieur ou antérieur), bloc ABD, bloc d'ischion. Un, deux ou les trois à la fois, chacun avec supplément." data-en="Start by choosing a base — flat or contoured. For a contoured cushion, options can be added as needed and combined: bevel (posterior or anterior), ABD block, ischial block. One, two, or all three together, each with a surcharge.">On choisit d'abord une base — plat ou contour. Pour un coussin contour, des options s'ajoutent au besoin, combinables entre elles : biseauté (postérieur ou antérieur), bloc ABD, bloc d'ischion. Un, deux ou les trois à la fois, chacun avec supplément.</p>
       <div class="coussin-grille coussin-grille-3">
-        <div class="coussin-carte"><div class="coussin-photo"><div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div><div class="coussin-corps"><span class="lbl">Siège</span><h3>Coussin plat</h3><p>Coussin de base sans contour. Compatible avec l'appui-pelvien.</p></div></div>
-        <div class="coussin-carte"><div class="coussin-photo"><div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div><div class="coussin-corps"><span class="lbl">Siège</span><h3>Coussin contour</h3><p>Peut se combiner avec biseauté, bloc ABD, bloc d'ischion — jusqu'aux trois.</p><div class="variantes"><span class="variante">Biseauté · 5° / 8-9° / 12°+</span><span class="variante">Bloc ABD</span><span class="variante">Bloc d'ischion</span></div></div></div>
-        <div class="coussin-carte"><div class="coussin-photo"><div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div><div class="coussin-corps"><span class="lbl">Siège</span><h3>Appui-pelvien</h3><p>Support rembourré pour le positionnement pelvien latéral. Vient avec un coussin plat.</p></div></div>
+        <div class="coussin-carte"><div class="coussin-photo"><div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div><div class="coussin-corps"><h3>Coussin plat</h3><p>Coussin de base sans contour. Compatible avec l'appui-pelvien.</p></div></div>
+        <div class="coussin-carte"><div class="coussin-photo"><div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div><div class="coussin-corps"><h3>Coussin contour</h3><p>Base avec contour. Options ci-dessous combinables au besoin, avec supplément.</p><div class="variantes"><span class="variante">Biseauté postérieur</span><span class="variante">Biseauté antérieur</span><span class="variante">+ Bloc ABD</span><span class="variante">+ Bloc d'ischion</span></div></div></div>
+        <div class="coussin-carte"><div class="coussin-photo"><div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div><div class="coussin-corps"><h3>Appui-pelvien</h3><p>Support rembourré pour le positionnement pelvien latéral. Vient avec un coussin plat.</p></div></div>
       </div>
     </div>
   </div>
@@ -197,7 +198,7 @@
       </div>
 
       <!-- Photo chaise -->
-      <div style="width:100%;max-width:380px;height:340px;display:flex;align-items:center;justify-content:center;background:var(--c-parchemin);border-radius:8px;">
+      <div style="width:100%;max-width:560px;height:480px;display:flex;align-items:center;justify-content:center;background:var(--c-parchemin);border-radius:8px;">
         <img id="couleur-chaise-img"
           src="images/Couleur/Chaise Grise R193 B193 G193 (1).png"
           alt="Chaise ERGO Gris moyen"
@@ -207,7 +208,7 @@
       <!-- Swatches -->
       <div id="couleur-swatches" style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;max-width:520px;"></div>
 
-      <p style="font-size:11px;color:var(--c-muted);font-style:italic;text-align:center;"
+      <p style="font-size:14px;color:var(--c-muted);font-style:italic;text-align:center;"
         data-fr="Les teintes peuvent légèrement varier selon l'écran."
         data-en="Colours may vary on screen.">
         Les teintes peuvent légèrement varier selon l'écran.
