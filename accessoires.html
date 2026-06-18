@@ -116,6 +116,19 @@
 .siege-resume-mesure { font-size: 12px; color: var(--c-cuivre); font-style: italic; margin-top: 10px; }
 @media (max-width: 900px) { .siege-config { grid-template-columns: 1fr; } }
 
+/* ── COMPARAISON : Option A boutons / Option B tableau (attaches ceintures) ── */
+.attache-groupe { margin-top: 14px; }
+.attache-groupe-titre { font-family: var(--font-label); font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--c-muted); margin-bottom: 8px; display: block; }
+.attache-btns { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.attache-btn { font-family: var(--font-body); font-size: 12px; font-weight: 500; padding: 7px 12px; border: 1px solid var(--c-bord); border-radius: var(--radius); background: var(--c-blanc); color: var(--c-nuit); transition: border-color .15s, background .15s, color .15s; }
+.attache-btn:hover { border-color: var(--c-cuivre); }
+.attache-btn.actif { background: var(--c-marine); border-color: var(--c-marine); color: var(--c-parchemin); }
+.attache-resultat { font-size: 12px; color: var(--c-muted); }
+.attache-tableau { width: 100%; border-collapse: collapse; margin-top: 10px; }
+.attache-tableau th { font-family: var(--font-label); font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--c-cuivre); text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--c-bord); }
+.attache-tableau td { font-size: 12px; color: var(--c-nuit); padding: 6px 10px; border-bottom: 1px solid var(--c-brume); vertical-align: top; }
+.attache-puce { display: inline-block; font-size: 11px; background: var(--c-brume); color: var(--c-nuit); padding: 2px 8px; border-radius: 10px; margin: 2px 3px 2px 0; }
+
 /* CTA : styles partagés dans style.css (.cta-outer, .cta-citation-texte, etc.) — ne pas dupliquer ici */
 @media (max-width: 900px) {
   .hero { padding: var(--pad-mobile); flex-direction: column; align-items: flex-start; gap: 24px; }
@@ -269,8 +282,21 @@
     <div class="deux-col">
       <div class="liste-groupe">
         <h3>Ceintures</h3>
-        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Ceinture 2 points</span><span class="expand-desc">Standard ou rembourrée</span></div></button><div class="expand-panel"><div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div><div><p class="expand-panel-desc">Ceinture à deux points d'ancrage. Version standard ou rembourrée pour plus de confort.</p></div></div></div>
-        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Ceinture 3 points</span><span class="expand-desc">Standard ou rembourrée</span></div></button><div class="expand-panel"><div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div><div><p class="expand-panel-desc">Trois points d'ancrage pour un maintien accru. Compatible avec le coussin contour avec bloc ABD.</p></div></div></div>
+        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Ceinture 2 points <span style="font-size:10px;color:var(--c-cuivre);font-weight:600;">(option A)</span></span><span class="expand-desc">Standard ou rembourrée</span></div></button><div class="expand-panel"><div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div><div style="width:100%;"><p class="expand-panel-desc">Ceinture à deux points d'ancrage.</p>
+          <div class="attache-groupe">
+            <span class="attache-groupe-titre">Type</span>
+            <div class="attache-btns" id="c2-type-btns"></div>
+            <span class="attache-groupe-titre">Attaches disponibles</span>
+            <div class="attache-resultat" id="c2-attaches"></div>
+          </div>
+        </div></div></div>
+        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Ceinture 3 points <span style="font-size:10px;color:var(--c-cuivre);font-weight:600;">(option B)</span></span><span class="expand-desc">Standard ou rembourrée</span></div></button><div class="expand-panel"><div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div><div style="width:100%;"><p class="expand-panel-desc">Trois points d'ancrage pour un maintien accru. Compatible avec le coussin contour avec bloc ABD.</p>
+          <table class="attache-tableau">
+            <tr><th>Type</th><th>Attaches disponibles</th></tr>
+            <tr><td>Standard</td><td><span class="attache-puce">Boucle</span></td></tr>
+            <tr><td>Rembourrée</td><td><span class="attache-puce">Boucle</span><span class="attache-puce">Velcro/velcro</span></td></tr>
+          </table>
+        </div></div></div>
         <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Ceinture couche</span><span class="expand-desc">4 tailles : Garderie, Petite, Moyenne, Grande</span></div></button><div class="expand-panel"><div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div><div><p class="expand-panel-desc">Ceinture large pour un maintien au niveau de l'abdomen et des hanches.</p></div></div></div>
         <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Ceinture thoracique</span><span class="expand-desc">Standard ou rembourrée</span></div></button><div class="expand-panel"><div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div><div><p class="expand-panel-desc">Ceinture au niveau thoracique pour le maintien du tronc supérieur.</p></div></div></div>
       </div>
@@ -458,6 +484,34 @@ window.addEventListener('scroll', () => {
   });
 
   maj();
+})();
+
+// ── DÉMO COMPARATIVE — Option A (ceinture 2 points) ──────────────
+(function() {
+  const btnsEl = document.getElementById('c2-type-btns');
+  const resEl  = document.getElementById('c2-attaches');
+  if (!btnsEl) return;
+  const ATTACHES = {
+    standard:   ['Boucle', 'Velcro/velcro', 'Velcro/anneau', "Boucle d'auto"],
+    rembourree: ['Boucle', 'Velcro/velcro', 'Velcro/anneau', "Boucle d'auto"]
+  };
+  function bouton(label, value) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'attache-btn'; b.textContent = label; b.dataset.value = value;
+    btnsEl.appendChild(b); return b;
+  }
+  bouton('Standard', 'standard');
+  bouton('Rembourrée', 'rembourree');
+  function maj(val) {
+    btnsEl.querySelectorAll('.attache-btn').forEach(b => b.classList.toggle('actif', b.dataset.value === val));
+    resEl.innerHTML = ATTACHES[val].map(a => '<span class="attache-puce">' + a + '</span>').join('');
+  }
+  btnsEl.addEventListener('click', function(e) {
+    var b = e.target.closest('.attache-btn');
+    if (!b) return;
+    maj(b.dataset.value);
+  });
+  maj('standard');
 })();
 
 // ── SÉLECTEUR COULEURS ──────────────────────────────────────────
