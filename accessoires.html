@@ -390,6 +390,18 @@
       </div>
       <div class="liste-groupe">
         <h3>Équipements</h3>
+        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Bande antidérapante sur le siège</span><span class="expand-desc">Prévient le glissement vers l'avant</span></div></button><div class="expand-panel"><div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div><div><p class="expand-panel-desc">Prévient le glissement vers l'avant de l'enfant sur le siège.</p></div></div></div>
+        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Barres de soutien (Grab bar)</span><span class="expand-desc">Appui des mains</span></div></button><div class="expand-panel"><div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div><div><p class="expand-panel-desc">Barres latérales pour aider le bénéficiaire à monter sur la chaise.</p></div></div></div>
+        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Base élargie</span><span class="expand-desc">Avec options sur roulette et/ou inclinable</span></div></button><div class="expand-panel" id="base-elargie-panel">
+          <div class="expand-photo" id="base-elargie-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div>
+          <div style="width:100%;">
+            <p class="expand-panel-desc" id="base-elargie-desc">Base au sol pour empêcher la chaise de basculer lors de rocking important.</p>
+            <div class="attache-groupe">
+              <span class="attache-groupe-titre">Options combinables (au besoin)</span>
+              <div class="attache-btns" id="base-elargie-options"></div>
+            </div>
+          </div>
+        </div></div>
         <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Cabaret</span><span class="expand-desc">4 formats selon la largeur de chaise</span></div></button><div class="expand-panel" id="cabaret-panel">
           <div class="expand-photo" id="cabaret-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div>
           <div style="width:100%;">
@@ -401,35 +413,7 @@
             <p class="expand-panel-note">Compatibilité vérifiée dans le formulaire</p>
           </div>
         </div></div>
-        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Barres de soutien (Grab bar)</span><span class="expand-desc">Appui des mains</span></div></button><div class="expand-panel"><div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div><div><p class="expand-panel-desc">Barres latérales pour aider le bénéficiaire à monter sur la chaise.</p></div></div></div>
-        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Bande antidérapante sur le siège</span><span class="expand-desc">Prévient le glissement vers l'avant</span></div></button><div class="expand-panel"><div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div><div><p class="expand-panel-desc">Prévient le glissement vers l'avant de l'enfant sur le siège.</p></div></div></div>
         <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Poignées d'ajustement</span><span class="expand-desc">Pour faciliter l'ajustement de la chaise</span></div></button><div class="expand-panel"><div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div><div><p class="expand-panel-desc">Facilitent le réglage rapide de la chaise au complet.</p></div></div></div>
-      </div>
-    </div>
-
-    <div class="sous-section" style="margin-top:48px;">
-      <div class="sous-titre-ligne"><span data-fr="Base élargie" data-en="Widened base">Base élargie</span></div>
-
-      <div class="siege-config">
-        <div>
-          <div class="siege-groupe">
-            <span class="siege-groupe-titre" data-fr="Base (toujours incluse)" data-en="Base (always included)">Base (toujours incluse)</span>
-            <div class="siege-options" id="base-elargie-base-options"></div>
-          </div>
-          <div class="siege-groupe">
-            <span class="siege-groupe-titre" data-fr="Options combinables (au besoin)" data-en="Combinable options (optional)">Options combinables (au besoin)</span>
-            <div class="siege-options" id="base-elargie-options"></div>
-          </div>
-          <p style="font-size:12px;color:var(--c-muted);line-height:1.6;margin-top:6px;" data-fr="Les options de base élargie peuvent se combiner entre elles au besoin." data-en="Widened base options can be combined with one another as needed.">Les options de base élargie peuvent se combiner entre elles au besoin.</p>
-        </div>
-
-        <div class="siege-affichage">
-          <div class="siege-photo" id="base-elargie-photo">
-            <div class="siege-photo-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div>
-          </div>
-          <div class="siege-resume-titre" id="base-elargie-resume-titre">Base élargie</div>
-          <div class="siege-resume-desc" id="base-elargie-resume-desc">Base au sol pour empêcher la chaise de basculer lors de rocking important.</div>
-        </div>
       </div>
     </div>
   </div>
@@ -599,30 +583,23 @@ window.addEventListener('scroll', () => {
 
 // ── SÉLECTEUR BASE ÉLARGIE ────────────────────────────────────────
 (function() {
-  const baseEl = document.getElementById('base-elargie-base-options');
   const optsEl = document.getElementById('base-elargie-options');
-  if (!baseEl) return;
+  if (!optsEl) return;
 
   const photoEl = document.getElementById('base-elargie-photo');
-  const titreEl = document.getElementById('base-elargie-resume-titre');
-  const descEl  = document.getElementById('base-elargie-resume-desc');
+  const descEl  = document.getElementById('base-elargie-desc');
 
-  // Base toujours active (un seul état possible, juste pour cohérence visuelle avec le coussin de siège)
   let etat = { roulette: false, inclinable: false };
 
   function bouton(conteneur, label, value) {
     var b = document.createElement('button');
     b.type = 'button';
-    b.className = 'siege-btn';
+    b.className = 'attache-btn';
     b.textContent = label;
     b.dataset.value = value;
     conteneur.appendChild(b);
     return b;
   }
-
-  var btnBase = bouton(baseEl, 'Base élargie', 'base');
-  btnBase.classList.add('actif');
-  btnBase.style.pointerEvents = 'none';
 
   bouton(optsEl, '+ Sur roulette', 'roulette');
   bouton(optsEl, '+ Inclinable', 'inclinable');
@@ -642,34 +619,25 @@ window.addEventListener('scroll', () => {
   }
 
   function maj() {
-    optsEl.querySelectorAll('.siege-btn').forEach(function(b) {
+    optsEl.querySelectorAll('.attache-btn').forEach(function(b) {
       var actif = (b.dataset.value === 'roulette' && etat.roulette) || (b.dataset.value === 'inclinable' && etat.inclinable);
       b.classList.toggle('actif', actif);
     });
 
-    var details = [];
-    if (etat.roulette) details.push('sur roulette');
-    if (etat.inclinable) details.push('inclinable');
-
-    if (!details.length) {
-      titreEl.textContent = 'Base élargie';
-      descEl.textContent = 'Base au sol pour empêcher la chaise de basculer lors de rocking important.';
-    } else {
-      titreEl.textContent = 'Base élargie ' + details.join(' et ');
-      var desc = 'Base au sol pour empêcher la chaise de basculer lors de rocking important.';
-      if (etat.roulette) desc += ' Permet de déplacer la chaise avec moins d\'effort.';
-      if (etat.inclinable) desc += ' Permet d\'incliner la chaise vers l\'arrière.';
-      descEl.textContent = desc;
-    }
+    var desc = 'Base au sol pour empêcher la chaise de basculer lors de rocking important.';
+    if (etat.roulette) desc += ' Permet de déplacer la chaise avec moins d\'effort.';
+    if (etat.inclinable) desc += ' Permet d\'incliner la chaise vers l\'arrière.';
+    descEl.textContent = desc;
 
     var src = PHOTOS[photoKey()];
+    var alt = 'Base élargie' + (etat.roulette ? ' sur roulette' : '') + (etat.inclinable ? ' inclinable' : '');
     if (src) {
-      photoEl.innerHTML = '<img class="zoomable" src="' + src + '" alt="' + titreEl.textContent + '" onerror="this.parentElement.innerHTML=\'<div class=&quot;siege-photo-placeholder&quot;><span>Photo à venir</span></div>\'">';
+      photoEl.innerHTML = '<img class="zoomable" src="' + src + '" alt="' + alt + '" onerror="this.parentElement.innerHTML=\'<div class=&quot;expand-photo-placeholder&quot;><span>Photo à venir</span></div>\'">';
     }
   }
 
   optsEl.addEventListener('click', function(e) {
-    var b = e.target.closest('.siege-btn');
+    var b = e.target.closest('.attache-btn');
     if (!b) return;
     if (b.dataset.value === 'roulette') etat.roulette = !etat.roulette;
     if (b.dataset.value === 'inclinable') etat.inclinable = !etat.inclinable;
