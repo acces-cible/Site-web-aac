@@ -60,7 +60,14 @@
 .specs-table td { padding: 8px 0; font-size: 12px; }
 .specs-table td:first-child { color: var(--c-muted); width: 55%; padding-right: 16px; }
 .specs-table td:last-child { color: var(--c-nuit); font-weight: 500; }
-.panel-note { font-family: var(--font-script); font-size: 13px; color: var(--c-muted); margin-bottom: 24px; padding-top: 6px; border-top: 1px solid var(--c-bord); }
+.panel-note { font-family: var(--font-script); font-size: 17px; color: var(--c-muted); margin-bottom: 24px; padding-top: 6px; border-top: 1px solid var(--c-bord); }
+
+.option-groupe { margin-bottom: 22px; }
+.option-titre { font-family: var(--font-mono); font-size: 9px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--c-muted); margin-bottom: 10px; display: block; }
+.option-rangee { display: flex; gap: 8px; flex-wrap: wrap; }
+.option-btn { font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--c-marine); background: var(--c-blanc); border: 1px solid var(--c-bord); border-radius: var(--radius); padding: 9px 18px; cursor: pointer; transition: background .15s, border-color .15s, color .15s; }
+.option-btn:hover { background: var(--c-brume); }
+.option-btn.actif { background: var(--c-marine); border-color: var(--c-marine); color: var(--c-blanc); }
 
 .sub-models { border: 1px solid var(--c-bord); border-radius: var(--radius); overflow: hidden; margin-bottom: 28px; }
 .sub-model-btn { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 14px 18px; border: none; border-bottom: 1px solid var(--c-bord); background: var(--c-blanc); cursor: pointer; text-align: left; transition: background .15s; }
@@ -162,15 +169,33 @@
   <div class="tab-panel actif" id="panel-mobilite">
     <div class="panel-inner">
       <div class="photo-stack">
-        <div class="carnet-photo"><div class="carnet-scotch"></div><div class="carnet-photo-inner"><img src="images/Marchepied/marchepied-pvc.jpg" alt="Marchepied PVC 2 marches avec rampes" onerror="this.style.minHeight='200px';this.style.background='var(--c-brume)'"><div class="carnet-caption">— Marchepied PVC · 2 marches avec rampes</div></div></div>
+        <div class="carnet-photo"><div class="carnet-scotch"></div><div class="carnet-photo-inner"><img id="pvc-img" src="images/Marchepied/marchepied-pvc-1m-0r.jpg" alt="Marchepied PVC" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="hero-placeholder" id="pvc-placeholder" style="display:none;width:100%;height:200px;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span id="pvc-placeholder-path" style="font-size:10px;">images/Marchepied/marchepied-pvc-1m-0r.jpg</span></div><div class="carnet-caption" id="pvc-caption">— Marchepied PVC · 1 marche · sans rampe</div></div></div>
       </div>
       <div class="panel-content">
         <span class="lbl">Mobilité</span>
         <h2>Marchepied PVC</h2>
         <span class="fiche-badge">1 OU 2 MARCHES · AVEC OU SANS RAMPES</span>
-        <p class="panel-desc">Robuste et léger, ce marchepied en cadre PVC blanc est conçu pour faciliter l'accès à des surfaces surélevées dans les milieux institutionnels ou à domicile. Les rampes latérales offrent un appui sécurisé pour les enfants qui ont besoin de support lors de la montée et de la descente.</p>
+        <p class="panel-desc">Robuste et léger, ce marchepied en cadre PVC blanc est conçu pour faciliter l'accès à des surfaces surélevées dans les milieux institutionnels ou à domicile. Les rampes latérales offrent un appui sécurisé pour les personnes qui ont besoin de support lors de la montée et de la descente.</p>
+
+        <div class="option-groupe">
+          <span class="option-titre">Nombre de marches</span>
+          <div class="option-rangee" id="pvc-marches">
+            <button class="option-btn actif" data-val="1" onclick="pvcSelect('marches','1',this)">1 marche</button>
+            <button class="option-btn" data-val="2" onclick="pvcSelect('marches','2',this)">2 marches</button>
+          </div>
+        </div>
+
+        <div class="option-groupe">
+          <span class="option-titre">Rampes latérales</span>
+          <div class="option-rangee" id="pvc-rampes">
+            <button class="option-btn actif" data-val="0" onclick="pvcSelect('rampes','0',this)">Aucune</button>
+            <button class="option-btn" data-val="1" onclick="pvcSelect('rampes','1',this)">1 côté</button>
+            <button class="option-btn" data-val="2" onclick="pvcSelect('rampes','2',this)">2 côtés</button>
+          </div>
+        </div>
+
         <div class="specs-titre">Spécifications techniques</div>
-        <table class="specs-table"><tr><td>Nombre de marches</td><td>1 ou 2</td></tr><tr><td>Rampes latérales</td><td>Optionnel</td></tr><tr><td>Matériau</td><td>Cadre PVC blanc · surface antidérapante</td></tr><tr><td>Hauteur</td><td>Fixe (selon la commande)</td></tr><tr><td>Milieu d'utilisation</td><td>Institutionnel · domicile</td></tr></table>
+        <table class="specs-table"><tr><td>Nombre de marches</td><td id="pvc-spec-marches">1</td></tr><tr><td>Rampes latérales</td><td id="pvc-spec-rampes">Aucune</td></tr><tr><td>Matériau</td><td>Cadre PVC blanc · surface antidérapante</td></tr><tr><td>Hauteur</td><td>Fixe (selon la commande)</td></tr><tr><td>Milieu d'utilisation</td><td>Institutionnel · domicile</td></tr></table>
         <p class="panel-note">* Les dimensions sont déterminées selon les besoins spécifiques lors de la commande.</p>
         <a href="soumission.html" class="btn-primary">Demander une soumission →</a>
       </div>
@@ -278,6 +303,34 @@ function toggleSub(btn, contentId) {
   document.querySelectorAll('.sub-model-btn').forEach(b => b.classList.remove('actif'));
   document.querySelectorAll('.sub-model-content').forEach(c => c.classList.remove('ouvert'));
   if (!isOpen) { btn.classList.add('actif'); document.getElementById(contentId).classList.add('ouvert'); }
+}
+
+const pvcEtat = { marches: '1', rampes: '0' };
+const pvcRampesLabel = { '0': 'Aucune', '1': '1 côté', '2': '2 côtés' };
+
+function pvcSelect(groupe, val, btn) {
+  pvcEtat[groupe] = val;
+  document.querySelectorAll('#pvc-' + groupe + ' .option-btn').forEach(b => b.classList.remove('actif'));
+  btn.classList.add('actif');
+  pvcMettreAJour();
+}
+
+function pvcMettreAJour() {
+  const m = pvcEtat.marches, r = pvcEtat.rampes;
+  const cheminImg = `images/Marchepied/marchepied-pvc-${m}m-${r}r.jpg`;
+  const img = document.getElementById('pvc-img');
+  const ph = document.getElementById('pvc-placeholder');
+  img.style.display = '';
+  ph.style.display = 'none';
+  img.src = cheminImg;
+  document.getElementById('pvc-placeholder-path').textContent = cheminImg;
+
+  const marcheTxt = m === '1' ? '1 marche' : '2 marches';
+  const rampeTxt = r === '0' ? 'sans rampe' : (r === '1' ? 'avec rampe 1 côté' : 'avec rampes 2 côtés');
+  document.getElementById('pvc-caption').textContent = `— Marchepied PVC · ${marcheTxt} · ${rampeTxt}`;
+
+  document.getElementById('pvc-spec-marches').textContent = m;
+  document.getElementById('pvc-spec-rampes').textContent = pvcRampesLabel[r];
 }
 </script>
 </body>
