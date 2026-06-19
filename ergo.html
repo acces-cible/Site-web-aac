@@ -28,13 +28,39 @@
 /* Cadre photo hero — padding du bas agrandi pour que la photo ne touche plus la légende/le bord */
 .carnet-photo { position: relative; display: inline-block; transform-origin: center bottom; transition: transform .3s ease; margin-bottom: 8px; }
 .carnet-photo:hover { transform: rotate(0deg) scale(1.01) !important; }
-.carnet-photo-inner { background: var(--c-blanc); padding: 16px 16px 84px; box-shadow: 0 2px 8px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.06); }
+.carnet-photo-inner { background: var(--c-blanc); padding: 16px 16px 12px; box-shadow: 0 2px 8px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.06); display: flex; flex-direction: column; }
 .carnet-photo-inner img { display: block; width: 100%; max-width: 300px; height: auto; }
 .carnet-placeholder { width: 280px; height: 320px; background: var(--c-brume); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: var(--c-muted); font-size: 12px; text-align: center; }
-.carnet-caption { font-family: var(--font-script); font-size: 14px; color: var(--c-muted); text-align: center; position: absolute; bottom: 28px; left: 16px; right: 16px; }
+.carnet-caption { font-family: var(--font-script); font-size: 14px; color: var(--c-muted); text-align: center; margin-top: 14px; }
 .carnet-scotch { position: absolute; top: -10px; left: 50%; transform: translateX(-50%) rotate(-2deg); width: 52px; height: 18px; background: rgba(220,210,190,.55); background-image: repeating-linear-gradient(90deg,transparent,transparent 3px,rgba(255,255,255,.15) 3px,rgba(255,255,255,.15) 4px); z-index: 2; }
 .carnet-scotch-gauche { position: absolute; top: -8px; left: 18px; transform: rotate(-8deg); width: 44px; height: 16px; background: rgba(220,210,190,.5); z-index: 2; }
 .carnet-scotch-droite { position: absolute; top: -8px; right: 18px; transform: rotate(6deg); width: 44px; height: 16px; background: rgba(220,210,190,.5); z-index: 2; }
+
+/* Carrousel photo — zone image + flèches + bouton zoom */
+.carnet-image-zone { position: relative; }
+.carnet-nav-fleche { position: absolute; top: 50%; transform: translateY(-50%); width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,.92); border: 1px solid var(--c-bord); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--c-marine); box-shadow: 0 2px 6px rgba(0,0,0,.12); transition: background .15s; z-index: 3; }
+.carnet-nav-fleche:hover { background: var(--c-blanc); }
+.carnet-nav-fleche.gauche { left: 6px; }
+.carnet-nav-fleche.droite { right: 6px; }
+.carnet-nav-fleche svg { pointer-events: none; }
+.carnet-nav-dots { display: flex; justify-content: center; gap: 6px; margin-top: 10px; }
+.carnet-nav-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--c-bord); cursor: pointer; transition: background .15s; }
+.carnet-nav-dot.actif { background: var(--c-cuivre); }
+.carnet-zoom-btn { position: absolute; bottom: 6px; right: 6px; width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,.92); border: 1px solid var(--c-bord); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--c-marine); box-shadow: 0 2px 6px rgba(0,0,0,.12); z-index: 3; transition: background .15s; }
+.carnet-zoom-btn:hover { background: var(--c-blanc); }
+
+/* Lightbox plein écran */
+.lightbox-overlay { display: none; position: fixed; inset: 0; background: rgba(20,28,36,.92); z-index: 1000; align-items: center; justify-content: center; }
+.lightbox-overlay.visible { display: flex; }
+.lightbox-img-wrap { position: relative; max-width: 88vw; max-height: 86vh; display: flex; align-items: center; justify-content: center; }
+.lightbox-img-wrap img { max-width: 88vw; max-height: 86vh; object-fit: contain; border-radius: 2px; }
+.lightbox-fermer { position: absolute; top: 24px; right: 28px; width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--c-parchemin); transition: background .15s; }
+.lightbox-fermer:hover { background: rgba(255,255,255,.22); }
+.lightbox-nav-fleche { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--c-parchemin); transition: background .15s; }
+.lightbox-nav-fleche:hover { background: rgba(255,255,255,.22); }
+.lightbox-nav-fleche.gauche { left: 24px; }
+.lightbox-nav-fleche.droite { right: 24px; }
+.lightbox-caption { position: absolute; bottom: -38px; left: 0; right: 0; text-align: center; font-family: var(--font-script); font-size: 17px; color: rgba(246,242,235,.75); }
 
 .modeles-outer { background: var(--c-parchemin); border-bottom: 1px solid var(--c-bord); }
 .modeles-inner { max-width: var(--max-width); margin: 0 auto; padding: 64px 60px; }
@@ -76,7 +102,7 @@
 .modele-fiche { display: grid; grid-template-columns: 320px 1fr; gap: 64px; align-items: start; padding: 8px 0 0; }
 
 .fiche-photo { display: flex; align-items: flex-start; justify-content: center; }
-.fiche-photo .carnet-photo-inner { padding: 10px 10px 36px; }
+.fiche-photo .carnet-photo-inner { padding: 10px 10px 10px; }
 .fiche-photo .carnet-photo-inner img { max-width: 100%; }
 .fiche-photo .carnet-placeholder { width: 100%; max-width: 280px; height: 320px; }
 
@@ -156,9 +182,15 @@
         <div class="carnet-photo" id="ficheCarnet">
           <div class="carnet-scotch" id="ficheScotch"></div>
           <div class="carnet-photo-inner">
-            <img id="ficheImg" src="" alt="" onerror="this.style.display='none';document.getElementById('fichePlaceholder').style.display='flex'">
-            <div class="carnet-placeholder" id="fichePlaceholder" style="display:none;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span id="fichePlaceholderPath" style="font-size:10px;"></span></div>
+            <div class="carnet-image-zone">
+              <img id="ficheImg" src="" alt="" onerror="this.style.display='none';document.getElementById('fichePlaceholder').style.display='flex'">
+              <div class="carnet-placeholder" id="fichePlaceholder" style="display:none;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span id="fichePlaceholderPath" style="font-size:10px;"></span></div>
+              <button class="carnet-nav-fleche gauche" id="ficheFlecheGauche" onclick="photoPrecedente()" aria-label="Photo précédente"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
+              <button class="carnet-nav-fleche droite" id="ficheFlecheDroite" onclick="photoSuivante()" aria-label="Photo suivante"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
+              <button class="carnet-zoom-btn" id="ficheZoomBtn" onclick="ouvrirLightbox()" aria-label="Agrandir la photo"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/><path d="M11 8v6M8 11h6"/></svg></button>
+            </div>
             <div class="carnet-caption" id="ficheCaption"></div>
+            <div class="carnet-nav-dots" id="ficheDots"></div>
           </div>
         </div>
       </div>
@@ -181,6 +213,16 @@
       </span>
     </div>
   </div>
+</div>
+
+<div class="lightbox-overlay" id="lightboxOverlay" onclick="if(event.target===this) fermerLightbox()">
+  <div class="lightbox-img-wrap">
+    <img id="lightboxImg" src="" alt="">
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+  </div>
+  <button class="lightbox-fermer" onclick="fermerLightbox()" aria-label="Fermer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+  <button class="lightbox-nav-fleche gauche" id="lightboxFlecheGauche" onclick="photoPrecedente()" aria-label="Photo précédente"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
+  <button class="lightbox-nav-fleche droite" id="lightboxFlecheDroite" onclick="photoSuivante()" aria-label="Photo suivante"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
 </div>
 
 <div class="cta-outer">
@@ -210,30 +252,83 @@
 <script src="scripts.js"></script>
 <script>
 const MODELES = [
-  { id:'garderie', nom:{fr:'Garderie',en:'Daycare'}, age:{fr:'9 mois à 6 ans · CPE',en:'9 months to 6 years'}, badge:null, titre:{fr:'Hauteur garderie',en:'Daycare height'}, context:{fr:'3 à 6 ans · Tables basses CPE',en:'3 to 6 years · Daycare tables'}, desc:{fr:"Pensée pour les tables basses utilisées dans les CPE et garderies. Compacte et robuste, elle s'adapte à l'environnement des tout-petits.",en:"Designed for the low tables used in early childhood centres. Compact and robust, it adapts to the environment of very young children."}, img:'images/Chaises/IMG_1071_fond_blanc.png', caption:{fr:'— ERGO · hauteur garderie',en:'— ERGO · daycare height'}, rotation:'-1.5deg', scotch:'simple', specs:[{fr:"Hauteur du dossier*",en:"Backrest height*",val:"10–20 po | 25–51 cm<br>(12 po par défaut)"},{fr:"Profondeur de l'appui-pied*",en:"Footrest depth*",val:"12–20 po | 30–51 cm<br>(12 po par défaut)"},{fr:"Profondeur de siège*",en:"Seat depth*",val:"8–20 po | 20–51 cm<br>(12 po par défaut)"},{fr:"Hauteur de table",en:"Table height",val:"10–24 po | 25–61 cm"},{fr:"Hauteur de siège max.",en:"Max. seat height",val:"17,5 po | 44 cm"},{fr:"Largeur intérieure",en:"Interior width",val:"14 po ou 16 po"},{fr:"Poids maximal",en:"Max. weight",val:"250 lbs | 113 kg"}], note:{fr:'* Incrément par intervalle de 2 po — 12 po par défaut pour la majorité des usagers',en:'* Increments of 2 in — 12 in by default for most users'} },
-  { id:'standard', nom:{fr:'Standard',en:'Standard'}, age:{fr:'Tables de cuisine',en:'Kitchen tables'}, badge:null, titre:{fr:'Standard',en:'Standard'}, context:{fr:'Table de cuisine standard',en:'Standard kitchen table'}, desc:{fr:"Le modèle signature de la gamme. 35 ans de réputation auprès des ergothérapeutes du Québec. Conçu pour les tables de cuisine standard.",en:"The signature model of the range. 35 years of reputation among Quebec occupational therapists. Designed for standard kitchen tables."}, img:'images/Chaises/IMG_1314_rogner.png', caption:{fr:'— ERGO · standard',en:'— ERGO · standard'}, rotation:'-2deg', scotch:'simple', specs:[{fr:"Hauteur du dossier*",en:"Backrest height*",val:"10–20 po | 25–51 cm<br>(12 po par défaut)"},{fr:"Profondeur de l'appui-pied*",en:"Footrest depth*",val:"12–20 po | 30–51 cm<br>(12 po par défaut)"},{fr:"Profondeur de siège*",en:"Seat depth*",val:"8–20 po | 20–51 cm<br>(12 po par défaut)"},{fr:"Hauteur de table",en:"Table height",val:"16–30 po | 41–76 cm"},{fr:"Hauteur de siège max.",en:"Max. seat height",val:"21,5 po | 52 cm"},{fr:"Largeur intérieure",en:"Interior width",val:"14 po ou 16 po"},{fr:"Poids maximal",en:"Max. weight",val:"250 lbs | 113 kg"}], note:{fr:'* Incrément par intervalle de 2 po — 12 po par défaut pour la majorité des usagers',en:'* Increments of 2 in — 12 in by default for most users'} },
-  { id:'surdimensionnee', nom:{fr:'Surdimensionnée',en:'Oversized'}, age:{fr:'Grand gabarit · 18–20 po',en:'Larger frame · 18–20 in'}, badge:null, titre:{fr:'Surdimensionnée',en:'Oversized'}, context:{fr:'18 po ou 20 po de largeur',en:'18 in or 20 in width'}, desc:{fr:"Conçue pour les personnes de grand gabarit nécessitant plus d'espace au bassin. Conserve toutes les caractéristiques de la gamme ERGO avec des montants plus robustes.",en:"Designed for individuals with a larger frame. Retains all proven ERGO features with more robust uprights."}, img:'images/Chaises/Surdimensionnee.png', caption:{fr:'— ERGO · surdimensionnée',en:'— ERGO · oversized'}, rotation:'1deg', scotch:'double', specs:[{fr:"Hauteur du dossier*",en:"Backrest height*",val:"16–20 po | 41–51 cm<br>(16 po par défaut)"},{fr:"Profondeur de l'appui-pied*",en:"Footrest depth*",val:"16–20 po | 41–51 cm<br>(16 po par défaut)"},{fr:"Profondeur de siège*",en:"Seat depth*",val:"16–20 po | 41–51 cm<br>(16 po par défaut)"},{fr:"Hauteur de table",en:"Table height",val:"16–30 po | 41–76 cm"},{fr:"Hauteur de siège max.",en:"Max. seat height",val:"23,5 po | 60 cm"},{fr:"Largeur intérieure",en:"Interior width",val:"18 po ou 20 po"},{fr:"Poids maximal",en:"Max. weight",val:"350 lbs | 158 kg"}], note:{fr:'* Incrément par intervalle de 2 po — 16 po par défaut pour la majorité des usagers',en:'* Increments of 2 in — 16 in by default for most users'} },
-  { id:'xl', nom:{fr:'ERGO XL',en:'ERGO XL'}, age:{fr:'Adultes · 22–24 po',en:'Adults · 22–24 in'}, badge:{fr:'Sur demande',en:'On request'}, titre:{fr:'ERGO XL',en:'ERGO XL'}, context:{fr:'Adultes · 22 po et 24 po',en:'Adults · 22 in and 24 in'}, desc:{fr:"Réalisée entièrement sur mesure pour des besoins hors-norme. Dimensions de bassin de 22 po ou 24 po. Chaque pièce est conçue individuellement avec l'ergothérapeute.",en:"Fully custom-built for exceptional needs. Pelvis widths of 22 in or 24 in. Each chair is designed individually with the occupational therapist."}, img:'images/Chaises/Chaise 24po sketch.jpg', caption:{fr:'— ERGO XL · croquis 24 po',en:'— ERGO XL · 24 in sketch'}, rotation:'-1.5deg', scotch:'simple', specs:[{fr:"Largeur intérieure",en:"Interior width",val:"22 po ou 24 po"},{fr:"Toutes dimensions",en:"All dimensions",val:"Sur mesure"},{fr:"Poids maximal",en:"Max. weight",val:"Sur mesure"}], note:{fr:'📝 Contactez-nous pour les spécifications complètes.',en:'📝 Contact us for full specifications.'} }
+  { id:'garderie', nom:{fr:'Garderie',en:'Daycare'}, age:{fr:'9 mois à 6 ans · CPE',en:'9 months to 6 years'}, badge:null, titre:{fr:'Hauteur garderie',en:'Daycare height'}, context:{fr:'3 à 6 ans · Tables basses CPE',en:'3 to 6 years · Daycare tables'}, desc:{fr:"Pensée pour les tables basses utilisées dans les CPE et garderies. Compacte et robuste, elle s'adapte à l'environnement des tout-petits.",en:"Designed for the low tables used in early childhood centres. Compact and robust, it adapts to the environment of very young children."}, imgs:['images/Chaises/IMG_1071_fond_blanc.png'], caption:{fr:'— ERGO · hauteur garderie',en:'— ERGO · daycare height'}, rotation:'-1.5deg', scotch:'simple', specs:[{fr:"Hauteur du dossier*",en:"Backrest height*",val:"10–20 po | 25–51 cm<br>(12 po par défaut)"},{fr:"Profondeur de l'appui-pied*",en:"Footrest depth*",val:"12–20 po | 30–51 cm<br>(12 po par défaut)"},{fr:"Profondeur de siège*",en:"Seat depth*",val:"8–20 po | 20–51 cm<br>(12 po par défaut)"},{fr:"Hauteur de table",en:"Table height",val:"10–24 po | 25–61 cm"},{fr:"Hauteur de siège max.",en:"Max. seat height",val:"17,5 po | 44 cm"},{fr:"Largeur intérieure",en:"Interior width",val:"14 po ou 16 po"},{fr:"Poids maximal",en:"Max. weight",val:"250 lbs | 113 kg"}], note:{fr:'* Incrément par intervalle de 2 po — 12 po par défaut pour la majorité des usagers',en:'* Increments of 2 in — 12 in by default for most users'} },
+  { id:'standard', nom:{fr:'Standard',en:'Standard'}, age:{fr:'Tables de cuisine',en:'Kitchen tables'}, badge:null, titre:{fr:'Standard',en:'Standard'}, context:{fr:'Table de cuisine standard',en:'Standard kitchen table'}, desc:{fr:"Le modèle signature de la gamme. 35 ans de réputation auprès des ergothérapeutes du Québec. Conçu pour les tables de cuisine standard.",en:"The signature model of the range. 35 years of reputation among Quebec occupational therapists. Designed for standard kitchen tables."}, imgs:['images/Chaises/IMG_1314_rogner.png'], caption:{fr:'— ERGO · standard',en:'— ERGO · standard'}, rotation:'-2deg', scotch:'simple', specs:[{fr:"Hauteur du dossier*",en:"Backrest height*",val:"10–20 po | 25–51 cm<br>(12 po par défaut)"},{fr:"Profondeur de l'appui-pied*",en:"Footrest depth*",val:"12–20 po | 30–51 cm<br>(12 po par défaut)"},{fr:"Profondeur de siège*",en:"Seat depth*",val:"8–20 po | 20–51 cm<br>(12 po par défaut)"},{fr:"Hauteur de table",en:"Table height",val:"16–30 po | 41–76 cm"},{fr:"Hauteur de siège max.",en:"Max. seat height",val:"21,5 po | 52 cm"},{fr:"Largeur intérieure",en:"Interior width",val:"14 po ou 16 po"},{fr:"Poids maximal",en:"Max. weight",val:"250 lbs | 113 kg"}], note:{fr:'* Incrément par intervalle de 2 po — 12 po par défaut pour la majorité des usagers',en:'* Increments of 2 in — 12 in by default for most users'} },
+  { id:'surdimensionnee', nom:{fr:'Surdimensionnée',en:'Oversized'}, age:{fr:'Grand gabarit · 18–20 po',en:'Larger frame · 18–20 in'}, badge:null, titre:{fr:'Surdimensionnée',en:'Oversized'}, context:{fr:'18 po ou 20 po de largeur',en:'18 in or 20 in width'}, desc:{fr:"Conçue pour les personnes de grand gabarit nécessitant plus d'espace au bassin. Conserve toutes les caractéristiques de la gamme ERGO avec des montants plus robustes.",en:"Designed for individuals with a larger frame. Retains all proven ERGO features with more robust uprights."}, imgs:['images/Chaises/Surdimensionnee.png'], caption:{fr:'— ERGO · surdimensionnée',en:'— ERGO · oversized'}, rotation:'1deg', scotch:'double', specs:[{fr:"Hauteur du dossier*",en:"Backrest height*",val:"16–20 po | 41–51 cm<br>(16 po par défaut)"},{fr:"Profondeur de l'appui-pied*",en:"Footrest depth*",val:"16–20 po | 41–51 cm<br>(16 po par défaut)"},{fr:"Profondeur de siège*",en:"Seat depth*",val:"16–20 po | 41–51 cm<br>(16 po par défaut)"},{fr:"Hauteur de table",en:"Table height",val:"16–30 po | 41–76 cm"},{fr:"Hauteur de siège max.",en:"Max. seat height",val:"23,5 po | 60 cm"},{fr:"Largeur intérieure",en:"Interior width",val:"18 po ou 20 po"},{fr:"Poids maximal",en:"Max. weight",val:"350 lbs | 158 kg"}], note:{fr:'* Incrément par intervalle de 2 po — 16 po par défaut pour la majorité des usagers',en:'* Increments of 2 in — 16 in by default for most users'} },
+  { id:'xl', nom:{fr:'ERGO XL',en:'ERGO XL'}, age:{fr:'Adultes · 22–24 po',en:'Adults · 22–24 in'}, badge:{fr:'Sur demande',en:'On request'}, titre:{fr:'ERGO XL',en:'ERGO XL'}, context:{fr:'Adultes · 22 po et 24 po',en:'Adults · 22 in and 24 in'}, desc:{fr:"Réalisée entièrement sur mesure pour des besoins hors-norme. Dimensions de bassin de 22 po ou 24 po. Chaque pièce est conçue individuellement avec l'ergothérapeute.",en:"Fully custom-built for exceptional needs. Pelvis widths of 22 in or 24 in. Each chair is designed individually with the occupational therapist."}, imgs:['images/Chaises/Chaise 24po.jpg','images/Chaises/Chaise 24po(2).jpg'], caption:{fr:'— ERGO · XL 24po',en:'— ERGO · XL 24in'}, rotation:'-1.5deg', scotch:'simple', specs:[{fr:"Largeur intérieure",en:"Interior width",val:"22 po ou 24 po"},{fr:"Toutes dimensions",en:"All dimensions",val:"Sur mesure"},{fr:"Poids maximal",en:"Max. weight",val:"Sur mesure"}], note:{fr:'📝 Contactez-nous pour les spécifications complètes.',en:'📝 Contact us for full specifications.'} }
 ];
 let modeleActif = 0;
 function construireBarre() {
   document.getElementById('modelesBarre').innerHTML = MODELES.map((m,i) => `<button class="modele-btn${i===0?' actif':''}" onclick="selectionnerModele(${i})"><div class="modele-btn-nom">${m.nom[langue]}</div><div class="modele-btn-age">${m.age[langue]}</div>${m.badge?`<span class="modele-btn-badge">${m.badge[langue]}</span>`:''}</button>`).join('');
 }
+let photoActive = 0;
 function afficherFiche(i) {
   const m=MODELES[i], l=langue;
+  photoActive = 0;
   document.getElementById('ficheTitre').textContent=m.titre[l];
   document.getElementById('ficheBadge').textContent=m.context[l];
   document.getElementById('ficheDesc').textContent=m.desc[l];
   document.getElementById('ficheNote').textContent=m.note[l];
-  document.getElementById('ficheCaption').textContent=m.caption[l];
-  const img=document.getElementById('ficheImg'), ph=document.getElementById('fichePlaceholder');
-  img.style.display=''; ph.style.display='none'; img.src=m.img; img.alt=m.titre[l];
-  document.getElementById('fichePlaceholderPath').textContent=m.img;
   document.getElementById('ficheCarnet').style.transform=`rotate(${m.rotation})`;
   const s=document.getElementById('ficheScotch');
   if(m.scotch==='double'){s.className='carnet-scotch-gauche';let s2=document.getElementById('ficheScotch2');if(!s2){s2=document.createElement('div');s2.id='ficheScotch2';s.parentNode.insertBefore(s2,s.nextSibling);}s2.className='carnet-scotch-droite';}else{s.className='carnet-scotch';const s2=document.getElementById('ficheScotch2');if(s2)s2.className='';}
   document.getElementById('ficheSpecs').innerHTML=m.specs.map(sp=>`<tr><td>${sp[l]}</td><td>${sp.val}</td></tr>`).join('');
+  afficherPhoto();
 }
+function afficherPhoto() {
+  const m = MODELES[modeleActif], l = langue;
+  const imgs = m.imgs;
+  const img = document.getElementById('ficheImg'), ph = document.getElementById('fichePlaceholder');
+  img.style.display=''; ph.style.display='none';
+  img.src = imgs[photoActive]; img.alt = m.titre[l];
+  document.getElementById('fichePlaceholderPath').textContent = imgs[photoActive];
+  document.getElementById('ficheCaption').textContent = m.caption[l];
+
+  const plusieurs = imgs.length > 1;
+  document.getElementById('ficheFlecheGauche').style.display = plusieurs ? 'flex' : 'none';
+  document.getElementById('ficheFlecheDroite').style.display = plusieurs ? 'flex' : 'none';
+  document.getElementById('ficheDots').style.display = plusieurs ? 'flex' : 'none';
+  document.getElementById('ficheDots').innerHTML = plusieurs
+    ? imgs.map((_,idx) => `<span class="carnet-nav-dot${idx===photoActive?' actif':''}" onclick="allerAPhoto(${idx})"></span>`).join('')
+    : '';
+}
+function photoSuivante() {
+  const imgs = MODELES[modeleActif].imgs;
+  photoActive = (photoActive + 1) % imgs.length;
+  afficherPhoto();
+  if (document.getElementById('lightboxOverlay').classList.contains('visible')) afficherPhotoLightbox();
+}
+function photoPrecedente() {
+  const imgs = MODELES[modeleActif].imgs;
+  photoActive = (photoActive - 1 + imgs.length) % imgs.length;
+  afficherPhoto();
+  if (document.getElementById('lightboxOverlay').classList.contains('visible')) afficherPhotoLightbox();
+}
+function allerAPhoto(idx) {
+  photoActive = idx;
+  afficherPhoto();
+}
+function afficherPhotoLightbox() {
+  const m = MODELES[modeleActif], l = langue;
+  document.getElementById('lightboxImg').src = m.imgs[photoActive];
+  document.getElementById('lightboxCaption').textContent = m.caption[l];
+  const plusieurs = m.imgs.length > 1;
+  document.getElementById('lightboxFlecheGauche').style.display = plusieurs ? 'flex' : 'none';
+  document.getElementById('lightboxFlecheDroite').style.display = plusieurs ? 'flex' : 'none';
+}
+function ouvrirLightbox() {
+  afficherPhotoLightbox();
+  document.getElementById('lightboxOverlay').classList.add('visible');
+}
+function fermerLightbox() {
+  document.getElementById('lightboxOverlay').classList.remove('visible');
+}
+document.addEventListener('keydown', (e) => {
+  if (!document.getElementById('lightboxOverlay').classList.contains('visible')) return;
+  if (e.key === 'Escape') fermerLightbox();
+  if (e.key === 'ArrowRight') photoSuivante();
+  if (e.key === 'ArrowLeft') photoPrecedente();
+});
 function selectionnerModele(i) {
   modeleActif=i;
   document.querySelectorAll('.modele-btn').forEach((b,j)=>b.classList.toggle('actif',j===i));
