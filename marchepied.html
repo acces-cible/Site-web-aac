@@ -50,6 +50,31 @@
 .carnet-caption { font-family: var(--font-script); font-size: 13px; color: var(--c-muted); text-align: center; position: absolute; bottom: 9px; left: 10px; right: 10px; }
 .carnet-scotch { position: absolute; top: -10px; left: 50%; transform: translateX(-50%) rotate(-2deg); width: 52px; height: 18px; background: rgba(220,210,190,.55); background-image: repeating-linear-gradient(90deg,transparent,transparent 3px,rgba(255,255,255,.15) 3px,rgba(255,255,255,.15) 4px); z-index: 2; }
 
+/* Carrousel générique — flèches + dots + zoom, actif seulement si plusieurs photos pour une combinaison */
+.carnet-image-zone { position: relative; }
+.carnet-nav-fleche { position: absolute; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,.92); border: 1px solid var(--c-bord); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--c-marine); box-shadow: 0 2px 6px rgba(0,0,0,.12); transition: background .15s; z-index: 3; }
+.carnet-nav-fleche:hover { background: var(--c-blanc); }
+.carnet-nav-fleche.gauche { left: 6px; }
+.carnet-nav-fleche.droite { right: 6px; }
+.carnet-nav-fleche svg { pointer-events: none; }
+.carnet-nav-dots { display: flex; justify-content: center; gap: 6px; margin-top: 8px; }
+.carnet-nav-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--c-bord); cursor: pointer; transition: background .15s; }
+.carnet-nav-dot.actif { background: var(--c-cuivre); }
+.carnet-zoom-btn { position: absolute; bottom: 6px; right: 6px; width: 26px; height: 26px; border-radius: 50%; background: rgba(255,255,255,.92); border: 1px solid var(--c-bord); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--c-marine); box-shadow: 0 2px 6px rgba(0,0,0,.12); z-index: 3; transition: background .15s; }
+.carnet-zoom-btn:hover { background: var(--c-blanc); }
+
+/* Lightbox plein écran */
+.lightbox-overlay { display: none; position: fixed; inset: 0; background: rgba(20,28,36,.92); z-index: 1000; align-items: center; justify-content: center; }
+.lightbox-overlay.visible { display: flex; }
+.lightbox-img-wrap { position: relative; max-width: 88vw; max-height: 86vh; display: flex; align-items: center; justify-content: center; }
+.lightbox-img-wrap img { max-width: 88vw; max-height: 86vh; object-fit: contain; border-radius: 2px; }
+.lightbox-fermer { position: absolute; top: 24px; right: 28px; width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--c-parchemin); transition: background .15s; }
+.lightbox-fermer:hover { background: rgba(255,255,255,.22); }
+.lightbox-nav-fleche { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--c-parchemin); transition: background .15s; }
+.lightbox-nav-fleche:hover { background: rgba(255,255,255,.22); }
+.lightbox-nav-fleche.gauche { left: 24px; }
+.lightbox-nav-fleche.droite { right: 24px; }
+
 .panel-content h2 { font-family: var(--font-titre); font-size: 34px; font-weight: 300; color: var(--c-marine); margin-bottom: 10px; line-height: 1.15; }
 .fiche-badge { display: inline-flex; font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--c-cuivre); border: 1px solid var(--c-cuivre); padding: 4px 12px; border-radius: 2px; margin-bottom: 20px; }
 .panel-desc { font-size: var(--fs-body); color: var(--c-muted); line-height: 1.8; margin-bottom: 28px; max-width: 500px; }
@@ -169,7 +194,7 @@
   <div class="tab-panel actif" id="panel-mobilite">
     <div class="panel-inner">
       <div class="photo-stack">
-        <div class="carnet-photo"><div class="carnet-scotch"></div><div class="carnet-photo-inner"><img id="pvc-img" src="images/Marchepied/1 marche PVC.jpg" alt="Marchepied PVC" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="hero-placeholder" id="pvc-placeholder" style="display:none;width:100%;height:200px;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span id="pvc-placeholder-path" style="font-size:10px;">images/Marchepied/1 marche PVC.jpg</span></div><div class="carnet-caption" id="pvc-caption">— Marchepied PVC · 1 marche · sans rampe</div></div></div>
+        <div class="carnet-photo"><div class="carnet-scotch"></div><div class="carnet-photo-inner"><div class="carnet-image-zone"><img id="pvc-img" src="images/Marchepied/1 marche PVC.jpg" alt="Marchepied PVC" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="hero-placeholder" id="pvc-placeholder" style="display:none;width:100%;height:200px;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span id="pvc-placeholder-path" style="font-size:10px;">images/Marchepied/1 marche PVC.jpg</span></div><button class="carnet-nav-fleche gauche" id="pvc-fleche-gauche" onclick="carrouselPrecedent('pvc')" style="display:none;" aria-label="Photo précédente"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button><button class="carnet-nav-fleche droite" id="pvc-fleche-droite" onclick="carrouselSuivant('pvc')" style="display:none;" aria-label="Photo suivante"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button><button class="carnet-zoom-btn" onclick="ouvrirLightbox('pvc')" aria-label="Agrandir la photo"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/><path d="M11 8v6M8 11h6"/></svg></button></div><div class="carnet-caption" id="pvc-caption">— Marchepied PVC · 1 marche · sans rampe</div><div class="carnet-nav-dots" id="pvc-dots" style="display:none;"></div></div></div>
       </div>
       <div class="panel-content">
         <span class="lbl">Mobilité</span>
@@ -206,7 +231,7 @@
   <div class="tab-panel" id="panel-chaise">
     <div class="panel-inner">
       <div class="photo-stack">
-        <div class="carnet-photo"><div class="carnet-scotch"></div><div class="carnet-photo-inner"><img id="chaise-img" src="images/Marchepied/Marchepied chaise fourchettes fixe.jpg" alt="Marchepied pour chaise" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="hero-placeholder" id="chaise-placeholder" style="display:none;width:100%;height:200px;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span id="chaise-placeholder-path" style="font-size:10px;">images/Marchepied/Marchepied chaise fourchettes fixe.jpg</span></div><div class="carnet-caption" id="chaise-caption">— Marchepied pour chaise · fourchettes · fixe</div></div></div>
+        <div class="carnet-photo"><div class="carnet-scotch"></div><div class="carnet-photo-inner"><div class="carnet-image-zone"><img id="chaise-img" src="images/Marchepied/Marchepied chaise fourchettes fixe.jpg" alt="Marchepied pour chaise" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="hero-placeholder" id="chaise-placeholder" style="display:none;width:100%;height:200px;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span id="chaise-placeholder-path" style="font-size:10px;">images/Marchepied/Marchepied chaise fourchettes fixe.jpg</span></div><button class="carnet-nav-fleche gauche" id="chaise-fleche-gauche" onclick="carrouselPrecedent('chaise')" style="display:none;" aria-label="Photo précédente"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button><button class="carnet-nav-fleche droite" id="chaise-fleche-droite" onclick="carrouselSuivant('chaise')" style="display:none;" aria-label="Photo suivante"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button><button class="carnet-zoom-btn" onclick="ouvrirLightbox('chaise')" aria-label="Agrandir la photo"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/><path d="M11 8v6M8 11h6"/></svg></button></div><div class="carnet-caption" id="chaise-caption">— Marchepied pour chaise · fourchettes · fixe</div><div class="carnet-nav-dots" id="chaise-dots" style="display:none;"></div></div></div>
       </div>
       <div class="panel-content">
         <span class="lbl">Positionnement chaise</span>
@@ -242,7 +267,7 @@
   <div class="tab-panel" id="panel-lavabo">
     <div class="panel-inner">
       <div class="photo-stack">
-        <div class="carnet-photo"><div class="carnet-scotch"></div><div class="carnet-photo-inner"><img id="lavabo-img" src="images/Marchepied/1 marche en bois.jpg" alt="Marchepied bois accès lavabo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="hero-placeholder" id="lavabo-placeholder" style="display:none;width:100%;height:200px;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span id="lavabo-placeholder-path" style="font-size:10px;">images/Marchepied/1 marche en bois.jpg</span></div><div class="carnet-caption" id="lavabo-caption">— Marchepied bois · accès lavabo · 1 marche</div></div></div>
+        <div class="carnet-photo"><div class="carnet-scotch"></div><div class="carnet-photo-inner"><div class="carnet-image-zone"><img id="lavabo-img" src="images/Marchepied/1 marche en bois.jpg" alt="Marchepied bois accès lavabo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="hero-placeholder" id="lavabo-placeholder" style="display:none;width:100%;height:200px;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span id="lavabo-placeholder-path" style="font-size:10px;">images/Marchepied/1 marche en bois.jpg</span></div><button class="carnet-nav-fleche gauche" id="lavabo-fleche-gauche" onclick="carrouselPrecedent('lavabo')" style="display:none;" aria-label="Photo précédente"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button><button class="carnet-nav-fleche droite" id="lavabo-fleche-droite" onclick="carrouselSuivant('lavabo')" style="display:none;" aria-label="Photo suivante"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button><button class="carnet-zoom-btn" onclick="ouvrirLightbox('lavabo')" aria-label="Agrandir la photo"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/><path d="M11 8v6M8 11h6"/></svg></button></div><div class="carnet-caption" id="lavabo-caption">— Marchepied bois · accès lavabo · 1 marche</div><div class="carnet-nav-dots" id="lavabo-dots" style="display:none;"></div></div></div>
       </div>
       <div class="panel-content">
         <span class="lbl">Accès lavabo / comptoir</span>
@@ -270,7 +295,7 @@
   <div class="tab-panel" id="panel-toilette">
     <div class="panel-inner">
       <div class="photo-stack">
-        <div class="carnet-photo"><div class="carnet-scotch"></div><div class="carnet-photo-inner"><img id="toilette-img" src="images/Marchepied/Adaptations de toilette fram ERGO.jpg" alt="Marchepied toilette sur base ERGO" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="hero-placeholder" id="toilette-placeholder" style="display:none;width:100%;height:200px;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span id="toilette-placeholder-path" style="font-size:10px;">images/Marchepied/Adaptations de toilette fram ERGO.jpg</span></div><div class="carnet-caption" id="toilette-caption">— Marchepied toilette · sur base ERGO</div></div></div>
+        <div class="carnet-photo"><div class="carnet-scotch"></div><div class="carnet-photo-inner"><div class="carnet-image-zone"><img id="toilette-img" src="images/Marchepied/Adaptations de toilette fram ERGO.jpg" alt="Marchepied toilette sur base ERGO" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="hero-placeholder" id="toilette-placeholder" style="display:none;width:100%;height:200px;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span id="toilette-placeholder-path" style="font-size:10px;">images/Marchepied/Adaptations de toilette fram ERGO.jpg</span></div><button class="carnet-nav-fleche gauche" id="toilette-fleche-gauche" onclick="carrouselPrecedent('toilette')" style="display:none;" aria-label="Photo précédente"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button><button class="carnet-nav-fleche droite" id="toilette-fleche-droite" onclick="carrouselSuivant('toilette')" style="display:none;" aria-label="Photo suivante"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button><button class="carnet-zoom-btn" onclick="ouvrirLightbox('toilette')" aria-label="Agrandir la photo"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/><path d="M11 8v6M8 11h6"/></svg></button></div><div class="carnet-caption" id="toilette-caption">— Marchepied toilette · sur base ERGO</div><div class="carnet-nav-dots" id="toilette-dots" style="display:none;"></div></div></div>
       </div>
       <div class="panel-content">
         <span class="lbl">Autonomie toilette</span>
@@ -332,6 +357,15 @@
   </div>
 </div>
 
+<div class="lightbox-overlay" id="lightboxOverlay" onclick="if(event.target===this) fermerLightbox()">
+  <div class="lightbox-img-wrap">
+    <img id="lightboxImg" src="" alt="">
+  </div>
+  <button class="lightbox-fermer" onclick="fermerLightbox()" aria-label="Fermer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+  <button class="lightbox-nav-fleche gauche" id="lightboxFlecheGauche" onclick="lightboxPrecedent()" aria-label="Photo précédente"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
+  <button class="lightbox-nav-fleche droite" id="lightboxFlecheDroite" onclick="lightboxSuivant()" aria-label="Photo suivante"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
+</div>
+
 <div id="footer-container"></div>
 <script src="scripts.js"></script>
 <script>
@@ -341,6 +375,98 @@ function switchTab(id) {
   document.getElementById('tab-' + id).classList.add('actif');
   document.getElementById('panel-' + id).classList.add('actif');
 }
+
+/* ── CARROUSEL GÉNÉRIQUE ──────────────────────────────────────────
+   Pour ajouter plusieurs photos à une même combinaison d'options :
+   ajouter une entrée dans MULTI_PHOTOS ci-dessous, où la clé est le
+   chemin canonique généré par la fonction MettreAJour() du panel
+   (visible dans .../placeholder-path quand l'image manque), et la
+   valeur est le tableau ordonné de tous les chemins disponibles.
+   S'il n'y a qu'une photo, ne rien ajouter ici — comportement normal. */
+const MULTI_PHOTOS = {
+  // 'images/Marchepied/1 marche PVC.jpg': ['images/Marchepied/1 marche PVC.jpg', 'images/Marchepied/1 marche PVC vue2.jpg'],
+};
+const carrouselIndex = {};
+let lightboxCarrouselId = null;
+
+function appliquerCarrousel(id, cheminCanonique) {
+  const photos = MULTI_PHOTOS[cheminCanonique] || [cheminCanonique];
+  carrouselIndex[id] = 0;
+  carrouselAfficher(id, photos);
+}
+function carrouselAfficher(id, photosOverride) {
+  const photos = photosOverride || MULTI_PHOTOS[document.getElementById(id + '-img').dataset.canonique] || [document.getElementById(id + '-img').src];
+  const idx = carrouselIndex[id] || 0;
+  const img = document.getElementById(id + '-img');
+  const ph = document.getElementById(id + '-placeholder');
+  img.dataset.photos = JSON.stringify(photos);
+  img.style.display = '';
+  ph.style.display = 'none';
+  img.src = photos[idx];
+  const pathEl = document.getElementById(id + '-placeholder-path');
+  if (pathEl) pathEl.textContent = photos[idx];
+
+  const plusieurs = photos.length > 1;
+  const fg = document.getElementById(id + '-fleche-gauche');
+  const fd = document.getElementById(id + '-fleche-droite');
+  const dots = document.getElementById(id + '-dots');
+  if (fg) fg.style.display = plusieurs ? 'flex' : 'none';
+  if (fd) fd.style.display = plusieurs ? 'flex' : 'none';
+  if (dots) {
+    dots.style.display = plusieurs ? 'flex' : 'none';
+    dots.innerHTML = plusieurs ? photos.map((_, i) => `<span class="carnet-nav-dot${i===idx?' actif':''}" onclick="carrouselAllerA('${id}',${i})"></span>`).join('') : '';
+  }
+}
+function carrouselSuivant(id) {
+  const photos = JSON.parse(document.getElementById(id + '-img').dataset.photos || '[]');
+  if (photos.length < 2) return;
+  carrouselIndex[id] = (carrouselIndex[id] + 1) % photos.length;
+  carrouselAfficher(id, photos);
+  if (lightboxCarrouselId === id) afficherPhotoLightbox(id, photos);
+}
+function carrouselPrecedent(id) {
+  const photos = JSON.parse(document.getElementById(id + '-img').dataset.photos || '[]');
+  if (photos.length < 2) return;
+  carrouselIndex[id] = (carrouselIndex[id] - 1 + photos.length) % photos.length;
+  carrouselAfficher(id, photos);
+  if (lightboxCarrouselId === id) afficherPhotoLightbox(id, photos);
+}
+function carrouselAllerA(id, i) {
+  const photos = JSON.parse(document.getElementById(id + '-img').dataset.photos || '[]');
+  carrouselIndex[id] = i;
+  carrouselAfficher(id, photos);
+}
+function afficherPhotoLightbox(id, photos) {
+  const idx = carrouselIndex[id] || 0;
+  document.getElementById('lightboxImg').src = photos[idx];
+  const plusieurs = photos.length > 1;
+  document.getElementById('lightboxFlecheGauche').style.display = plusieurs ? 'flex' : 'none';
+  document.getElementById('lightboxFlecheDroite').style.display = plusieurs ? 'flex' : 'none';
+}
+function ouvrirLightbox(id) {
+  lightboxCarrouselId = id;
+  const photos = JSON.parse(document.getElementById(id + '-img').dataset.photos || '[]');
+  afficherPhotoLightbox(id, photos);
+  document.getElementById('lightboxOverlay').classList.add('visible');
+}
+function fermerLightbox() {
+  document.getElementById('lightboxOverlay').classList.remove('visible');
+  lightboxCarrouselId = null;
+}
+function lightboxSuivant() { if (lightboxCarrouselId) carrouselSuivant(lightboxCarrouselId); }
+function lightboxPrecedent() { if (lightboxCarrouselId) carrouselPrecedent(lightboxCarrouselId); }
+document.addEventListener('keydown', (e) => {
+  if (!document.getElementById('lightboxOverlay').classList.contains('visible')) return;
+  if (e.key === 'Escape') fermerLightbox();
+  if (e.key === 'ArrowRight') lightboxSuivant();
+  if (e.key === 'ArrowLeft') lightboxPrecedent();
+});
+document.addEventListener('DOMContentLoaded', () => {
+  pvcMettreAJour();
+  chaiseMettreAJour();
+  lavaboSelect('1', document.querySelector('#lavabo-marches .option-btn.actif'));
+  toiletteMettreAJour('ergo');
+});
 
 const pvcEtat = { marches: '1', rampes: '0' };
 const pvcRampesLabel = { '0': 'Aucune', '1': '1 côté', '2': '2 côtés' };
@@ -357,12 +483,7 @@ function pvcMettreAJour() {
   const marcheMot = m === '1' ? '1 marche' : '2 marches';
   const rampeSuffixe = r === '0' ? '' : (r === '1' ? ' 1 rampe' : ' 2 rampe');
   const cheminImg = `images/Marchepied/${marcheMot} PVC${rampeSuffixe}.jpg`;
-  const img = document.getElementById('pvc-img');
-  const ph = document.getElementById('pvc-placeholder');
-  img.style.display = '';
-  ph.style.display = 'none';
-  img.src = cheminImg;
-  document.getElementById('pvc-placeholder-path').textContent = cheminImg;
+  appliquerCarrousel('pvc', cheminImg);
 
   const marcheTxt = m === '1' ? '1 marche' : '2 marches';
   const rampeTxt = r === '0' ? 'sans rampe' : (r === '1' ? 'avec rampe 1 côté' : 'avec rampes 2 côtés');
@@ -394,12 +515,7 @@ function chaiseSelect(groupe, val, btn) {
 function chaiseMettreAJour() {
   const f = chaiseEtat.fixation, h = chaiseEtat.hauteur;
   const cheminImg = chaiseImages[`${f}-${h}`];
-  const img = document.getElementById('chaise-img');
-  const ph = document.getElementById('chaise-placeholder');
-  img.style.display = '';
-  ph.style.display = 'none';
-  img.src = cheminImg;
-  document.getElementById('chaise-placeholder-path').textContent = cheminImg;
+  appliquerCarrousel('chaise', cheminImg);
 
   document.getElementById('chaise-caption').textContent = `— Marchepied pour chaise · ${chaiseFixationLabel[f].toLowerCase()} · ${chaiseHauteurLabel[h].toLowerCase()}`;
   document.getElementById('chaise-spec-fixation').textContent = chaiseFixationLabel[f];
@@ -411,12 +527,7 @@ function lavaboSelect(val, btn) {
   btn.classList.add('actif');
   const motMarche = val === '1' ? '1 marche' : (val === '2' ? '2 marches' : '3 marches');
   const cheminImg = `images/Marchepied/${motMarche} en bois.jpg`;
-  const img = document.getElementById('lavabo-img');
-  const ph = document.getElementById('lavabo-placeholder');
-  img.style.display = '';
-  ph.style.display = 'none';
-  img.src = cheminImg;
-  document.getElementById('lavabo-placeholder-path').textContent = cheminImg;
+  appliquerCarrousel('lavabo', cheminImg);
   document.getElementById('lavabo-caption').textContent = `— Marchepied bois · accès lavabo · ${motMarche}`;
   document.getElementById('lavabo-spec-marches').textContent = val;
 }
@@ -456,12 +567,7 @@ function toiletteSelect(val, btn) {
 
 function toiletteMettreAJour(val) {
   const d = toiletteData[val];
-  const img = document.getElementById('toilette-img');
-  const ph = document.getElementById('toilette-placeholder');
-  img.style.display = '';
-  ph.style.display = 'none';
-  img.src = d.img;
-  document.getElementById('toilette-placeholder-path').textContent = d.img;
+  appliquerCarrousel('toilette', d.img);
   document.getElementById('toilette-caption').textContent = d.caption;
   document.getElementById('toilette-badge').textContent = d.badge;
   document.getElementById('toilette-desc').innerHTML = d.desc;
