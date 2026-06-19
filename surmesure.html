@@ -32,9 +32,9 @@
 .produit-card:last-child { margin-bottom: 0; }
 .produit-card.inverse { direction: rtl; }
 .produit-card.inverse > * { direction: ltr; }
-.produit-photo { background: var(--c-brume); border-right: 1px solid var(--c-bord); min-height: 320px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; position: relative; overflow: hidden; }
+.produit-photo { background: var(--c-brume); border-right: 1px solid var(--c-bord); min-height: 420px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; position: relative; overflow: hidden; }
 .produit-card.inverse .produit-photo { border-right: none; border-left: 1px solid var(--c-bord); }
-.produit-photo img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+.produit-photo img { width: 100%; height: 100%; object-fit: contain; position: absolute; inset: 0; padding: 24px; box-sizing: border-box; }
 .produit-photo-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; padding: 24px; }
 .produit-photo-placeholder svg { opacity: .2; }
 .produit-photo-placeholder-lbl { font-family: var(--font-mono); font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: var(--c-muted); opacity: .6; }
@@ -94,7 +94,7 @@
   .produits-inner { padding: 40px 20px; }
   .produit-card { grid-template-columns: 1fr; }
   .produit-card.inverse { direction: ltr; }
-  .produit-photo { min-height: 220px; border-right: none; border-bottom: 1px solid var(--c-bord); }
+  .produit-photo { min-height: 320px; border-right: none; border-bottom: 1px solid var(--c-bord); }
   .produit-card.inverse .produit-photo { border-left: none; border-bottom: 1px solid var(--c-bord); }
   .produit-contenu { padding: 24px 20px; }
   .cta-inner { grid-template-columns: 1fr; padding: 48px 20px; gap: 32px; }
