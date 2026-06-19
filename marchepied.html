@@ -375,6 +375,14 @@ function pvcMettreAJour() {
 const chaiseEtat = { fixation: 'fourchettes', hauteur: 'fixe' };
 const chaiseFixationLabel = { fourchettes: 'Fourchettes', trous: 'Trous' };
 const chaiseHauteurLabel = { fixe: 'Fixe', sets: 'Ajustable avec sets', rapide: 'Ajustable rapide' };
+const chaiseImages = {
+  'fourchettes-fixe': 'images/Marchepied/Marchepied chaise fourchettes fixe.jpg',
+  'fourchettes-sets': 'images/Marchepied/Marchepied chaise fourchettes sets.jpg',
+  'fourchettes-rapide': 'images/Marchepied/Marchepied avec fourchettes.jpg',
+  'trous-fixe': 'images/Marchepied/Marchepied avec trous.jpg',
+  'trous-sets': 'images/Marchepied/Appui-pied avec sets.jpg',
+  'trous-rapide': 'images/Marchepied/Marchepied chaise trous rapide.jpg'
+};
 
 function chaiseSelect(groupe, val, btn) {
   chaiseEtat[groupe] = val;
@@ -385,7 +393,7 @@ function chaiseSelect(groupe, val, btn) {
 
 function chaiseMettreAJour() {
   const f = chaiseEtat.fixation, h = chaiseEtat.hauteur;
-  const cheminImg = `images/Marchepied/Marchepied chaise ${f} ${h}.jpg`;
+  const cheminImg = chaiseImages[`${f}-${h}`];
   const img = document.getElementById('chaise-img');
   const ph = document.getElementById('chaise-placeholder');
   img.style.display = '';
