@@ -68,7 +68,7 @@
 .coussin-grille-3 { grid-template-columns: repeat(3, 1fr); }
 .coussin-carte { background: var(--c-blanc); overflow: hidden; transition: box-shadow .15s; }
 .coussin-carte:hover { box-shadow: 0 4px 20px rgba(0,0,0,.08); position: relative; z-index: 1; }
-.coussin-photo { width: 100%; height: 160px; background: var(--c-brume); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.coussin-photo { width: 100%; height: 160px; background: var(--c-brume); display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
 .coussin-photo img { width: 100%; height: 100%; object-fit: cover; }
 .coussin-photo-placeholder { display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--c-bord); }
 .coussin-photo-placeholder span { font-family: var(--font-mono); font-size: 8px; color: var(--c-bord); }
@@ -89,7 +89,7 @@
 .expand-desc { font-size: 12px; color: var(--c-muted); line-height: 1.55; }
 .expand-panel { display: none; padding: 0 0 16px 24px; }
 .expand-item.ouvert .expand-panel { display: grid; grid-template-columns: 140px 1fr; gap: 16px; align-items: start; }
-.expand-photo { width: 140px; height: 110px; background: var(--c-brume); border: 1px solid var(--c-bord); display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; }
+.expand-photo { width: 140px; height: 110px; background: var(--c-brume); border: 1px solid var(--c-bord); display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; position: relative; }
 .expand-photo img { width: 100%; height: 100%; object-fit: cover; }
 .expand-photo-placeholder { color: var(--c-bord); }
 .expand-panel-desc { font-size: 13px; color: var(--c-muted); line-height: 1.65; }
@@ -116,7 +116,7 @@
 .siege-btn.actif { background: var(--c-marine); border-color: var(--c-marine); color: var(--c-parchemin); }
 .siege-btn-disabled { opacity: .35; cursor: not-allowed; pointer-events: none; }
 .siege-affichage { background: var(--c-blanc); border: 1px solid var(--c-bord); border-radius: var(--radius); padding: 28px; min-height: 280px; }
-.siege-photo { width: 100%; height: 200px; background: var(--c-brume); display: flex; align-items: center; justify-content: center; margin-bottom: 18px; overflow: hidden; }
+.siege-photo { width: 100%; height: 200px; background: var(--c-brume); display: flex; align-items: center; justify-content: center; margin-bottom: 18px; overflow: hidden; position: relative; }
 .siege-photo img { width: 100%; height: 100%; object-fit: cover; }
 .siege-photo-placeholder { display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--c-bord); }
 .siege-photo-placeholder span { font-family: var(--font-mono); font-size: 9px; color: var(--c-bord); }
@@ -137,6 +137,30 @@
 .attache-tableau th { font-family: var(--font-label); font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--c-cuivre); text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--c-bord); }
 .attache-tableau td { font-size: 12px; color: var(--c-nuit); padding: 6px 10px; border-bottom: 1px solid var(--c-brume); vertical-align: top; }
 .attache-puce { display: inline-block; font-size: 11px; background: var(--c-brume); color: var(--c-nuit); padding: 2px 8px; border-radius: 10px; margin: 2px 3px 2px 0; }
+
+/* Carrousel générique — flèches + dots + zoom, actif seulement si plusieurs photos pour un même item */
+.carnet-nav-fleche { position: absolute; top: 50%; transform: translateY(-50%); width: 24px; height: 24px; border-radius: 50%; background: rgba(255,255,255,.92); border: 1px solid var(--c-bord); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--c-marine); box-shadow: 0 2px 6px rgba(0,0,0,.12); transition: background .15s; z-index: 3; }
+.carnet-nav-fleche:hover { background: var(--c-blanc); }
+.carnet-nav-fleche.gauche { left: 5px; }
+.carnet-nav-fleche.droite { right: 5px; }
+.carnet-nav-fleche svg { pointer-events: none; }
+.carnet-nav-dots { position: absolute; bottom: 5px; left: 0; right: 0; display: flex; justify-content: center; gap: 5px; z-index: 3; }
+.carnet-nav-dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,.7); border: 1px solid rgba(0,0,0,.15); cursor: pointer; transition: background .15s; }
+.carnet-nav-dot.actif { background: var(--c-cuivre); border-color: var(--c-cuivre); }
+.carnet-zoom-btn { position: absolute; bottom: 5px; right: 5px; width: 22px; height: 22px; border-radius: 50%; background: rgba(255,255,255,.92); border: 1px solid var(--c-bord); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--c-marine); box-shadow: 0 2px 6px rgba(0,0,0,.12); z-index: 3; transition: background .15s; }
+.carnet-zoom-btn:hover { background: var(--c-blanc); }
+
+/* Lightbox plein écran — partagée par toutes les zones photo sauf Couleurs */
+.lightbox-overlay { display: none; position: fixed; inset: 0; background: rgba(20,28,36,.92); z-index: 1000; align-items: center; justify-content: center; }
+.lightbox-overlay.visible { display: flex; }
+.lightbox-img-wrap { position: relative; max-width: 88vw; max-height: 86vh; display: flex; align-items: center; justify-content: center; }
+.lightbox-img-wrap img { max-width: 88vw; max-height: 86vh; object-fit: contain; border-radius: 2px; }
+.lightbox-fermer { position: absolute; top: 24px; right: 28px; width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--c-parchemin); transition: background .15s; }
+.lightbox-fermer:hover { background: rgba(255,255,255,.22); }
+.lightbox-nav-fleche { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--c-parchemin); transition: background .15s; }
+.lightbox-nav-fleche:hover { background: rgba(255,255,255,.22); }
+.lightbox-nav-fleche.gauche { left: 24px; }
+.lightbox-nav-fleche.droite { right: 24px; }
 
 /* CTA : styles partagés dans style.css (.cta-outer, .cta-citation-texte, etc.) — ne pas dupliquer ici */
 @media (max-width: 900px) {
@@ -204,10 +228,10 @@
     <div class="sous-section">
       <div class="sous-titre-ligne" data-fr="Coussin de dos" data-en="Back cushion">Coussin de dos</div>
       <div class="coussin-grille">
-        <div class="coussin-carte"><div class="coussin-photo"><div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div><div class="coussin-corps"><h3>Contour léger</h3><p>Légère inclinaison latérale pour un soutien doux du tronc.</p></div></div>
-        <div class="coussin-carte"><div class="coussin-photo"><div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div><div class="coussin-corps"><h3>Contour moyen</h3><p>Contour marqué pour un soutien latéral modéré.</p><p style="font-size:11px;color:var(--c-cuivre);font-style:italic;margin-top:8px;">* Mesure anthropométrique requise</p></div></div>
-        <div class="coussin-carte"><div class="coussin-photo"><div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div><div class="coussin-corps"><h3>Contour accentué</h3><p>Soutien latéral prononcé pour les besoins posturaux importants.</p><p style="font-size:11px;color:var(--c-cuivre);font-style:italic;margin-top:8px;">* Mesure anthropométrique requise</p></div></div>
-        <div class="coussin-carte"><div class="coussin-photo"><div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div><div class="coussin-corps"><h3>Appui thoracique</h3><p>Pour un soutien sévère. Vient avec un coussin lombaire et un petit coussin plat dans le haut du dossier.</p><p style="font-size:11px;color:var(--c-cuivre);font-style:italic;margin-top:8px;">* Mesure anthropométrique requise</p></div></div>
+        <div class="coussin-carte"><div class="coussin-photo" id="photo-coussin-contour-leger"><div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div><div class="coussin-corps"><h3>Contour léger</h3><p>Légère inclinaison latérale pour un soutien doux du tronc.</p></div></div>
+        <div class="coussin-carte"><div class="coussin-photo" id="photo-coussin-contour-moyen"><div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div><div class="coussin-corps"><h3>Contour moyen</h3><p>Contour marqué pour un soutien latéral modéré.</p><p style="font-size:11px;color:var(--c-cuivre);font-style:italic;margin-top:8px;">* Mesure anthropométrique requise</p></div></div>
+        <div class="coussin-carte"><div class="coussin-photo" id="photo-coussin-contour-accentue"><div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div><div class="coussin-corps"><h3>Contour accentué</h3><p>Soutien latéral prononcé pour les besoins posturaux importants.</p><p style="font-size:11px;color:var(--c-cuivre);font-style:italic;margin-top:8px;">* Mesure anthropométrique requise</p></div></div>
+        <div class="coussin-carte"><div class="coussin-photo" id="photo-coussin-appui-thoracique"><div class="coussin-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à venir</span></div></div><div class="coussin-corps"><h3>Appui thoracique</h3><p>Pour un soutien sévère. Vient avec un coussin lombaire et un petit coussin plat dans le haut du dossier.</p><p style="font-size:11px;color:var(--c-cuivre);font-style:italic;margin-top:8px;">* Mesure anthropométrique requise</p></div></div>
       </div>
     </div>
     <div class="sous-section">
@@ -246,7 +270,7 @@
   </div>
 </div>
 
-<!-- SECTION COULEURS — Sélecteur de rembourrage -->
+<!-- SECTION COULEURS — Sélecteur de rembourrage — NE PAS MODIFIER (hors scope du carrousel) -->
 <div id="couleurs" style="background:var(--c-parchemin);border-bottom:1px solid var(--c-bord);">
   <div style="max-width:var(--max-width);margin:0 auto;padding:var(--pad-section);">
     <div class="entete-section">
@@ -383,15 +407,15 @@
     <div class="deux-col">
       <div class="liste-groupe">
         <h3>Soutien postural</h3>
-        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Appui-bras</span><span class="expand-desc">Ajustable en hauteur</span></div></button><div class="expand-panel"><div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div><div><p class="expand-panel-desc">Ajustable en hauteur pour permettre aux bras d'être supportés adéquatement et peut servir pour aider aux transferts.</p></div></div></div>
-        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Appui-tête (hauteur)</span><span class="expand-desc">Réglable en hauteur</span></div></button><div class="expand-panel"><div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div><div><p class="expand-panel-desc">Soutien de la tête réglable en hauteur.</p></div></div></div>
-        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Appui-tête (hauteur et profondeur)</span><span class="expand-desc">Réglable sur deux axes</span></div></button><div class="expand-panel"><div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div><div><p class="expand-panel-desc">Réglable sur deux axes pour un positionnement de tête plus précis.</p></div></div></div>
-        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Bloc ABD amovible</span><span class="expand-desc">Bloc abducteur détachable</span></div></button><div class="expand-panel"><div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div><div><p class="expand-panel-desc">Empêche l'abduction des jambes, ne sert pas pour empêcher le bénéficiaire de glisser.</p></div></div></div>
+        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Appui-bras</span><span class="expand-desc">Ajustable en hauteur</span></div></button><div class="expand-panel"><div class="expand-photo" id="photo-appui-bras"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div><div><p class="expand-panel-desc">Ajustable en hauteur pour permettre aux bras d'être supportés adéquatement et peut servir pour aider aux transferts.</p></div></div></div>
+        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Appui-tête (hauteur)</span><span class="expand-desc">Réglable en hauteur</span></div></button><div class="expand-panel"><div class="expand-photo" id="photo-appui-tete-hauteur"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div><div><p class="expand-panel-desc">Soutien de la tête réglable en hauteur.</p></div></div></div>
+        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Appui-tête (hauteur et profondeur)</span><span class="expand-desc">Réglable sur deux axes</span></div></button><div class="expand-panel"><div class="expand-photo" id="photo-appui-tete-2axes"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div><div><p class="expand-panel-desc">Réglable sur deux axes pour un positionnement de tête plus précis.</p></div></div></div>
+        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Bloc ABD amovible</span><span class="expand-desc">Bloc abducteur détachable</span></div></button><div class="expand-panel"><div class="expand-photo" id="photo-bloc-abd"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div><div><p class="expand-panel-desc">Empêche l'abduction des jambes, ne sert pas pour empêcher le bénéficiaire de glisser.</p></div></div></div>
       </div>
       <div class="liste-groupe">
         <h3>Équipements</h3>
-        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Bande antidérapante sur le siège</span><span class="expand-desc">Prévient le glissement vers l'avant</span></div></button><div class="expand-panel"><div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div><div><p class="expand-panel-desc">Prévient le glissement vers l'avant de l'enfant sur le siège.</p></div></div></div>
-        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Barres de soutien (Grab bar)</span><span class="expand-desc">Appui des mains</span></div></button><div class="expand-panel"><div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div><div><p class="expand-panel-desc">Barres latérales pour aider le bénéficiaire à monter sur la chaise.</p></div></div></div>
+        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Bande antidérapante sur le siège</span><span class="expand-desc">Prévient le glissement vers l'avant</span></div></button><div class="expand-panel"><div class="expand-photo" id="photo-bande-antiderapante"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div><div><p class="expand-panel-desc">Prévient le glissement vers l'avant de l'enfant sur le siège.</p></div></div></div>
+        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Barres de soutien (Grab bar)</span><span class="expand-desc">Appui des mains</span></div></button><div class="expand-panel"><div class="expand-photo" id="photo-grab-bar"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div><div><p class="expand-panel-desc">Barres latérales pour aider le bénéficiaire à monter sur la chaise.</p></div></div></div>
         <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Base élargie</span><span class="expand-desc">Avec options sur roulette et/ou inclinable</span></div></button><div class="expand-panel" id="base-elargie-panel">
           <div class="expand-photo" id="base-elargie-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div>
           <div style="width:100%;">
@@ -413,7 +437,7 @@
             <p class="expand-panel-note">Compatibilité vérifiée dans le formulaire</p>
           </div>
         </div></div>
-        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Poignées d'ajustement</span><span class="expand-desc">Pour faciliter l'ajustement de la chaise</span></div></button><div class="expand-panel"><div class="expand-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div><div><p class="expand-panel-desc">Facilitent le réglage rapide de la chaise au complet.</p></div></div></div>
+        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Poignées d'ajustement</span><span class="expand-desc">Pour faciliter l'ajustement de la chaise</span></div></button><div class="expand-panel"><div class="expand-photo" id="photo-poignees"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div><div><p class="expand-panel-desc">Facilitent le réglage rapide de la chaise au complet.</p></div></div></div>
       </div>
     </div>
   </div>
@@ -440,6 +464,15 @@
       </table>
     </div>
   </div>
+</div>
+
+<div class="lightbox-overlay" id="lightboxOverlay" onclick="if(event.target===this) fermerLightbox()">
+  <div class="lightbox-img-wrap">
+    <img id="lightboxImg" src="" alt="">
+  </div>
+  <button class="lightbox-fermer" onclick="fermerLightbox()" aria-label="Fermer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+  <button class="lightbox-nav-fleche gauche" id="lightboxFlecheGauche" onclick="lightboxPrecedent()" aria-label="Photo précédente"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
+  <button class="lightbox-nav-fleche droite" id="lightboxFlecheDroite" onclick="lightboxSuivant()" aria-label="Photo suivante"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
 </div>
 
 <div class="cta-outer">
@@ -475,6 +508,99 @@ window.addEventListener('scroll', () => {
   document.querySelectorAll('.ancre-btn').forEach((b, i) => b.classList.toggle('actif', i === actif));
 });
 
+/* ── CARROUSEL GÉNÉRIQUE (flèches + dots + zoom) ──────────────────
+   Pour donner plusieurs photos à un item, ajouter une entrée dans
+   PHOTOS_ITEM ci-dessous : la clé est l'id de la zone photo (voir
+   id="..." sur chaque .coussin-photo / .expand-photo / .siege-photo
+   dans le HTML), la valeur est le tableau ordonné des chemins.
+   Avec une seule photo (ou aucune entrée ici), comportement normal —
+   pas de flèches, pas de zoom additionnel sur les zones sans photo. */
+const PHOTOS_ITEM = {
+  // 'photo-coussin-contour-leger': ['images/Accessoires/contour-leger-1.jpg', 'images/Accessoires/contour-leger-2.jpg'],
+};
+const itemCarrouselIndex = {};
+let lightboxItemId = null;
+
+function construireZonePhoto(zoneId, src, alt) {
+  const zone = document.getElementById(zoneId);
+  if (!zone) return;
+  const photos = PHOTOS_ITEM[zoneId] && PHOTOS_ITEM[zoneId].length ? PHOTOS_ITEM[zoneId] : (src ? [src] : null);
+  const placeholderClass = zone.classList.contains('coussin-photo') ? 'coussin-photo-placeholder' : (zone.classList.contains('siege-photo') ? 'siege-photo-placeholder' : 'expand-photo-placeholder');
+  if (!photos) {
+    zone.innerHTML = '<div class="' + placeholderClass + '"><span>Photo à venir</span></div>';
+    return;
+  }
+  itemCarrouselIndex[zoneId] = 0;
+  const plusieurs = photos.length > 1;
+  zone.dataset.photos = JSON.stringify(photos);
+  zone.innerHTML =
+    '<img id="' + zoneId + '-img" src="' + photos[0] + '" alt="' + (alt || '') + '" class="zoomable" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">' +
+    '<div class="' + placeholderClass + '" style="display:none;"><span>Photo à venir</span></div>' +
+    (plusieurs ? '<button class="carnet-nav-fleche gauche" onclick="itemCarrouselPrecedent(\'' + zoneId + '\')" aria-label="Photo précédente"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>' : '') +
+    (plusieurs ? '<button class="carnet-nav-fleche droite" onclick="itemCarrouselSuivant(\'' + zoneId + '\')" aria-label="Photo suivante"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>' : '') +
+    '<button class="carnet-zoom-btn" onclick="ouvrirLightboxItem(\'' + zoneId + '\')" aria-label="Agrandir la photo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/><path d="M11 8v6M8 11h6"/></svg></button>' +
+    (plusieurs ? '<div class="carnet-nav-dots" id="' + zoneId + '-dots"></div>' : '');
+  if (plusieurs) majDotsItem(zoneId, photos);
+}
+function majDotsItem(zoneId, photos) {
+  const dots = document.getElementById(zoneId + '-dots');
+  if (!dots) return;
+  const idx = itemCarrouselIndex[zoneId] || 0;
+  dots.innerHTML = photos.map((_, i) => '<span class="carnet-nav-dot' + (i===idx?' actif':'') + '" onclick="itemCarrouselAllerA(\'' + zoneId + '\',' + i + ')"></span>').join('');
+}
+function itemCarrouselSuivant(zoneId) {
+  const photos = JSON.parse(document.getElementById(zoneId).dataset.photos || '[]');
+  if (photos.length < 2) return;
+  itemCarrouselIndex[zoneId] = (itemCarrouselIndex[zoneId] + 1) % photos.length;
+  document.getElementById(zoneId + '-img').src = photos[itemCarrouselIndex[zoneId]];
+  majDotsItem(zoneId, photos);
+  if (lightboxItemId === zoneId) document.getElementById('lightboxImg').src = photos[itemCarrouselIndex[zoneId]];
+}
+function itemCarrouselPrecedent(zoneId) {
+  const photos = JSON.parse(document.getElementById(zoneId).dataset.photos || '[]');
+  if (photos.length < 2) return;
+  itemCarrouselIndex[zoneId] = (itemCarrouselIndex[zoneId] - 1 + photos.length) % photos.length;
+  document.getElementById(zoneId + '-img').src = photos[itemCarrouselIndex[zoneId]];
+  majDotsItem(zoneId, photos);
+  if (lightboxItemId === zoneId) document.getElementById('lightboxImg').src = photos[itemCarrouselIndex[zoneId]];
+}
+function itemCarrouselAllerA(zoneId, i) {
+  const photos = JSON.parse(document.getElementById(zoneId).dataset.photos || '[]');
+  itemCarrouselIndex[zoneId] = i;
+  document.getElementById(zoneId + '-img').src = photos[i];
+  majDotsItem(zoneId, photos);
+}
+function ouvrirLightboxItem(zoneId) {
+  const photos = JSON.parse(document.getElementById(zoneId).dataset.photos || '[]');
+  if (!photos.length) return;
+  lightboxItemId = zoneId;
+  const idx = itemCarrouselIndex[zoneId] || 0;
+  document.getElementById('lightboxImg').src = photos[idx];
+  const plusieurs = photos.length > 1;
+  document.getElementById('lightboxFlecheGauche').style.display = plusieurs ? 'flex' : 'none';
+  document.getElementById('lightboxFlecheDroite').style.display = plusieurs ? 'flex' : 'none';
+  document.getElementById('lightboxOverlay').classList.add('visible');
+}
+function fermerLightbox() {
+  document.getElementById('lightboxOverlay').classList.remove('visible');
+  lightboxItemId = null;
+}
+function lightboxSuivant() { if (lightboxItemId) itemCarrouselSuivant(lightboxItemId); }
+function lightboxPrecedent() { if (lightboxItemId) itemCarrouselPrecedent(lightboxItemId); }
+document.addEventListener('keydown', (e) => {
+  if (!document.getElementById('lightboxOverlay').classList.contains('visible')) return;
+  if (e.key === 'Escape') fermerLightbox();
+  if (e.key === 'ArrowRight') lightboxSuivant();
+  if (e.key === 'ArrowLeft') lightboxPrecedent();
+});
+
+// Initialise toutes les zones photo statiques (coussins dos, accessoires simples) au chargement
+document.addEventListener('DOMContentLoaded', () => {
+  ['photo-coussin-contour-leger','photo-coussin-contour-moyen','photo-coussin-contour-accentue','photo-coussin-appui-thoracique',
+   'photo-appui-bras','photo-appui-tete-hauteur','photo-appui-tete-2axes','photo-bloc-abd',
+   'photo-bande-antiderapante','photo-grab-bar','photo-poignees'].forEach(id => construireZonePhoto(id, null, ''));
+});
+
 // ── SÉLECTEUR COUSSIN DE SIÈGE ────────────────────────────────────
 (function() {
   const baseEl   = document.getElementById('siege-base-options');
@@ -482,7 +608,6 @@ window.addEventListener('scroll', () => {
   const blocsEl  = document.getElementById('siege-blocs-options');
   if (!baseEl) return;
 
-  const photoEl  = document.getElementById('siege-photo');
   const titreEl  = document.getElementById('siege-resume-titre');
   const descEl   = document.getElementById('siege-resume-desc');
   const mesureEl = document.getElementById('siege-resume-mesure');
@@ -556,6 +681,9 @@ window.addEventListener('scroll', () => {
 
     // Note sur le surplus de largeur requis — uniquement pour la base Contour
     noteContourEl.style.display = contourActif ? '' : 'none';
+
+    // Photo (carrousel générique — voir PHOTOS_ITEM)
+    construireZonePhoto('siege-photo', null, titre);
   }
 
   baseEl.addEventListener('click', function(e) {
@@ -586,7 +714,6 @@ window.addEventListener('scroll', () => {
   const optsEl = document.getElementById('base-elargie-options');
   if (!optsEl) return;
 
-  const photoEl = document.getElementById('base-elargie-photo');
   const descEl  = document.getElementById('base-elargie-desc');
 
   let etat = { roulette: false, inclinable: false };
@@ -631,9 +758,7 @@ window.addEventListener('scroll', () => {
 
     var src = PHOTOS[photoKey()];
     var alt = 'Base élargie' + (etat.roulette ? ' sur roulette' : '') + (etat.inclinable ? ' inclinable' : '');
-    if (src) {
-      photoEl.innerHTML = '<img class="zoomable" src="' + src + '" alt="' + alt + '" onerror="this.parentElement.innerHTML=\'<div class=&quot;expand-photo-placeholder&quot;><span>Photo à venir</span></div>\'">';
-    }
+    construireZonePhoto('base-elargie-photo', src, alt);
   }
 
   optsEl.addEventListener('click', function(e) {
@@ -649,7 +774,7 @@ window.addEventListener('scroll', () => {
 function initSelecteurCeinture(id, config) {
   const typeEl    = document.getElementById('ceinture-type-' + id);
   const attacheEl = document.getElementById('ceinture-attache-' + id);
-  const photoEl   = document.getElementById('ceinture-photo-' + id);
+  const photoZoneId = 'ceinture-photo-' + id;
   const noteEl    = document.getElementById('ceinture-note-' + id);
   if (!typeEl) return;
 
@@ -683,13 +808,9 @@ function initSelecteurCeinture(id, config) {
       b.classList.toggle('siege-btn-disabled', !valide);
     });
 
-    // Photo : par attache seule, ou par combinaison groupe1+attache selon la config
+    // Photo : par attache seule, ou par combinaison groupe1+attache selon la config — via carrousel générique
     var src = config.photos && config.photos[photoKey()];
-    if (src) {
-      photoEl.innerHTML = '<img class="zoomable" src="' + src + '" alt="' + config.nom + ' — ' + config.attachesLabels[etat.attache] + '" onerror="this.parentElement.innerHTML=\'<div class=&quot;expand-photo-placeholder&quot;><span>Photo à venir</span></div>\'">';
-    } else {
-      photoEl.innerHTML = '<div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div>';
-    }
+    construireZonePhoto(photoZoneId, src, config.nom + ' — ' + config.attachesLabels[etat.attache]);
 
     // Note d'avertissement Velcro/velcro
     if (etat.attache === 'velcro_velcro') {
@@ -813,7 +934,6 @@ function initSelecteurCeinture(id, config) {
 // ── SÉLECTEUR CABARET ──────────────────────────────────────────
 (function() {
   const formatsEl = document.getElementById('cabaret-formats');
-  const photoEl   = document.getElementById('cabaret-photo');
   if (!formatsEl) return;
 
   const FORMATS = [
@@ -839,7 +959,7 @@ function initSelecteurCeinture(id, config) {
       b.classList.toggle('actif', b.dataset.value === courant);
     });
     var f = FORMATS.find(function(x) { return x.id === courant; });
-    photoEl.innerHTML = '<img class="zoomable" src="' + f.img + '" alt="Cabaret — ' + f.label + '" onerror="this.parentElement.innerHTML=\'<div class=&quot;expand-photo-placeholder&quot;><span>Photo à venir</span></div>\'">';
+    construireZonePhoto('cabaret-photo', f.img, 'Cabaret — ' + f.label);
   }
 
   formatsEl.addEventListener('click', function(e) {
@@ -852,7 +972,7 @@ function initSelecteurCeinture(id, config) {
   maj();
 })();
 
-// ── SÉLECTEUR COULEURS ──────────────────────────────────────────
+// ── SÉLECTEUR COULEURS — INCHANGÉ, hors scope du carrousel ──────
 (function() {
   const COULEURS = [
     { fr:'Gris moyen',       en:'Medium grey',     hex:'#b0b0b0', img:'images/Couleur/Chaise Grise R193 B193 G193 (1).png' },
