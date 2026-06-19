@@ -10,10 +10,18 @@
 <style>
 /* ── MARCHEPIEDS : styles uniques ── */
 .hero-outer { background: var(--c-parchemin); border-bottom: 1px solid var(--c-bord); }
-.hero { max-width: var(--max-width); margin: 0 auto; padding: 64px 60px 56px; }
-.hero .lbl { margin-bottom: 16px; }
-.hero h1 { font-family: var(--font-titre); font-size: 48px; font-weight: 300; line-height: 1.12; color: var(--c-marine); margin-bottom: 18px; }
-.hero p { font-size: var(--fs-body); color: var(--c-muted); max-width: 520px; line-height: 1.8; }
+.hero { padding: 64px 60px 0; display: grid; grid-template-columns: 1fr 420px; gap: 48px; align-items: end; max-width: var(--max-width); margin: 0 auto; }
+.hero-texte { padding-bottom: 56px; }
+.hero-texte .lbl { margin-bottom: 18px; }
+.hero h1 { font-family: var(--font-titre); font-size: 48px; font-weight: 300; line-height: 1.12; color: var(--c-marine); margin-bottom: 20px; }
+.hero p { font-size: var(--fs-body); color: var(--c-muted); max-width: 440px; line-height: 1.8; margin-bottom: 32px; }
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 56px; }
+.hero-image { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; }
+.hero-image .carnet-photo { margin-bottom: 8px; }
+.hero-image .carnet-photo-inner { padding: 16px 16px 84px; }
+.hero-image .carnet-photo-inner img { max-width: 300px; }
+.hero-image .carnet-caption { bottom: 28px; left: 16px; right: 16px; font-size: 14px; }
+.hero-placeholder { width: 280px; height: 320px; background: var(--c-brume); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: var(--c-muted); font-size: 12px; text-align: center; }
 
 .tab-bar { position: static; background: var(--c-brume); border-bottom: 1px solid var(--c-bord); }
 .tab-bar-inner { max-width: var(--max-width); margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); }
@@ -91,8 +99,11 @@
 .ergo-cta-lien:hover { color: var(--c-cuivre); }
 
 @media (max-width: 768px) {
-  .hero { padding: 40px 20px 36px; }
-  .hero h1 { font-size: 32px; }
+  .hero { grid-template-columns: 1fr; padding: 24px 20px 0; gap: 0; }
+  .hero-texte { padding: 28px 20px 24px; }
+  .hero h1 { font-size: 30px; }
+  .hero-btns { flex-direction: column; margin-bottom: 32px; }
+  .hero-btns a { text-align: center; }
   .tab-bar-inner { grid-template-columns: repeat(2, 1fr); }
   .panel-inner { grid-template-columns: 1fr; padding: 36px 20px; gap: 28px; }
   .surmesure-inner { grid-template-columns: 1fr; }
@@ -109,9 +120,25 @@
 
 <div class="hero-outer">
   <div class="hero">
-    <span class="lbl">Solutions de mobilité adaptée</span>
-    <h1>Marchepieds fabriqués<br>sur mesure</h1>
-    <p>De l'accès au lavabo à l'autonomie aux toilettes, chaque marchepied est conçu en fonction des besoins réels de l'enfant et de son environnement.</p>
+    <div class="hero-texte">
+      <span class="lbl">Solutions de mobilité adaptée</span>
+      <h1>Marchepieds fabriqués<br>sur mesure</h1>
+      <p>De l'accès au lavabo à l'autonomie aux toilettes, chaque marchepied est conçu en fonction des besoins réels de la personne et de son environnement.</p>
+      <div class="hero-btns">
+        <a href="soumission.html" class="btn-primary">Demander une soumission →</a>
+        <a href="contactez-nous.html" class="btn-ghost">Nous contacter</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <div class="carnet-photo" style="transform:rotate(-1.5deg);">
+        <div class="carnet-scotch"></div>
+        <div class="carnet-photo-inner">
+          <img src="images/Marchepied/marchepied-hero.jpg" alt="Marchepied sur mesure" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="hero-placeholder" style="display:none;"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg><span>images/Marchepied/marchepied-hero.jpg</span></div>
+          <div class="carnet-caption">— Marchepied sur mesure</div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
