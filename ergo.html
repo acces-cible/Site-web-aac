@@ -73,14 +73,14 @@
 .btn-retour { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: .04em; color: var(--c-cuivre); margin-top: 20px; cursor: pointer; border-bottom: 1px solid rgba(192,135,74,.3); padding-bottom: 2px; transition: border-color .2s; }
 .btn-retour:hover { border-color: var(--c-cuivre); }
 
-.modele-fiche { border: 1px solid var(--c-bord); border-radius: var(--radius); overflow: hidden; background: var(--c-blanc); display: grid; grid-template-columns: 280px 1fr; }
+.modele-fiche { display: grid; grid-template-columns: 320px 1fr; gap: 64px; align-items: start; padding: 8px 0 0; }
 
-/* Cadre photo de la fiche — élargi pour que l'image (320px) ne déborde plus du cadre (280px) */
-.fiche-photo { background: var(--c-brume); border-right: 1px solid var(--c-bord); display: flex; align-items: center; justify-content: center; padding: 32px 20px; }
-.fiche-photo .carnet-photo-inner img { max-width: 200px; }
-.fiche-photo .carnet-placeholder { width: 200px; height: 240px; }
+.fiche-photo { display: flex; align-items: flex-start; justify-content: center; }
+.fiche-photo .carnet-photo-inner { padding: 10px 10px 36px; }
+.fiche-photo .carnet-photo-inner img { max-width: 100%; }
+.fiche-photo .carnet-placeholder { width: 100%; max-width: 280px; height: 320px; }
 
-.fiche-contenu { padding: 36px 40px; }
+.fiche-contenu { padding: 0; }
 .fiche-contenu .lbl { margin-bottom: 10px; }
 .fiche-titre { font-family: var(--font-titre); font-size: 38px; font-weight: 400; color: var(--c-marine); line-height: 1.15; margin-bottom: 12px; }
 .fiche-badge { display: inline-flex; font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--c-cuivre); border: 1px solid var(--c-cuivre); padding: 4px 12px; border-radius: 2px; margin-bottom: 20px; }
@@ -105,9 +105,9 @@
   .hero-btns a { text-align: center; }
   .modeles-inner { padding: 32px 20px; }
   .modeles-barre { display: grid; grid-template-columns: 1fr 1fr; }
-  .modele-fiche { grid-template-columns: 1fr; }
-  .fiche-photo { border-right: none; border-bottom: 1px solid var(--c-bord); }
-  .fiche-contenu { padding: 24px 20px; }
+  .modele-fiche { grid-template-columns: 1fr; gap: 28px; }
+  .fiche-photo { justify-content: flex-start; }
+  .fiche-contenu { padding: 0; }
 }
 </style>
 </head>
