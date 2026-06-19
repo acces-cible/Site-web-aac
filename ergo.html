@@ -31,7 +31,7 @@
 .carnet-photo-inner { background: var(--c-blanc); padding: 16px 16px 12px; box-shadow: 0 2px 8px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.06); display: flex; flex-direction: column; }
 .carnet-photo-inner img { display: block; width: 100%; max-width: 300px; height: auto; }
 .carnet-placeholder { width: 280px; height: 320px; background: var(--c-brume); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: var(--c-muted); font-size: 12px; text-align: center; }
-.carnet-caption { font-family: var(--font-script); font-size: 14px; color: var(--c-muted); text-align: center; margin-top: 14px; }
+.carnet-caption { font-family: var(--font-script); font-size: 14px; color: var(--c-muted); text-align: center; margin-top: 18px; padding-top: 2px; }
 .carnet-scotch { position: absolute; top: -10px; left: 50%; transform: translateX(-50%) rotate(-2deg); width: 52px; height: 18px; background: rgba(220,210,190,.55); background-image: repeating-linear-gradient(90deg,transparent,transparent 3px,rgba(255,255,255,.15) 3px,rgba(255,255,255,.15) 4px); z-index: 2; }
 .carnet-scotch-gauche { position: absolute; top: -8px; left: 18px; transform: rotate(-8deg); width: 44px; height: 16px; background: rgba(220,210,190,.5); z-index: 2; }
 .carnet-scotch-droite { position: absolute; top: -8px; right: 18px; transform: rotate(6deg); width: 44px; height: 16px; background: rgba(220,210,190,.5); z-index: 2; }
@@ -99,12 +99,12 @@
 .btn-retour { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: .04em; color: var(--c-cuivre); margin-top: 20px; cursor: pointer; border-bottom: 1px solid rgba(192,135,74,.3); padding-bottom: 2px; transition: border-color .2s; }
 .btn-retour:hover { border-color: var(--c-cuivre); }
 
-.modele-fiche { display: grid; grid-template-columns: 320px 1fr; gap: 64px; align-items: start; padding: 8px 0 0; }
+.modele-fiche { display: grid; grid-template-columns: 380px 1fr; gap: 64px; align-items: start; padding: 8px 0 0; }
 
 .fiche-photo { display: flex; align-items: flex-start; justify-content: center; }
-.fiche-photo .carnet-photo-inner { padding: 10px 10px 10px; }
+.fiche-photo .carnet-photo-inner { padding: 14px 14px 14px; }
 .fiche-photo .carnet-photo-inner img { max-width: 100%; }
-.fiche-photo .carnet-placeholder { width: 100%; max-width: 280px; height: 320px; }
+.fiche-photo .carnet-placeholder { width: 100%; max-width: 360px; height: 380px; }
 
 .fiche-contenu { padding: 0; }
 .fiche-contenu .lbl { margin-bottom: 10px; }
