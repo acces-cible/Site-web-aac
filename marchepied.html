@@ -298,6 +298,7 @@
           <tr><td>Support papier de toilette</td><td>Inclus</td></tr>
           <tr><td>Nombre de marches</td><td>2</td></tr>
         </table>
+        <a href="javascript:void(0)" onclick="switchTab('mobilite')" id="toilette-lien-mobilite" style="display:none;align-items:center;gap:8px;font-family:var(--font-body);font-size:13px;font-weight:600;color:var(--c-cuivre);background:var(--c-blanc);border:1px solid var(--c-cuivre);border-radius:var(--radius);padding:11px 18px;text-decoration:none;margin-bottom:24px;width:fit-content;">Voir les configurations dans la section Mobilité →</a>
         <p class="panel-note" id="toilette-note">* L'image est présentée à titre informatif seulement — le produit final peut différer.</p>
         <a href="soumission.html" class="btn-primary">Demander une soumission →</a>
       </div>
@@ -419,21 +420,24 @@ const toiletteData = {
     caption: '— Marchepied toilette · sur base ERGO',
     badge: 'SUR BASE ERGO · AJUSTABLE',
     desc: 'La solution la plus complète, car elle s\'ajuste en hauteur et en profondeur, avec des grab bars intégrés et un support à rouleau de papier de toilette.',
-    specs: [['Ajustement hauteur','Oui'],['Ajustement profondeur','Oui'],['Grab bar','Inclus'],['Support papier de toilette','Inclus'],['Nombre de marches','2']]
+    specs: [['Ajustement hauteur','Oui'],['Ajustement profondeur','Oui'],['Grab bar','Inclus'],['Support papier de toilette','Inclus'],['Nombre de marches','2']],
+    lienMobilite: false
   },
   ajustable: {
     img: 'images/Marchepied/Adaptations de toilette contre plaqué.jpg',
     caption: '— Marchepied toilette · ajustable · main courante réglable',
     badge: 'BOIS · AJUSTABLE EN HAUTEUR · MAIN COURANTE RÉGLABLE',
     desc: 'Une marche en bois ajustable en hauteur, avec main courante réglable en hauteur. Un modèle versatile, fabriqué sur mesure selon le gabarit de la personne.',
-    specs: [['Ajustement hauteur','Oui'],['Main courante','Réglable en hauteur'],['Matériau','Bois · contre-plaqué'],['Nombre de marches','1']]
+    specs: [['Ajustement hauteur','Oui'],['Main courante','Réglable en hauteur'],['Matériau','Bois · contre-plaqué'],['Nombre de marches','1']],
+    lienMobilite: false
   },
   pvc: {
     img: 'images/Marchepied/Adaptations de toilette PVC.jpg',
     caption: '— Marchepied toilette · PVC fixe',
     badge: 'PVC · 1 OU 2 MARCHES · AVEC OU SANS RAMPES',
-    desc: 'C\'est l\'option légère, faite sur mesure. Disponible en 1 ou 2 marches, avec ou sans rampes. Cette option reprend nos marchepieds PVC — voir la section <a href="javascript:void(0)" onclick="switchTab(\'mobilite\')" style="color:var(--c-cuivre);text-decoration:underline;">Mobilité</a> pour le détail des configurations (1 ou 2 marches, avec ou sans rampes).',
-    specs: [['Matériau','Cadre PVC blanc · surface antidérapante'],['Nombre de marches','1 ou 2'],['Rampes latérales','Avec ou sans']]
+    desc: 'C\'est l\'option légère, faite sur mesure. Disponible en 1 ou 2 marches, avec ou sans rampes.',
+    specs: [['Matériau','Cadre PVC blanc · surface antidérapante'],['Nombre de marches','1 ou 2'],['Rampes latérales','Avec ou sans']],
+    lienMobilite: true
   }
 };
 
@@ -457,6 +461,8 @@ function toiletteMettreAJour(val) {
 
   const specsHtml = d.specs.map(s => `<tr><td>${s[0]}</td><td>${s[1]}</td></tr>`).join('');
   document.getElementById('toilette-specs').innerHTML = specsHtml;
+
+  document.getElementById('toilette-lien-mobilite').style.display = d.lienMobilite ? 'inline-flex' : 'none';
 }
 </script>
 </body>
