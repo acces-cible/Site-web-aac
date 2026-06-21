@@ -34,6 +34,11 @@
       Carrousel.init('photo-x', [], { alt: 'Produit à venir' });
       → affiche automatiquement un placeholder "Photo à venir" cohérent.
 
+   5. Le bouton zoom est activé par défaut. Pour le désactiver sur une zone
+      précise (ex: petites photos décoratives qui n'ont pas besoin d'être
+      vues en grand) :
+      Carrousel.init('photo-deco', ['...'], { alt: '...', zoom: false });
+
    Le composant gère pour chaque zone : l'image courante, les flèches
    (masquées si une seule photo), les points indicateurs, le bouton zoom,
    et partage UNE SEULE lightbox globale pour tout le site (créée une fois,
@@ -102,7 +107,7 @@ const Carrousel = (function () {
         'onerror="this.style.display=\'none\';this.insertAdjacentHTML(\'afterend\', Carrousel._placeholderHTML(\'' + (z.alt || 'Photo à venir').replace(/'/g, "\\'") + '\'))">' +
       (plusieurs ? '<button class="crsl-fleche gauche" aria-label="Photo précédente" onclick="Carrousel.prev(\'' + id + '\')">' + SVG_GAUCHE + '</button>' : '') +
       (plusieurs ? '<button class="crsl-fleche droite" aria-label="Photo suivante" onclick="Carrousel.next(\'' + id + '\')">' + SVG_DROITE + '</button>' : '') +
-      '<button class="crsl-zoom" aria-label="Agrandir la photo" onclick="Carrousel.openLightbox(\'' + id + '\')">' + SVG_ZOOM + '</button>' +
+      (z.zoom ? '<button class="crsl-zoom" aria-label="Agrandir la photo" onclick="Carrousel.openLightbox(\'' + id + '\')">' + SVG_ZOOM + '</button>' : '') +
       (plusieurs ? '<div class="crsl-dots" data-position="overlay">' +
         z.photos.map((_, i) => '<button class="crsl-dot' + (i === z.index ? ' actif' : '') + '" aria-label="Photo ' + (i+1) + '" onclick="Carrousel.goTo(\'' + id + '\',' + i + ')"></button>').join('') +
       '</div>' : '');
@@ -194,7 +199,8 @@ const Carrousel = (function () {
         photos: nouvellesPhotos,
         index: 0,
         alt: opts.alt || '',
-        caption: opts.caption || ''
+        caption: opts.caption || '',
+        zoom: opts.zoom !== false // activé par défaut, désactiver avec { zoom: false }
       };
 
       if (memeStructure) mettreAJourImage(id);
@@ -208,7 +214,7 @@ const Carrousel = (function () {
       mettreAJourImage(id);
     },
     openLightbox(id) {
-      if (!zones[id] || !zones[id].photos.length) return;
+      if (!zones[id] || !zones[id].photos.length || zones[id].zoom === false) return;
       lightboxOuverte = id;
       majLightbox(id);
       document.getElementById('crsl-lightbox').classList.add('visible');
