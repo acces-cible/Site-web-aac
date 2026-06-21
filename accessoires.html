@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Caveat:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="carrousel.css">
 <style>
 /* ── ACCESSOIRES : styles uniques ── */
 :root { --pad-section: 72px 60px; --pad-mobile: 40px 20px; }
@@ -138,29 +139,7 @@
 .attache-tableau td { font-size: 12px; color: var(--c-nuit); padding: 6px 10px; border-bottom: 1px solid var(--c-brume); vertical-align: top; }
 .attache-puce { display: inline-block; font-size: 11px; background: var(--c-brume); color: var(--c-nuit); padding: 2px 8px; border-radius: 10px; margin: 2px 3px 2px 0; }
 
-/* Carrousel générique — flèches + dots + zoom, actif seulement si plusieurs photos pour un même item */
-.carnet-nav-fleche { position: absolute; top: 50%; transform: translateY(-50%); width: 24px; height: 24px; border-radius: 50%; background: rgba(255,255,255,.92); border: 1px solid var(--c-bord); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--c-marine); box-shadow: 0 2px 6px rgba(0,0,0,.12); transition: background .15s; z-index: 3; }
-.carnet-nav-fleche:hover { background: var(--c-blanc); }
-.carnet-nav-fleche.gauche { left: 5px; }
-.carnet-nav-fleche.droite { right: 5px; }
-.carnet-nav-fleche svg { pointer-events: none; }
-.carnet-nav-dots { position: absolute; bottom: 5px; left: 0; right: 0; display: flex; justify-content: center; gap: 5px; z-index: 3; }
-.carnet-nav-dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,.7); border: 1px solid rgba(0,0,0,.15); cursor: pointer; transition: background .15s; }
-.carnet-nav-dot.actif { background: var(--c-cuivre); border-color: var(--c-cuivre); }
-.carnet-zoom-btn { position: absolute; bottom: 5px; right: 5px; width: 22px; height: 22px; border-radius: 50%; background: rgba(255,255,255,.92); border: 1px solid var(--c-bord); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--c-marine); box-shadow: 0 2px 6px rgba(0,0,0,.12); z-index: 3; transition: background .15s; }
-.carnet-zoom-btn:hover { background: var(--c-blanc); }
-
-/* Lightbox plein écran — partagée par toutes les zones photo sauf Couleurs */
-.lightbox-overlay { display: none; position: fixed; inset: 0; background: rgba(20,28,36,.92); z-index: 1000; align-items: center; justify-content: center; }
-.lightbox-overlay.visible { display: flex; }
-.lightbox-img-wrap { position: relative; max-width: 88vw; max-height: 86vh; display: flex; align-items: center; justify-content: center; }
-.lightbox-img-wrap img { max-width: 88vw; max-height: 86vh; object-fit: contain; border-radius: 2px; }
-.lightbox-fermer { position: absolute; top: 24px; right: 28px; width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--c-parchemin); transition: background .15s; }
-.lightbox-fermer:hover { background: rgba(255,255,255,.22); }
-.lightbox-nav-fleche { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--c-parchemin); transition: background .15s; }
-.lightbox-nav-fleche:hover { background: rgba(255,255,255,.22); }
-.lightbox-nav-fleche.gauche { left: 24px; }
-.lightbox-nav-fleche.droite { right: 24px; }
+/* Carrousel + lightbox : styles partagés fournis par carrousel.css */
 
 /* CTA : styles partagés dans style.css (.cta-outer, .cta-citation-texte, etc.) — ne pas dupliquer ici */
 @media (max-width: 900px) {
@@ -187,7 +166,7 @@
     <div class="hero-texte">
       <span class="lbl" data-fr="Accessoires posturaux · Chaise ERGO" data-en="Postural accessories · ERGO Chair">Accessoires posturaux · Chaise ERGO</span>
       <h1 class="hero-h1" data-fr-html="Les accessoires qui font de la chaise une <em>solution complète.</em>" data-en-html="The accessories that make the chair a <em>complete solution.</em>">Les accessoires qui font de la chaise une <em>solution complète.</em></h1>
-      <p class="hero-sous-titre" data-fr="Chaque chaise ERGO peut être équipée selon les besoins posturaux précis de l'enfant. Les accessoires sont sélectionnés avec l'ergothérapeute dans le formulaire de soumission." data-en="Every ERGO chair can be equipped to the child's precise postural needs. Accessories are selected with the occupational therapist in the quote form.">Chaque chaise ERGO peut être équipée selon les besoins posturaux précis de l'enfant. Les accessoires sont sélectionnés avec l'ergothérapeute dans le formulaire de soumission.</p>
+      <p class="hero-sous-titre" data-fr="Chaque chaise ERGO peut être équipée selon les besoins posturaux précis de la personne. Les accessoires sont sélectionnés avec l'ergothérapeute dans le formulaire de soumission." data-en="Every ERGO chair can be equipped to the person's precise postural needs. Accessories are selected with the occupational therapist in the quote form.">Chaque chaise ERGO peut être équipée selon les besoins posturaux précis de la personne. Les accessoires sont sélectionnés avec l'ergothérapeute dans le formulaire de soumission.</p>
       <div class="hero-btns">
         <a href="soumission.html" class="btn-primary" data-fr="Formulaire de soumission →" data-en="Quote form →">Formulaire de soumission →</a>
         <a href="ergo.html" class="btn-ghost" data-fr="Voir la chaise ERGO" data-en="View the ERGO chair">Voir la chaise ERGO</a>
@@ -311,7 +290,7 @@
 <!-- SECTION 02 — CEINTURES -->
 <div id="ceintures" style="background:var(--c-brume);border-bottom:1px solid var(--c-bord);">
   <div style="max-width:var(--max-width);margin:0 auto;padding:var(--pad-section);">
-    <div class="entete-section"><span class="lbl">Section 02</span><h2>Ceintures & Plastrons</h2><p>Les systèmes de maintien sont choisis selon les besoins cliniques de l'enfant. Le type d'attache disponible varie selon la ceinture sélectionnée.</p></div>
+    <div class="entete-section"><span class="lbl">Section 02</span><h2>Ceintures & Plastrons</h2><p>Les systèmes de maintien sont choisis selon les besoins cliniques de la personne. Le type d'attache disponible varie selon la ceinture sélectionnée.</p></div>
     <div class="deux-col">
       <div class="liste-groupe">
         <h3>Ceintures</h3>
@@ -414,7 +393,7 @@
       </div>
       <div class="liste-groupe">
         <h3>Équipements</h3>
-        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Bande antidérapante sur le siège</span><span class="expand-desc">Prévient le glissement vers l'avant</span></div></button><div class="expand-panel"><div class="expand-photo" id="photo-bande-antiderapante"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div><div><p class="expand-panel-desc">Prévient le glissement vers l'avant de l'enfant sur le siège.</p></div></div></div>
+        <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Bande antidérapante sur le siège</span><span class="expand-desc">Prévient le glissement vers l'avant</span></div></button><div class="expand-panel"><div class="expand-photo" id="photo-bande-antiderapante"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div><div><p class="expand-panel-desc">Prévient le glissement vers l'avant de la personne sur le siège.</p></div></div></div>
         <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Barres de soutien (Grab bar)</span><span class="expand-desc">Appui des mains</span></div></button><div class="expand-panel"><div class="expand-photo" id="photo-grab-bar"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div><div><p class="expand-panel-desc">Barres latérales pour aider le bénéficiaire à monter sur la chaise.</p></div></div></div>
         <div class="expand-item"><button class="expand-trigger" onclick="toggleExpand(this)"><span class="expand-fleche"><svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,2 6,6 2,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="expand-texte"><span class="expand-nom">Base élargie</span><span class="expand-desc">Avec options sur roulette et/ou inclinable</span></div></button><div class="expand-panel" id="base-elargie-panel">
           <div class="expand-photo" id="base-elargie-photo"><div class="expand-photo-placeholder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg></div></div>
@@ -446,7 +425,7 @@
   <div style="max-width:var(--max-width);margin:0 auto;padding:var(--pad-section);">
     <div class="entete-section"><span class="lbl">Section 04</span><h2>Configuration hors standard</h2><p>Les dimensions de dossier, siège et appui-pieds peuvent être ajustées au-delà des mesures standard.</p></div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:48px;margin-bottom:28px;">
-      <div class="liste-groupe" style="margin-bottom:0;"><h3>Dossier</h3><div class="liste-items"><div class="liste-item"><div class="liste-dot"></div><div><strong>Mini dossier</strong><span>Pour les enfants qui n'ont pas besoin d'un dossier haut.</span></div></div><div class="liste-item"><div class="liste-dot"></div><div><strong>Dossier plus haut</strong><span>Plusieurs hauteurs selon la largeur de chaise.</span></div></div><div class="liste-item"><div class="liste-dot"></div><div><strong>Extension de dossier</strong><span>S'ajoute à un dossier existant pour plus de hauteur.</span></div></div></div></div>
+      <div class="liste-groupe" style="margin-bottom:0;"><h3>Dossier</h3><div class="liste-items"><div class="liste-item"><div class="liste-dot"></div><div><strong>Mini dossier</strong><span>Pour les personnes qui n'ont pas besoin d'un dossier haut.</span></div></div><div class="liste-item"><div class="liste-dot"></div><div><strong>Dossier plus haut</strong><span>Plusieurs hauteurs selon la largeur de chaise.</span></div></div><div class="liste-item"><div class="liste-dot"></div><div><strong>Extension de dossier</strong><span>S'ajoute à un dossier existant pour plus de hauteur.</span></div></div></div></div>
       <div class="liste-groupe" style="margin-bottom:0;"><h3>Siège</h3><div class="liste-items"><div class="liste-item"><div class="liste-dot"></div><div><strong>Mini siège</strong><span>Pour les morphologies nécessitant peu de profondeur.</span></div></div><div class="liste-item"><div class="liste-dot"></div><div><strong>Siège plus profond</strong><span>Plusieurs profondeurs selon la largeur de chaise.</span></div></div></div></div>
       <div class="liste-groupe" style="margin-bottom:0;"><h3>Appui-pieds</h3><div class="liste-items"><div class="liste-item"><div class="liste-dot"></div><div><strong>Appui-pieds plus profond</strong><span>Plusieurs profondeurs selon la largeur de chaise.</span></div></div><div class="liste-item"><div class="liste-dot"></div><div><strong>Sans appui-pieds</strong><span>Permet d'avoir les pieds au sol.</span></div></div><div class="liste-item"><div class="liste-dot"></div><div><strong>2e appui-pieds</strong><span>Permet d'avoir plusieurs marches pour accéder à la chaise (style escalier).</span></div></div></div></div>
     </div>
@@ -466,20 +445,11 @@
   </div>
 </div>
 
-<div class="lightbox-overlay" id="lightboxOverlay" onclick="if(event.target===this) fermerLightbox()">
-  <div class="lightbox-img-wrap">
-    <img id="lightboxImg" src="" alt="">
-  </div>
-  <button class="lightbox-fermer" onclick="fermerLightbox()" aria-label="Fermer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-  <button class="lightbox-nav-fleche gauche" id="lightboxFlecheGauche" onclick="lightboxPrecedent()" aria-label="Photo précédente"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
-  <button class="lightbox-nav-fleche droite" id="lightboxFlecheDroite" onclick="lightboxSuivant()" aria-label="Photo suivante"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
-</div>
-
 <div class="cta-outer">
   <div class="cta-inner">
-    <div class="cta-citation"><span class="lbl">Un mot des ergothérapeutes</span><blockquote class="cta-citation-texte">« Je décris l'enfant. Claude dessine la chaise.<br>Deux semaines plus tard, elle est parfaite. »</blockquote><p class="cta-citation-source">— Ergothérapeute, région de Montréal</p><div class="cta-regle"></div></div>
+    <div class="cta-citation"><span class="lbl">Un mot des ergothérapeutes</span><blockquote class="cta-citation-texte">« Je décris la personne. Claude dessine la chaise.<br>Quelques semaines plus tard, elle est parfaite. »</blockquote><p class="cta-citation-source">— Ergothérapeute, région de Montréal</p><div class="cta-regle"></div></div>
     <div class="cta-action">
-      <h2 class="cta-titre" data-fr-html="Prêt à configurer<br>la chaise d'un <em>enfant en particulier ?</em>" data-en-html="Ready to configure<br>a chair for <em>a specific child?</em>">Prêt à configurer<br>la chaise d'un <em>enfant en particulier ?</em></h2>
+      <h2 class="cta-titre" data-fr-html="Prêt à configurer<br>la chaise d'une <em>personne en particulier ?</em>" data-en-html="Ready to configure<br>a chair for <em>a specific person?</em>">Prêt à configurer<br>la chaise d'une <em>personne en particulier ?</em></h2>
       <ul class="cta-liste"><li>Tous les accessoires sont sélectionnés dans le formulaire unique</li><li>Compatibilité vérifiée selon la largeur de chaise choisie</li><li>Délai de fabrication : 4 à 6 semaines</li></ul>
       <div class="cta-btns"><a href="soumission.html" class="btn-accent">Remplir le formulaire de soumission →</a><a href="contactez-nous.html" class="cta-lien">Ou nous écrire directement</a></div>
     </div>
@@ -488,6 +458,7 @@
 
 <div id="footer-container"></div>
 <script src="scripts.js"></script>
+<script src="carrousel.js"></script>
 <script>
 function toggleExpand(btn) {
   const item = btn.closest('.expand-item');
@@ -508,91 +479,26 @@ window.addEventListener('scroll', () => {
   document.querySelectorAll('.ancre-btn').forEach((b, i) => b.classList.toggle('actif', i === actif));
 });
 
-/* ── CARROUSEL GÉNÉRIQUE (flèches + dots + zoom) ──────────────────
+/* ── PHOTOS MULTIPLES PAR ZONE ──────────────────────────────────
    Pour donner plusieurs photos à un item, ajouter une entrée dans
    PHOTOS_ITEM ci-dessous : la clé est l'id de la zone photo (voir
    id="..." sur chaque .coussin-photo / .expand-photo / .siege-photo
    dans le HTML), la valeur est le tableau ordonné des chemins.
-   Avec une seule photo (ou aucune entrée ici), comportement normal —
-   pas de flèches, pas de zoom additionnel sur les zones sans photo. */
+   Avec une seule photo (ou aucune entrée ici), comportement normal. */
 const PHOTOS_ITEM = {
   'photo-coussin-contour-leger': ['images/Coussins/coussin dos leger.JPG', 'images/Coussins/coussin contour dos leger 1.JPG', 'images/Coussins/coussin contour dos leger 2.JPG'],
 };
-const itemCarrouselIndex = {};
-let lightboxItemId = null;
 
+/* Fonction-pont : conserve la même signature que l'ancien système local
+   (zoneId, src, alt) mais délègue tout l'affichage au composant Carrousel
+   unifié (carrousel.js), qui gère flèches/dots/zoom/lightbox pour tout le site. */
 function construireZonePhoto(zoneId, src, alt) {
   const zone = document.getElementById(zoneId);
   if (!zone) return;
-  const photos = PHOTOS_ITEM[zoneId] && PHOTOS_ITEM[zoneId].length ? PHOTOS_ITEM[zoneId] : (src ? [src] : null);
-  const placeholderClass = zone.classList.contains('coussin-photo') ? 'coussin-photo-placeholder' : (zone.classList.contains('siege-photo') ? 'siege-photo-placeholder' : 'expand-photo-placeholder');
-  if (!photos) {
-    zone.innerHTML = '<div class="' + placeholderClass + '"><span>Photo à venir</span></div>';
-    return;
-  }
-  itemCarrouselIndex[zoneId] = 0;
-  const plusieurs = photos.length > 1;
-  zone.dataset.photos = JSON.stringify(photos);
-  zone.innerHTML =
-    '<img id="' + zoneId + '-img" src="' + photos[0] + '" alt="' + (alt || '') + '" class="zoomable" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">' +
-    '<div class="' + placeholderClass + '" style="display:none;"><span>Photo à venir</span></div>' +
-    (plusieurs ? '<button class="carnet-nav-fleche gauche" onclick="itemCarrouselPrecedent(\'' + zoneId + '\')" aria-label="Photo précédente"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>' : '') +
-    (plusieurs ? '<button class="carnet-nav-fleche droite" onclick="itemCarrouselSuivant(\'' + zoneId + '\')" aria-label="Photo suivante"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>' : '') +
-    '<button class="carnet-zoom-btn" onclick="ouvrirLightboxItem(\'' + zoneId + '\')" aria-label="Agrandir la photo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/><path d="M11 8v6M8 11h6"/></svg></button>' +
-    (plusieurs ? '<div class="carnet-nav-dots" id="' + zoneId + '-dots"></div>' : '');
-  if (plusieurs) majDotsItem(zoneId, photos);
+  if (!zone.classList.contains('crsl-zone')) zone.classList.add('crsl-zone');
+  const photos = (PHOTOS_ITEM[zoneId] && PHOTOS_ITEM[zoneId].length) ? PHOTOS_ITEM[zoneId] : (src ? [src] : []);
+  Carrousel.init(zoneId, photos, { alt: alt || '' });
 }
-function majDotsItem(zoneId, photos) {
-  const dots = document.getElementById(zoneId + '-dots');
-  if (!dots) return;
-  const idx = itemCarrouselIndex[zoneId] || 0;
-  dots.innerHTML = photos.map((_, i) => '<span class="carnet-nav-dot' + (i===idx?' actif':'') + '" onclick="itemCarrouselAllerA(\'' + zoneId + '\',' + i + ')"></span>').join('');
-}
-function itemCarrouselSuivant(zoneId) {
-  const photos = JSON.parse(document.getElementById(zoneId).dataset.photos || '[]');
-  if (photos.length < 2) return;
-  itemCarrouselIndex[zoneId] = (itemCarrouselIndex[zoneId] + 1) % photos.length;
-  document.getElementById(zoneId + '-img').src = photos[itemCarrouselIndex[zoneId]];
-  majDotsItem(zoneId, photos);
-  if (lightboxItemId === zoneId) document.getElementById('lightboxImg').src = photos[itemCarrouselIndex[zoneId]];
-}
-function itemCarrouselPrecedent(zoneId) {
-  const photos = JSON.parse(document.getElementById(zoneId).dataset.photos || '[]');
-  if (photos.length < 2) return;
-  itemCarrouselIndex[zoneId] = (itemCarrouselIndex[zoneId] - 1 + photos.length) % photos.length;
-  document.getElementById(zoneId + '-img').src = photos[itemCarrouselIndex[zoneId]];
-  majDotsItem(zoneId, photos);
-  if (lightboxItemId === zoneId) document.getElementById('lightboxImg').src = photos[itemCarrouselIndex[zoneId]];
-}
-function itemCarrouselAllerA(zoneId, i) {
-  const photos = JSON.parse(document.getElementById(zoneId).dataset.photos || '[]');
-  itemCarrouselIndex[zoneId] = i;
-  document.getElementById(zoneId + '-img').src = photos[i];
-  majDotsItem(zoneId, photos);
-}
-function ouvrirLightboxItem(zoneId) {
-  const photos = JSON.parse(document.getElementById(zoneId).dataset.photos || '[]');
-  if (!photos.length) return;
-  lightboxItemId = zoneId;
-  const idx = itemCarrouselIndex[zoneId] || 0;
-  document.getElementById('lightboxImg').src = photos[idx];
-  const plusieurs = photos.length > 1;
-  document.getElementById('lightboxFlecheGauche').style.display = plusieurs ? 'flex' : 'none';
-  document.getElementById('lightboxFlecheDroite').style.display = plusieurs ? 'flex' : 'none';
-  document.getElementById('lightboxOverlay').classList.add('visible');
-}
-function fermerLightbox() {
-  document.getElementById('lightboxOverlay').classList.remove('visible');
-  lightboxItemId = null;
-}
-function lightboxSuivant() { if (lightboxItemId) itemCarrouselSuivant(lightboxItemId); }
-function lightboxPrecedent() { if (lightboxItemId) itemCarrouselPrecedent(lightboxItemId); }
-document.addEventListener('keydown', (e) => {
-  if (!document.getElementById('lightboxOverlay').classList.contains('visible')) return;
-  if (e.key === 'Escape') fermerLightbox();
-  if (e.key === 'ArrowRight') lightboxSuivant();
-  if (e.key === 'ArrowLeft') lightboxPrecedent();
-});
 
 // Initialise toutes les zones photo statiques (coussins dos, accessoires simples) au chargement
 document.addEventListener('DOMContentLoaded', () => {
