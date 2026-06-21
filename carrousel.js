@@ -1,0 +1,178 @@
+/* ═══════════════════════════════════════════════
+   Les Adaptations Accès-Cible — carrousel.js
+   Composant carrousel photo + lightbox — PARTAGÉ
+   ═══════════════════════════════════════════════
+   Remplace les 4 implémentations dupliquées sur
+   ergo.html / marchepied.html / surmesure.html /
+   accessoires.html par UNE seule API déclarative.
+
+   ───────────────────────────────────────────────
+   COMMENT UTILISER (déclaratif, pas de JS par page)
+   ───────────────────────────────────────────────
+
+   1. Donner à la zone-image un id unique et la classe "crsl-zone" :
+      <div class="crsl-zone carnet-photo-inner" id="photo-ergo-standard">
+        <img src="..." alt="...">
+      </div>
+
+   2. Appeler Carrousel.init(id, photos, options) une fois les photos connues :
+      Carrousel.init('photo-ergo-standard', [
+        'images/Chaises/IMG_1314_rogner.png'
+      ], { alt: 'Chaise ERGO standard', caption: '— ERGO · standard' });
+
+      Avec plusieurs photos, flèches/dots apparaissent automatiquement :
+      Carrousel.init('photo-ergo-xl', [
+        'images/Chaises/Chaise 24po.jpg',
+        'images/Chaises/Chaise 24po(2).jpg'
+      ], { alt: 'ERGO XL', caption: '— ERGO · XL 24po' });
+
+   3. Pour changer les photos d'une zone déjà initialisée (ex: sélecteur
+      d'options qui change la combinaison affichée), rappeler Carrousel.init
+      avec le même id et les nouvelles photos — il met à jour proprement.
+
+   4. Si aucune photo n'est disponible encore, passer un tableau vide :
+      Carrousel.init('photo-x', [], { alt: 'Produit à venir' });
+      → affiche automatiquement un placeholder "Photo à venir" cohérent.
+
+   Le composant gère pour chaque zone : l'image courante, les flèches
+   (masquées si une seule photo), les points indicateurs, le bouton zoom,
+   et partage UNE SEULE lightbox globale pour tout le site (créée une fois,
+   injectée automatiquement au premier appel de Carrousel.init).
+
+   Navigation clavier dans la lightbox : ← → pour naviguer, Échap pour fermer.
+   ═══════════════════════════════════════════════ */
+
+const Carrousel = (function () {
+  const zones = {}; // id -> { photos, index, alt, caption, el }
+  let lightboxOuverte = null; // id de la zone actuellement dans la lightbox
+
+  const SVG_GAUCHE = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>';
+  const SVG_DROITE = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>';
+  const SVG_ZOOM = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/><path d="M11 8v6M8 11h6"/></svg>';
+  const SVG_FERMER = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>';
+  const SVG_GAUCHE_GD = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>';
+  const SVG_DROITE_GD = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>';
+
+  function injecterLightbox() {
+    if (document.getElementById('crsl-lightbox')) return;
+    const overlay = document.createElement('div');
+    overlay.id = 'crsl-lightbox';
+    overlay.innerHTML =
+      '<div class="crsl-lightbox-wrap">' +
+        '<img id="crsl-lightbox-img" src="" alt="">' +
+        '<div class="crsl-lightbox-caption" id="crsl-lightbox-caption"></div>' +
+      '</div>' +
+      '<button class="crsl-lightbox-fermer" id="crsl-lightbox-fermer" aria-label="Fermer">' + SVG_FERMER + '</button>' +
+      '<button class="crsl-lightbox-nav gauche" id="crsl-lightbox-gauche" aria-label="Photo précédente">' + SVG_GAUCHE_GD + '</button>' +
+      '<button class="crsl-lightbox-nav droite" id="crsl-lightbox-droite" aria-label="Photo suivante">' + SVG_DROITE_GD + '</button>';
+    document.body.appendChild(overlay);
+
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) fermerLightbox(); });
+    document.getElementById('crsl-lightbox-fermer').addEventListener('click', fermerLightbox);
+    document.getElementById('crsl-lightbox-gauche').addEventListener('click', () => naviguer(lightboxOuverte, -1));
+    document.getElementById('crsl-lightbox-droite').addEventListener('click', () => naviguer(lightboxOuverte, 1));
+
+    document.addEventListener('keydown', (e) => {
+      if (!overlay.classList.contains('visible')) return;
+      if (e.key === 'Escape') fermerLightbox();
+      if (e.key === 'ArrowRight') naviguer(lightboxOuverte, 1);
+      if (e.key === 'ArrowLeft') naviguer(lightboxOuverte, -1);
+    });
+  }
+
+  function placeholderHTML(label) {
+    return '<div class="crsl-placeholder" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:100%;height:100%;color:var(--c-muted,#7a7060);font-size:12px;text-align:center;padding:16px;">' +
+      '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m21 15-5-5L5 21"/></svg>' +
+      '<span>' + (label || 'Photo à venir') + '</span></div>';
+  }
+
+  function rendre(id) {
+    const z = zones[id];
+    const el = z.el;
+    if (!el) return;
+
+    if (!z.photos.length) {
+      el.innerHTML = placeholderHTML(z.alt);
+      return;
+    }
+
+    const plusieurs = z.photos.length > 1;
+    el.innerHTML =
+      '<img src="' + z.photos[z.index] + '" alt="' + (z.alt || '') + '" ' +
+        'onerror="this.style.display=\'none\';this.insertAdjacentHTML(\'afterend\', Carrousel._placeholderHTML(\'' + (z.alt || 'Photo à venir').replace(/'/g, "\\'") + '\'))">' +
+      (plusieurs ? '<button class="crsl-fleche gauche" aria-label="Photo précédente" onclick="Carrousel.prev(\'' + id + '\')">' + SVG_GAUCHE + '</button>' : '') +
+      (plusieurs ? '<button class="crsl-fleche droite" aria-label="Photo suivante" onclick="Carrousel.next(\'' + id + '\')">' + SVG_DROITE + '</button>' : '') +
+      '<button class="crsl-zoom" aria-label="Agrandir la photo" onclick="Carrousel.openLightbox(\'' + id + '\')">' + SVG_ZOOM + '</button>' +
+      (plusieurs ? '<div class="crsl-dots" data-position="overlay">' +
+        z.photos.map((_, i) => '<button class="crsl-dot' + (i === z.index ? ' actif' : '') + '" aria-label="Photo ' + (i+1) + '" onclick="Carrousel.goTo(\'' + id + '\',' + i + ')"></button>').join('') +
+      '</div>' : '');
+
+    if (z.captionEl) z.captionEl.textContent = z.caption || '';
+
+    if (lightboxOuverte === id) majLightbox(id);
+  }
+
+  function naviguer(id, delta) {
+    if (!id || !zones[id]) return;
+    const z = zones[id];
+    if (z.photos.length < 2) return;
+    z.index = (z.index + delta + z.photos.length) % z.photos.length;
+    rendre(id);
+  }
+
+  function majLightbox(id) {
+    const z = zones[id];
+    document.getElementById('crsl-lightbox-img').src = z.photos[z.index];
+    document.getElementById('crsl-lightbox-img').alt = z.alt || '';
+    document.getElementById('crsl-lightbox-caption').textContent = z.caption || '';
+    const plusieurs = z.photos.length > 1;
+    document.getElementById('crsl-lightbox-gauche').hidden = !plusieurs;
+    document.getElementById('crsl-lightbox-droite').hidden = !plusieurs;
+  }
+
+  function fermerLightbox() {
+    const overlay = document.getElementById('crsl-lightbox');
+    if (overlay) overlay.classList.remove('visible');
+    lightboxOuverte = null;
+  }
+
+  // ── API publique ──
+  return {
+    /**
+     * Initialise ou met à jour une zone carrousel.
+     * @param {string} id - id de l'élément DOM (doit déjà exister, classe crsl-zone recommandée)
+     * @param {string[]} photos - chemins des photos, dans l'ordre d'affichage
+     * @param {object} options - { alt, caption, captionElId }
+     *   captionElId : id d'un élément séparé pour afficher la légende
+     *   (sinon la légende n'est affichée que dans la lightbox)
+     */
+    init(id, photos, options) {
+      injecterLightbox();
+      const opts = options || {};
+      zones[id] = {
+        el: document.getElementById(id),
+        captionEl: opts.captionElId ? document.getElementById(opts.captionElId) : null,
+        photos: photos || [],
+        index: 0,
+        alt: opts.alt || '',
+        caption: opts.caption || ''
+      };
+      rendre(id);
+    },
+    next(id) { naviguer(id, 1); },
+    prev(id) { naviguer(id, -1); },
+    goTo(id, index) {
+      if (!zones[id]) return;
+      zones[id].index = index;
+      rendre(id);
+    },
+    openLightbox(id) {
+      if (!zones[id] || !zones[id].photos.length) return;
+      lightboxOuverte = id;
+      majLightbox(id);
+      document.getElementById('crsl-lightbox').classList.add('visible');
+    },
+    closeLightbox: fermerLightbox,
+    _placeholderHTML: placeholderHTML // exposé pour le onerror inline des <img>
+  };
+})();
