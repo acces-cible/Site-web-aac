@@ -493,58 +493,26 @@ function genererFilNarratif() {
   // Génère un arc de cercle complet (la boucle) sous forme de commandes SVG
   // C (courbes de Bézier cubiques) — un vrai cercle plutôt que des courbes
   // approximées à la main, pour un rendu net et reconnaissable comme boucle.
-  // Dessine une boucle "lasso" — on entre par un côté, on tourne presque un
-  // tour complet (~300° au lieu de 360°), et on ressort par un point DIFFÉRENT
-  // du point d'entrée. C'est ce qui distingue une vraie boucle ouverte d'un
-  // cercle fermé : un cercle fermé revient exactement à son point de départ,
-  // ce qui force le trait à repasser sur lui-même à l'entrée (effet de
-  // croisement double, visuellement faux). Ici, l'entrée est en haut du
-  // cercle et la sortie est légèrement décalée sur le côté, comme une
-  // ficelle qu'on enroule puis qu'on laisse filer.
-  function boucleSVG(cx, cy, r, rotationDeg) {
-    const rot = rotationDeg * Math.PI / 180;
-    const k = 0.5523 * r;
-    function rotatePt(x, y) {
-      const dx = x - cx, dy = y - cy;
-      return [cx + dx * Math.cos(rot) - dy * Math.sin(rot), cy + dx * Math.sin(rot) + dy * Math.cos(rot)];
-    }
-    // Entrée à -90° (haut du cercle), sortie à -30° (légèrement décalée,
-    // donc ~300° de boucle parcourue, pas 360°) — jamais le même point.
-    const angleEntree = -90 * Math.PI / 180;
-    const angleSortie = -25 * Math.PI / 180;
-
-    function ptSurCercle(angle) {
-      return rotatePt(cx + r * Math.cos(angle), cy + r * Math.sin(angle));
-    }
-    function ctrlPourArc(angle, deltaAngle) {
-      // Point de contrôle tangent au cercle à cet angle, pour une courbe de
-      // Bézier qui suit fidèlement l'arc plutôt que de couper en ligne droite.
-      const dist = (4/3) * Math.tan(deltaAngle / 4) * r;
-      return rotatePt(
-        cx + r * Math.cos(angle) - dist * Math.sin(angle),
-        cy + r * Math.sin(angle) + dist * Math.cos(angle)
-      );
-    }
-
-    const pEntree = ptSurCercle(angleEntree);
-    // On découpe le tour en 3 arcs de 100° chacun (300° total) pour garder
-    // des courbes de Bézier précises (un seul arc de 300° serait imprécis).
-    const a1 = angleEntree + (100 * Math.PI / 180);
-    const a2 = a1 + (100 * Math.PI / 180);
-    const a3 = angleSortie + (360 * Math.PI / 180); // point final, après ~300°
-
-    const p1 = ptSurCercle(a1);
-    const p2 = ptSurCercle(a2);
-    const pSortie = ptSurCercle(angleSortie);
-
-    const c0a = ctrlPourArc(angleEntree, 100 * Math.PI/180), c0b = ctrlPourArc(a1, -100 * Math.PI/180);
-    const c1a = ctrlPourArc(a1, 100 * Math.PI/180), c1b = ctrlPourArc(a2, -100 * Math.PI/180);
-    const c2a = ctrlPourArc(a2, 100 * Math.PI/180), c2b = ctrlPourArc(angleSortie, -100 * Math.PI/180);
-
-    return `L ${pEntree[0]} ${pEntree[1]} ` +
-      `C ${c0a[0]} ${c0a[1]}, ${c0b[0]} ${c0b[1]}, ${p1[0]} ${p1[1]} ` +
-      `C ${c1a[0]} ${c1a[1]}, ${c1b[0]} ${c1b[1]}, ${p2[0]} ${p2[1]} ` +
-      `C ${c2a[0]} ${c2a[1]}, ${c2b[0]} ${c2b[1]}, ${pSortie[0]} ${pSortie[1]} `;
+  // Dessine une boucle organique en forme de goutte. Les coordonnées sont
+  // reprises directement d'une maquette testée et validée visuellement
+  // (pas une géométrie inventée puis mise à l'échelle, qui donnait des
+  // boucles trop petites ou mal formées dans les versions précédentes).
+  // cx, cy = point d'ENTRÉE de la boucle (où le trait la rejoint), pas son
+  // centre géométrique. echelle = 1.0 reproduit la taille de référence.
+  // miroir = true pour une boucle qui s'enroule dans l'autre sens (utile
+  // selon que le trait arrive de la gauche ou de la droite).
+  function boucleSVG(cx, cy, echelle, miroir) {
+    const s = echelle;
+    const mx = miroir ? -1 : 1;
+    function pt(dx, dy) { return [cx + mx * dx * s, cy + dy * s]; }
+    const c1a = pt(-25,-20), c1b = pt(-35,-50), p1 = pt(-15,-70);
+    const c2a = pt(5,-90),   c2b = pt(35,-80),  p2 = pt(40,-55);
+    const c3a = pt(44,-32),  c3b = pt(28,-15),  p3 = pt(10,-5);
+    const c4a = pt(35,-12),  c4b = pt(70,-30),  pSortie = pt(120,-100);
+    return `C ${c1a[0]} ${c1a[1]}, ${c1b[0]} ${c1b[1]}, ${p1[0]} ${p1[1]} ` +
+      `C ${c2a[0]} ${c2a[1]}, ${c2b[0]} ${c2b[1]}, ${p2[0]} ${p2[1]} ` +
+      `C ${c3a[0]} ${c3a[1]}, ${c3b[0]} ${c3b[1]}, ${p3[0]} ${p3[1]} ` +
+      `C ${c4a[0]} ${c4a[1]}, ${c4b[0]} ${c4b[1]}, ${pSortie[0]} ${pSortie[1]} `;
   }
 
   // Segments (entre photo i et photo i+1) qui reçoivent une boucle décorative.
@@ -570,21 +538,27 @@ function genererFilNarratif() {
     d += `M ${startX} ${startY} `;
 
     if (segmentsAvecBoucle.has(i)) {
-      // Étape 1 : descente fluide en diagonale vers une zone à mi-chemin,
-      // avec un vrai décalage horizontal dès la sortie (pas tout droit).
+      // Montée vers le point d'entrée de la boucle, puis la fonction boucleSVG
+      // prend le relais directement (elle gère elle-même toute la forme de la
+      // boucle, y compris sa remontée finale vers le point de sortie).
       const versDroite = distX > 0;
-      const loopCx = startX + distX * 0.5 + (versDroite ? -10 : 10);
-      const loopCy = startY + distY * 0.42;
-      const loopR = Math.max(34, Math.min(50, Math.abs(distY) * 0.22));
+      const entreeX = startX + distX * 0.3;
+      const entreeY = startY + Math.min(70, Math.abs(distY) * 0.5 + 30);
+      const echelle = 0.85;
 
-      d += `C ${startX + distX*0.18} ${startY + distY*0.22}, `;
-      d += `${loopCx - loopR*0.6} ${loopCy - loopR*0.9}, `;
-      d += `${loopCx} ${loopCy - loopR} `;
+      d += `C ${startX + distX*0.05} ${startY + 15}, `;
+      d += `${entreeX - 15} ${entreeY - 25}, `;
+      d += `${entreeX} ${entreeY} `;
 
-      d += boucleSVG(loopCx, loopCy, loopR, versDroite ? 15 : -15);
+      d += boucleSVG(entreeX, entreeY, echelle, !versDroite);
 
-      d += `C ${loopCx + loopR*0.6} ${loopCy + loopR*0.9}, `;
-      d += `${endX - distX*0.18} ${endY - distY*0.22}, `;
+      // Point de sortie de la boucle = entreeX/Y + (120,-100)*echelle*mx — on
+      // relie ce point réel à la destination finale plutôt que de deviner.
+      const mx = (!versDroite) ? -1 : 1;
+      const sortieX = entreeX + 120 * echelle * mx;
+      const sortieY = entreeY - 100 * echelle;
+      d += `C ${sortieX + distX*0.05} ${sortieY + 10}, `;
+      d += `${endX - distX*0.15} ${endY - 30}, `;
       d += `${endX} ${endY} `;
     } else {
       // Deux courbes C explicites (pas de commande S, qui hérite d'un point
@@ -614,22 +588,23 @@ function genererFilNarratif() {
     const distY = endY - startY;
     const distX = endX - startX;
 
-    // La boucle a besoin d'espace pour se déployer sans toucher le départ
-    // ni l'arrivée — on la place au tiers du trajet plutôt que près de la fin,
-    // et son rayon s'adapte à la distance verticale disponible.
-    const loopR = Math.max(38, Math.min(55, Math.abs(distY) * 0.28));
-    const loopCx = startX + distX * 0.32;
-    const loopCy = startY + distY * 0.38;
+    const versDroite = distX > 0;
+    const entreeX = startX + distX * 0.25;
+    const entreeY = startY + Math.min(70, Math.abs(distY) * 0.4 + 30);
+    const echelle = 0.9;
 
     d += `M ${startX} ${startY} `;
-    d += `C ${startX + distX*0.05} ${startY + distY*0.12}, `;
-    d += `${loopCx - loopR*0.5} ${loopCy - loopR*1.1}, `;
-    d += `${loopCx} ${loopCy - loopR} `;
+    d += `C ${startX + distX*0.05} ${startY + 15}, `;
+    d += `${entreeX - 15} ${entreeY - 25}, `;
+    d += `${entreeX} ${entreeY} `;
 
-    d += boucleSVG(loopCx, loopCy, loopR, 20);
+    d += boucleSVG(entreeX, entreeY, echelle, !versDroite);
 
-    d += `C ${loopCx + loopR*0.5} ${loopCy + loopR*1.1}, `;
-    d += `${endX - distX*0.25} ${endY - distY*0.3}, `;
+    const mx = (!versDroite) ? -1 : 1;
+    const sortieX = entreeX + 120 * echelle * mx;
+    const sortieY = entreeY - 100 * echelle;
+    d += `C ${sortieX + distX*0.05} ${sortieY + 10}, `;
+    d += `${endX - distX*0.2} ${endY - 30}, `;
     d += `${endX} ${endY} `;
   }
 
