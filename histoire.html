@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Caveat:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="carrousel.css">
 <style>
 .page-header { background: var(--c-marine); padding: 56px 60px 64px; border-bottom: 1px solid rgba(255,255,255,.07); position: relative; overflow: hidden; }
 .page-header-inner { max-width: var(--max-width); margin: 0 auto; }
@@ -17,9 +18,6 @@
 .page-header-h1 { font-family: var(--font-titre); font-size: 36px; font-weight: 300; color: var(--c-parchemin); line-height: 1.12; margin-bottom: 20px; }
 .page-header-h1 em { font-style: italic; color: var(--c-cuivre); }
 .page-header-p { font-size: 15px; color: rgba(246,242,235,.55); max-width: 520px; line-height: 1.85; }
-.page-header-photo { width: 100%; max-height: 480px; object-fit: cover; display: block; filter: mix-blend-mode:multiply; }
-.hero-photo-outer-hidden { display: none; }
-.hero-photo-outer img { max-height: 220px; width: auto; max-width: 480px; object-fit: contain; display: block; mix-blend-mode: multiply; filter: brightness(1.05); }
 .timeline-outer { background: var(--c-parchemin); padding: 80px 0 100px; }
 .timeline-inner { max-width: var(--max-width); margin: 0 auto; padding: 0 60px; position: relative; }
 .timeline-inner::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 0; border-left: 2px dashed var(--c-bord); transform: translateX(-50%); z-index: 0; }
@@ -31,11 +29,11 @@
 .etape-image { padding: 16px; }
 .carnet-photo { display: inline-block; transform-origin: center center; transition: transform .3s ease; }
 .carnet-photo:hover { transform: rotate(0deg) scale(1.02) !important; }
-.carnet-photo-inner { background: var(--c-blanc); padding: 12px 12px 44px; box-shadow: 0 3px 12px rgba(0,0,0,.1); position: relative; }
-.carnet-photo-inner img { width: 100%; max-width: 380px; height: 300px; object-fit: cover; display: block; mix-blend-mode: normal; filter: none; }
-.carnet-caption { font-family: var(--font-script); font-size: 13px; color: var(--c-muted); text-align: center; position: absolute; bottom: 8px; left: 10px; right: 10px; }
+.carnet-photo-inner { background: var(--c-blanc); padding: 12px 12px 12px; box-shadow: 0 3px 12px rgba(0,0,0,.1); position: relative; }
+.carnet-photo-inner .crsl-zone { width: 380px; height: 300px; }
+.carnet-photo-inner img { width: 100%; height: 100%; object-fit: cover; display: block; mix-blend-mode: normal; filter: none; }
+.carnet-caption { font-family: var(--font-script); font-size: 13px; color: var(--c-muted); text-align: center; margin-top: 8px; }
 .carnet-scotch { position: absolute; top: -10px; left: 50%; transform: translateX(-50%) rotate(-2deg); width: 52px; height: 18px; background: rgba(220,210,190,.55); z-index: 2; }
-.carnet-placeholder { width: 380px; height: 300px; background: var(--c-brume); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: var(--c-muted); font-size: 11px; }
 .etape-texte { padding: 16px 24px; }
 .etape-lbl { margin-bottom: 10px; font-size: 12px !important; letter-spacing: .14em !important; }
 .etape-titre { font-family: var(--font-titre); font-size: 38px; font-weight: 400; color: var(--c-marine); line-height: 1.2; margin-bottom: 14px; }
@@ -71,7 +69,7 @@
   .etape-noeud, .etape:nth-child(even) .etape-noeud  { order: 0 !important; grid-column: 1; grid-row: 1 / 3; align-self: flex-start; padding-top: 12px; }
   .etape-droite, .etape:nth-child(even) .etape-droite { order: 0 !important; grid-column: 2; grid-row: 2; justify-content: flex-start !important; }
   .timeline-inner { padding: 0 20px; }
-  .carnet-photo-inner img, .carnet-placeholder { max-width: 100%; height: 240px; }
+  .carnet-photo-inner .crsl-zone { width: 100%; max-width: 100%; height: 240px; }
   .conclusion-inner { grid-template-columns: 1fr; padding: 48px 20px; gap: 32px; }
   .conclusion-h2 { font-size: 28px; }
   .page-header { padding: 40px 20px 32px; }
@@ -102,9 +100,7 @@
       </p>
     </div>
     <div style="display:flex;align-items:center;justify-content:center;">
-      <img src="images/Histoire/Croquis d'un livre ouvert_edited.jpg" alt="Un livre ouvert"
-           style="max-height:320px;width:auto;max-width:100%;object-fit:contain;mix-blend-mode:multiply;filter:brightness(1.05);"
-           onerror="this.style.display='none'">
+      <div class="crsl-zone" id="livre-photo" style="max-height:320px;width:100%;max-width:380px;height:320px;"></div>
     </div>
   </div>
 </div>
@@ -120,9 +116,7 @@
           <div class="carnet-photo" style="transform:rotate(-2deg);">
             <div class="carnet-scotch"></div>
             <div class="carnet-photo-inner">
-              <img src="images/Histoire/Claude enfant.jpg" alt="Claude Poupart enfant"
-                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-              <div class="carnet-placeholder" style="display:none;"><span>Claude enfant · 1965</span></div>
+              <div class="crsl-zone" id="photo-1965"></div>
               <div class="carnet-caption">— Claude Poupart · Camp Papillon · 1965</div>
             </div>
           </div>
@@ -167,9 +161,7 @@
           <div class="carnet-photo" style="transform:rotate(1.5deg);">
             <div class="carnet-scotch"></div>
             <div class="carnet-photo-inner">
-              <img src="images/Histoire/Chaise haute en bois, croquis 1990_edited.jpg" alt="Croquis de la première chaise ERGO, 1990"
-                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-              <div class="carnet-placeholder" style="display:none;"><span>Croquis 1990</span></div>
+              <div class="crsl-zone" id="photo-1990"></div>
               <div class="carnet-caption">— Premier croquis de la Chaise ERGO · 1990</div>
             </div>
           </div>
@@ -184,9 +176,7 @@
           <div class="carnet-photo" style="transform:rotate(-1deg);">
             <div class="carnet-scotch"></div>
             <div class="carnet-photo-inner">
-              <img src="images/Histoire/chaise ERGO 2000.jpg" alt="Chaise ERGO années 2000"
-                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-              <div class="carnet-placeholder" style="display:none;"><span>Années 2000</span></div>
+              <div class="crsl-zone" id="photo-2000"></div>
               <div class="carnet-caption">— Chaise ERGO · Années 2000</div>
             </div>
           </div>
@@ -231,9 +221,7 @@
           <div class="carnet-photo" style="transform:rotate(1deg);">
             <div class="carnet-scotch"></div>
             <div class="carnet-photo-inner">
-              <img src="images/Histoire/petite soeur 2009.jpg" alt="ERGO hauteur garderie 2009"
-                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-              <div class="carnet-placeholder" style="display:none;"><span>ERGO garderie · 2009</span></div>
+              <div class="crsl-zone" id="photo-2009"></div>
               <div class="carnet-caption">— ERGO hauteur garderie · 2009</div>
             </div>
           </div>
@@ -248,10 +236,7 @@
           <div class="carnet-photo" style="transform:rotate(-1.5deg);">
             <div class="carnet-scotch"></div>
             <div class="carnet-photo-inner">
-              <img src="images/Histoire/ERGO surdimensionnée.jpg" alt="ERGO surdimensionnée 2016"
-                   style="max-width:100%;max-height:300px;width:auto;height:auto;display:block;margin:0 auto;"
-                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-              <div class="carnet-placeholder" style="display:none;"><span>ERGO surdimensionnée · 2016</span></div>
+              <div class="crsl-zone" id="photo-2016"></div>
               <div class="carnet-caption">— ERGO surdimensionnée · 2016</div>
             </div>
           </div>
@@ -300,9 +285,7 @@
           <div class="carnet-photo" style="transform:rotate(2deg);">
             <div class="carnet-scotch" style="background:rgba(139,58,42,0.2);"></div>
             <div class="carnet-photo-inner" style="background:#1a1008;">
-              <img src="images/Histoire/Incendie image a la main.jpg" alt="L'incendie de juin 2023"
-                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-              <div class="carnet-placeholder" style="display:none;background:#2a1a14;color:#7a6050;"><span>Juin 2023</span></div>
+              <div class="crsl-zone" id="photo-2023"></div>
               <div class="carnet-caption" style="color:#c0874a;">— 8 juin 2023 · L'incendie</div>
             </div>
           </div>
@@ -317,9 +300,7 @@
           <div class="carnet-photo" style="transform:rotate(-1deg);">
             <div class="carnet-scotch"></div>
             <div class="carnet-photo-inner">
-              <img src="images/Histoire/156A_edited.jpg" alt="Le nouvel atelier 156-A"
-                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-              <div class="carnet-placeholder" style="display:none;"><span>Le nouvel atelier · 2024</span></div>
+              <div class="crsl-zone" id="photo-2024"></div>
               <div class="carnet-caption">— Le nouvel atelier · 2024</div>
             </div>
           </div>
@@ -368,9 +349,7 @@
           <div class="carnet-photo" style="transform:rotate(1.5deg);">
             <div class="carnet-scotch"></div>
             <div class="carnet-photo-inner">
-              <img src="images/Histoire/Guillaume sur chaise ERGO 01.png" alt="Guillaume Chiasson-Poupart sur la Chaise ERGO"
-                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-              <div class="carnet-placeholder" style="display:none;"><span>Guillaume · 2026</span></div>
+              <div class="crsl-zone" id="photo-2026"></div>
               <div class="carnet-caption">— Guillaume Chiasson-Poupart · La relève</div>
             </div>
           </div>
@@ -430,5 +409,17 @@
 
 <div id="footer-container"></div>
 <script src="scripts.js"></script>
+<script src="carrousel.js"></script>
+<script>
+Carrousel.init('livre-photo', ["images/Histoire/Croquis d'un livre ouvert_edited.jpg"], { alt: 'Un livre ouvert' });
+Carrousel.init('photo-1965', ['images/Histoire/Claude enfant.jpg'], { alt: 'Claude Poupart enfant' });
+Carrousel.init('photo-1990', ["images/Histoire/Chaise haute en bois, croquis 1990_edited.jpg"], { alt: 'Croquis de la première chaise ERGO, 1990' });
+Carrousel.init('photo-2000', ['images/Histoire/chaise ERGO 2000.jpg'], { alt: 'Chaise ERGO années 2000' });
+Carrousel.init('photo-2009', ['images/Histoire/petite soeur 2009.jpg'], { alt: 'ERGO hauteur garderie 2009' });
+Carrousel.init('photo-2016', ['images/Histoire/ERGO surdimensionnée.jpg'], { alt: 'ERGO surdimensionnée 2016' });
+Carrousel.init('photo-2023', ['images/Histoire/Incendie image a la main.jpg'], { alt: "L'incendie de juin 2023" });
+Carrousel.init('photo-2024', ['images/Histoire/156A_edited.jpg'], { alt: 'Le nouvel atelier 156-A' });
+Carrousel.init('photo-2026', ['images/Histoire/Guillaume sur chaise ERGO 01.png'], { alt: 'Guillaume Chiasson-Poupart sur la Chaise ERGO' });
+</script>
 </body>
 </html>
