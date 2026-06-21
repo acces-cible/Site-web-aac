@@ -86,7 +86,7 @@ const Carrousel = (function () {
       '<span>' + (label || 'Photo à venir') + '</span></div>';
   }
 
-  function rendre(id) {
+  function construireStructure(id) {
     const z = zones[id];
     const el = z.el;
     if (!el) return;
@@ -108,7 +108,37 @@ const Carrousel = (function () {
       '</div>' : '');
 
     if (z.captionEl) z.captionEl.textContent = z.caption || '';
+    if (lightboxOuverte === id) majLightbox(id);
+  }
 
+  // Met à jour seulement l'image + les points actifs, sans reconstruire les
+  // flèches/zoom déjà en place — évite le flash de cadre vide à chaque clic.
+  // Si la structure ne correspond plus (ex: nombre de photos différent du
+  // rendu précédent), reconstruit tout via construireStructure() à la place.
+  function mettreAJourImage(id) {
+    const z = zones[id];
+    const el = z.el;
+    if (!el) return;
+
+    const img = el.querySelector('img');
+    const dotsActuels = el.querySelectorAll('.crsl-dot').length;
+    const structureValide = z.photos.length
+      ? (img && dotsActuels === (z.photos.length > 1 ? z.photos.length : 0))
+      : !img;
+
+    if (!structureValide) {
+      construireStructure(id);
+      return;
+    }
+
+    if (!z.photos.length) return; // déjà en placeholder, rien à mettre à jour
+
+    img.src = z.photos[z.index];
+    img.alt = z.alt || '';
+    img.style.display = '';
+    el.querySelectorAll('.crsl-dot').forEach((dot, i) => dot.classList.toggle('actif', i === z.index));
+
+    if (z.captionEl) z.captionEl.textContent = z.caption || '';
     if (lightboxOuverte === id) majLightbox(id);
   }
 
@@ -117,7 +147,7 @@ const Carrousel = (function () {
     const z = zones[id];
     if (z.photos.length < 2) return;
     z.index = (z.index + delta + z.photos.length) % z.photos.length;
-    rendre(id);
+    mettreAJourImage(id);
   }
 
   function majLightbox(id) {
@@ -149,22 +179,33 @@ const Carrousel = (function () {
     init(id, photos, options) {
       injecterLightbox();
       const opts = options || {};
+      const dejaInitialisee = !!zones[id];
+      const nouvellesPhotos = photos || [];
+
+      // Si la zone existe déjà et que le nombre de photos (donc la structure
+      // flèches/dots) ne change pas, on ne touche qu'à l'image — élimine le
+      // flash de cadre vide quand un sélecteur d'options change la combinaison
+      // affichée mais garde le même nombre de photos pour cette combinaison.
+      const memeStructure = dejaInitialisee && zones[id].photos.length === nouvellesPhotos.length;
+
       zones[id] = {
         el: document.getElementById(id),
         captionEl: opts.captionElId ? document.getElementById(opts.captionElId) : null,
-        photos: photos || [],
+        photos: nouvellesPhotos,
         index: 0,
         alt: opts.alt || '',
         caption: opts.caption || ''
       };
-      rendre(id);
+
+      if (memeStructure) mettreAJourImage(id);
+      else construireStructure(id);
     },
     next(id) { naviguer(id, 1); },
     prev(id) { naviguer(id, -1); },
     goTo(id, index) {
       if (!zones[id]) return;
       zones[id].index = index;
-      rendre(id);
+      mettreAJourImage(id);
     },
     openLightbox(id) {
       if (!zones[id] || !zones[id].photos.length) return;
