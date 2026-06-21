@@ -491,10 +491,14 @@ function genererFilNarratif() {
   const points = elements.map(pos);
   const avionPos = avion ? pos(avion) : null;
 
+  // Marge de sécurité : on ne part jamais exactement du bord du rectangle,
+  // on laisse un petit espace pour que le trait ne touche jamais visuellement
+  // le cadre de la photo (même chose à l'arrivée).
+  const MARGE = 14;
+
   // Index des segments (entre photo i et photo i+1) qui reçoivent une boucle
-  // décorative supplémentaire, comme dans le croquis de référence (après 1965→1990,
-  // et juste avant l'envol final).
-  const segmentsAvecBoucle = new Set([0, 5]); // 0 = entre 1965 et 1990, 5 = entre 2023 et 2024
+  // décorative supplémentaire, comme dans le croquis de référence.
+  const segmentsAvecBoucle = new Set([0, 5]);
 
   let d = '';
 
@@ -502,46 +506,48 @@ function genererFilNarratif() {
     const a = points[i];
     const b = points[i + 1];
 
-    // Départ : bas de la photo si la suivante est plus basse, sinon côté
-    const sortGauche = a.centerX > b.centerX;
-    const startX = sortGauche ? a.left : a.right;
-    const startY = a.centerY;
-    const endX = sortGauche ? b.right : b.left;
-    const endY = b.centerY;
+    // RÈGLE FIXE : on sort toujours par le BAS de la photo de départ et on
+    // entre toujours par le HAUT de la photo d'arrivée. Jamais par les côtés
+    // à mi-hauteur — ça évite structurellement qu'une courbe de Bézier
+    // repasse au-dessus ou en travers d'un rectangle plus haut que prévu
+    // (ex: la photo de l'incendie, qui a un format différent des autres).
+    const startX = a.centerX;
+    const startY = a.bottom + MARGE;
+    const endX = b.centerX;
+    const endY = b.top - MARGE;
 
     const midX = (startX + endX) / 2;
     const midY = (startY + endY) / 2;
+    const versDroite = endX > startX;
 
     if (segmentsAvecBoucle.has(i)) {
-      // Segment avec boucle décorative au milieu du parcours
-      const loopX = midX + (sortGauche ? -20 : 20);
-      const loopY = midY - 25;
+      const loopX = midX + (versDroite ? -15 : 15);
+      const loopY = midY;
       d += `M ${startX} ${startY} `;
-      d += `C ${startX - (sortGauche?40:-40)} ${startY+10}, ${loopX-30} ${loopY+10}, ${loopX} ${loopY} `;
-      d += `C ${loopX+25} ${loopY-22}, ${loopX+35} ${loopY+15}, ${loopX+5} ${loopY+20} `;
-      d += `C ${loopX-20} ${loopY+24}, ${loopX-15} ${loopY+5}, ${loopX+10} ${loopY+8} `;
-      d += `C ${midX+20} ${midY+5}, ${endX+(sortGauche?40:-40)} ${endY-10}, ${endX} ${endY} `;
+      d += `C ${startX} ${startY+35}, ${loopX-30} ${loopY-25}, ${loopX} ${loopY} `;
+      d += `C ${loopX+25} ${loopY-22}, ${loopX+32} ${loopY+18}, ${loopX} ${loopY+22} `;
+      d += `C ${loopX-25} ${loopY+26}, ${loopX-15} ${loopY+2}, ${loopX+8} ${loopY+8} `;
+      d += `C ${midX+15} ${midY+12}, ${endX} ${endY-35}, ${endX} ${endY} `;
     } else {
-      // Segment simple en S doux
+      // Segment simple : descend depuis la photo de départ, courbe en S
+      // horizontal au milieu (jamais à hauteur des rectangles), remonte
+      // vers la photo d'arrivée.
       d += `M ${startX} ${startY} `;
-      d += `C ${startX + (sortGauche?-50:50)} ${startY + (midY-startY)*0.3}, `;
-      d += `${endX + (sortGauche?50:-50)} ${endY - (endY-midY)*0.3}, `;
-      d += `${endX} ${endY} `;
+      d += `C ${startX} ${startY + 40}, ${startX} ${midY}, ${midX} ${midY} `;
+      d += `C ${endX} ${midY}, ${endX} ${endY - 40}, ${endX} ${endY} `;
     }
   }
 
   // Dernier segment : de la dernière étape (2024) vers l'avion
   if (avionPos) {
     const last = points[points.length - 1];
-    const sortGauche = last.centerX > avionPos.centerX;
-    const startX = sortGauche ? last.left : last.right;
-    const startY = last.centerY;
+    const startX = last.centerX;
+    const startY = last.bottom + MARGE;
     const endX = avionPos.centerX;
-    const endY = avionPos.top + 10;
+    const endY = avionPos.top - MARGE;
     const midY = (startY + endY) / 2;
     d += `M ${startX} ${startY} `;
-    d += `C ${startX - 60} ${startY + 20}, ${endX + 70} ${midY}, ${endX + 10} ${endY - 15} `;
-    d += `C ${endX - 30} ${endY - 30}, ${endX - 50} ${endY - 5}, ${endX - 15} ${endY + 5} `;
+    d += `C ${startX} ${startY + 40}, ${endX} ${midY}, ${endX} ${endY} `;
   }
 
   const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
