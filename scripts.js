@@ -68,6 +68,7 @@ function initNavScroll() {
 function initNav() {
   marquerPageActive();
   initNavScroll();
+  appliquerLangueSauvegardee();
 }
 document.addEventListener('DOMContentLoaded', () => {
   chargerComposant('nav.html',    'nav-container',    initNav);
@@ -79,10 +80,13 @@ function toggleMenu() {
   const mobile = document.getElementById('navMobile');
   if (mobile) mobile.classList.toggle('ouvert');
 }
-/* ── LANGUE FR / EN ── */
+/* ── LANGUE FR / EN ──
+   Le choix de langue est mémorisé dans localStorage (clé "langue-accescible")
+   pour rester actif d'une page à l'autre, jusqu'à ce que la personne clique
+   à nouveau sur le bouton pour revenir à l'autre langue. */
 window.langue = 'fr';
-function toggleLangue() {
-  window.langue = window.langue === 'fr' ? 'en' : 'fr';
+
+function appliquerTexteLangue() {
   const btn = document.getElementById('langBtn');
   if (btn) btn.textContent = window.langue === 'fr' ? 'EN' : 'FR';
   document.documentElement.lang = window.langue;
@@ -102,6 +106,22 @@ function toggleLangue() {
      de langue indépendamment du système data-fr/data-en (ex: accessoires.html
      section Couleurs, qui affiche le nom de la teinte dans la bonne langue). */
   document.dispatchEvent(new CustomEvent('langueChange', { detail: window.langue }));
+}
+
+// Appelé une fois la nav injectée (donc #langBtn disponible) à chaque
+// chargement de page — relit le choix précédent et l'applique sans
+// attendre de clic, pour que la langue reste la même partout sur le site.
+function appliquerLangueSauvegardee() {
+  let sauvegardee = 'fr';
+  try { sauvegardee = localStorage.getItem('langue-accescible') || 'fr'; } catch (e) { /* navigation privée ou stockage bloqué : reste en fr */ }
+  window.langue = sauvegardee;
+  appliquerTexteLangue();
+}
+
+function toggleLangue() {
+  window.langue = window.langue === 'fr' ? 'en' : 'fr';
+  try { localStorage.setItem('langue-accescible', window.langue); } catch (e) { /* stockage indisponible : le choix ne survivra pas au changement de page, sans plus */ }
+  appliquerTexteLangue();
 }
 /* ── LIGHTBOX (zoom image, partagée sur tout le site) ──
    Usage : ajouter class="zoomable" sur n'importe quelle <img>.
