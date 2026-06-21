@@ -493,26 +493,58 @@ function genererFilNarratif() {
   // Génère un arc de cercle complet (la boucle) sous forme de commandes SVG
   // C (courbes de Bézier cubiques) — un vrai cercle plutôt que des courbes
   // approximées à la main, pour un rendu net et reconnaissable comme boucle.
+  // Dessine une boucle "lasso" — on entre par un côté, on tourne presque un
+  // tour complet (~300° au lieu de 360°), et on ressort par un point DIFFÉRENT
+  // du point d'entrée. C'est ce qui distingue une vraie boucle ouverte d'un
+  // cercle fermé : un cercle fermé revient exactement à son point de départ,
+  // ce qui force le trait à repasser sur lui-même à l'entrée (effet de
+  // croisement double, visuellement faux). Ici, l'entrée est en haut du
+  // cercle et la sortie est légèrement décalée sur le côté, comme une
+  // ficelle qu'on enroule puis qu'on laisse filer.
   function boucleSVG(cx, cy, r, rotationDeg) {
     const rot = rotationDeg * Math.PI / 180;
-    const k = 0.5523 * r; // constante magique pour approximer un cercle avec 4 courbes de Bézier
+    const k = 0.5523 * r;
     function rotatePt(x, y) {
       const dx = x - cx, dy = y - cy;
       return [cx + dx * Math.cos(rot) - dy * Math.sin(rot), cy + dx * Math.sin(rot) + dy * Math.cos(rot)];
     }
-    const p0 = rotatePt(cx, cy - r);
-    const p1 = rotatePt(cx + r, cy);
-    const p2 = rotatePt(cx, cy + r);
-    const p3 = rotatePt(cx - r, cy);
-    const c0a = rotatePt(cx + k, cy - r), c0b = rotatePt(cx + r, cy - k);
-    const c1a = rotatePt(cx + r, cy + k), c1b = rotatePt(cx + k, cy + r);
-    const c2a = rotatePt(cx - k, cy + r), c2b = rotatePt(cx - r, cy + k);
-    const c3a = rotatePt(cx - r, cy - k), c3b = rotatePt(cx - k, cy - r);
-    return `L ${p0[0]} ${p0[1]} ` +
+    // Entrée à -90° (haut du cercle), sortie à -30° (légèrement décalée,
+    // donc ~300° de boucle parcourue, pas 360°) — jamais le même point.
+    const angleEntree = -90 * Math.PI / 180;
+    const angleSortie = -25 * Math.PI / 180;
+
+    function ptSurCercle(angle) {
+      return rotatePt(cx + r * Math.cos(angle), cy + r * Math.sin(angle));
+    }
+    function ctrlPourArc(angle, deltaAngle) {
+      // Point de contrôle tangent au cercle à cet angle, pour une courbe de
+      // Bézier qui suit fidèlement l'arc plutôt que de couper en ligne droite.
+      const dist = (4/3) * Math.tan(deltaAngle / 4) * r;
+      return rotatePt(
+        cx + r * Math.cos(angle) - dist * Math.sin(angle),
+        cy + r * Math.sin(angle) + dist * Math.cos(angle)
+      );
+    }
+
+    const pEntree = ptSurCercle(angleEntree);
+    // On découpe le tour en 3 arcs de 100° chacun (300° total) pour garder
+    // des courbes de Bézier précises (un seul arc de 300° serait imprécis).
+    const a1 = angleEntree + (100 * Math.PI / 180);
+    const a2 = a1 + (100 * Math.PI / 180);
+    const a3 = angleSortie + (360 * Math.PI / 180); // point final, après ~300°
+
+    const p1 = ptSurCercle(a1);
+    const p2 = ptSurCercle(a2);
+    const pSortie = ptSurCercle(angleSortie);
+
+    const c0a = ctrlPourArc(angleEntree, 100 * Math.PI/180), c0b = ctrlPourArc(a1, -100 * Math.PI/180);
+    const c1a = ctrlPourArc(a1, 100 * Math.PI/180), c1b = ctrlPourArc(a2, -100 * Math.PI/180);
+    const c2a = ctrlPourArc(a2, 100 * Math.PI/180), c2b = ctrlPourArc(angleSortie, -100 * Math.PI/180);
+
+    return `L ${pEntree[0]} ${pEntree[1]} ` +
       `C ${c0a[0]} ${c0a[1]}, ${c0b[0]} ${c0b[1]}, ${p1[0]} ${p1[1]} ` +
       `C ${c1a[0]} ${c1a[1]}, ${c1b[0]} ${c1b[1]}, ${p2[0]} ${p2[1]} ` +
-      `C ${c2a[0]} ${c2a[1]}, ${c2b[0]} ${c2b[1]}, ${p3[0]} ${p3[1]} ` +
-      `C ${c3a[0]} ${c3a[1]}, ${c3b[0]} ${c3b[1]}, ${p0[0]} ${p0[1]} `;
+      `C ${c2a[0]} ${c2a[1]}, ${c2b[0]} ${c2b[1]}, ${pSortie[0]} ${pSortie[1]} `;
   }
 
   // Segments (entre photo i et photo i+1) qui reçoivent une boucle décorative.
