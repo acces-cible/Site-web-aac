@@ -98,6 +98,10 @@ function toggleLangue() {
     const val = el.dataset[window.langue + 'Html'];
     if (val) el.innerHTML = val;
   });
+  /* Signal global pour toute section qui a besoin de réagir au changement
+     de langue indépendamment du système data-fr/data-en (ex: accessoires.html
+     section Couleurs, qui affiche le nom de la teinte dans la bonne langue). */
+  document.dispatchEvent(new CustomEvent('langueChange', { detail: window.langue }));
 }
 /* ── LIGHTBOX (zoom image, partagée sur tout le site) ──
    Usage : ajouter class="zoomable" sur n'importe quelle <img>.
