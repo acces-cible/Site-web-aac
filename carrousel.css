@@ -1,0 +1,117 @@
+/* ═══════════════════════════════════════════════
+   Les Adaptations Accès-Cible — carrousel.css
+   Composant carrousel photo + lightbox — PARTAGÉ
+   ═══════════════════════════════════════════════
+   À inclure sur toute page utilisant data-carrousel.
+   Remplace les styles dupliqués sur ergo/marchepied/
+   surmesure/accessoires. Dépend des variables de
+   style.css (--c-marine, --c-cuivre, --c-bord, etc).
+   ═══════════════════════════════════════════════ */
+
+/* ── Conteneur photo générique ──
+   Toute zone qui contient une image carrousel doit avoir
+   position:relative (déjà le cas pour .carnet-photo-inner,
+   .produit-photo, .coussin-photo, .siege-photo, .expand-photo,
+   .fiche-photo .carnet-photo-inner — réutilise les classes
+   existantes, n'en crée pas de nouvelles). */
+
+.crsl-zone { position: relative; }
+.crsl-zone img { display: block; width: 100%; height: 100%; }
+
+/* ── Flèches de navigation ── */
+.crsl-fleche {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 28px; height: 28px; border-radius: 50%;
+  background: rgba(255,255,255,.92); border: 1px solid var(--c-bord);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--c-marine);
+  box-shadow: 0 2px 6px rgba(0,0,0,.12);
+  transition: background .15s, transform .15s;
+  z-index: 3;
+}
+.crsl-fleche:hover { background: var(--c-blanc); }
+.crsl-fleche:focus-visible { outline: 2px solid var(--c-cuivre); outline-offset: 2px; }
+.crsl-fleche.gauche { left: 6px; }
+.crsl-fleche.droite { right: 6px; }
+.crsl-fleche svg { pointer-events: none; }
+.crsl-fleche[hidden] { display: none; }
+
+/* ── Points indicateurs ── */
+.crsl-dots {
+  display: flex; justify-content: center; gap: 6px;
+  margin-top: 8px;
+}
+.crsl-dots[data-position="overlay"] {
+  position: absolute; bottom: 8px; left: 0; right: 0; margin-top: 0; z-index: 3;
+}
+.crsl-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--c-bord); border: none; cursor: pointer;
+  transition: background .15s, transform .15s; padding: 0;
+}
+.crsl-dots[data-position="overlay"] .crsl-dot {
+  background: rgba(255,255,255,.7); border: 1px solid rgba(0,0,0,.15);
+}
+.crsl-dot.actif { background: var(--c-cuivre); transform: scale(1.15); }
+.crsl-dots[data-position="overlay"] .crsl-dot.actif { border-color: var(--c-cuivre); }
+.crsl-dots:focus-within .crsl-dot:focus-visible { outline: 2px solid var(--c-cuivre); outline-offset: 1px; }
+.crsl-dots[hidden] { display: none; }
+
+/* ── Bouton zoom ── */
+.crsl-zoom {
+  position: absolute; bottom: 6px; right: 6px;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: rgba(255,255,255,.92); border: 1px solid var(--c-bord);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--c-marine);
+  box-shadow: 0 2px 6px rgba(0,0,0,.12);
+  z-index: 3; transition: background .15s;
+}
+.crsl-zoom:hover { background: var(--c-blanc); }
+.crsl-zoom:focus-visible { outline: 2px solid var(--c-cuivre); outline-offset: 2px; }
+
+/* ── Lightbox plein écran — UNE SEULE instance pour tout le site ── */
+#crsl-lightbox {
+  display: none; position: fixed; inset: 0; z-index: 1000;
+  background: rgba(20,28,36,.92);
+  align-items: center; justify-content: center;
+}
+#crsl-lightbox.visible { display: flex; }
+.crsl-lightbox-wrap {
+  position: relative; max-width: 88vw; max-height: 86vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.crsl-lightbox-wrap img {
+  max-width: 88vw; max-height: 86vh; object-fit: contain; border-radius: 2px;
+}
+.crsl-lightbox-caption {
+  margin-top: 14px; text-align: center;
+  font-family: var(--font-script); font-size: 17px;
+  color: rgba(246,242,235,.78);
+}
+.crsl-lightbox-fermer {
+  position: absolute; top: 24px; right: 28px;
+  width: 38px; height: 38px; border-radius: 50%;
+  background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--c-parchemin); transition: background .15s;
+}
+.crsl-lightbox-fermer:hover { background: rgba(255,255,255,.22); }
+.crsl-lightbox-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--c-parchemin); transition: background .15s;
+}
+.crsl-lightbox-nav:hover { background: rgba(255,255,255,.22); }
+.crsl-lightbox-nav.gauche { left: 24px; }
+.crsl-lightbox-nav.droite { right: 24px; }
+.crsl-lightbox-nav[hidden], .crsl-lightbox-fermer[hidden] { display: none; }
+
+@media (max-width: 640px) {
+  .crsl-lightbox-nav { width: 38px; height: 38px; }
+  .crsl-lightbox-nav.gauche { left: 10px; }
+  .crsl-lightbox-nav.droite { right: 10px; }
+  .crsl-lightbox-fermer { top: 14px; right: 14px; }
+}
