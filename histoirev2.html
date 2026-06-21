@@ -50,14 +50,14 @@
 .etape-incendie .carnet-photo-inner { background: #2a1a14; }
 .etape-incendie .carnet-photo-inner img { filter: grayscale(20%) sepia(20%) contrast(1.1); mix-blend-mode: normal; }
 .etape-releve .etape-noeud-cercle { border-color: var(--c-cuivre); background: var(--c-cuivre); }
-.etape-envol { display: flex; align-items: center; justify-content: center; gap: 32px; padding: 60px 20px 20px; position: relative; z-index: 1; }
-.envol-avion { width: 130px; height: auto; flex-shrink: 0; }
-.envol-texte-gauche { text-align: right; max-width: 220px; }
-.envol-texte-droite { text-align: left; max-width: 220px; }
+.etape-envol { display: flex; align-items: center; justify-content: flex-start; gap: 48px; padding: 60px 20px 40px; position: relative; z-index: 1; padding-left: 8%; }
+.envol-avion { width: 150px; height: auto; flex-shrink: 0; margin-left: 60px; }
+.envol-texte-gauche { text-align: left; max-width: 200px; }
 .envol-desc { font-size: 13px; color: var(--c-muted); line-height: 1.6; margin-top: 6px; }
 @media (max-width: 900px) {
-  .etape-envol { flex-direction: column; gap: 16px; text-align: center; }
-  .envol-texte-gauche, .envol-texte-droite { text-align: center; max-width: 320px; }
+  .etape-envol { flex-direction: column; gap: 20px; text-align: center; padding-left: 20px; }
+  .envol-texte-gauche { text-align: center; max-width: 320px; }
+  .envol-avion { margin-left: 0; }
 }
 .conclusion-outer { background: var(--c-marine); }
 .conclusion-inner { max-width: var(--max-width); margin: 0 auto; padding: 80px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
@@ -372,14 +372,10 @@
     <!-- ENVOL — avion en papier, fin de la frise -->
     <div class="etape-envol" id="etape-envol">
       <div class="envol-texte-gauche">
-        <span class="lbl etape-lbl" data-fr="Et la suite" data-en="And what's next">Et la suite</span>
-        <p class="envol-desc" data-fr="L'histoire continue de s'écrire, un équipement à la fois." data-en="The story keeps being written, one piece of equipment at a time.">L'histoire continue de s'écrire, un équipement à la fois.</p>
-      </div>
-      <img src="images/Histoire/avion-papier.png" alt="Avion en papier" id="fil-avion" class="envol-avion">
-      <div class="envol-texte-droite">
         <span class="lbl etape-lbl" data-fr="2024 — 2026" data-en="2024 — 2026">2024 — 2026</span>
         <p class="envol-desc" data-fr="La suite continue." data-en="The story continues.">La suite continue.</p>
       </div>
+      <img src="images/Histoire/avion-papier.png" alt="Avion en papier" id="fil-avion" class="envol-avion">
     </div>
 
   </div>
@@ -491,13 +487,35 @@ function genererFilNarratif() {
   const points = elements.map(pos);
   const avionPos = avion ? pos(avion) : null;
 
-  // Marge de sécurité : on ne part jamais exactement du bord du rectangle,
-  // on laisse un petit espace pour que le trait ne touche jamais visuellement
-  // le cadre de la photo (même chose à l'arrivée).
-  const MARGE = 14;
+  // Marge de sécurité : le trait ne touche jamais le bord visuel d'une photo.
+  const MARGE = 16;
 
-  // Index des segments (entre photo i et photo i+1) qui reçoivent une boucle
-  // décorative supplémentaire, comme dans le croquis de référence.
+  // Génère un arc de cercle complet (la boucle) sous forme de commandes SVG
+  // C (courbes de Bézier cubiques) — un vrai cercle plutôt que des courbes
+  // approximées à la main, pour un rendu net et reconnaissable comme boucle.
+  function boucleSVG(cx, cy, r, rotationDeg) {
+    const rot = rotationDeg * Math.PI / 180;
+    const k = 0.5523 * r; // constante magique pour approximer un cercle avec 4 courbes de Bézier
+    function rotatePt(x, y) {
+      const dx = x - cx, dy = y - cy;
+      return [cx + dx * Math.cos(rot) - dy * Math.sin(rot), cy + dx * Math.sin(rot) + dy * Math.cos(rot)];
+    }
+    const p0 = rotatePt(cx, cy - r);
+    const p1 = rotatePt(cx + r, cy);
+    const p2 = rotatePt(cx, cy + r);
+    const p3 = rotatePt(cx - r, cy);
+    const c0a = rotatePt(cx + k, cy - r), c0b = rotatePt(cx + r, cy - k);
+    const c1a = rotatePt(cx + r, cy + k), c1b = rotatePt(cx + k, cy + r);
+    const c2a = rotatePt(cx - k, cy + r), c2b = rotatePt(cx - r, cy + k);
+    const c3a = rotatePt(cx - r, cy - k), c3b = rotatePt(cx - k, cy - r);
+    return `L ${p0[0]} ${p0[1]} ` +
+      `C ${c0a[0]} ${c0a[1]}, ${c0b[0]} ${c0b[1]}, ${p1[0]} ${p1[1]} ` +
+      `C ${c1a[0]} ${c1a[1]}, ${c1b[0]} ${c1b[1]}, ${p2[0]} ${p2[1]} ` +
+      `C ${c2a[0]} ${c2a[1]}, ${c2b[0]} ${c2b[1]}, ${p3[0]} ${p3[1]} ` +
+      `C ${c3a[0]} ${c3a[1]}, ${c3b[0]} ${c3b[1]}, ${p0[0]} ${p0[1]} `;
+  }
+
+  // Segments (entre photo i et photo i+1) qui reçoivent une boucle décorative.
   const segmentsAvecBoucle = new Set([0, 5]);
 
   let d = '';
@@ -507,47 +525,80 @@ function genererFilNarratif() {
     const b = points[i + 1];
 
     // RÈGLE FIXE : on sort toujours par le BAS de la photo de départ et on
-    // entre toujours par le HAUT de la photo d'arrivée. Jamais par les côtés
-    // à mi-hauteur — ça évite structurellement qu'une courbe de Bézier
-    // repasse au-dessus ou en travers d'un rectangle plus haut que prévu
-    // (ex: la photo de l'incendie, qui a un format différent des autres).
+    // entre toujours par le HAUT de la photo d'arrivée — jamais par les
+    // côtés à mi-hauteur. Ça évite structurellement qu'une courbe repasse
+    // sur le rectangle d'une photo, peu importe sa taille.
     const startX = a.centerX;
     const startY = a.bottom + MARGE;
     const endX = b.centerX;
     const endY = b.top - MARGE;
+    const distY = endY - startY;
+    const distX = endX - startX;
 
-    const midX = (startX + endX) / 2;
-    const midY = (startY + endY) / 2;
-    const versDroite = endX > startX;
+    d += `M ${startX} ${startY} `;
 
     if (segmentsAvecBoucle.has(i)) {
-      const loopX = midX + (versDroite ? -15 : 15);
-      const loopY = midY;
-      d += `M ${startX} ${startY} `;
-      d += `C ${startX} ${startY+35}, ${loopX-30} ${loopY-25}, ${loopX} ${loopY} `;
-      d += `C ${loopX+25} ${loopY-22}, ${loopX+32} ${loopY+18}, ${loopX} ${loopY+22} `;
-      d += `C ${loopX-25} ${loopY+26}, ${loopX-15} ${loopY+2}, ${loopX+8} ${loopY+8} `;
-      d += `C ${midX+15} ${midY+12}, ${endX} ${endY-35}, ${endX} ${endY} `;
+      // Étape 1 : descente fluide en diagonale vers une zone à mi-chemin,
+      // avec un vrai décalage horizontal dès la sortie (pas tout droit).
+      const versDroite = distX > 0;
+      const loopCx = startX + distX * 0.5 + (versDroite ? -10 : 10);
+      const loopCy = startY + distY * 0.42;
+      const loopR = Math.max(34, Math.min(50, Math.abs(distY) * 0.22));
+
+      d += `C ${startX + distX*0.18} ${startY + distY*0.22}, `;
+      d += `${loopCx - loopR*0.6} ${loopCy - loopR*0.9}, `;
+      d += `${loopCx} ${loopCy - loopR} `;
+
+      d += boucleSVG(loopCx, loopCy, loopR, versDroite ? 15 : -15);
+
+      d += `C ${loopCx + loopR*0.6} ${loopCy + loopR*0.9}, `;
+      d += `${endX - distX*0.18} ${endY - distY*0.22}, `;
+      d += `${endX} ${endY} `;
     } else {
-      // Segment simple : descend depuis la photo de départ, courbe en S
-      // horizontal au milieu (jamais à hauteur des rectangles), remonte
-      // vers la photo d'arrivée.
-      d += `M ${startX} ${startY} `;
-      d += `C ${startX} ${startY + 40}, ${startX} ${midY}, ${midX} ${midY} `;
-      d += `C ${endX} ${midY}, ${endX} ${endY - 40}, ${endX} ${endY} `;
+      // Deux courbes C explicites (pas de commande S, qui hérite d'un point
+      // de contrôle réfléchi et peut donner un mouvement imprévisible quand
+      // distY est petit par rapport à distX). Le premier point de contrôle
+      // pousse fort horizontalement dès la sortie ; le second symétriquement
+      // avant l'arrivée — garantit un vrai déploiement, pas une ligne courte.
+      const midX = startX + distX * 0.5;
+      const midY = startY + distY * 0.5;
+      d += `C ${startX + distX*0.15} ${startY + distY*0.1}, `;
+      d += `${midX - distX*0.15} ${midY - distY*0.35}, `;
+      d += `${midX} ${midY} `;
+      d += `C ${midX + distX*0.15} ${midY + distY*0.35}, `;
+      d += `${endX - distX*0.15} ${endY - distY*0.1}, `;
+      d += `${endX} ${endY} `;
     }
   }
 
-  // Dernier segment : de la dernière étape (2024) vers l'avion
+  // Dernier segment : de la dernière étape (2024) vers l'avion final, avec
+  // une grande boucle large avant l'arrivée (comme dans le croquis de référence).
   if (avionPos) {
     const last = points[points.length - 1];
     const startX = last.centerX;
     const startY = last.bottom + MARGE;
-    const endX = avionPos.centerX;
-    const endY = avionPos.top - MARGE;
-    const midY = (startY + endY) / 2;
+    const endX = avionPos.left - 20;
+    const endY = avionPos.centerY;
+    const distY = endY - startY;
+    const distX = endX - startX;
+
+    // La boucle a besoin d'espace pour se déployer sans toucher le départ
+    // ni l'arrivée — on la place au tiers du trajet plutôt que près de la fin,
+    // et son rayon s'adapte à la distance verticale disponible.
+    const loopR = Math.max(38, Math.min(55, Math.abs(distY) * 0.28));
+    const loopCx = startX + distX * 0.32;
+    const loopCy = startY + distY * 0.38;
+
     d += `M ${startX} ${startY} `;
-    d += `C ${startX} ${startY + 40}, ${endX} ${midY}, ${endX} ${endY} `;
+    d += `C ${startX + distX*0.05} ${startY + distY*0.12}, `;
+    d += `${loopCx - loopR*0.5} ${loopCy - loopR*1.1}, `;
+    d += `${loopCx} ${loopCy - loopR} `;
+
+    d += boucleSVG(loopCx, loopCy, loopR, 20);
+
+    d += `C ${loopCx + loopR*0.5} ${loopCy + loopR*1.1}, `;
+    d += `${endX - distX*0.25} ${endY - distY*0.3}, `;
+    d += `${endX} ${endY} `;
   }
 
   const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
@@ -561,7 +612,9 @@ function genererFilNarratif() {
 
   svg.innerHTML = '';
   svg.appendChild(path);
-  svg.setAttribute('viewBox', `0 0 ${rectConteneur.width} ${conteneur.scrollHeight}`);
+  const largeurSvg = rectConteneur.width || conteneur.scrollWidth || conteneur.offsetWidth || 680;
+  svg.setAttribute('viewBox', `0 0 ${largeurSvg} ${conteneur.scrollHeight}`);
+  svg.setAttribute('preserveAspectRatio', 'none');
 }
 
 window.addEventListener('load', () => setTimeout(genererFilNarratif, 150));
