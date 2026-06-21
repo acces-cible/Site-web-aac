@@ -218,10 +218,10 @@ const MODELES = [
 ];
 let modeleActif = 0;
 function construireBarre() {
-  document.getElementById('modelesBarre').innerHTML = MODELES.map((m,i) => `<button class="modele-btn${i===0?' actif':''}" onclick="selectionnerModele(${i})"><div class="modele-btn-nom">${m.nom[langue]}</div><div class="modele-btn-age">${m.age[langue]}</div>${m.badge?`<span class="modele-btn-badge">${m.badge[langue]}</span>`:''}</button>`).join('');
+  document.getElementById('modelesBarre').innerHTML = MODELES.map((m,i) => `<button class="modele-btn${i===0?' actif':''}" onclick="selectionnerModele(${i})"><div class="modele-btn-nom">${m.nom[window.langue]}</div><div class="modele-btn-age">${m.age[window.langue]}</div>${m.badge?`<span class="modele-btn-badge">${m.badge[window.langue]}</span>`:''}</button>`).join('');
 }
 function afficherFiche(i) {
-  const m=MODELES[i], l=langue;
+  const m=MODELES[i], l=window.langue;
   document.getElementById('ficheTitre').textContent=m.titre[l];
   document.getElementById('ficheBadge').textContent=m.context[l];
   document.getElementById('ficheDesc').textContent=m.desc[l];
@@ -239,7 +239,7 @@ function selectionnerModele(i) {
 }
 let comparatifVisible = false;
 function construireComparatif() {
-  const l = langue;
+  const l = window.langue;
   const modelesComparables = MODELES.filter(m => m.id !== 'xl');
   const labels = l==='fr'
     ? ["Hauteur du dossier*","Profondeur de l'appui-pied*","Profondeur de siège*","Hauteur de table","Hauteur de siège max.","Largeur intérieure","Poids maximal"]
@@ -263,28 +263,40 @@ function basculerComparatif() {
     construireComparatif();
     span.dataset.fr = 'Revenir à la fiche détaillée';
     span.dataset.en = 'Back to detailed sheet';
-    span.textContent = langue === 'fr' ? 'Revenir à la fiche détaillée' : 'Back to detailed sheet';
+    span.textContent = window.langue === 'fr' ? 'Revenir à la fiche détaillée' : 'Back to detailed sheet';
   } else {
     span.dataset.fr = 'Comparer les 3 modèles côte à côte';
     span.dataset.en = 'Compare 3 models side by side';
-    span.textContent = langue === 'fr' ? 'Comparer les 3 modèles côte à côte' : 'Compare 3 models side by side';
+    span.textContent = window.langue === 'fr' ? 'Comparer les 3 modèles côte à côte' : 'Compare 3 models side by side';
   }
 }
 // Attendre que le DOM soit prêt pour construire la barre
 document.addEventListener('DOMContentLoaded', ()=>{ construireBarre(); afficherFiche(0); });
-// Reconstruire si la langue change
-  let langue = window.langue || 'fr';
-  window.toggleLangue = function() {
-  langue = langue === 'fr' ? 'en' : 'fr';
-  const btn = document.getElementById('langBtn');
-  if (btn) btn.textContent = langue === 'fr' ? 'EN' : 'FR';
-  document.documentElement.lang = langue;
-  document.querySelectorAll('[data-fr]').forEach(el => { const val = el.dataset[langue]; if (!val) return; if (val.includes('<')) el.innerHTML = val; else el.textContent = val; });
-  document.querySelectorAll('[data-fr-html]').forEach(el => { const val = el.dataset[langue + 'Html']; if (val) el.innerHTML = val; });
+// Cette page a besoin de reconstruire sa barre de modèles et sa fiche en plus
+// du texte général déjà géré par scripts.js — on étend toggleLangue au lieu
+// de l'écraser, pour garder la sauvegarde du choix de langue (localStorage)
+// fournie par scripts.js et rester synchronisé avec window.langue.
+const toggleLangueBase = window.toggleLangue;
+window.toggleLangue = function() {
+  toggleLangueBase();
   construireBarre();
   afficherFiche(modeleActif);
   if (comparatifVisible) construireComparatif();
 };
+// Si la langue sauvegardée est l'anglais, la barre et la fiche doivent aussi
+// se reconstruire dès le chargement de la page (pas seulement au clic). La
+// nav (et donc #langBtn / la lecture de window.langue) se charge de façon
+// asynchrone via fetch() dans scripts.js — on attend qu'elle soit prête
+// plutôt que de deviner un délai fixe.
+function attendreLangueInitiale(tentativesRestantes) {
+  if (document.getElementById('langBtn')) {
+    if (window.langue === 'en') { construireBarre(); afficherFiche(modeleActif); }
+    return;
+  }
+  if (tentativesRestantes <= 0) return; // la nav n'a pas chargé — abandonne plutôt que d'attendre indéfiniment
+  setTimeout(() => attendreLangueInitiale(tentativesRestantes - 1), 30);
+}
+document.addEventListener('DOMContentLoaded', () => attendreLangueInitiale(40)); // ~1.2s de tentatives au pire
 </script>
 </body>
 </html>
