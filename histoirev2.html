@@ -560,48 +560,55 @@ function genererFilNarratif() {
 
   // --- Petit utilitaire de bruit déterministe (pas de hasard pur, pour que
   // le tracé soit stable entre deux générations tant que les positions ne
-  // changent pas) : sert à casser la symétrie parfaite des courbes droites,
-  // pour un rendu plus "tracé à la main" et moins "courbe vectorielle".
+  // changent pas) : sert à varier légèrement les segments droits d'un
+  // tracé à l'autre, pour qu'ils ne soient pas des clones identiques.
   function bruit(seed) {
     const x = Math.sin(seed * 12.9898) * 43758.5453;
     return x - Math.floor(x);
   }
 
-  // Dessine une boucle organique en spirale asymétrique, inspirée d'un tracé
-  // d'avion en papier fait à main levée : la boucle se resserre progressivement
-  // au lieu de revenir sur un rayon constant comme un cercle. Les deux moitiés
-  // de la boucle n'ont pas la même amplitude (asymétrie volontaire) — c'est ce
-  // qui fait la différence entre "rond parfait" et "gribouillis naturel".
+  // Dessine une boucle entre le bas d'une photo (départ) et le haut de la
+  // photo suivante (arrivée). MÉTHODE DE VALIDATION : la forme a été mise
+  // au point dans un fichier de test isolé avec deux boîtes aux proportions
+  // réelles, rendue via Playwright (PAS wkhtmltoimage — son rendu SVG s'est
+  // avéré peu fiable dans ce projet), puis ajustée jusqu'à obtenir un tracé
+  // qui descend franchement sous le niveau d'arrivée, fait une vraie boucle
+  // visible *à côté* de la photo suivante (pas dessous, pas en la traversant),
+  // puis remonte pour entrer par le haut — reproduisant le sketch de
+  // référence du client plutôt qu'une formule géométrique inventée.
   //
-  // cx, cy = point d'ENTRÉE de la boucle (où le trait la rejoint), pas son
-  // centre géométrique. echelle = 1.0 reproduit la taille de référence.
-  // miroir = true pour une boucle qui s'enroule dans l'autre sens.
-  function boucleSVG(cx, cy, echelle, miroir, seed) {
-    const s = echelle;
-    const mx = miroir ? -1 : 1;
-    function pt(dx, dy) { return [cx + mx * dx * s, cy + dy * s]; }
+  // a, b = objets {top, bottom, left, right, centerX, centerY} des deux
+  // photos consécutives (mêmes objets que retournés par pos() plus haut).
+  // coteExterieur = -1 si la photo B est dans la colonne de GAUCHE de la
+  // grille (donc son "extérieur", loin du texte, est encore plus à gauche),
+  // +1 si elle est dans la colonne de DROITE. On ne déduit plus le côté de
+  // la direction du trait : la boucle doit toujours partir vers le bord de
+  // page, jamais vers le centre où se trouve la colonne de texte voisine.
+  function traceAvecBoucle(a, b, coteExterieur) {
+    const startX = a.centerX, startY = a.bottom + MARGE;
+    const endX = b.centerX, endY = b.top - MARGE;
+    const signe = coteExterieur;
+    // Bord de B du côté extérieur (celui que la boucle doit longer sans traverser).
+    const bordB = signe > 0 ? b.right : b.left;
 
-    // Variation légère et déterministe selon la position (seed), pour que
-    // les deux boucles du tracé ne soient pas des clones identiques.
-    const j = (n) => (bruit(seed + n) - 0.5) * 10; // jitter ±5px
+    // Centre de la boucle : à l'extérieur de B, vers le bord de page —
+    // jamais vers le centre, où se trouve la colonne de texte voisine.
+    const boucleCX = bordB + signe * 70;
+    const boucleCY = endY + 110;
 
-    // Première moitié : montée large et ouverte (grand rayon).
-    const c1a = pt(-22 + j(1), -18 + j(2)), c1b = pt(-38 + j(3), -52 + j(4)), p1 = pt(-18 + j(5), -76 + j(6));
-    const c2a = pt(2 + j(7),  -98 + j(8)),  c2b = pt(34 + j(9), -92 + j(10)), p2 = pt(44 + j(11), -64 + j(12));
-    // Deuxième moitié : la spirale se RESSERRE (rayon plus petit qu'à l'entrée,
-    // contrairement à un cercle qui referme sur le même rayon) avant de
-    // repartir vers la sortie — c'est l'asymétrie qui rend la forme organique.
-    const c3a = pt(50 + j(13), -38 + j(14)), c3b = pt(32 + j(15), -18 + j(16)), p3 = pt(14 + j(17), -8 + j(18));
-    const c4a = pt(2 + j(19),  -2 + j(20)),  c4b = pt(-6 + j(21), 8 + j(22)),   p4 = pt(8 + j(23), 18 + j(24));
-    // Petite boucle interne resserrée (le "nœud" qui distingue une vraie
-    // spirale d'un simple aller-retour) avant de filer vers la sortie.
-    const c5a = pt(28 + j(25), 14 + j(26)), c5b = pt(38 + j(27), -10 + j(28)), pSortie = pt(118 + j(29), -96 + j(30));
+    // Distance de la fin de A jusqu'au point d'entrée de la boucle — réparti
+    // sur une seule courbe de transition pour rester fluide.
+    const d1x = boucleCX - signe * 30 - startX;
+    const d1y = (boucleCY - 55) - startY;
 
-    return `C ${c1a[0]} ${c1a[1]}, ${c1b[0]} ${c1b[1]}, ${p1[0]} ${p1[1]} ` +
-      `C ${c2a[0]} ${c2a[1]}, ${c2b[0]} ${c2b[1]}, ${p2[0]} ${p2[1]} ` +
-      `C ${c3a[0]} ${c3a[1]}, ${c3b[0]} ${c3b[1]}, ${p3[0]} ${p3[1]} ` +
-      `C ${c4a[0]} ${c4a[1]}, ${c4b[0]} ${c4b[1]}, ${p4[0]} ${p4[1]} ` +
-      `C ${c5a[0]} ${c5a[1]}, ${c5b[0]} ${c5b[1]}, ${pSortie[0]} ${pSortie[1]} `;
+    let d = `M ${startX} ${startY} `;
+    d += `C ${startX} ${startY+45}, ${startX + d1x*0.55} ${startY + d1y*0.35}, ${startX + d1x*0.85} ${startY + d1y*0.7} `;
+    d += `C ${boucleCX - signe*30 - d1x*0.1} ${boucleCY - 95}, ${boucleCX + signe*15} ${boucleCY - 55}, ${boucleCX + signe*15} ${boucleCY - 55} `;
+    d += `C ${boucleCX + signe*55} ${boucleCY - 20}, ${boucleCX + signe*50} ${boucleCY + 35}, ${boucleCX} ${boucleCY + 45} `;
+    d += `C ${boucleCX - signe*50} ${boucleCY + 55}, ${boucleCX - signe*65} ${boucleCY - 10}, ${boucleCX - signe*30} ${boucleCY - 45} `;
+    d += `C ${boucleCX} ${boucleCY - 75}, ${boucleCX + signe*25} ${endY + 25}, ${bordB - signe*15} ${endY + 10} `;
+    d += `C ${bordB + signe*30} ${endY + 2}, ${endX - signe*30} ${endY}, ${endX} ${endY} `;
+    return d;
   }
 
   // Segments (entre photo i et photo i+1) qui reçoivent une boucle décorative.
@@ -613,6 +620,17 @@ function genererFilNarratif() {
     const a = points[i];
     const b = points[i + 1];
 
+    if (segmentsAvecBoucle.has(i)) {
+      // L'"extérieur" est déterminé par la position de B dans la grille
+      // (colonne gauche ou droite de la frise), pas par la direction du
+      // trait — sinon la boucle se forme du côté où se trouve la colonne
+      // de texte voisine et la traverse.
+      const centreFrise = rectConteneur.width / 2;
+      const coteExterieur = b.centerX < centreFrise ? -1 : 1;
+      d += traceAvecBoucle(a, b, coteExterieur);
+      continue;
+    }
+
     const startX = a.centerX;
     const startY = a.bottom + MARGE;
     const endX = b.centerX;
@@ -622,74 +640,28 @@ function genererFilNarratif() {
 
     d += `M ${startX} ${startY} `;
 
-    if (segmentsAvecBoucle.has(i)) {
-      const versDroite = distX > 0;
-      const entreeX = startX + distX * 0.3;
-      const entreeY = startY + Math.min(70, Math.abs(distY) * 0.5 + 30);
-      const echelle = 0.85;
-
-      // Légère ondulation sur la montée vers la boucle, plutôt qu'une
-      // courbe parfaitement lisse — accentue l'effet "tracé à main levée".
-      const j1 = (bruit(i + 100) - 0.5) * 14;
-      d += `C ${startX + distX*0.05 + j1} ${startY + 15}, `;
-      d += `${entreeX - 15 - j1} ${entreeY - 25}, `;
-      d += `${entreeX} ${entreeY} `;
-
-      d += boucleSVG(entreeX, entreeY, echelle, !versDroite, i + 1);
-
-      const mx = (!versDroite) ? -1 : 1;
-      const sortieX = entreeX + 118 * echelle * mx;
-      const sortieY = entreeY - 96 * echelle;
-      const j2 = (bruit(i + 200) - 0.5) * 14;
-      d += `C ${sortieX + distX*0.05 + j2} ${sortieY + 10}, `;
-      d += `${endX - distX*0.15 - j2} ${endY - 30}, `;
-      d += `${endX} ${endY} `;
-    } else {
-      // Segment droit avec une légère ondulation sinusoïdale plutôt qu'une
-      // simple courbe en S symétrique — casse l'aspect "courbe vectorielle
-      // générique" et se rapproche d'un tracé fait à main levée.
-      const j = (bruit(i + 50) - 0.5) * 0.18; // variation d'amplitude ±9%
-      const midX = startX + distX * (0.5 + j);
-      const midY = startY + distY * 0.5;
-      const ampli = 1 + (bruit(i + 60) - 0.5) * 0.4;
-      d += `C ${startX + distX*0.15} ${startY + distY*0.1}, `;
-      d += `${midX - distX*0.15*ampli} ${midY - distY*0.35*ampli}, `;
-      d += `${midX} ${midY} `;
-      d += `C ${midX + distX*0.15*ampli} ${midY + distY*0.35*ampli}, `;
-      d += `${endX - distX*0.15} ${endY - distY*0.1}, `;
-      d += `${endX} ${endY} `;
-    }
+    // Segment droit avec une légère ondulation sinusoïdale plutôt qu'une
+    // simple courbe en S symétrique — casse l'aspect "courbe vectorielle
+    // générique" et se rapproche d'un tracé fait à main levée.
+    const j = (bruit(i + 50) - 0.5) * 0.18; // variation d'amplitude ±9%
+    const midX = startX + distX * (0.5 + j);
+    const midY = startY + distY * 0.5;
+    const ampli = 1 + (bruit(i + 60) - 0.5) * 0.4;
+    d += `C ${startX + distX*0.15} ${startY + distY*0.1}, `;
+    d += `${midX - distX*0.15*ampli} ${midY - distY*0.35*ampli}, `;
+    d += `${midX} ${midY} `;
+    d += `C ${midX + distX*0.15*ampli} ${midY + distY*0.35*ampli}, `;
+    d += `${endX - distX*0.15} ${endY - distY*0.1}, `;
+    d += `${endX} ${endY} `;
   }
 
   // Dernier segment : de la dernière étape (2024) vers l'avion final, avec
-  // une grande boucle large avant l'arrivée.
+  // la même logique de boucle avant l'arrivée.
   if (avionPos) {
     const last = points[points.length - 1];
-    const startX = last.centerX;
-    const startY = last.bottom + MARGE;
-    const endX = avionPos.left - 20;
-    const endY = avionPos.centerY;
-    const distY = endY - startY;
-    const distX = endX - startX;
-
-    const versDroite = distX > 0;
-    const entreeX = startX + distX * 0.25;
-    const entreeY = startY + Math.min(70, Math.abs(distY) * 0.4 + 30);
-    const echelle = 0.9;
-
-    d += `M ${startX} ${startY} `;
-    d += `C ${startX + distX*0.05} ${startY + 15}, `;
-    d += `${entreeX - 15} ${entreeY - 25}, `;
-    d += `${entreeX} ${entreeY} `;
-
-    d += boucleSVG(entreeX, entreeY, echelle, !versDroite, 999);
-
-    const mx = (!versDroite) ? -1 : 1;
-    const sortieX = entreeX + 118 * echelle * mx;
-    const sortieY = entreeY - 96 * echelle;
-    d += `C ${sortieX + distX*0.05} ${sortieY + 10}, `;
-    d += `${endX - distX*0.2} ${endY - 30}, `;
-    d += `${endX} ${endY} `;
+    const centreFrise = rectConteneur.width / 2;
+    const coteExterieur = avionPos.centerX < centreFrise ? -1 : 1;
+    d += traceAvecBoucle(last, avionPos, coteExterieur);
   }
 
   const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
