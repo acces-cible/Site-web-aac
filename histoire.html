@@ -18,6 +18,14 @@
 .page-header-h1 { font-family: var(--font-titre); font-size: 36px; font-weight: 300; color: var(--c-parchemin); line-height: 1.12; margin-bottom: 20px; }
 .page-header-h1 em { font-style: italic; color: var(--c-cuivre); }
 .page-header-p { font-size: 15px; color: rgba(246,242,235,.55); max-width: 520px; line-height: 1.85; }
+
+/* HEADER — grille texte/image en classes (au lieu de style inline), pour
+   pouvoir inverser l'ordre proprement en mobile via media query. */
+.histoire-header-grid { background: var(--c-parchemin); border-bottom: 1px solid var(--c-bord); }
+.histoire-header-grid-inner { max-width: var(--max-width); margin: 0 auto; padding: 64px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+.histoire-header-texte { order: 1; }
+.histoire-header-image { order: 2; display: flex; align-items: center; justify-content: center; }
+
 .timeline-outer { background: var(--c-parchemin); padding: 80px 0 100px; }
 .timeline-inner { max-width: var(--max-width); margin: 0 auto; padding: 0 60px; position: relative; }
 .timeline-inner::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 0; border-left: 2px dashed var(--c-bord); transform: translateX(-50%); z-index: 0; }
@@ -63,11 +71,32 @@
 .conclusion-stat-n { font-family: var(--font-titre); font-size: 34px; font-weight: 400; color: var(--c-parchemin); line-height: 1; margin-bottom: 4px; }
 .conclusion-stat-l { font-family: var(--font-mono); font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: #c0874a; }
 @media (max-width: 900px) {
+  /* === HEADER MOBILE : image au-dessus, texte en dessous, 1 colonne ===
+     Corrige le bug où l'image se faisait écraser/déformer en restant
+     en colonne à côté du texte sur petit écran. */
+  .histoire-header-grid-inner { grid-template-columns: 1fr; padding: 40px 20px 32px; gap: 28px; }
+  .histoire-header-texte { order: 2; }
+  .histoire-header-image { order: 1; }
+  .histoire-header-image .crsl-zone { max-width: 280px; height: 260px; margin: 0 auto; }
+
   .timeline-inner::before { left: 28px; transform: none; }
   .etape { grid-template-columns: 56px 1fr; grid-template-rows: auto auto; gap: 0 16px; margin-bottom: 56px; }
-  .etape-gauche, .etape:nth-child(even) .etape-gauche { order: 0 !important; grid-column: 2; grid-row: 1; justify-content: flex-start !important; }
+
+  /* === RÈGLE MOBILE CONFIRMÉE : photo TOUJOURS au-dessus du texte ===
+     peu importe que l'étape soit paire ou impaire. On détecte quel côté
+     (.etape-gauche ou .etape-droite) contient l'image via :has() et on
+     le force en row 1 ; le texte va systématiquement en row 2. */
+  .etape-gauche, .etape:nth-child(even) .etape-gauche,
+  .etape-droite, .etape:nth-child(even) .etape-droite {
+    order: 0 !important;
+    grid-column: 2;
+  }
+  .etape:has(.etape-gauche .etape-image) .etape-gauche  { grid-row: 1; justify-content: flex-start !important; }
+  .etape:has(.etape-gauche .etape-image) .etape-droite  { grid-row: 2; justify-content: flex-start !important; }
+  .etape:has(.etape-droite .etape-image) .etape-droite  { grid-row: 1; justify-content: flex-start !important; }
+  .etape:has(.etape-droite .etape-image) .etape-gauche  { grid-row: 2; justify-content: flex-start !important; }
+
   .etape-noeud, .etape:nth-child(even) .etape-noeud  { order: 0 !important; grid-column: 1; grid-row: 1 / 3; align-self: flex-start; padding-top: 12px; }
-  .etape-droite, .etape:nth-child(even) .etape-droite { order: 0 !important; grid-column: 2; grid-row: 2; justify-content: flex-start !important; }
   .timeline-inner { padding: 0 20px; }
   .carnet-photo-inner .crsl-zone { width: 100%; max-width: 100%; height: 240px; }
   .conclusion-inner { grid-template-columns: 1fr; padding: 48px 20px; gap: 32px; }
@@ -75,16 +104,28 @@
   .page-header { padding: 40px 20px 32px; }
   .page-header-h1 { font-size: 32px; }
 }
+
+/* Fallback pour navigateurs sans support de :has() (anciens Safari/Firefox).
+   Suffisant ici car le motif est constant : étapes impaires = photo à
+   gauche, étapes paires = photo à droite, tout au long de la frise. */
+@supports not (selector(:has(a))) {
+  @media (max-width: 900px) {
+    .etape:nth-child(odd)  .etape-gauche { grid-row: 1; justify-content: flex-start !important; }
+    .etape:nth-child(odd)  .etape-droite { grid-row: 2; justify-content: flex-start !important; }
+    .etape:nth-child(even) .etape-droite { grid-row: 1; justify-content: flex-start !important; }
+    .etape:nth-child(even) .etape-gauche { grid-row: 2; justify-content: flex-start !important; }
+  }
+}
 </style>
 </head>
 <body>
 
 <div id="nav-container" style="height:58px;"></div>
 
-<!-- HEADER — texte gauche, livre droite -->
-<div style="background:var(--c-parchemin);border-bottom:1px solid var(--c-bord);">
-  <div style="max-width:var(--max-width);margin:0 auto;padding:64px 60px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;">
-    <div>
+<!-- HEADER — ordre géré entièrement en CSS (classes), pour pouvoir l'inverser en mobile -->
+<div class="histoire-header-grid">
+  <div class="histoire-header-grid-inner">
+    <div class="histoire-header-texte">
       <span class="lbl page-header-lbl" style="margin-bottom:20px;display:block;"
         data-fr="Notre histoire · Depuis 1965"
         data-en="Our story · Since 1965">Notre histoire · Depuis 1965</span>
@@ -99,7 +140,7 @@
         De Camp Papillon en 1965 à l'atelier reconstruit en 2024 — une histoire d'obstination, de savoir-faire transmis, et d'un incendie qui n'a pas eu raison de la mission.
       </p>
     </div>
-    <div style="display:flex;align-items:center;justify-content:center;">
+    <div class="histoire-header-image">
       <div class="crsl-zone" id="livre-photo" style="max-height:320px;width:100%;max-width:380px;height:320px;"></div>
     </div>
   </div>
