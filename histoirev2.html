@@ -18,6 +18,13 @@
 .page-header-h1 { font-family: var(--font-titre); font-size: 36px; font-weight: 300; color: var(--c-parchemin); line-height: 1.12; margin-bottom: 20px; }
 .page-header-h1 em { font-style: italic; color: var(--c-cuivre); }
 .page-header-p { font-size: 15px; color: rgba(246,242,235,.55); max-width: 520px; line-height: 1.85; }
+
+/* HEADER — grille texte/image, desktop côte à côte */
+.histoire-header-grid { background: var(--c-parchemin); border-bottom: 1px solid var(--c-bord); }
+.histoire-header-grid-inner { max-width: var(--max-width); margin: 0 auto; padding: 64px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+.histoire-header-texte { order: 1; }
+.histoire-header-image { order: 2; display: flex; align-items: center; justify-content: center; }
+
 .timeline-outer { background: var(--c-parchemin); padding: 80px 0 100px; }
 .timeline-inner { max-width: var(--max-width); margin: 0 auto; padding: 0 60px; position: relative; }
 .timeline-inner::before { display: none; }
@@ -74,11 +81,50 @@
 .conclusion-stat-n { font-family: var(--font-titre); font-size: 34px; font-weight: 400; color: var(--c-parchemin); line-height: 1; margin-bottom: 4px; }
 .conclusion-stat-l { font-family: var(--font-mono); font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: #c0874a; }
 @media (max-width: 900px) {
-  .timeline-inner::before { left: 28px; transform: none; }
-  .etape { grid-template-columns: 56px 1fr; grid-template-rows: auto auto; gap: 0 16px; margin-bottom: 56px; }
-  .etape-gauche, .etape:nth-child(even) .etape-gauche { order: 0 !important; grid-column: 2; grid-row: 1; justify-content: flex-start !important; }
-  .etape-noeud, .etape:nth-child(even) .etape-noeud  { order: 0 !important; grid-column: 1; grid-row: 1 / 3; align-self: flex-start; padding-top: 12px; }
-  .etape-droite, .etape:nth-child(even) .etape-droite { order: 0 !important; grid-column: 2; grid-row: 2; justify-content: flex-start !important; }
+  /* === HEADER MOBILE : image en haut, texte en dessous, 1 colonne === */
+  .histoire-header-grid-inner { grid-template-columns: 1fr; padding: 40px 20px 32px; gap: 28px; }
+  .histoire-header-texte { order: 2; }
+  .histoire-header-image { order: 1; }
+  .histoire-header-image .crsl-zone { max-width: 280px; height: 260px; margin: 0 auto; }
+
+  /* === TRAIT SIMPLE À GAUCHE EN MOBILE (remplace le SVG serpentant) === */
+  .timeline-inner::before {
+    display: block;
+    content: '';
+    position: absolute;
+    left: 28px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    border-left: 2px dashed rgba(26,26,26,.3);
+    transform: none;
+  }
+  /* Le tracé SVG serpentant n'a de sens qu'en alternance gauche/droite desktop */
+  #fil-svg { display: none; }
+
+  .etape {
+    grid-template-columns: 56px 1fr;
+    grid-template-rows: auto auto;
+    gap: 0 16px;
+    margin-bottom: 56px;
+  }
+  /* RÈGLE MOBILE : photo TOUJOURS au-dessus du texte, peu importe pair/impair */
+  .etape-gauche, .etape:nth-child(even) .etape-gauche,
+  .etape-droite, .etape:nth-child(even) .etape-droite {
+    order: 0 !important;
+  }
+  .etape:has(.etape-gauche .etape-image) .etape-gauche { grid-column: 2; grid-row: 1; justify-content: flex-start !important; }
+  .etape:has(.etape-gauche .etape-image) .etape-droite { grid-column: 2; grid-row: 2; justify-content: flex-start !important; }
+  .etape:has(.etape-droite .etape-image) .etape-droite { grid-column: 2; grid-row: 1; justify-content: flex-start !important; }
+  .etape:has(.etape-droite .etape-image) .etape-gauche { grid-column: 2; grid-row: 2; justify-content: flex-start !important; }
+
+  .etape-noeud, .etape:nth-child(even) .etape-noeud {
+    order: 0 !important;
+    grid-column: 1;
+    grid-row: 1 / 3;
+    align-self: flex-start;
+    padding-top: 12px;
+  }
   .timeline-inner { padding: 0 20px; }
   .carnet-photo-inner .crsl-zone { width: 100%; max-width: 100%; height: 240px; }
   .conclusion-inner { grid-template-columns: 1fr; padding: 48px 20px; gap: 32px; }
@@ -86,16 +132,28 @@
   .page-header { padding: 40px 20px 32px; }
   .page-header-h1 { font-size: 32px; }
 }
+
+/* Fallback pour navigateurs sans support de :has() — ordre fixe basé sur pair/impair,
+   suffisant car dans ce fichier les étapes impaires ont la photo à gauche et les
+   étapes paires l'ont à droite (motif constant tout au long de la frise). */
+@supports not (selector(:has(a))) {
+  @media (max-width: 900px) {
+    .etape:nth-child(odd) .etape-gauche  { grid-column: 2; grid-row: 1; justify-content: flex-start !important; }
+    .etape:nth-child(odd) .etape-droite  { grid-column: 2; grid-row: 2; justify-content: flex-start !important; }
+    .etape:nth-child(even) .etape-droite { grid-column: 2; grid-row: 1; justify-content: flex-start !important; }
+    .etape:nth-child(even) .etape-gauche { grid-column: 2; grid-row: 2; justify-content: flex-start !important; }
+  }
+}
 </style>
 </head>
 <body>
 
 <div id="nav-container" style="height:58px;"></div>
 
-<!-- HEADER — texte gauche, livre droite -->
-<div style="background:var(--c-parchemin);border-bottom:1px solid var(--c-bord);">
-  <div style="max-width:var(--max-width);margin:0 auto;padding:64px 60px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;">
-    <div>
+<!-- HEADER — texte / livre, ordre géré entièrement en CSS pour pouvoir l'inverser en mobile -->
+<div class="histoire-header-grid">
+  <div class="histoire-header-grid-inner">
+    <div class="histoire-header-texte">
       <span class="lbl page-header-lbl" style="margin-bottom:20px;display:block;"
         data-fr="Notre histoire · Depuis 1965"
         data-en="Our story · Since 1965">Notre histoire · Depuis 1965</span>
@@ -110,7 +168,7 @@
         De Camp Papillon en 1965 à l'atelier reconstruit en 2024 — une histoire d'obstination, de savoir-faire transmis, et d'un incendie qui n'a pas eu raison de la mission.
       </p>
     </div>
-    <div style="display:flex;align-items:center;justify-content:center;">
+    <div class="histoire-header-image">
       <div class="crsl-zone" id="livre-photo" style="max-height:320px;width:100%;max-width:380px;height:320px;"></div>
     </div>
   </div>
@@ -445,22 +503,32 @@ Carrousel.init('photo-2026', ['images/Histoire/Guillaume sur chaise ERGO 01.png'
 /* ═══════════════════════════════════════════════
    FIL NARRATIF SERPENTANT — génération dynamique
    ═══════════════════════════════════════════════
+   DESKTOP UNIQUEMENT (voir garde en bas de fonction). Sur mobile, on garde
+   un simple trait pointillé vertical en CSS (.timeline-inner::before),
+   beaucoup plus lisible pour une seule colonne.
+
    Le tracé est calculé en JS plutôt que codé en dur en pixels fixes,
-   parce que la hauteur de chaque étape varie selon la longueur du texte
-   (donc les positions des photos changent d'une visite à l'autre selon
-   la résolution d'écran et le contenu). On mesure la position réelle de
-   chaque photo (.carnet-photo) par rapport au conteneur de la frise, et
-   on construit le tracé entre ces points à chaque chargement / redimensionnement.
+   parce que la hauteur de chaque étape varie selon la longueur du texte.
+   On mesure la position réelle de chaque photo (.carnet-photo) par rapport
+   au conteneur de la frise, et on construit le tracé entre ces points à
+   chaque chargement / redimensionnement.
 
    RÈGLE D'OR : le trait ne doit JAMAIS passer derrière une photo. Chaque
    segment part du bord d'une photo et s'arrête avant le bord de la suivante.
-   On ajoute une boucle décorative sur certains segments (configurable ci-dessous)
-   pour le rythme visuel, comme dans le croquis de référence.
+
+   STYLE DE BOUCLE : inspiré d'un tracé d'avion en papier dessiné à main
+   levée (spirale asymétrique qui se resserre, pas un cercle géométrique
+   parfait) — voir boucleSVG() plus bas pour le détail des coordonnées.
 
    IDs des photos dans l'ordre chronologique : fil-1965, fil-1990, fil-2000,
    fil-2009, fil-2016, fil-2023, fil-2024, fil-2026, puis l'avion (fil-avion). */
 
 function genererFilNarratif() {
+  // Le tracé serpentant n'a de sens qu'en alternance gauche/droite desktop.
+  // Sous le seuil mobile, on ne calcule rien et on laisse le CSS afficher
+  // le simple trait pointillé vertical à la place.
+  if (window.innerWidth <= 900) return;
+
   const svg = document.getElementById('fil-svg');
   const conteneur = document.querySelector('.timeline-inner');
   if (!svg || !conteneur) return;
@@ -490,29 +558,50 @@ function genererFilNarratif() {
   // Marge de sécurité : le trait ne touche jamais le bord visuel d'une photo.
   const MARGE = 16;
 
-  // Génère un arc de cercle complet (la boucle) sous forme de commandes SVG
-  // C (courbes de Bézier cubiques) — un vrai cercle plutôt que des courbes
-  // approximées à la main, pour un rendu net et reconnaissable comme boucle.
-  // Dessine une boucle organique en forme de goutte. Les coordonnées sont
-  // reprises directement d'une maquette testée et validée visuellement
-  // (pas une géométrie inventée puis mise à l'échelle, qui donnait des
-  // boucles trop petites ou mal formées dans les versions précédentes).
+  // --- Petit utilitaire de bruit déterministe (pas de hasard pur, pour que
+  // le tracé soit stable entre deux générations tant que les positions ne
+  // changent pas) : sert à casser la symétrie parfaite des courbes droites,
+  // pour un rendu plus "tracé à la main" et moins "courbe vectorielle".
+  function bruit(seed) {
+    const x = Math.sin(seed * 12.9898) * 43758.5453;
+    return x - Math.floor(x);
+  }
+
+  // Dessine une boucle organique en spirale asymétrique, inspirée d'un tracé
+  // d'avion en papier fait à main levée : la boucle se resserre progressivement
+  // au lieu de revenir sur un rayon constant comme un cercle. Les deux moitiés
+  // de la boucle n'ont pas la même amplitude (asymétrie volontaire) — c'est ce
+  // qui fait la différence entre "rond parfait" et "gribouillis naturel".
+  //
   // cx, cy = point d'ENTRÉE de la boucle (où le trait la rejoint), pas son
   // centre géométrique. echelle = 1.0 reproduit la taille de référence.
-  // miroir = true pour une boucle qui s'enroule dans l'autre sens (utile
-  // selon que le trait arrive de la gauche ou de la droite).
-  function boucleSVG(cx, cy, echelle, miroir) {
+  // miroir = true pour une boucle qui s'enroule dans l'autre sens.
+  function boucleSVG(cx, cy, echelle, miroir, seed) {
     const s = echelle;
     const mx = miroir ? -1 : 1;
     function pt(dx, dy) { return [cx + mx * dx * s, cy + dy * s]; }
-    const c1a = pt(-25,-20), c1b = pt(-35,-50), p1 = pt(-15,-70);
-    const c2a = pt(5,-90),   c2b = pt(35,-80),  p2 = pt(40,-55);
-    const c3a = pt(44,-32),  c3b = pt(28,-15),  p3 = pt(10,-5);
-    const c4a = pt(35,-12),  c4b = pt(70,-30),  pSortie = pt(120,-100);
+
+    // Variation légère et déterministe selon la position (seed), pour que
+    // les deux boucles du tracé ne soient pas des clones identiques.
+    const j = (n) => (bruit(seed + n) - 0.5) * 10; // jitter ±5px
+
+    // Première moitié : montée large et ouverte (grand rayon).
+    const c1a = pt(-22 + j(1), -18 + j(2)), c1b = pt(-38 + j(3), -52 + j(4)), p1 = pt(-18 + j(5), -76 + j(6));
+    const c2a = pt(2 + j(7),  -98 + j(8)),  c2b = pt(34 + j(9), -92 + j(10)), p2 = pt(44 + j(11), -64 + j(12));
+    // Deuxième moitié : la spirale se RESSERRE (rayon plus petit qu'à l'entrée,
+    // contrairement à un cercle qui referme sur le même rayon) avant de
+    // repartir vers la sortie — c'est l'asymétrie qui rend la forme organique.
+    const c3a = pt(50 + j(13), -38 + j(14)), c3b = pt(32 + j(15), -18 + j(16)), p3 = pt(14 + j(17), -8 + j(18));
+    const c4a = pt(2 + j(19),  -2 + j(20)),  c4b = pt(-6 + j(21), 8 + j(22)),   p4 = pt(8 + j(23), 18 + j(24));
+    // Petite boucle interne resserrée (le "nœud" qui distingue une vraie
+    // spirale d'un simple aller-retour) avant de filer vers la sortie.
+    const c5a = pt(28 + j(25), 14 + j(26)), c5b = pt(38 + j(27), -10 + j(28)), pSortie = pt(118 + j(29), -96 + j(30));
+
     return `C ${c1a[0]} ${c1a[1]}, ${c1b[0]} ${c1b[1]}, ${p1[0]} ${p1[1]} ` +
       `C ${c2a[0]} ${c2a[1]}, ${c2b[0]} ${c2b[1]}, ${p2[0]} ${p2[1]} ` +
       `C ${c3a[0]} ${c3a[1]}, ${c3b[0]} ${c3b[1]}, ${p3[0]} ${p3[1]} ` +
-      `C ${c4a[0]} ${c4a[1]}, ${c4b[0]} ${c4b[1]}, ${pSortie[0]} ${pSortie[1]} `;
+      `C ${c4a[0]} ${c4a[1]}, ${c4b[0]} ${c4b[1]}, ${p4[0]} ${p4[1]} ` +
+      `C ${c5a[0]} ${c5a[1]}, ${c5b[0]} ${c5b[1]}, ${pSortie[0]} ${pSortie[1]} `;
   }
 
   // Segments (entre photo i et photo i+1) qui reçoivent une boucle décorative.
@@ -524,10 +613,6 @@ function genererFilNarratif() {
     const a = points[i];
     const b = points[i + 1];
 
-    // RÈGLE FIXE : on sort toujours par le BAS de la photo de départ et on
-    // entre toujours par le HAUT de la photo d'arrivée — jamais par les
-    // côtés à mi-hauteur. Ça évite structurellement qu'une courbe repasse
-    // sur le rectangle d'une photo, peu importe sa taille.
     const startX = a.centerX;
     const startY = a.bottom + MARGE;
     const endX = b.centerX;
@@ -538,47 +623,46 @@ function genererFilNarratif() {
     d += `M ${startX} ${startY} `;
 
     if (segmentsAvecBoucle.has(i)) {
-      // Montée vers le point d'entrée de la boucle, puis la fonction boucleSVG
-      // prend le relais directement (elle gère elle-même toute la forme de la
-      // boucle, y compris sa remontée finale vers le point de sortie).
       const versDroite = distX > 0;
       const entreeX = startX + distX * 0.3;
       const entreeY = startY + Math.min(70, Math.abs(distY) * 0.5 + 30);
       const echelle = 0.85;
 
-      d += `C ${startX + distX*0.05} ${startY + 15}, `;
-      d += `${entreeX - 15} ${entreeY - 25}, `;
+      // Légère ondulation sur la montée vers la boucle, plutôt qu'une
+      // courbe parfaitement lisse — accentue l'effet "tracé à main levée".
+      const j1 = (bruit(i + 100) - 0.5) * 14;
+      d += `C ${startX + distX*0.05 + j1} ${startY + 15}, `;
+      d += `${entreeX - 15 - j1} ${entreeY - 25}, `;
       d += `${entreeX} ${entreeY} `;
 
-      d += boucleSVG(entreeX, entreeY, echelle, !versDroite);
+      d += boucleSVG(entreeX, entreeY, echelle, !versDroite, i + 1);
 
-      // Point de sortie de la boucle = entreeX/Y + (120,-100)*echelle*mx — on
-      // relie ce point réel à la destination finale plutôt que de deviner.
       const mx = (!versDroite) ? -1 : 1;
-      const sortieX = entreeX + 120 * echelle * mx;
-      const sortieY = entreeY - 100 * echelle;
-      d += `C ${sortieX + distX*0.05} ${sortieY + 10}, `;
-      d += `${endX - distX*0.15} ${endY - 30}, `;
+      const sortieX = entreeX + 118 * echelle * mx;
+      const sortieY = entreeY - 96 * echelle;
+      const j2 = (bruit(i + 200) - 0.5) * 14;
+      d += `C ${sortieX + distX*0.05 + j2} ${sortieY + 10}, `;
+      d += `${endX - distX*0.15 - j2} ${endY - 30}, `;
       d += `${endX} ${endY} `;
     } else {
-      // Deux courbes C explicites (pas de commande S, qui hérite d'un point
-      // de contrôle réfléchi et peut donner un mouvement imprévisible quand
-      // distY est petit par rapport à distX). Le premier point de contrôle
-      // pousse fort horizontalement dès la sortie ; le second symétriquement
-      // avant l'arrivée — garantit un vrai déploiement, pas une ligne courte.
-      const midX = startX + distX * 0.5;
+      // Segment droit avec une légère ondulation sinusoïdale plutôt qu'une
+      // simple courbe en S symétrique — casse l'aspect "courbe vectorielle
+      // générique" et se rapproche d'un tracé fait à main levée.
+      const j = (bruit(i + 50) - 0.5) * 0.18; // variation d'amplitude ±9%
+      const midX = startX + distX * (0.5 + j);
       const midY = startY + distY * 0.5;
+      const ampli = 1 + (bruit(i + 60) - 0.5) * 0.4;
       d += `C ${startX + distX*0.15} ${startY + distY*0.1}, `;
-      d += `${midX - distX*0.15} ${midY - distY*0.35}, `;
+      d += `${midX - distX*0.15*ampli} ${midY - distY*0.35*ampli}, `;
       d += `${midX} ${midY} `;
-      d += `C ${midX + distX*0.15} ${midY + distY*0.35}, `;
+      d += `C ${midX + distX*0.15*ampli} ${midY + distY*0.35*ampli}, `;
       d += `${endX - distX*0.15} ${endY - distY*0.1}, `;
       d += `${endX} ${endY} `;
     }
   }
 
   // Dernier segment : de la dernière étape (2024) vers l'avion final, avec
-  // une grande boucle large avant l'arrivée (comme dans le croquis de référence).
+  // une grande boucle large avant l'arrivée.
   if (avionPos) {
     const last = points[points.length - 1];
     const startX = last.centerX;
@@ -598,11 +682,11 @@ function genererFilNarratif() {
     d += `${entreeX - 15} ${entreeY - 25}, `;
     d += `${entreeX} ${entreeY} `;
 
-    d += boucleSVG(entreeX, entreeY, echelle, !versDroite);
+    d += boucleSVG(entreeX, entreeY, echelle, !versDroite, 999);
 
     const mx = (!versDroite) ? -1 : 1;
-    const sortieX = entreeX + 120 * echelle * mx;
-    const sortieY = entreeY - 100 * echelle;
+    const sortieX = entreeX + 118 * echelle * mx;
+    const sortieY = entreeY - 96 * echelle;
     d += `C ${sortieX + distX*0.05} ${sortieY + 10}, `;
     d += `${endX - distX*0.2} ${endY - 30}, `;
     d += `${endX} ${endY} `;
