@@ -119,16 +119,28 @@ const Carrousel = (function () {
   // Met à jour seulement l'image + les points actifs, sans reconstruire les
   // flèches/zoom déjà en place — évite le flash de cadre vide à chaque clic.
   // Si la structure ne correspond plus (ex: nombre de photos différent du
-  // rendu précédent), reconstruit tout via construireStructure() à la place.
+  // rendu précédent, OU un placeholder résiduel d'un onerror précédent traîne
+  // encore dans le DOM), reconstruit tout via construireStructure() à la place.
+  //
+  // CORRECTIF : l'ancienne version ne détectait QUE l'absence du <img> ou un
+  // mauvais nombre de dots comme signe de structure invalide. Mais le onerror
+  // de construireStructure() insère un placeholder *en plus* du <img> caché
+  // (insertAdjacentHTML('afterend', ...)) sans jamais le retirer — donc si une
+  // image avait échoué à charger lors d'un appel précédent, ce placeholder
+  // restait pour toujours dans le DOM, empilé sous le nouveau contenu à
+  // chaque appel suivant (le bug de texte/photo dupliqués visible à l'écran).
+  // On détecte maintenant explicitement ce résidu et on force une reconstruction
+  // complète dans ce cas, qui vide proprement tout le innerHTML au passage.
   function mettreAJourImage(id) {
     const z = zones[id];
     const el = z.el;
     if (!el) return;
 
     const img = el.querySelector('img');
+    const placeholderResiduel = el.querySelector('.crsl-placeholder');
     const dotsActuels = el.querySelectorAll('.crsl-dot').length;
     const structureValide = z.photos.length
-      ? (img && dotsActuels === (z.photos.length > 1 ? z.photos.length : 0))
+      ? (img && !placeholderResiduel && dotsActuels === (z.photos.length > 1 ? z.photos.length : 0))
       : !img;
 
     if (!structureValide) {
@@ -187,11 +199,20 @@ const Carrousel = (function () {
       const dejaInitialisee = !!zones[id];
       const nouvellesPhotos = photos || [];
 
-      // Si la zone existe déjà et que le nombre de photos (donc la structure
-      // flèches/dots) ne change pas, on ne touche qu'à l'image — élimine le
-      // flash de cadre vide quand un sélecteur d'options change la combinaison
-      // affichée mais garde le même nombre de photos pour cette combinaison.
-      const memeStructure = dejaInitialisee && zones[id].photos.length === nouvellesPhotos.length;
+      // CORRECTIF : l'ancienne condition ne comparait que la LONGUEUR des
+      // deux tableaux de photos ([Surdimensionnee.jpg] vs [IMG_1314.png] sont
+      // tous deux de longueur 1, donc jugés "même structure" alors que ce sont
+      // des photos différentes). Ça déclenchait mettreAJourImage() au lieu de
+      // construireStructure() à chaque changement de modèle ayant le même
+      // nombre de photos — exactement le cas pour Garderie → Standard →
+      // Surdimensionnée, qui n'ont chacun qu'une seule image. On compare
+      // maintenant aussi le contenu (chemins des fichiers), pas seulement
+      // le compte, pour ne prendre le raccourci "mise à jour légère" que
+      // lorsque c'est vraiment la même combinaison de photos qui se répète
+      // (ex: un sélecteur d'options qui ne change rien à l'image affichée).
+      const memesPhotos = dejaInitialisee &&
+        zones[id].photos.length === nouvellesPhotos.length &&
+        zones[id].photos.every((p, i) => p === nouvellesPhotos[i]);
 
       zones[id] = {
         el: document.getElementById(id),
@@ -203,7 +224,7 @@ const Carrousel = (function () {
         zoom: opts.zoom !== false // activé par défaut, désactiver avec { zoom: false }
       };
 
-      if (memeStructure) mettreAJourImage(id);
+      if (memesPhotos) mettreAJourImage(id);
       else construireStructure(id);
     },
     next(id) { naviguer(id, 1); },
