@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Caveat:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="carrousel.css">
 <style>
 /* Section artisans — nouvelle structure */
 .artisans-photo-principale { width: 100%; max-height: 440px; object-fit: cover; border-radius: var(--radius); margin-bottom: 40px; display: block; }
@@ -57,11 +58,7 @@
       <div class="carnet-photo">
         <div class="carnet-scotch"></div>
         <div class="carnet-photo-inner">
-          <img src="images/IMG_1314_rogner.png" alt="Chaise ERGO"
-               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div style="display:none;width:260px;height:320px;background:var(--c-brume);align-items:center;justify-content:center;color:var(--c-muted);font-size:11px;text-align:center;flex-direction:column;gap:8px;padding:20px;">
-            <span style="font-size:28px;opacity:.3">🪑</span><span>Photo · Chaise ERGO</span>
-          </div>
+          <div class="crsl-zone" id="hero-photo"></div>
           <div class="carnet-caption"
                data-fr="— La Chaise ERGO · Pour tous"
                data-en="— The ERGO Chair · For everyone">— La Chaise ERGO · Pour tous</div>
@@ -114,12 +111,7 @@
     </div>
 
     <!-- Photo unique père & fils -->
-    <img src="images/Histoire/perefils.png" alt="Claude et Guillaume Poupart"
-         class="artisans-photo-principale"
-         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="artisans-photo-placeholder" style="display:none;">
-      <span data-fr="Photo · Claude & Guillaume Poupart" data-en="Photo · Claude & Guillaume Poupart">Photo · Claude & Guillaume Poupart</span>
-    </div>
+    <div class="crsl-zone" id="artisans-photo" style="margin-bottom:40px;"></div>
 
     <!-- Deux textes côte à côte -->
     <div class="artisans-duo">
@@ -172,11 +164,7 @@
       <a href="histoire.html" class="histoire-lien"
          data-fr="Lire toute l'histoire →"
          data-en="Read the full story →">Lire toute l'histoire →</a>
-      <div style="margin-top:32px;">
-        <img src="images/Histoire/claude-plage.png" alt="Claude Poupart"
-             style="max-width:100%;max-height:280px;object-fit:contain;mix-blend-mode:multiply;filter:brightness(1.05);"
-             onerror="this.style.display='none'">
-      </div>
+      <div class="crsl-zone" id="claude-plage-photo" style="margin-top:32px;max-width:100%;max-height:280px;"></div>
     </div>
     <div class="frise">
       <div class="frise-item">
@@ -218,7 +206,7 @@
         data-fr="Un mot des ergothérapeutes"
         data-en="A word from occupational therapists">Un mot des ergothérapeutes</span>
       <blockquote class="cta-citation-texte">
-        « Je décris le bénéficiaire. On conçoit ensemble. Le résultat dépasse toujours mes attentes. »
+        « J'ai essayé d'autres fournisseurs. Je reviens toujours ici. La qualité et le suivi n'ont pas d'équivalent. »
       </blockquote>
       <p class="cta-citation-source">— Ergothérapeute, région de Montréal</p>
       <div class="cta-regle"></div>
@@ -251,5 +239,11 @@
 
 <div id="footer-container"></div>
 <script src="scripts.js"></script>
+<script src="carrousel.js"></script>
+<script>
+Carrousel.init('hero-photo', ['images/IMG_1314_rogner.png'], { alt: 'Chaise ERGO', zoom: false });
+Carrousel.init('artisans-photo', ['images/Histoire/perefils.png'], { alt: 'Claude et Guillaume Poupart', zoom: false });
+Carrousel.init('claude-plage-photo', ['images/Histoire/claude-plage.png'], { alt: 'Claude Poupart', zoom: false });
+</script>
 </body>
 </html>

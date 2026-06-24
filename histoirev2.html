@@ -19,8 +19,7 @@
 .page-header-h1 em { font-style: italic; color: var(--c-cuivre); }
 .page-header-p { font-size: 15px; color: rgba(246,242,235,.55); max-width: 520px; line-height: 1.85; }
 
-/* HEADER — grille texte/image en classes (au lieu de style inline), pour
-   pouvoir inverser l'ordre proprement en mobile via media query. */
+/* HEADER — grille texte/image, desktop côte à côte */
 .histoire-header-grid { background: var(--c-parchemin); border-bottom: 1px solid var(--c-bord); }
 .histoire-header-grid-inner { max-width: var(--max-width); margin: 0 auto; padding: 64px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
 .histoire-header-texte { order: 1; }
@@ -28,7 +27,9 @@
 
 .timeline-outer { background: var(--c-parchemin); padding: 80px 0 100px; }
 .timeline-inner { max-width: var(--max-width); margin: 0 auto; padding: 0 60px; position: relative; }
-.timeline-inner::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 0; border-left: 2px dashed var(--c-bord); transform: translateX(-50%); z-index: 0; }
+.timeline-inner::before { display: none; }
+#fil-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: visible; }
+#fil-svg image { pointer-events: none; }
 .etape { display: grid; grid-template-columns: 1fr 60px 1fr; margin-bottom: 80px; align-items: center; }
 .etape:last-child { margin-bottom: 0; }
 .etape-noeud { display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; z-index: 2; gap: 6px; }
@@ -56,6 +57,15 @@
 .etape-incendie .carnet-photo-inner { background: #2a1a14; }
 .etape-incendie .carnet-photo-inner img { filter: grayscale(20%) sepia(20%) contrast(1.1); mix-blend-mode: normal; }
 .etape-releve .etape-noeud-cercle { border-color: var(--c-cuivre); background: var(--c-cuivre); }
+.etape-envol { display: flex; align-items: center; justify-content: flex-start; gap: 48px; padding: 60px 20px 40px; position: relative; z-index: 1; padding-left: 8%; }
+.envol-avion { width: 150px; height: auto; flex-shrink: 0; margin-left: 60px; }
+.envol-texte-gauche { text-align: left; max-width: 200px; }
+.envol-desc { font-size: 13px; color: var(--c-muted); line-height: 1.6; margin-top: 6px; }
+@media (max-width: 900px) {
+  .etape-envol { flex-direction: column; gap: 20px; text-align: center; padding-left: 20px; }
+  .envol-texte-gauche { text-align: center; max-width: 320px; }
+  .envol-avion { margin-left: 0; }
+}
 .conclusion-outer { background: var(--c-marine); }
 .conclusion-inner { max-width: var(--max-width); margin: 0 auto; padding: 80px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
 .conclusion-h2 { font-family: var(--font-titre); font-size: 38px; font-weight: 300; color: var(--c-parchemin); line-height: 1.2; margin-bottom: 20px; }
@@ -71,32 +81,50 @@
 .conclusion-stat-n { font-family: var(--font-titre); font-size: 34px; font-weight: 400; color: var(--c-parchemin); line-height: 1; margin-bottom: 4px; }
 .conclusion-stat-l { font-family: var(--font-mono); font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: #c0874a; }
 @media (max-width: 900px) {
-  /* === HEADER MOBILE : image au-dessus, texte en dessous, 1 colonne ===
-     Corrige le bug où l'image se faisait écraser/déformer en restant
-     en colonne à côté du texte sur petit écran. */
+  /* === HEADER MOBILE : image en haut, texte en dessous, 1 colonne === */
   .histoire-header-grid-inner { grid-template-columns: 1fr; padding: 40px 20px 32px; gap: 28px; }
   .histoire-header-texte { order: 2; }
   .histoire-header-image { order: 1; }
   .histoire-header-image .crsl-zone { max-width: 280px; height: 260px; margin: 0 auto; }
 
-  .timeline-inner::before { left: 28px; transform: none; }
-  .etape { grid-template-columns: 56px 1fr; grid-template-rows: auto auto; gap: 0 16px; margin-bottom: 56px; }
+  /* === TRAIT SIMPLE À GAUCHE EN MOBILE (remplace le SVG serpentant) === */
+  .timeline-inner::before {
+    display: block;
+    content: '';
+    position: absolute;
+    left: 28px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    border-left: 2px dashed rgba(26,26,26,.3);
+    transform: none;
+  }
+  /* Le tracé SVG serpentant n'a de sens qu'en alternance gauche/droite desktop */
+  #fil-svg { display: none; }
 
-  /* === RÈGLE MOBILE CONFIRMÉE : photo TOUJOURS au-dessus du texte ===
-     peu importe que l'étape soit paire ou impaire. On détecte quel côté
-     (.etape-gauche ou .etape-droite) contient l'image via :has() et on
-     le force en row 1 ; le texte va systématiquement en row 2. */
+  .etape {
+    grid-template-columns: 56px 1fr;
+    grid-template-rows: auto auto;
+    gap: 0 16px;
+    margin-bottom: 56px;
+  }
+  /* RÈGLE MOBILE : photo TOUJOURS au-dessus du texte, peu importe pair/impair */
   .etape-gauche, .etape:nth-child(even) .etape-gauche,
   .etape-droite, .etape:nth-child(even) .etape-droite {
     order: 0 !important;
-    grid-column: 2;
   }
-  .etape:has(.etape-gauche .etape-image) .etape-gauche  { grid-row: 1; justify-content: flex-start !important; }
-  .etape:has(.etape-gauche .etape-image) .etape-droite  { grid-row: 2; justify-content: flex-start !important; }
-  .etape:has(.etape-droite .etape-image) .etape-droite  { grid-row: 1; justify-content: flex-start !important; }
-  .etape:has(.etape-droite .etape-image) .etape-gauche  { grid-row: 2; justify-content: flex-start !important; }
+  .etape:has(.etape-gauche .etape-image) .etape-gauche { grid-column: 2; grid-row: 1; justify-content: flex-start !important; }
+  .etape:has(.etape-gauche .etape-image) .etape-droite { grid-column: 2; grid-row: 2; justify-content: flex-start !important; }
+  .etape:has(.etape-droite .etape-image) .etape-droite { grid-column: 2; grid-row: 1; justify-content: flex-start !important; }
+  .etape:has(.etape-droite .etape-image) .etape-gauche { grid-column: 2; grid-row: 2; justify-content: flex-start !important; }
 
-  .etape-noeud, .etape:nth-child(even) .etape-noeud  { order: 0 !important; grid-column: 1; grid-row: 1 / 3; align-self: flex-start; padding-top: 12px; }
+  .etape-noeud, .etape:nth-child(even) .etape-noeud {
+    order: 0 !important;
+    grid-column: 1;
+    grid-row: 1 / 3;
+    align-self: flex-start;
+    padding-top: 12px;
+  }
   .timeline-inner { padding: 0 20px; }
   .carnet-photo-inner .crsl-zone { width: 100%; max-width: 100%; height: 240px; }
   .conclusion-inner { grid-template-columns: 1fr; padding: 48px 20px; gap: 32px; }
@@ -105,15 +133,15 @@
   .page-header-h1 { font-size: 32px; }
 }
 
-/* Fallback pour navigateurs sans support de :has() (anciens Safari/Firefox).
-   Suffisant ici car le motif est constant : étapes impaires = photo à
-   gauche, étapes paires = photo à droite, tout au long de la frise. */
+/* Fallback pour navigateurs sans support de :has() — ordre fixe basé sur pair/impair,
+   suffisant car dans ce fichier les étapes impaires ont la photo à gauche et les
+   étapes paires l'ont à droite (motif constant tout au long de la frise). */
 @supports not (selector(:has(a))) {
   @media (max-width: 900px) {
-    .etape:nth-child(odd)  .etape-gauche { grid-row: 1; justify-content: flex-start !important; }
-    .etape:nth-child(odd)  .etape-droite { grid-row: 2; justify-content: flex-start !important; }
-    .etape:nth-child(even) .etape-droite { grid-row: 1; justify-content: flex-start !important; }
-    .etape:nth-child(even) .etape-gauche { grid-row: 2; justify-content: flex-start !important; }
+    .etape:nth-child(odd) .etape-gauche  { grid-column: 2; grid-row: 1; justify-content: flex-start !important; }
+    .etape:nth-child(odd) .etape-droite  { grid-column: 2; grid-row: 2; justify-content: flex-start !important; }
+    .etape:nth-child(even) .etape-droite { grid-column: 2; grid-row: 1; justify-content: flex-start !important; }
+    .etape:nth-child(even) .etape-gauche { grid-column: 2; grid-row: 2; justify-content: flex-start !important; }
   }
 }
 </style>
@@ -122,7 +150,7 @@
 
 <div id="nav-container" style="height:58px;"></div>
 
-<!-- HEADER — ordre géré entièrement en CSS (classes), pour pouvoir l'inverser en mobile -->
+<!-- HEADER — texte / livre, ordre géré entièrement en CSS pour pouvoir l'inverser en mobile -->
 <div class="histoire-header-grid">
   <div class="histoire-header-grid-inner">
     <div class="histoire-header-texte">
@@ -149,12 +177,13 @@
 <!-- FRISE -->
 <div class="timeline-outer">
   <div class="timeline-inner">
+  <svg id="fil-svg"></svg>
 
     <!-- 1965 -->
     <div class="etape">
       <div class="etape-gauche">
         <div class="etape-image">
-          <div class="carnet-photo" style="transform:rotate(-2deg);">
+          <div class="carnet-photo" id="fil-1965" style="transform:rotate(-2deg);">
             <div class="carnet-scotch"></div>
             <div class="carnet-photo-inner">
               <div class="crsl-zone" id="photo-1965"></div>
@@ -199,7 +228,7 @@
       </div>
       <div class="etape-droite">
         <div class="etape-image">
-          <div class="carnet-photo" style="transform:rotate(1.5deg);">
+          <div class="carnet-photo" id="fil-1990" style="transform:rotate(1.5deg);">
             <div class="carnet-scotch"></div>
             <div class="carnet-photo-inner">
               <div class="crsl-zone" id="photo-1990"></div>
@@ -214,7 +243,7 @@
     <div class="etape">
       <div class="etape-gauche">
         <div class="etape-image">
-          <div class="carnet-photo" style="transform:rotate(-1deg);">
+          <div class="carnet-photo" id="fil-2000" style="transform:rotate(-1deg);">
             <div class="carnet-scotch"></div>
             <div class="carnet-photo-inner">
               <div class="crsl-zone" id="photo-2000"></div>
@@ -259,7 +288,7 @@
       </div>
       <div class="etape-droite">
         <div class="etape-image">
-          <div class="carnet-photo" style="transform:rotate(1deg);">
+          <div class="carnet-photo" id="fil-2009" style="transform:rotate(1deg);">
             <div class="carnet-scotch"></div>
             <div class="carnet-photo-inner">
               <div class="crsl-zone" id="photo-2009"></div>
@@ -274,7 +303,7 @@
     <div class="etape">
       <div class="etape-gauche">
         <div class="etape-image">
-          <div class="carnet-photo" style="transform:rotate(-1.5deg);">
+          <div class="carnet-photo" id="fil-2016" style="transform:rotate(-1.5deg);">
             <div class="carnet-scotch"></div>
             <div class="carnet-photo-inner">
               <div class="crsl-zone" id="photo-2016"></div>
@@ -323,7 +352,7 @@
       </div>
       <div class="etape-droite">
         <div class="etape-image">
-          <div class="carnet-photo" style="transform:rotate(2deg);">
+          <div class="carnet-photo" id="fil-2023" style="transform:rotate(2deg);">
             <div class="carnet-scotch" style="background:rgba(139,58,42,0.2);"></div>
             <div class="carnet-photo-inner" style="background:#1a1008;">
               <div class="crsl-zone" id="photo-2023"></div>
@@ -338,7 +367,7 @@
     <div class="etape">
       <div class="etape-gauche">
         <div class="etape-image">
-          <div class="carnet-photo" style="transform:rotate(-1deg);">
+          <div class="carnet-photo" id="fil-2024" style="transform:rotate(-1deg);">
             <div class="carnet-scotch"></div>
             <div class="carnet-photo-inner">
               <div class="crsl-zone" id="photo-2024"></div>
@@ -387,7 +416,7 @@
       </div>
       <div class="etape-droite">
         <div class="etape-image">
-          <div class="carnet-photo" style="transform:rotate(1.5deg);">
+          <div class="carnet-photo" id="fil-2026" style="transform:rotate(1.5deg);">
             <div class="carnet-scotch"></div>
             <div class="carnet-photo-inner">
               <div class="crsl-zone" id="photo-2026"></div>
@@ -396,6 +425,15 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- ENVOL — avion en papier, fin de la frise -->
+    <div class="etape-envol" id="etape-envol">
+      <div class="envol-texte-gauche">
+        <span class="lbl etape-lbl" data-fr="2024 — 2026" data-en="2024 — 2026">2024 — 2026</span>
+        <p class="envol-desc" data-fr="La suite continue." data-en="The story continues.">La suite continue.</p>
+      </div>
+      <img src="images/Histoire/avion-papier.png" alt="Avion en papier" id="fil-avion" class="envol-avion">
     </div>
 
   </div>
@@ -461,6 +499,192 @@ Carrousel.init('photo-2016', ['images/Histoire/ERGO surdimensionnée.jpg'], { al
 Carrousel.init('photo-2023', ['images/Histoire/Incendie image a la main.jpg'], { alt: "L'incendie de juin 2023" });
 Carrousel.init('photo-2024', ['images/Histoire/156A_edited.jpg'], { alt: 'Le nouvel atelier 156-A' });
 Carrousel.init('photo-2026', ['images/Histoire/Guillaume sur chaise ERGO 01.png'], { alt: 'Guillaume Chiasson-Poupart sur la Chaise ERGO' });
+
+/* ═══════════════════════════════════════════════
+   FIL NARRATIF SERPENTANT — génération dynamique
+   ═══════════════════════════════════════════════
+   DESKTOP UNIQUEMENT (voir garde en bas de fonction). Sur mobile, on garde
+   un simple trait pointillé vertical en CSS (.timeline-inner::before),
+   beaucoup plus lisible pour une seule colonne.
+
+   Le tracé est calculé en JS plutôt que codé en dur en pixels fixes,
+   parce que la hauteur de chaque étape varie selon la longueur du texte.
+   On mesure la position réelle de chaque photo (.carnet-photo) par rapport
+   au conteneur de la frise, et on construit le tracé entre ces points à
+   chaque chargement / redimensionnement.
+
+   RÈGLE D'OR : le trait ne doit JAMAIS passer derrière une photo. Chaque
+   segment part du bord d'une photo et s'arrête avant le bord de la suivante.
+
+   STYLE DE BOUCLE : inspiré d'un tracé d'avion en papier dessiné à main
+   levée (spirale asymétrique qui se resserre, pas un cercle géométrique
+   parfait) — voir boucleSVG() plus bas pour le détail des coordonnées.
+
+   IDs des photos dans l'ordre chronologique : fil-1965, fil-1990, fil-2000,
+   fil-2009, fil-2016, fil-2023, fil-2024, fil-2026, puis l'avion (fil-avion). */
+
+function genererFilNarratif() {
+  // Le tracé serpentant n'a de sens qu'en alternance gauche/droite desktop.
+  // Sous le seuil mobile, on ne calcule rien et on laisse le CSS afficher
+  // le simple trait pointillé vertical à la place.
+  if (window.innerWidth <= 900) return;
+
+  const svg = document.getElementById('fil-svg');
+  const conteneur = document.querySelector('.timeline-inner');
+  if (!svg || !conteneur) return;
+
+  const ids = ['fil-1965','fil-1990','fil-2000','fil-2009','fil-2016','fil-2023','fil-2024'];
+  const elements = ids.map(id => document.getElementById(id)).filter(Boolean);
+  const avion = document.getElementById('fil-avion');
+
+  if (elements.length < 2) return;
+
+  const rectConteneur = conteneur.getBoundingClientRect();
+  function pos(el) {
+    const r = el.getBoundingClientRect();
+    return {
+      top: r.top - rectConteneur.top,
+      bottom: r.bottom - rectConteneur.top,
+      left: r.left - rectConteneur.left,
+      right: r.right - rectConteneur.left,
+      centerX: r.left - rectConteneur.left + r.width / 2,
+      centerY: r.top - rectConteneur.top + r.height / 2
+    };
+  }
+
+  const points = elements.map(pos);
+  const avionPos = avion ? pos(avion) : null;
+
+  // Marge de sécurité : le trait ne touche jamais le bord visuel d'une photo.
+  const MARGE = 16;
+
+  // --- Petit utilitaire de bruit déterministe (pas de hasard pur, pour que
+  // le tracé soit stable entre deux générations tant que les positions ne
+  // changent pas) : sert à varier légèrement les segments droits d'un
+  // tracé à l'autre, pour qu'ils ne soient pas des clones identiques.
+  function bruit(seed) {
+    const x = Math.sin(seed * 12.9898) * 43758.5453;
+    return x - Math.floor(x);
+  }
+
+  // Dessine une boucle entre le bas d'une photo (départ) et le haut de la
+  // photo suivante (arrivée). MÉTHODE DE VALIDATION : la forme a été mise
+  // au point dans un fichier de test isolé avec deux boîtes aux proportions
+  // réelles, rendue via Playwright (PAS wkhtmltoimage — son rendu SVG s'est
+  // avéré peu fiable dans ce projet), puis ajustée jusqu'à obtenir un tracé
+  // qui descend franchement sous le niveau d'arrivée, fait une vraie boucle
+  // visible *à côté* de la photo suivante (pas dessous, pas en la traversant),
+  // puis remonte pour entrer par le haut — reproduisant le sketch de
+  // référence du client plutôt qu'une formule géométrique inventée.
+  //
+  // a, b = objets {top, bottom, left, right, centerX, centerY} des deux
+  // photos consécutives (mêmes objets que retournés par pos() plus haut).
+  // coteExterieur = -1 si la photo B est dans la colonne de GAUCHE de la
+  // grille (donc son "extérieur", loin du texte, est encore plus à gauche),
+  // +1 si elle est dans la colonne de DROITE. On ne déduit plus le côté de
+  // la direction du trait : la boucle doit toujours partir vers le bord de
+  // page, jamais vers le centre où se trouve la colonne de texte voisine.
+  function traceAvecBoucle(a, b, coteExterieur) {
+    const startX = a.centerX, startY = a.bottom + MARGE;
+    const endX = b.centerX, endY = b.top - MARGE;
+    const signe = coteExterieur;
+    // Bord de B du côté extérieur (celui que la boucle doit longer sans traverser).
+    const bordB = signe > 0 ? b.right : b.left;
+
+    // Centre de la boucle : à l'extérieur de B, vers le bord de page —
+    // jamais vers le centre, où se trouve la colonne de texte voisine.
+    const boucleCX = bordB + signe * 70;
+    const boucleCY = endY + 110;
+
+    // Distance de la fin de A jusqu'au point d'entrée de la boucle — réparti
+    // sur une seule courbe de transition pour rester fluide.
+    const d1x = boucleCX - signe * 30 - startX;
+    const d1y = (boucleCY - 55) - startY;
+
+    let d = `M ${startX} ${startY} `;
+    d += `C ${startX} ${startY+45}, ${startX + d1x*0.55} ${startY + d1y*0.35}, ${startX + d1x*0.85} ${startY + d1y*0.7} `;
+    d += `C ${boucleCX - signe*30 - d1x*0.1} ${boucleCY - 95}, ${boucleCX + signe*15} ${boucleCY - 55}, ${boucleCX + signe*15} ${boucleCY - 55} `;
+    d += `C ${boucleCX + signe*55} ${boucleCY - 20}, ${boucleCX + signe*50} ${boucleCY + 35}, ${boucleCX} ${boucleCY + 45} `;
+    d += `C ${boucleCX - signe*50} ${boucleCY + 55}, ${boucleCX - signe*65} ${boucleCY - 10}, ${boucleCX - signe*30} ${boucleCY - 45} `;
+    d += `C ${boucleCX} ${boucleCY - 75}, ${boucleCX + signe*25} ${endY + 25}, ${bordB - signe*15} ${endY + 10} `;
+    d += `C ${bordB + signe*30} ${endY + 2}, ${endX - signe*30} ${endY}, ${endX} ${endY} `;
+    return d;
+  }
+
+  // Segments (entre photo i et photo i+1) qui reçoivent une boucle décorative.
+  const segmentsAvecBoucle = new Set([0, 5]);
+
+  let d = '';
+
+  for (let i = 0; i < points.length - 1; i++) {
+    const a = points[i];
+    const b = points[i + 1];
+
+    if (segmentsAvecBoucle.has(i)) {
+      // L'"extérieur" est déterminé par la position de B dans la grille
+      // (colonne gauche ou droite de la frise), pas par la direction du
+      // trait — sinon la boucle se forme du côté où se trouve la colonne
+      // de texte voisine et la traverse.
+      const centreFrise = rectConteneur.width / 2;
+      const coteExterieur = b.centerX < centreFrise ? -1 : 1;
+      d += traceAvecBoucle(a, b, coteExterieur);
+      continue;
+    }
+
+    const startX = a.centerX;
+    const startY = a.bottom + MARGE;
+    const endX = b.centerX;
+    const endY = b.top - MARGE;
+    const distY = endY - startY;
+    const distX = endX - startX;
+
+    d += `M ${startX} ${startY} `;
+
+    // Segment droit avec une légère ondulation sinusoïdale plutôt qu'une
+    // simple courbe en S symétrique — casse l'aspect "courbe vectorielle
+    // générique" et se rapproche d'un tracé fait à main levée.
+    const j = (bruit(i + 50) - 0.5) * 0.18; // variation d'amplitude ±9%
+    const midX = startX + distX * (0.5 + j);
+    const midY = startY + distY * 0.5;
+    const ampli = 1 + (bruit(i + 60) - 0.5) * 0.4;
+    d += `C ${startX + distX*0.15} ${startY + distY*0.1}, `;
+    d += `${midX - distX*0.15*ampli} ${midY - distY*0.35*ampli}, `;
+    d += `${midX} ${midY} `;
+    d += `C ${midX + distX*0.15*ampli} ${midY + distY*0.35*ampli}, `;
+    d += `${endX - distX*0.15} ${endY - distY*0.1}, `;
+    d += `${endX} ${endY} `;
+  }
+
+  // Dernier segment : de la dernière étape (2024) vers l'avion final, avec
+  // la même logique de boucle avant l'arrivée.
+  if (avionPos) {
+    const last = points[points.length - 1];
+    const centreFrise = rectConteneur.width / 2;
+    const coteExterieur = avionPos.centerX < centreFrise ? -1 : 1;
+    d += traceAvecBoucle(last, avionPos, coteExterieur);
+  }
+
+  const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  path.setAttribute('d', d);
+  path.setAttribute('fill', 'none');
+  path.setAttribute('stroke', '#1a1a1a');
+  path.setAttribute('stroke-width', '3');
+  path.setAttribute('stroke-linecap', 'round');
+  path.setAttribute('stroke-dasharray', '1.5 13');
+  path.setAttribute('opacity', '0.85');
+
+  svg.innerHTML = '';
+  svg.appendChild(path);
+  const largeurSvg = rectConteneur.width || conteneur.scrollWidth || conteneur.offsetWidth || 680;
+  svg.setAttribute('viewBox', `0 0 ${largeurSvg} ${conteneur.scrollHeight}`);
+  svg.setAttribute('preserveAspectRatio', 'none');
+}
+
+window.addEventListener('load', () => setTimeout(genererFilNarratif, 150));
+window.addEventListener('resize', () => {
+  clearTimeout(window._filResizeTimer);
+  window._filResizeTimer = setTimeout(genererFilNarratif, 200);
+});
 </script>
 </body>
 </html>

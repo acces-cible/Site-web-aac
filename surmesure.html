@@ -4,10 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sur mesure — Les Adaptations Accès-Cible</title>
-<meta name="description" content="Solutions sur mesure fabriquées au Québec : tables adaptées, bancs au sol, caissons et tout ce que l'ergothérapeute imagine.">
+<meta name="description" content="Solutions sur mesure fabriquées au Québec : bureaux adaptés, bancs au sol, caissons et tout ce que l'ergothérapeute imagine.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Caveat:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="carrousel.css">
 <style>
 /* ── SUR MESURE : styles uniques ── */
 .page-header { background: var(--c-parchemin); padding: 32px 60px 28px; border-bottom: 1px solid var(--c-bord); }
@@ -32,12 +33,10 @@
 .produit-card:last-child { margin-bottom: 0; }
 .produit-card.inverse { direction: rtl; }
 .produit-card.inverse > * { direction: ltr; }
-.produit-photo { background: var(--c-brume); border-right: 1px solid var(--c-bord); min-height: 420px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; position: relative; overflow: hidden; }
+.produit-photo { background: var(--c-brume); border-right: 1px solid var(--c-bord); min-height: 420px; position: relative; overflow: hidden; }
 .produit-card.inverse .produit-photo { border-right: none; border-left: 1px solid var(--c-bord); }
-.produit-photo img { width: 100%; height: 100%; object-fit: contain; position: absolute; inset: 0; padding: 24px; box-sizing: border-box; }
-.produit-photo-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; padding: 24px; }
-.produit-photo-placeholder svg { opacity: .2; }
-.produit-photo-placeholder-lbl { font-family: var(--font-mono); font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: var(--c-muted); opacity: .6; }
+.produit-photo .crsl-zone { width: 100%; height: 100%; }
+.produit-photo .crsl-zone img { object-fit: contain; padding: 24px; box-sizing: border-box; }
 .produit-photo-tag { position: absolute; top: 16px; left: 16px; font-family: var(--font-mono); font-size: 8px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; background: var(--c-marine); color: var(--c-parchemin); padding: 4px 10px; border-radius: 2px; z-index: 4; }
 .produit-contenu { padding: 40px; display: flex; flex-direction: column; justify-content: center; }
 .produit-contenu .lbl { margin-bottom: 12px; }
@@ -48,30 +47,6 @@
 .produit-points { list-style: none; display: flex; flex-direction: column; gap: 6px; margin-bottom: 24px; }
 .produit-points li { font-size: 13px; color: var(--c-muted); padding-left: 16px; position: relative; line-height: 1.5; }
 .produit-points li::before { content: '—'; position: absolute; left: 0; color: var(--c-cuivre); }
-
-/* Carrousel photo réalisations — flèches + dots + zoom */
-.produit-nav-fleche { position: absolute; top: 50%; transform: translateY(-50%); width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,.92); border: 1px solid var(--c-bord); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--c-marine); box-shadow: 0 2px 6px rgba(0,0,0,.12); transition: background .15s; z-index: 3; }
-.produit-nav-fleche:hover { background: var(--c-blanc); }
-.produit-nav-fleche.gauche { left: 12px; }
-.produit-nav-fleche.droite { right: 12px; }
-.produit-nav-fleche svg { pointer-events: none; }
-.produit-nav-dots { position: absolute; bottom: 14px; left: 0; right: 0; display: flex; justify-content: center; gap: 6px; z-index: 3; }
-.produit-nav-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.6); border: 1px solid rgba(0,0,0,.15); cursor: pointer; transition: background .15s; }
-.produit-nav-dot.actif { background: var(--c-cuivre); border-color: var(--c-cuivre); }
-.produit-zoom-btn { position: absolute; bottom: 14px; right: 14px; width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,.92); border: 1px solid var(--c-bord); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--c-marine); box-shadow: 0 2px 6px rgba(0,0,0,.12); z-index: 3; transition: background .15s; }
-.produit-zoom-btn:hover { background: var(--c-blanc); }
-
-/* Lightbox plein écran — réalisations */
-.lightbox-overlay { display: none; position: fixed; inset: 0; background: rgba(20,28,36,.92); z-index: 1000; align-items: center; justify-content: center; }
-.lightbox-overlay.visible { display: flex; }
-.lightbox-img-wrap { position: relative; max-width: 88vw; max-height: 86vh; display: flex; align-items: center; justify-content: center; }
-.lightbox-img-wrap img { max-width: 88vw; max-height: 86vh; object-fit: contain; border-radius: 2px; }
-.lightbox-fermer { position: absolute; top: 24px; right: 28px; width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--c-parchemin); transition: background .15s; }
-.lightbox-fermer:hover { background: rgba(255,255,255,.22); }
-.lightbox-nav-fleche { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--c-parchemin); transition: background .15s; }
-.lightbox-nav-fleche:hover { background: rgba(255,255,255,.22); }
-.lightbox-nav-fleche.gauche { left: 24px; }
-.lightbox-nav-fleche.droite { right: 24px; }
 
 .cta-outer { background: var(--c-marine); }
 .cta-inner { max-width: var(--max-width); margin: 0 auto; padding: 72px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
@@ -117,7 +92,7 @@
   <div class="intro-inner">
     <div>
       <h2 class="intro-h2">Si vous pouvez<br>le décrire, Claude<br>peut le <em>fabriquer.</em></h2>
-      <p class="intro-p">Certains besoins ne rentrent dans aucune catégorie. Une table à l'envers pour un fauteuil roulant particulier. Un banc au sol pour une séance de physiothérapie. Un support taillé pour un environnement précis.</p>
+      <p class="intro-p">Certains besoins ne rentrent dans aucune catégorie. Un bureau à l'envers pour un fauteuil roulant particulier. Un banc au sol pour une séance de physiothérapie. Un support taillé pour un environnement précis.</p>
       <p class="intro-p"><strong>C'est exactement pour ça qu'Accès-Cible existe.</strong> Chaque projet sur mesure commence par une conversation avec l'ergothérapeute — et se termine par une pièce unique, fabriquée à la main au Québec.</p>
     </div>
     <div class="intro-citation">
@@ -133,14 +108,9 @@
 
     <!-- Réalisations triées en ordre alphabétique par titre — toujours respecter cet ordre lors de l'ajout d'une nouvelle réalisation -->
     <div class="produit-card">
-      <div class="produit-photo" id="photoZone-balancoire">
+      <div class="produit-photo">
         <span class="produit-photo-tag">Sur mesure</span>
-        <img id="img-balancoire" src="images/sur mesure/Balancoire chaise roulante 1.png" alt="Balançoire pour chaise roulante" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="produit-photo-placeholder" style="display:none;"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#7a7060" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><div class="produit-photo-placeholder-lbl">Photo à venir</div></div>
-        <button class="produit-nav-fleche gauche" onclick="produitPrecedente('balancoire')" aria-label="Photo précédente"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
-        <button class="produit-nav-fleche droite" onclick="produitSuivante('balancoire')" aria-label="Photo suivante"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
-        <button class="produit-zoom-btn" onclick="ouvrirLightbox('balancoire')" aria-label="Agrandir la photo"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/><path d="M11 8v6M8 11h6"/></svg></button>
-        <div class="produit-nav-dots" id="dots-balancoire"></div>
+        <div class="crsl-zone" id="photo-balancoire"></div>
       </div>
       <div class="produit-contenu">
         <span class="lbl">Réalisation · 01</span>
@@ -153,10 +123,9 @@
     </div>
 
     <div class="produit-card inverse">
-      <div class="produit-photo" id="photoZone-banc3roues">
+      <div class="produit-photo">
         <span class="produit-photo-tag">Sur mesure</span>
-        <img id="img-banc3roues" src="images/sur mesure/petit banc 3 roues.jpg" alt="Petit banc à 3 roues" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="produit-photo-placeholder" style="display:none;"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#7a7060" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><div class="produit-photo-placeholder-lbl">Photo à venir</div></div>
+        <div class="crsl-zone" id="photo-banc3roues"></div>
       </div>
       <div class="produit-contenu">
         <span class="lbl">Réalisation · 02</span>
@@ -169,14 +138,9 @@
     </div>
 
     <div class="produit-card">
-      <div class="produit-photo" id="photoZone-planche">
+      <div class="produit-photo">
         <span class="produit-photo-tag">Sur mesure</span>
-        <img id="img-planche" src="images/sur mesure/planche inclinee 1.png" alt="Planche inclinée" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="produit-photo-placeholder" style="display:none;"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#7a7060" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><div class="produit-photo-placeholder-lbl">Photo à venir</div></div>
-        <button class="produit-nav-fleche gauche" onclick="produitPrecedente('planche')" aria-label="Photo précédente"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
-        <button class="produit-nav-fleche droite" onclick="produitSuivante('planche')" aria-label="Photo suivante"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
-        <button class="produit-zoom-btn" onclick="ouvrirLightbox('planche')" aria-label="Agrandir la photo"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/><path d="M11 8v6M8 11h6"/></svg></button>
-        <div class="produit-nav-dots" id="dots-planche"></div>
+        <div class="crsl-zone" id="photo-planche"></div>
       </div>
       <div class="produit-contenu">
         <span class="lbl">Réalisation · 03</span>
@@ -189,10 +153,9 @@
     </div>
 
     <div class="produit-card inverse">
-      <div class="produit-photo" id="photoZone-poutre">
+      <div class="produit-photo">
         <span class="produit-photo-tag">Sur mesure</span>
-        <img id="img-poutre" src="images/sur mesure/Poutre.jpg" alt="Poutre d'équilibre" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="produit-photo-placeholder" style="display:none;"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#7a7060" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><div class="produit-photo-placeholder-lbl">Photo à venir</div></div>
+        <div class="crsl-zone" id="photo-poutre"></div>
       </div>
       <div class="produit-contenu">
         <span class="lbl">Réalisation · 04</span>
@@ -205,10 +168,9 @@
     </div>
 
     <div class="produit-card">
-      <div class="produit-photo" id="photoZone-tablelanger">
+      <div class="produit-photo">
         <span class="produit-photo-tag">Sur mesure</span>
-        <img id="img-tablelanger" src="images/sur mesure/Table a langer 1.jpg" alt="Table à langer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="produit-photo-placeholder" style="display:none;"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#7a7060" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><div class="produit-photo-placeholder-lbl">Photo à venir</div></div>
+        <div class="crsl-zone" id="photo-tablelanger"></div>
       </div>
       <div class="produit-contenu">
         <span class="lbl">Réalisation · 05</span>
@@ -221,15 +183,6 @@
     </div>
 
   </div>
-</div>
-
-<div class="lightbox-overlay" id="lightboxOverlay" onclick="if(event.target===this) fermerLightbox()">
-  <div class="lightbox-img-wrap">
-    <img id="lightboxImg" src="" alt="">
-  </div>
-  <button class="lightbox-fermer" onclick="fermerLightbox()" aria-label="Fermer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-  <button class="lightbox-nav-fleche gauche" id="lightboxFlecheGauche" onclick="lightboxPrecedente()" aria-label="Photo précédente"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
-  <button class="lightbox-nav-fleche droite" id="lightboxFlecheDroite" onclick="lightboxSuivante()" aria-label="Photo suivante"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
 </div>
 
 <div class="cta-outer">
@@ -253,65 +206,28 @@
 
 <div id="footer-container"></div>
 <script src="scripts.js"></script>
+<script src="carrousel.js"></script>
 <script>
-const PRODUITS_PHOTOS = {
-  balancoire: ['images/sur mesure/Balancoire chaise roulante 1.png','images/sur mesure/Balancoire chaise roulante 2.png','images/sur mesure/Balancoire chaise roulante 3.png'],
-  planche: ['images/sur mesure/planche inclinee 1.png','images/sur mesure/planche inclinee 2.png']
-};
-const produitIndex = { balancoire: 0, planche: 0 };
-let lightboxId = null;
-
-function construireDots(id) {
-  const dots = document.getElementById('dots-' + id);
-  dots.innerHTML = PRODUITS_PHOTOS[id].map((_, idx) => `<span class="produit-nav-dot${idx===produitIndex[id]?' actif':''}" onclick="allerAPhotoProduit('${id}',${idx})"></span>`).join('');
-}
-function afficherPhotoProduit(id) {
-  const img = document.getElementById('img-' + id);
-  img.style.display = '';
-  img.src = PRODUITS_PHOTOS[id][produitIndex[id]];
-  construireDots(id);
-}
-function produitSuivante(id) {
-  produitIndex[id] = (produitIndex[id] + 1) % PRODUITS_PHOTOS[id].length;
-  afficherPhotoProduit(id);
-}
-function produitPrecedente(id) {
-  produitIndex[id] = (produitIndex[id] - 1 + PRODUITS_PHOTOS[id].length) % PRODUITS_PHOTOS[id].length;
-  afficherPhotoProduit(id);
-}
-function allerAPhotoProduit(id, idx) {
-  produitIndex[id] = idx;
-  afficherPhotoProduit(id);
-}
-function ouvrirLightbox(id) {
-  lightboxId = id;
-  document.getElementById('lightboxImg').src = PRODUITS_PHOTOS[id][produitIndex[id]];
-  const plusieurs = PRODUITS_PHOTOS[id].length > 1;
-  document.getElementById('lightboxFlecheGauche').style.display = plusieurs ? 'flex' : 'none';
-  document.getElementById('lightboxFlecheDroite').style.display = plusieurs ? 'flex' : 'none';
-  document.getElementById('lightboxOverlay').classList.add('visible');
-}
-function fermerLightbox() {
-  document.getElementById('lightboxOverlay').classList.remove('visible');
-  lightboxId = null;
-}
-function lightboxSuivante() {
-  if (!lightboxId) return;
-  produitSuivante(lightboxId);
-  document.getElementById('lightboxImg').src = PRODUITS_PHOTOS[lightboxId][produitIndex[lightboxId]];
-}
-function lightboxPrecedente() {
-  if (!lightboxId) return;
-  produitPrecedente(lightboxId);
-  document.getElementById('lightboxImg').src = PRODUITS_PHOTOS[lightboxId][produitIndex[lightboxId]];
-}
-document.addEventListener('keydown', (e) => {
-  if (!document.getElementById('lightboxOverlay').classList.contains('visible')) return;
-  if (e.key === 'Escape') fermerLightbox();
-  if (e.key === 'ArrowRight') lightboxSuivante();
-  if (e.key === 'ArrowLeft') lightboxPrecedente();
-});
-document.addEventListener('DOMContentLoaded', () => { construireDots('balancoire'); construireDots('planche'); });
+Carrousel.init('photo-balancoire',
+  ['images/sur mesure/Balancoire chaise roulante 1.png','images/sur mesure/Balancoire chaise roulante 2.png','images/sur mesure/Balancoire chaise roulante 3.png'],
+  { alt: 'Balançoire pour chaise roulante' }
+);
+Carrousel.init('photo-banc3roues',
+  ['images/sur mesure/petit banc 3 roues.jpg'],
+  { alt: 'Petit banc à 3 roues' }
+);
+Carrousel.init('photo-planche',
+  ['images/sur mesure/planche inclinee 1.png','images/sur mesure/planche inclinee 2.png'],
+  { alt: 'Planche inclinée' }
+);
+Carrousel.init('photo-poutre',
+  ['images/sur mesure/Poutre.jpg'],
+  { alt: "Poutre d'équilibre" }
+);
+Carrousel.init('photo-tablelanger',
+  ['images/sur mesure/Table a langer 1.jpg'],
+  { alt: 'Table à langer' }
+);
 </script>
 </body>
 </html>
