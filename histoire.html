@@ -38,9 +38,9 @@
 .carnet-photo { display: inline-block; transform-origin: center center; transition: transform .3s ease; }
 .carnet-photo:hover { transform: rotate(0deg) scale(1.02) !important; }
 .carnet-photo-inner { background: var(--c-blanc); padding: 12px 12px 12px; box-shadow: 0 3px 12px rgba(0,0,0,.1); position: relative; }
-.carnet-photo-inner .crsl-zone { width: 380px; height: 300px; }
-.carnet-photo-inner img { width: 100%; height: 100%; object-fit: contain; display: block; mix-blend-mode: normal; filter: none; }
-.carnet-caption { font-family: var(--font-script); font-size: 13px; color: var(--c-muted); text-align: center; margin-top: 24px; }
+.carnet-photo-inner .crsl-zone { width: 380px; max-height: 320px; display: flex; align-items: flex-start; justify-content: center; overflow: hidden; }
+.carnet-photo-inner img { width: auto; height: auto; max-width: 100%; max-height: 320px; object-fit: contain; display: block; mix-blend-mode: normal; filter: none; }
+.carnet-caption { font-family: var(--font-script); font-size: 13px; color: var(--c-muted); text-align: center; margin-top: 28px; }
 .carnet-scotch { position: absolute; top: -10px; left: 50%; transform: translateX(-50%) rotate(-2deg); width: 52px; height: 18px; background: rgba(220,210,190,.55); z-index: 2; }
 .etape-texte { padding: 16px 24px; }
 .etape-lbl { margin-bottom: 10px; font-size: 12px !important; letter-spacing: .14em !important; }
@@ -98,7 +98,8 @@
 
   .etape-noeud, .etape:nth-child(even) .etape-noeud  { order: 0 !important; grid-column: 1; grid-row: 1 / 3; align-self: flex-start; padding-top: 12px; }
   .timeline-inner { padding: 0 20px; }
-  .carnet-photo-inner .crsl-zone { width: 100%; max-width: 100%; height: 240px; }
+  .carnet-photo-inner .crsl-zone { width: 100%; max-width: 100%; max-height: 280px; }
+  .carnet-photo-inner img { max-height: 280px; }
   .conclusion-inner { grid-template-columns: 1fr; padding: 48px 20px; gap: 32px; }
   .conclusion-h2 { font-size: 28px; }
   .page-header { padding: 40px 20px 32px; }
