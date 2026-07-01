@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-fr="FAQ — Accès-Cible" data-en="FAQ — Accès-Cible">FAQ — Accès-Cible</title>
+<meta name="description" data-fr="Réponses aux questions fréquentes : délais de fabrication, financement, garantie, entretien et plus." data-en="Answers to frequently asked questions: manufacturing timelines, financing, warranty, maintenance and more." content="Réponses aux questions fréquentes">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* ===== FAQ — styles spécifiques à cette page ===== */
+  :root{
+    --c-marine:#1e3a4f;
+    --c-nuit:#1a2530;
+    --c-parchemin:#f6f2eb;
+    --c-cuivre:#c0874a;
+    --c-brume:#e8e2d6;
+    --c-bord:#d4cdbf;
+    --c-muted:#7a7060;
+    --c-blanc:#fff;
+  }
+
+  .faq-hero{
+    background:var(--c-marine);
+    color:var(--c-blanc);
+    padding:4.5rem 1.5rem 3.5rem;
+    text-align:center;
+  }
+  .faq-hero .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--c-cuivre);
+    display:block;
+    margin-bottom:1rem;
+  }
+  .faq-hero h1{
+    font-family:'Crimson Pro', serif;
+    font-weight:600;
+    font-size:clamp(2.2rem, 4.5vw, 3.2rem);
+    margin:0 0 .75rem;
+  }
+  .faq-hero p{
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:1.05rem;
+    color:var(--c-brume);
+    max-width:640px;
+    margin:0 auto;
+  }
+
+  .faq-main{
+    background:var(--c-parchemin);
+    padding:3.5rem 1.5rem 5rem;
+  }
+  .faq-container{
+    max-width:820px;
+    margin:0 auto;
+  }
+
+  .faq-search{
+    margin-bottom:2.5rem;
+  }
+  .faq-search input{
+    width:100%;
+    box-sizing:border-box;
+    padding:0.9rem 1.2rem;
+    border:1px solid var(--c-bord);
+    border-radius:8px;
+    background:var(--c-blanc);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:1rem;
+    color:var(--c-nuit);
+  }
+  .faq-search input:focus{
+    outline:2px solid var(--c-cuivre);
+    outline-offset:2px;
+  }
+  .faq-search input::placeholder{
+    color:var(--c-muted);
+  }
+
+  .faq-group{
+    margin-bottom:2.75rem;
+  }
+  .faq-group-title{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.75rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--c-cuivre);
+    border-bottom:1px solid var(--c-bord);
+    padding-bottom:.6rem;
+    margin-bottom:1rem;
+  }
+
+  .faq-item{
+    background:var(--c-blanc);
+    border:1px solid var(--c-bord);
+    border-radius:10px;
+    margin-bottom:0.9rem;
+    overflow:hidden;
+    transition:border-color .2s ease;
+  }
+  .faq-item.open{
+    border-color:var(--c-cuivre);
+  }
+
+  .faq-question{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:1rem;
+    background:none;
+    border:none;
+    cursor:pointer;
+    text-align:left;
+    padding:1.2rem 1.4rem;
+    font-family:'Crimson Pro', serif;
+    font-weight:600;
+    font-size:1.25rem;
+    color:var(--c-nuit);
+  }
+  .faq-question:hover{
+    color:var(--c-marine);
+  }
+  .faq-question:focus-visible{
+    outline:2px solid var(--c-cuivre);
+    outline-offset:-2px;
+  }
+
+  .faq-icon{
+    flex:0 0 auto;
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    border:1px solid var(--c-bord);
+    position:relative;
+    transition:transform .25s ease, background .2s ease, border-color .2s ease;
+  }
+  .faq-icon::before,
+  .faq-icon::after{
+    content:"";
+    position:absolute;
+    background:var(--c-marine);
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+  }
+  .faq-icon::before{ width:12px; height:2px; }
+  .faq-icon::after{ width:2px; height:12px; transition:opacity .2s ease; }
+  .faq-item.open .faq-icon{
+    background:var(--c-cuivre);
+    border-color:var(--c-cuivre);
+    transform:rotate(180deg);
+  }
+  .faq-item.open .faq-icon::before,
+  .faq-item.open .faq-icon::after{
+    background:var(--c-blanc);
+  }
+  .faq-item.open .faq-icon::after{
+    opacity:0;
+  }
+
+  .faq-answer{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .35s ease;
+  }
+  .faq-answer-inner{
+    padding:0 1.4rem 1.4rem;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:1rem;
+    line-height:1.65;
+    color:var(--c-nuit);
+  }
+  .faq-answer-inner p{ margin:0 0 0.9rem; }
+  .faq-answer-inner p:last-child{ margin-bottom:0; }
+  .faq-answer-inner a{
+    color:var(--c-marine);
+    text-decoration:underline;
+    text-decoration-color:var(--c-cuivre);
+    text-underline-offset:3px;
+  }
+  .faq-answer-inner strong{ color:var(--c-marine); }
+
+  .faq-note{
+    background:var(--c-brume);
+    border-left:3px solid var(--c-cuivre);
+    padding:0.9rem 1.1rem;
+    margin-top:0.9rem;
+    font-size:0.92rem;
+    color:var(--c-nuit);
+  }
+
+  .faq-empty{
+    display:none;
+    text-align:center;
+    font-family:'IBM Plex Sans', sans-serif;
+    color:var(--c-muted);
+    padding:2rem 0;
+  }
+
+  /* CTA final */
+  .faq-cta{
+    background:var(--c-nuit);
+    color:var(--c-blanc);
+    padding:4rem 1.5rem;
+    text-align:center;
+  }
+  .faq-cta blockquote{
+    font-family:'Caveat', cursive;
+    font-size:1.9rem;
+    color:var(--c-brume);
+    max-width:600px;
+    margin:0 auto 1.75rem;
+    line-height:1.3;
+  }
+  .faq-cta .btn-cuivre{
+    display:inline-block;
+    background:var(--c-cuivre);
+    color:var(--c-nuit);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-weight:600;
+    padding:0.95rem 2.2rem;
+    border-radius:6px;
+    text-decoration:none;
+    transition:transform .15s ease, background .15s ease;
+  }
+  .faq-cta .btn-cuivre:hover{
+    background:#d99a5c;
+    transform:translateY(-2px);
+  }
+
+  @media (max-width: 640px){
+    .faq-question{ font-size:1.08rem; padding:1rem 1.1rem; }
+    .faq-answer-inner{ padding:0 1.1rem 1.1rem; font-size:0.95rem; }
+    .faq-hero{ padding:3.5rem 1.2rem 2.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== NAV (à remplacer par le nav.html partagé du site) ===== -->
+<nav class="site-nav" style="position:sticky; top:0; z-index:100;">
+  <!-- Réutiliser exactement le composant nav existant des 12 autres pages -->
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="faq-hero">
+  <span class="eyebrow" data-fr="Questions fréquentes" data-en="Frequently asked questions">Questions fréquentes</span>
+  <h1 data-fr="Foire aux questions" data-en="Frequently Asked Questions">Foire aux questions</h1>
+  <p data-fr="Délais, financement, garantie, entretien : les réponses aux questions qu'on nous pose le plus souvent." data-en="Timelines, financing, warranty, maintenance: answers to the questions we hear most often.">
+    Délais, financement, garantie, entretien : les réponses aux questions qu'on nous pose le plus souvent.
+  </p>
+</header>
+
+<!-- ===== CONTENU FAQ ===== -->
+<main class="faq-main">
+  <div class="faq-container">
+
+    <div class="faq-search">
+      <input
+        type="text"
+        id="faqSearch"
+        data-fr-placeholder="Rechercher une question..."
+        data-en-placeholder="Search a question..."
+        placeholder="Rechercher une question..."
+        aria-label="Rechercher dans la FAQ"
+      >
+    </div>
+
+    <p class="faq-empty" id="faqEmpty" data-fr="Aucun résultat. Essayez un autre mot-clé ou contactez-nous directement." data-en="No results. Try another keyword or contact us directly.">
+      Aucun résultat. Essayez un autre mot-clé ou contactez-nous directement.
+    </p>
+
+    <!-- GROUPE 1 : Fabrication et délais -->
+    <section class="faq-group">
+      <h2 class="faq-group-title" data-fr="Fabrication et délais" data-en="Manufacturing and timelines">Fabrication et délais</h2>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span data-fr="Combien de temps prend la fabrication d'une chaise ou d'un bureau ?" data-en="How long does it take to manufacture a chair or desk?">Combien de temps prend la fabrication d'une chaise ou d'un bureau ?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p data-fr="Le délai de fabrication standard est de <strong>4 à 6 semaines</strong> à partir de la confirmation de la commande, autant pour les chaises ERGO que pour les bureaux adaptés." data-en="Standard manufacturing time is <strong>4 to 6 weeks</strong> from order confirmation, for both ERGO chairs and adapted desks."
+               data-fr-html="Le délai de fabrication standard est de <strong>4 à 6 semaines</strong> à partir de la confirmation de la commande, autant pour les chaises ERGO que pour les bureaux adaptés."
+               data-en-html="Standard manufacturing time is <strong>4 to 6 weeks</strong> from order confirmation, for both ERGO chairs and adapted desks.">
+              Le délai de fabrication standard est de <strong>4 à 6 semaines</strong> à partir de la confirmation de la commande, autant pour les chaises ERGO que pour les bureaux adaptés.
+            </p>
+            <p data-fr="Ce délai peut varier selon le volume de commandes en cours et le niveau de personnalisation demandé (modèle Surdimensionné, XL sur demande, options d'ajustement particulières)." data-en="This timeline may vary depending on current order volume and the level of customization requested (Oversized model, XL on request, special adjustment options)."
+               data-fr-html="Ce délai peut varier selon le volume de commandes en cours et le niveau de personnalisation demandé (modèle Surdimensionné, XL sur demande, options d'ajustement particulières)."
+               data-en-html="This timeline may vary depending on current order volume and the level of customization requested (Oversized model, XL on request, special adjustment options).">
+              Ce délai peut varier selon le volume de commandes en cours et le niveau de personnalisation demandé (modèle Surdimensionné, XL sur demande, options d'ajustement particulières).
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span data-fr="Est-ce que je peux suivre l'avancement de ma commande ?" data-en="Can I track the progress of my order?">Est-ce que je peux suivre l'avancement de ma commande ?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p data-fr="Oui. Notre équipe communique avec vous à chaque étape clé — confirmation, fabrication, livraison — par téléphone ou courriel, selon votre préférence." data-en="Yes. Our team communicates with you at each key step — confirmation, manufacturing, delivery — by phone or email, according to your preference."
+               data-fr-html="Oui. Notre équipe communique avec vous à chaque étape clé — confirmation, fabrication, livraison — par téléphone ou courriel, selon votre préférence."
+               data-en-html="Yes. Our team communicates with you at each key step — confirmation, manufacturing, delivery — by phone or email, according to your preference.">
+              Oui. Notre équipe communique avec vous à chaque étape clé — confirmation, fabrication, livraison — par téléphone ou courriel, selon votre préférence.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GROUPE 2 : Soumission et processus -->
+    <section class="faq-group">
+      <h2 class="faq-group-title" data-fr="Soumission et processus" data-en="Submission and process">Soumission et processus</h2>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span data-fr="Comment fonctionne le formulaire de soumission en ligne ?" data-en="How does the online submission form work?">Comment fonctionne le formulaire de soumission en ligne ?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p data-fr="Notre formulaire est hébergé sur Fillout. Vous y décrivez les besoins de la personne, les mesures pertinentes et le contexte d'utilisation. Une fois soumis, un membre de notre équipe analyse votre demande et communique avec vous pour valider les détails avant fabrication." data-en="Our form is hosted on Fillout. You describe the person's needs, relevant measurements and the context of use. Once submitted, a member of our team reviews your request and contacts you to confirm the details before manufacturing."
+               data-fr-html="Notre formulaire est hébergé sur Fillout. Vous y décrivez les besoins de la personne, les mesures pertinentes et le contexte d'utilisation. Une fois soumis, un membre de notre équipe analyse votre demande et communique avec vous pour valider les détails avant fabrication."
+               data-en-html="Our form is hosted on Fillout. You describe the person's needs, relevant measurements and the context of use. Once submitted, a member of our team reviews your request and contacts you to confirm the details before manufacturing.">
+              Notre formulaire est hébergé sur Fillout. Vous y décrivez les besoins de la personne, les mesures pertinentes et le contexte d'utilisation. Une fois soumis, un membre de notre équipe analyse votre demande et communique avec vous pour valider les détails avant fabrication.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span data-fr="Le formulaire Fillout ne s'ouvre pas sur le réseau de mon établissement (CISSS/CIUSSS). Que faire ?" data-en="The Fillout form won't open on my facility's network (CISSS/CIUSSS). What should I do?">Le formulaire Fillout ne s'ouvre pas sur le réseau de mon établissement (CISSS/CIUSSS). Que faire ?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p data-fr="Certains réseaux informatiques d'établissements de santé (CISSS, CIUSSS) bloquent l'accès à des plateformes externes comme Fillout par mesure de sécurité." data-en="Some healthcare facility networks (CISSS, CIUSSS) block access to external platforms like Fillout for security reasons."
+               data-fr-html="Certains réseaux informatiques d'établissements de santé (CISSS, CIUSSS) bloquent l'accès à des plateformes externes comme Fillout par mesure de sécurité."
+               data-en-html="Some healthcare facility networks (CISSS, CIUSSS) block access to external platforms like Fillout for security reasons.">
+              Certains réseaux informatiques d'établissements de santé (CISSS, CIUSSS) bloquent l'accès à des plateformes externes comme Fillout par mesure de sécurité.
+            </p>
+            <p data-fr="Si c'est votre cas, essayez d'ouvrir le lien depuis un appareil personnel (téléphone, tablette) ou un réseau différent (données mobiles, Wi-Fi personnel). Vous pouvez aussi nous joindre directement par téléphone au 450 227-1948 ou par courriel à info@lesadaptationsacces-cible.com, et nous compléterons la demande avec vous." data-en="If this is your situation, try opening the link from a personal device (phone, tablet) or a different network (mobile data, personal Wi-Fi). You can also reach us directly by phone at 450 227-1948 or by email at info@lesadaptationsacces-cible.com, and we'll complete the request with you."
+               data-fr-html="Si c'est votre cas, essayez d'ouvrir le lien depuis un appareil personnel (téléphone, tablette) ou un réseau différent (données mobiles, Wi-Fi personnel). Vous pouvez aussi nous joindre directement par téléphone au <a href='tel:4502271948'>450 227-1948</a> ou par courriel à <a href='mailto:info@lesadaptationsacces-cible.com'>info@lesadaptationsacces-cible.com</a>, et nous compléterons la demande avec vous."
+               data-en-html="If this is your situation, try opening the link from a personal device (phone, tablet) or a different network (mobile data, personal Wi-Fi). You can also reach us directly by phone at <a href='tel:4502271948'>450 227-1948</a> or by email at <a href='mailto:info@lesadaptationsacces-cible.com'>info@lesadaptationsacces-cible.com</a>, and we'll complete the request with you.">
+              Si c'est votre cas, essayez d'ouvrir le lien depuis un appareil personnel (téléphone, tablette) ou un réseau différent (données mobiles, Wi-Fi personnel). Vous pouvez aussi nous joindre directement par téléphone au <a href="tel:4502271948">450 227-1948</a> ou par courriel à <a href="mailto:info@lesadaptationsacces-cible.com">info@lesadaptationsacces-cible.com</a>, et nous compléterons la demande avec vous.
+            </p>
+            <div class="faq-note" data-fr="Astuce : transférez le lien du formulaire à votre adresse courriel personnelle avant de quitter le réseau de l'établissement." data-en="Tip: forward the form link to your personal email before leaving the facility's network."
+                 data-fr-html="<strong>Astuce :</strong> transférez le lien du formulaire à votre adresse courriel personnelle avant de quitter le réseau de l'établissement."
+                 data-en-html="<strong>Tip:</strong> forward the form link to your personal email before leaving the facility's network.">
+              <strong>Astuce :</strong> transférez le lien du formulaire à votre adresse courriel personnelle avant de quitter le réseau de l'établissement.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GROUPE 3 : Financement -->
+    <section class="faq-group">
+      <h2 class="faq-group-title" data-fr="Financement" data-en="Financing">Financement</h2>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span data-fr="Est-ce que le financement par un organisme payeur est possible ?" data-en="Is financing through a paying organization possible?">Est-ce que le financement par un organisme payeur est possible ?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p data-fr="Oui. Nos produits sont régulièrement financés par des organismes payeurs (CLSC, CISSS, CIUSSS, assurances privées, entre autres). Nous fournissons les documents nécessaires — soumission détaillée, description technique — pour appuyer une demande de financement." data-en="Yes. Our products are regularly financed by paying organizations (CLSC, CISSS, CIUSSS, private insurance, among others). We provide the necessary documents — detailed quote, technical description — to support a financing request."
+               data-fr-html="Oui. Nos produits sont régulièrement financés par des organismes payeurs (CLSC, CISSS, CIUSSS, assurances privées, entre autres). Nous fournissons les documents nécessaires — soumission détaillée, description technique — pour appuyer une demande de financement."
+               data-en-html="Yes. Our products are regularly financed by paying organizations (CLSC, CISSS, CIUSSS, private insurance, among others). We provide the necessary documents — detailed quote, technical description — to support a financing request.">
+              Oui. Nos produits sont régulièrement financés par des organismes payeurs (CLSC, CISSS, CIUSSS, assurances privées, entre autres). Nous fournissons les documents nécessaires — soumission détaillée, description technique — pour appuyer une demande de financement.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span data-fr="Qui s'occupe de faire la demande de financement, moi ou vous ?" data-en="Who handles the financing request — me or you?">Qui s'occupe de faire la demande de financement, moi ou vous ?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p data-fr="La demande de financement est généralement déposée par le professionnel référent (ergothérapeute, intervenant) ou par l'organisme payeur lui-même. De notre côté, nous fournissons toute la documentation technique et le prix détaillé requis pour appuyer cette démarche." data-en="The financing request is typically filed by the referring professional (occupational therapist, case worker) or by the paying organization itself. On our end, we provide all the technical documentation and detailed pricing required to support the process."
+               data-fr-html="La demande de financement est généralement déposée par le professionnel référent (ergothérapeute, intervenant) ou par l'organisme payeur lui-même. De notre côté, nous fournissons toute la documentation technique et le prix détaillé requis pour appuyer cette démarche."
+               data-en-html="The financing request is typically filed by the referring professional (occupational therapist, case worker) or by the paying organization itself. On our end, we provide all the technical documentation and detailed pricing required to support the process.">
+              La demande de financement est généralement déposée par le professionnel référent (ergothérapeute, intervenant) ou par l'organisme payeur lui-même. De notre côté, nous fournissons toute la documentation technique et le prix détaillé requis pour appuyer cette démarche.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GROUPE 4 : Garantie -->
+    <section class="faq-group">
+      <h2 class="faq-group-title" data-fr="Garantie" data-en="Warranty">Garantie</h2>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span data-fr="Quelle est la durée de la garantie sur les chaises et les bureaux ?" data-en="What is the warranty period on chairs and desks?">Quelle est la durée de la garantie sur les chaises et les bureaux ?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p data-fr="Les chaises ERGO et les bureaux adaptés sont couverts par une <strong>garantie de 5 ans</strong> contre les défauts de fabrication." data-en="ERGO chairs and adapted desks are covered by a <strong>5-year warranty</strong> against manufacturing defects."
+               data-fr-html="Les chaises ERGO et les bureaux adaptés sont couverts par une <strong>garantie de 5 ans</strong> contre les défauts de fabrication."
+               data-en-html="ERGO chairs and adapted desks are covered by a <strong>5-year warranty</strong> against manufacturing defects.">
+              Les chaises ERGO et les bureaux adaptés sont couverts par une <strong>garantie de 5 ans</strong> contre les défauts de fabrication.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span data-fr="Et pour les accessoires et la cuirette ?" data-en="What about accessories and vinyl upholstery?">Et pour les accessoires et la cuirette ?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p data-fr="Les accessoires et la cuirette sont couverts par une <strong>garantie d'un an</strong>." data-en="Accessories and vinyl upholstery are covered by a <strong>one-year warranty</strong>."
+               data-fr-html="Les accessoires et la cuirette sont couverts par une <strong>garantie d'un an</strong>."
+               data-en-html="Accessories and vinyl upholstery are covered by a <strong>one-year warranty</strong>.">
+              Les accessoires et la cuirette sont couverts par une <strong>garantie d'un an</strong>.
+            </p>
+            <p data-fr="Pour tous les détails et conditions, consultez notre politique de garantie." data-en="For full details and conditions, see our warranty policy."
+               data-fr-html="Pour tous les détails et conditions, consultez notre <a href='politique-garantie.html'>politique de garantie</a>."
+               data-en-html="For full details and conditions, see our <a href='politique-garantie.html'>warranty policy</a>.">
+              Pour tous les détails et conditions, consultez notre <a href="politique-garantie.html">politique de garantie</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GROUPE 5 : Après la livraison -->
+    <section class="faq-group">
+      <h2 class="faq-group-title" data-fr="Après la livraison" data-en="After delivery">Après la livraison</h2>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span data-fr="Est-ce possible de faire ajuster une chaise ou un bureau après la livraison ?" data-en="Is it possible to have a chair or desk adjusted after delivery?">Est-ce possible de faire ajuster une chaise ou un bureau après la livraison ?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p data-fr="Oui. Les besoins d'une personne évoluent, et nos produits sont conçus pour être ajustés dans le temps. Contactez-nous pour planifier un ajustement — plusieurs se font directement sur place, sans nécessiter un retour en atelier." data-en="Yes. A person's needs change over time, and our products are designed to be adjusted accordingly. Contact us to schedule an adjustment — many can be done directly on-site, without needing to return to the workshop."
+               data-fr-html="Oui. Les besoins d'une personne évoluent, et nos produits sont conçus pour être ajustés dans le temps. Contactez-nous pour planifier un ajustement — plusieurs se font directement sur place, sans nécessiter un retour en atelier."
+               data-en-html="Yes. A person's needs change over time, and our products are designed to be adjusted accordingly. Contact us to schedule an adjustment — many can be done directly on-site, without needing to return to the workshop.">
+              Oui. Les besoins d'une personne évoluent, et nos produits sont conçus pour être ajustés dans le temps. Contactez-nous pour planifier un ajustement — plusieurs se font directement sur place, sans nécessiter un retour en atelier.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span data-fr="Comment entretenir la cuirette de ma chaise ?" data-en="How do I care for my chair's vinyl upholstery?">Comment entretenir la cuirette de ma chaise ?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p data-fr="Nettoyez la cuirette avec un chiffon doux légèrement humide et un savon doux, sans produits abrasifs ni solvants. Évitez l'exposition prolongée à une chaleur directe ou au soleil, qui peut assécher et fissurer le matériau avec le temps." data-en="Clean the vinyl with a soft, lightly dampened cloth and mild soap, avoiding abrasive products or solvents. Avoid prolonged exposure to direct heat or sunlight, which can dry out and crack the material over time."
+               data-fr-html="Nettoyez la cuirette avec un chiffon doux légèrement humide et un savon doux, sans produits abrasifs ni solvants. Évitez l'exposition prolongée à une chaleur directe ou au soleil, qui peut assécher et fissurer le matériau avec le temps."
+               data-en-html="Clean the vinyl with a soft, lightly dampened cloth and mild soap, avoiding abrasive products or solvents. Avoid prolonged exposure to direct heat or sunlight, which can dry out and crack the material over time.">
+              Nettoyez la cuirette avec un chiffon doux légèrement humide et un savon doux, sans produits abrasifs ni solvants. Évitez l'exposition prolongée à une chaleur directe ou au soleil, qui peut assécher et fissurer le matériau avec le temps.
+            </p>
+            <p data-fr="Essuyez tout dégât rapidement pour éviter les taches, et évitez de plier ou tordre le matériau." data-en="Wipe up spills promptly to avoid staining, and avoid folding or twisting the material."
+               data-fr-html="Essuyez tout dégât rapidement pour éviter les taches, et évitez de plier ou tordre le matériau."
+               data-en-html="Wipe up spills promptly to avoid staining, and avoid folding or twisting the material.">
+              Essuyez tout dégât rapidement pour éviter les taches, et évitez de plier ou tordre le matériau.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- ===== CTA FINAL ===== -->
+<section class="faq-cta">
+  <blockquote data-fr="« Une question qui reste sans réponse est une occasion manquée de bien vous servir. »" data-en="“A question left unanswered is a missed chance to serve you well.”">
+    « Une question qui reste sans réponse est une occasion manquée de bien vous servir. »
+  </blockquote>
+  <a class="btn-cuivre" href="contact.html#formulaire" data-fr="Posez-nous votre question" data-en="Ask us your question">Posez-nous votre question</a>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Les Adaptations Accès-Cible</div>
+      <div class="footer-tagline" data-fr="Fabrication artisanale · Québec · Depuis 1990" data-en="Artisan craftsmanship · Quebec · Since 1990">Fabrication artisanale · Québec · Depuis 1990</div>
+      <div class="footer-coords">
+        <span>156-A route 117<br>Sainte-Anne-des-Lacs, Québec  J0R 1B0</span>
+        <a href="tel:+14502271948">450 227-1948</a>
+        <a href="mailto:info@lesadaptationsacces-cible.com">info@lesadaptationsacces-cible.com</a>
+        <a href="mailto:info@acces-cible.ca">info@acces-cible.ca</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-titre" data-fr="Produits" data-en="Products">Produits</div>
+      <div class="footer-liens">
+        <a href="ergo.html" data-fr="Chaise ERGO" data-en="ERGO Chair">Chaise ERGO</a>
+        <a href="accessoires.html" data-fr="Accessoires posturaux" data-en="Postural accessories">Accessoires posturaux</a>
+        <a href="bureaux.html" data-fr="Bureaux adaptés" data-en="Adapted desks">Bureaux adaptés</a>
+        <a href="marchepied.html" data-fr="Marchepieds" data-en="Footrests">Marchepieds</a>
+        <a href="surmesure.html" data-fr="Sur mesure" data-en="Custom made">Sur mesure</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-titre" data-fr="Entreprise" data-en="Company">Entreprise</div>
+      <div class="footer-liens">
+        <a href="histoire.html" data-fr="Notre histoire" data-en="Our story">Notre histoire</a>
+        <a href="contactez-nous.html" data-fr="Contactez-nous" data-en="Contact us">Contactez-nous</a>
+        <a href="soumission.html" data-fr="Soumission" data-en="Get a quote">Soumission</a>
+        <a href="faq.html" data-fr="FAQ" data-en="FAQ">FAQ</a>
+        <a href="politique-confidentialite.html" data-fr="Politique de confidentialité" data-en="Privacy policy">Politique de confidentialité</a>
+        <a href="politique-garantie.html" data-fr="Politique de garantie" data-en="Warranty policy">Politique de garantie</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copyright" data-fr="© 2026 Les Adaptations Accès-Cible. Tous droits réservés." data-en="© 2026 Les Adaptations Accès-Cible. All rights reserved.">© 2026 Les Adaptations Accès-Cible. Tous droits réservés.</div>
+    <div class="footer-fab" data-fr="Fait à la main · Sainte-Anne-des-Lacs" data-en="Handmade · Sainte-Anne-des-Lacs">Fait à la main · Sainte-Anne-des-Lacs</div>
+  </div>
+</footer>
+
+<script src="scripts.js"></script>
+<script>
+(function(){
+  var searchInput = document.getElementById('faqSearch');
+  var emptyMsg = document.getElementById('faqEmpty');
+  var groups = document.querySelectorAll('.faq-group');
+  var items = document.querySelectorAll('.faq-item');
+
+  // Accordéon
+  items.forEach(function(item){
+    var btn = item.querySelector('.faq-question');
+    var answer = item.querySelector('.faq-answer');
+
+    btn.addEventListener('click', function(){
+      var isOpen = item.classList.contains('open');
+
+      // Ferme les autres items ouverts (accordéon exclusif)
+      items.forEach(function(other){
+        if(other !== item){
+          other.classList.remove('open');
+          other.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+          other.querySelector('.faq-answer').style.maxHeight = null;
+        }
+      });
+
+      if(isOpen){
+        item.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        answer.style.maxHeight = null;
+      } else {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    });
+  });
+
+  // Recherche simple (filtre sur le texte visible des questions/réponses)
+  if(searchInput){
+    searchInput.addEventListener('input', function(){
+      var query = searchInput.value.trim().toLowerCase();
+      var anyVisible = false;
+
+      groups.forEach(function(group){
+        var groupHasMatch = false;
+        var groupItems = group.querySelectorAll('.faq-item');
+
+        groupItems.forEach(function(item){
+          var text = item.textContent.toLowerCase();
+          var match = query === '' || text.indexOf(query) !== -1;
+          item.style.display = match ? '' : 'none';
+          if(match){ groupHasMatch = true; anyVisible = true; }
+
+          // Referme les items masqués
+          if(!match && item.classList.contains('open')){
+            item.classList.remove('open');
+            item.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+            item.querySelector('.faq-answer').style.maxHeight = null;
+          }
+        });
+
+        group.style.display = groupHasMatch ? '' : 'none';
+      });
+
+      emptyMsg.style.display = anyVisible ? 'none' : 'block';
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
