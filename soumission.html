@@ -26,6 +26,9 @@
 .formulaire-sous-titre { font-size: 13px; color: var(--c-muted); margin-bottom: 32px; }
 .fillout-wrap { width: 100%; }
 
+.consentement-donnees { font-size: 12px; color: var(--c-muted); font-style: italic; line-height: 1.6; margin-top: 16px; }
+.consentement-donnees a { color: var(--c-cuivre); text-decoration: underline; text-underline-offset: 3px; font-style: normal; }
+
 .formulaire-fallback { margin-top: 20px; padding: 14px 20px; background: var(--c-brume); border: 1px solid var(--c-bord); border-radius: var(--radius); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .formulaire-fallback span { font-family: var(--font-label); font-size: 11px; letter-spacing: .04em; color: var(--c-muted); }
 .formulaire-fallback a { font-family: var(--font-label); font-size: 11px; font-weight: 600; letter-spacing: .04em; color: var(--c-cuivre); text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
@@ -94,6 +97,12 @@
       </div>
       <script src="https://server.fillout.com/embed/v1/"></script>
     </div>
+
+    <p class="consentement-donnees"
+       data-fr-html="En soumettant ce formulaire, vous acceptez que les renseignements fournis (incluant les mesures anthropométriques) soient utilisés conformément à notre <a href='politique-confidentialite.html'>politique de confidentialité</a>, et puissent être traités par nos fournisseurs Fillout et Airtable, situés aux États-Unis."
+       data-en-html="By submitting this form, you agree that the information provided (including anthropometric measurements) will be used in accordance with our <a href='politique-confidentialite.html'>privacy policy</a>, and may be processed by our providers Fillout and Airtable, located in the United States.">
+      En soumettant ce formulaire, vous acceptez que les renseignements fournis (incluant les mesures anthropométriques) soient utilisés conformément à notre <a href="politique-confidentialite.html">politique de confidentialité</a>, et puissent être traités par nos fournisseurs Fillout et Airtable, situés aux États-Unis.
+    </p>
 
     <div class="formulaire-fallback">
       <span data-fr="Formulaire non disponible sur ce réseau (ex : CISSS) ?" data-en="Form not available on this network?">Formulaire non disponible sur ce réseau (ex : CISSS) ?</span>
