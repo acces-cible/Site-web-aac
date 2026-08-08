@@ -821,21 +821,21 @@ function initSelecteurCeinture(id, config) {
     photos: {}
   });
 
-  // Plastron en H — groupe1 = Taille, photo basée sur l'attache seule
+// Plastron en H — groupe1 = Taille, photo basée sur l'attache seule
+  // Attache disponible uniquement en boucle (pas de velcro/velcro pour ce modèle)
   initSelecteurCeinture('plastron-h', {
     nom: 'Plastron en H',
     groupe1Ordre: ['petit', 'moyen'],
     groupe1Labels: { petit: 'Petit', moyen: 'Moyen' },
     attachesLabels: LABELS,
-    attachesOrdre: ['boucle', 'velcro_velcro'],
+    attachesOrdre: ['boucle'],
     attaches: {
-      petit: ['boucle', 'velcro_velcro'],
-      moyen: ['boucle', 'velcro_velcro']
+      petit: ['boucle'],
+      moyen: ['boucle']
     },
     photoParAttacheSeule: true,
     photos: {}
   });
-})();
 
 // ── SÉLECTEUR CABARET ──────────────────────────────────────────
 (function() {
