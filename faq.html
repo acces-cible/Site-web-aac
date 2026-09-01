@@ -122,39 +122,7 @@
 </head>
 <body>
 
-<!-- ===== NAV ===== -->
-<nav class="nav">
-  <a href="index.html" class="nav-logo">
-    <div class="nav-logo-barre"></div>
-    <div class="nav-logo-texte">
-      Les Adaptations Accès-Cible
-    </div>
-  </a>
-  <div class="nav-liens" id="navLiens">
-    <a href="ergo.html" data-fr="Chaise ERGO" data-en="ERGO Chair">Chaise ERGO</a>
-    <a href="accessoires.html" data-fr="Accessoires" data-en="Accessories">Accessoires</a>
-    <a href="bureaux.html" data-fr="Bureaux" data-en="Desks">Bureaux</a>
-    <a href="marchepied.html" data-fr="Marchepieds" data-en="Footrests">Marchepieds</a>
-    <a href="surmesure.html" data-fr="Sur mesure" data-en="Custom-made">Sur mesure</a>
-    <a href="histoire.html" data-fr="Notre histoire" data-en="Our story">Notre histoire</a>
-    <a href="contactez-nous.html" data-fr="Contactez-nous" data-en="Contact us">Contactez-nous</a>
-    <button class="lang-btn" onclick="toggleLangue()" id="langBtn">EN</button>
-    <a href="soumission.html" class="nav-cta" data-fr="Soumission →" data-en="Get a quote →">Soumission →</a>
-  </div>
-  <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-<div class="nav-mobile" id="navMobile">
-  <a href="ergo.html" data-fr="Chaise ERGO" data-en="ERGO Chair">Chaise ERGO</a>
-  <a href="accessoires.html" data-fr="Accessoires" data-en="Accessories">Accessoires</a>
-  <a href="bureaux.html" data-fr="Bureaux" data-en="Desks">Bureaux</a>
-  <a href="marchepied.html" data-fr="Marchepieds" data-en="Footrests">Marchepieds</a>
-  <a href="surmesure.html" data-fr="Sur mesure" data-en="Custom-made">Sur mesure</a>
-  <a href="histoire.html" data-fr="Notre histoire" data-en="Our story">Notre histoire</a>
-  <a href="contactez-nous.html" data-fr="Contactez-nous" data-en="Contact us">Contactez-nous</a>
-  <a href="soumission.html" class="nav-mobile-cta" data-fr="Demander une soumission →" data-en="Get a quote →">Demander une soumission →</a>
-</div>
+<div id="nav-container" style="height:58px;position:sticky;top:0;z-index:100;"></div>
 
 <!-- ===== HERO ===== -->
 <div class="faq-outer">
@@ -468,46 +436,7 @@
   </div>
 </div>
 
-<!-- ===== FOOTER ===== -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div>
-      <div class="footer-brand">Les Adaptations Accès-Cible</div>
-      <div class="footer-tagline" data-fr="Fabrication artisanale · Québec · Depuis 1990" data-en="Artisan craftsmanship · Quebec · Since 1990">Fabrication artisanale · Québec · Depuis 1990</div>
-      <div class="footer-coords">
-        <span>156-A route 117<br>Sainte-Anne-des-Lacs, Québec  J0R 1B0</span>
-        <a href="tel:+14502271948">450 227-1948</a>
-        <a href="mailto:info@lesadaptationsacces-cible.com">info@lesadaptationsacces-cible.com</a>
-        <a href="mailto:info@acces-cible.ca">info@acces-cible.ca</a>
-      </div>
-    </div>
-    <div>
-      <div class="footer-col-titre" data-fr="Produits" data-en="Products">Produits</div>
-      <div class="footer-liens">
-        <a href="ergo.html" data-fr="Chaise ERGO" data-en="ERGO Chair">Chaise ERGO</a>
-        <a href="accessoires.html" data-fr="Accessoires posturaux" data-en="Postural accessories">Accessoires posturaux</a>
-        <a href="bureaux.html" data-fr="Bureaux adaptés" data-en="Adapted desks">Bureaux adaptés</a>
-        <a href="marchepied.html" data-fr="Marchepieds" data-en="Footrests">Marchepieds</a>
-        <a href="surmesure.html" data-fr="Sur mesure" data-en="Custom made">Sur mesure</a>
-      </div>
-    </div>
-    <div>
-      <div class="footer-col-titre" data-fr="Entreprise" data-en="Company">Entreprise</div>
-      <div class="footer-liens">
-        <a href="histoire.html" data-fr="Notre histoire" data-en="Our story">Notre histoire</a>
-        <a href="contactez-nous.html" data-fr="Contactez-nous" data-en="Contact us">Contactez-nous</a>
-        <a href="soumission.html" data-fr="Soumission" data-en="Get a quote">Soumission</a>
-        <a href="faq.html" data-fr="FAQ" data-en="FAQ">FAQ</a>
-        <a href="politique-confidentialite.html" data-fr="Politique de confidentialité" data-en="Privacy policy">Politique de confidentialité</a>
-        <a href="politique-garantie.html" data-fr="Politique de garantie" data-en="Warranty policy">Politique de garantie</a>
-      </div>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <div class="footer-copyright" data-fr="© 2026 Les Adaptations Accès-Cible. Tous droits réservés." data-en="© 2026 Les Adaptations Accès-Cible. All rights reserved.">© 2026 Les Adaptations Accès-Cible. Tous droits réservés.</div>
-    <div class="footer-fab" data-fr="Fait à la main · Sainte-Anne-des-Lacs" data-en="Handmade · Sainte-Anne-des-Lacs">Fait à la main · Sainte-Anne-des-Lacs</div>
-  </div>
-</footer>
+<div id="footer-container"></div>
 
 <script src="scripts.js"></script>
 <script>

@@ -176,7 +176,7 @@
       <div class="hero-carnet">
         <div class="hero-carnet-scotch"></div>
         <div class="hero-carnet-inner">
-          <img class="zoomable" src="images/Accessoires/coussin-couleurs.jpg" alt="Accessoires posturaux ERGO"
+          <img class="zoomable" src="images/coussins leger moyen accentue.JPG" alt="Coussins de dos ERGO — contours léger, moyen et accentué"
                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="hero-carnet-placeholder" style="display:none;"><span>Photo à venir</span></div>
           <div class="hero-carnet-caption">— Coussins & couleurs</div>
@@ -590,6 +590,9 @@ document.addEventListener('DOMContentLoaded', () => {
     noteContourEl.style.display = contourActif ? '' : 'none';
 
     // Photo (carrousel générique — voir PHOTOS_ITEM)
+    PHOTOS_ITEM['siege-photo'] = etat.ischion
+      ? ['images/Coussins/contour bloc ischion01.png', 'images/Coussins/contour bloc ischion02.png', 'images/Coussins/contour bloc ischion03.png']
+      : null;
     construireZonePhoto('siege-photo', null, titre);
   }
 
