@@ -133,7 +133,8 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   color: rgba(255,255,255,.85);
   transition: color .2s;
 }
-.nav-liens a:hover, .nav-liens a.actif { color: rgba(255,255,255,1); }
+.nav-liens a:hover { color: rgba(255,255,255,1); }
+.nav-liens a.actif { color: var(--c-or); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 8px; }
 
 .nav-dropdown { position: relative; }
 .nav-dropdown-menu {

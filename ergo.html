@@ -12,7 +12,7 @@
 <style>
 /* ── ERGO : styles uniques ── */
 .hero-outer { background: var(--c-parchemin); border-bottom: 1px solid var(--c-bord); }
-.hero { padding: 64px 60px 0; display: grid; grid-template-columns: 1fr 420px; gap: 48px; align-items: start; max-width: var(--max-width); margin: 0 auto; }
+.hero { padding: 64px 60px 0; display: grid; grid-template-columns: 1fr 520px; gap: 48px; align-items: start; max-width: var(--max-width); margin: 0 auto; }
 .hero-texte { padding-bottom: 56px; align-self: end; }
 .hero-texte .lbl { margin-bottom: 18px; }
 .hero-h1 { font-family: var(--font-titre); font-size: 48px; font-weight: 300; line-height: 1.12; color: var(--c-marine); margin-bottom: 20px; }
@@ -31,6 +31,8 @@
 .carnet-photo:hover { transform: rotate(0deg) scale(1.01) !important; }
 .hero-image .carnet-photo-inner, .fiche-photo .carnet-photo-inner { background: var(--c-blanc); padding: 16px 16px 12px; box-shadow: 0 2px 8px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.06); display: flex; flex-direction: column; }
 .carnet-photo-inner img { display: block; width: 100%; max-width: 300px; height: auto; }
+.hero-image .carnet-photo-inner img { max-width: 440px; }
+@media (max-width: 768px) { .hero-image .carnet-photo-inner img { max-width: 300px; } }
 .carnet-placeholder { width: 280px; height: 320px; background: var(--c-brume); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: var(--c-muted); font-size: 12px; text-align: center; }
 .carnet-caption { font-family: var(--font-script); font-size: 14px; color: var(--c-muted); text-align: center; margin-top: 18px; padding-top: 2px; }
 .carnet-scotch { position: absolute; top: -10px; left: 50%; transform: translateX(-50%) rotate(-2deg); width: 52px; height: 18px; background: rgba(220,210,190,.55); background-image: repeating-linear-gradient(90deg,transparent,transparent 3px,rgba(255,255,255,.15) 3px,rgba(255,255,255,.15) 4px); z-index: 2; }
