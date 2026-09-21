@@ -214,6 +214,8 @@ const Carrousel = (function () {
         zones[id].photos.length === nouvellesPhotos.length &&
         zones[id].photos.every((p, i) => p === nouvellesPhotos[i]);
 
+      nouvellesPhotos.slice(1).forEach(src => { new Image().src = src; });
+
       zones[id] = {
         el: document.getElementById(id),
         captionEl: opts.captionElId ? document.getElementById(opts.captionElId) : null,
