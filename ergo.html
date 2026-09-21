@@ -41,7 +41,7 @@
 
 .modeles-outer { background: var(--c-parchemin); border-bottom: 1px solid var(--c-bord); }
 .modeles-inner { max-width: var(--max-width); margin: 0 auto; padding: 64px 60px; }
-.modeles-barre { display: flex; border: 1px solid var(--c-bord); border-radius: var(--radius); overflow: hidden; margin-bottom: 24px; position: sticky; top: 70px; z-index: 50; background: var(--c-blanc); }
+.modeles-barre { display: flex; border: 1px solid var(--c-bord); border-radius: var(--radius); overflow: hidden; margin-bottom: 24px; }
 
 /* Boutons de sélection des modèles — alignement + lisibilité sur fond actif corrigés */
 .modele-btn { flex: 1; padding: 16px 20px; border-right: 1px solid var(--c-bord); cursor: pointer; background: var(--c-blanc); transition: background .15s; text-align: left; position: relative; display: flex; flex-direction: column; }
@@ -107,7 +107,7 @@
   .hero-btns { flex-direction: column; }
   .hero-btns a { text-align: center; }
   .modeles-inner { padding: 32px 20px; }
-  .modeles-barre { display: grid; grid-template-columns: 1fr 1fr; position: static; }
+  .modeles-barre { display: grid; grid-template-columns: 1fr 1fr; }
   .modele-fiche { grid-template-columns: 1fr; gap: 28px; }
   .fiche-photo { justify-content: flex-start; }
   .fiche-contenu { padding: 0; }
