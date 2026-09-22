@@ -12,8 +12,9 @@
 <style>
 /* ── SUR MESURE : styles uniques ── */
 .page-header { background: var(--c-parchemin); padding: 32px 60px 28px; border-bottom: 1px solid var(--c-bord); }
-.page-header-inner { max-width: var(--max-width); margin: 0 auto; display: flex; align-items: baseline; gap: 24px; flex-wrap: wrap; }
-.page-header-h1 { font-family: var(--font-titre); font-size: 22px; font-weight: 300; color: var(--c-marine); }
+.page-header-inner { max-width: var(--max-width); margin: 0 auto; }
+.page-header-inner .lbl { display: block; margin-bottom: 14px; }
+.page-header-h1 { font-family: var(--font-titre); font-size: 32px; font-weight: 300; color: var(--c-marine); }
 .page-header-h1 em { font-style: italic; color: var(--c-cuivre); }
 
 .intro-outer { background: var(--c-parchemin); border-bottom: 1px solid var(--c-bord); }
@@ -28,7 +29,7 @@
 
 .produits-outer { background: var(--c-parchemin); }
 .produits-inner { max-width: var(--max-width); margin: 0 auto; padding: 64px 60px; }
-.produits-titre-section { font-family: var(--font-mono); font-size: 9px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--c-muted); margin-bottom: 32px; padding-bottom: 12px; border-bottom: 1px solid var(--c-bord); }
+.produits-titre-section { font-family: var(--font-titre); font-size: var(--fs-h2); font-weight: 300; color: var(--c-marine); margin-bottom: 32px; padding-bottom: 20px; border-bottom: 1px solid var(--c-bord); }
 .produit-card { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--c-bord); border-radius: var(--radius); overflow: hidden; background: var(--c-blanc); margin-bottom: 24px; }
 .produit-card:last-child { margin-bottom: 0; }
 .produit-card.inverse { direction: rtl; }
@@ -83,7 +84,7 @@
 
 <div class="page-header">
   <div class="page-header-inner">
-    <span class="lbl">Fabrication unique · Sur mesure · Québec</span>
+    <span class="lbl">Fabrication artisanale · Québec · Depuis 1990</span>
     <h1 class="page-header-h1">Solutions <em>sur mesure</em></h1>
   </div>
 </div>
