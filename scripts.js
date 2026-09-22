@@ -29,6 +29,14 @@ function initNavScroll() {
   const nav = document.querySelector('.nav');
   if (!nav) return;
 
+  // Le conteneur (#nav-container) reste sticky en permanence pour réserver
+  // sa place avant le chargement de nav.html — mais ça veut dire qu'une fois
+  // la nav cachée par translateY, sa boîte de 58px reste invisible mais
+  // toujours cliquable en haut de l'écran, bloquant le contenu qui défile
+  // dessous. On désactive donc les clics sur ce conteneur quand la nav
+  // est cachée.
+  const conteneur = nav.closest('#nav-container') || nav.parentElement;
+
   const navHauteur = nav.offsetHeight || 58;
   const barreSecondaire = document.querySelector('.ancres, .tab-bar');
 
@@ -40,10 +48,12 @@ function initNavScroll() {
 
   function afficherNav() {
     nav.style.transform = 'translateY(0)';
+    if (conteneur) conteneur.style.pointerEvents = '';
     if (barreSecondaire) barreSecondaire.style.top = navHauteur + 'px';
   }
   function cacherNav() {
     nav.style.transform = 'translateY(-100%)';
+    if (conteneur) conteneur.style.pointerEvents = 'none';
     if (barreSecondaire) barreSecondaire.style.top = '0px';
   }
 
