@@ -79,9 +79,9 @@
 
 <div class="page-header">
   <div class="page-header-inner">
-    <span class="lbl">Contactez-nous</span>
-    <h1 class="page-h1">Une question ?<br>Écrivez-nous <em>directement.</em></h1>
-    <p class="page-sous-titre">Pour toute question générale, demande d'information ou suivi de commande. Pour une soumission de chaise adaptée, utilisez notre formulaire dédié.</p>
+    <span class="lbl" data-fr="Contactez-nous" data-en="Contact us">Contactez-nous</span>
+    <h1 class="page-h1" data-fr-html="Une question ?<br>Écrivez-nous <em>directement.</em>" data-en-html="A question?<br>Write to us <em>directly.</em>">Une question ?<br>Écrivez-nous <em>directement.</em></h1>
+    <p class="page-sous-titre" data-fr="Pour toute question générale, demande d'information ou suivi de commande. Pour une soumission de chaise adaptée, utilisez notre formulaire dédié." data-en="For any general question, information request, or order follow-up. For a quote on an adapted chair, use our dedicated form.">Pour toute question générale, demande d'information ou suivi de commande. Pour une soumission de chaise adaptée, utilisez notre formulaire dédié.</p>
   </div>
 </div>
 
@@ -89,48 +89,48 @@
   <div class="contact-inner">
 
     <div>
-      <span class="lbl" style="margin-bottom:24px;display:block;">Formulaire de contact</span>
+      <span class="lbl" style="margin-bottom:24px;display:block;" data-fr="Formulaire de contact" data-en="Contact form">Formulaire de contact</span>
 
       <form id="contact-form" action="https://formspree.io/f/mjgdzrvw" method="POST">
 
         <div class="form-deux-col">
           <div class="form-groupe">
-            <label for="prenom">Prénom *</label>
-            <input type="text" id="prenom" name="prenom" required autocomplete="given-name" placeholder="Marie">
+            <label for="prenom" data-fr="Prénom *" data-en="First name *">Prénom *</label>
+            <input type="text" id="prenom" name="prenom" required autocomplete="given-name" placeholder="Marie" data-fr-placeholder="Marie" data-en-placeholder="Marie">
           </div>
           <div class="form-groupe">
-            <label for="nom">Nom *</label>
-            <input type="text" id="nom" name="nom" required autocomplete="family-name" placeholder="Tremblay">
+            <label for="nom" data-fr="Nom *" data-en="Last name *">Nom *</label>
+            <input type="text" id="nom" name="nom" required autocomplete="family-name" placeholder="Tremblay" data-fr-placeholder="Tremblay" data-en-placeholder="Tremblay">
           </div>
         </div>
 
         <div class="form-deux-col">
           <div class="form-groupe">
-            <label for="courriel">Courriel *</label>
-            <input type="email" id="courriel" name="email" required autocomplete="email" placeholder="marie@exemple.com">
+            <label for="courriel" data-fr="Courriel *" data-en="Email *">Courriel *</label>
+            <input type="email" id="courriel" name="email" required autocomplete="email" placeholder="marie@exemple.com" data-fr-placeholder="marie@exemple.com" data-en-placeholder="marie@example.com">
           </div>
           <div class="form-groupe">
-            <label for="telephone">Téléphone</label>
-            <input type="tel" id="telephone" name="telephone" autocomplete="tel" placeholder="514 000-0000">
+            <label for="telephone" data-fr="Téléphone" data-en="Phone">Téléphone</label>
+            <input type="tel" id="telephone" name="telephone" autocomplete="tel" placeholder="514 000-0000" data-fr-placeholder="514 000-0000" data-en-placeholder="514 000-0000">
           </div>
         </div>
 
         <div class="form-groupe">
-          <label for="message">Message *</label>
-          <textarea id="message" name="message" required placeholder="Votre message..."></textarea>
+          <label for="message" data-fr="Message *" data-en="Message *">Message *</label>
+          <textarea id="message" name="message" required placeholder="Votre message..." data-fr-placeholder="Votre message..." data-en-placeholder="Your message..."></textarea>
         </div>
 
         <!-- Honeypot anti-spam -->
         <input type="text" name="_gotcha" style="display:none">
 
         <button type="submit" class="form-submit" id="submit-btn">
-          <span>Envoyer le message</span>
+          <span data-fr="Envoyer le message" data-en="Send message">Envoyer le message</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
           </svg>
         </button>
 
-        <p class="form-note">Pour joindre un document, écrivez-nous à <a href="mailto:info@lesadaptationsacces-cible.com">info@lesadaptationsacces-cible.com</a></p>
+        <p class="form-note" data-fr-html="Pour joindre un document, écrivez-nous à <a href=&quot;mailto:info@lesadaptationsacces-cible.com&quot;>info@lesadaptationsacces-cible.com</a>" data-en-html="To attach a document, write to us at <a href=&quot;mailto:info@lesadaptationsacces-cible.com&quot;>info@lesadaptationsacces-cible.com</a>">Pour joindre un document, écrivez-nous à <a href="mailto:info@lesadaptationsacces-cible.com">info@lesadaptationsacces-cible.com</a></p>
 
         <p class="form-note"
            data-fr-html="En soumettant ce formulaire, vous acceptez que vos renseignements soient utilisés conformément à notre <a href='politique-confidentialite.html'>politique de confidentialité</a>."
@@ -139,7 +139,7 @@
         </p>
 
         <div class="form-succes" id="form-succes">
-          <p><strong>Message envoyé !</strong> Nous vous répondrons dans les meilleurs délais.</p>
+          <p data-fr-html="<strong>Message envoyé !</strong> Nous vous répondrons dans les meilleurs délais." data-en-html="<strong>Message sent!</strong> We'll get back to you as soon as possible."><strong>Message envoyé !</strong> Nous vous répondrons dans les meilleurs délais.</p>
         </div>
 
       </form>
@@ -147,14 +147,14 @@
 
     <div class="contact-info">
       <div class="info-bloc">
-        <div class="info-titre">Coordonnées</div>
+        <div class="info-titre" data-fr="Coordonnées" data-en="Contact information">Coordonnées</div>
         <div class="info-ligne">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.95-.95a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           <a href="tel:+14502271948">450 227-1948</a>
         </div>
         <div class="info-ligne">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          <a href="mailto:info@lesadaptationsacces-cible.com">info@lesadaptationsacces-cible.com</a> ou <a href="mailto:info@acces-cible.ca">info@acces-cible.ca</a>
+          <span data-fr-html="<a href=&quot;mailto:info@lesadaptationsacces-cible.com&quot;>info@lesadaptationsacces-cible.com</a> ou <a href=&quot;mailto:info@acces-cible.ca&quot;>info@acces-cible.ca</a>" data-en-html="<a href=&quot;mailto:info@lesadaptationsacces-cible.com&quot;>info@lesadaptationsacces-cible.com</a> or <a href=&quot;mailto:info@acces-cible.ca&quot;>info@acces-cible.ca</a>"><a href="mailto:info@lesadaptationsacces-cible.com">info@lesadaptationsacces-cible.com</a> ou <a href="mailto:info@acces-cible.ca">info@acces-cible.ca</a></span>
         </div>
         <div class="info-ligne">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -163,9 +163,9 @@
       </div>
 
       <div class="info-bloc">
-        <div class="info-titre">Soumission de chaise adaptée</div>
-        <p class="info-note">Pour une soumission complète de chaise ERGO ou de bureau adapté, utilisez notre formulaire dédié — il guide le professionnel à travers toutes les options.</p>
-        <a href="soumission.html" class="btn-ghost" style="margin-top:14px;display:inline-block;font-size:12px;">Formulaire de soumission →</a>
+        <div class="info-titre" data-fr="Soumission de chaise adaptée" data-en="Adapted chair quote">Soumission de chaise adaptée</div>
+        <p class="info-note" data-fr="Pour une soumission complète de chaise ERGO ou de bureau adapté, utilisez notre formulaire dédié — il guide le professionnel à travers toutes les options." data-en="For a full quote on an ERGO chair or adapted desk, use our dedicated form — it guides the professional through all the options.">Pour une soumission complète de chaise ERGO ou de bureau adapté, utilisez notre formulaire dédié — il guide le professionnel à travers toutes les options.</p>
+        <a href="soumission.html" class="btn-ghost" style="margin-top:14px;display:inline-block;font-size:12px;" data-fr="Formulaire de soumission →" data-en="Quote form →">Formulaire de soumission →</a>
       </div>
     </div>
 
@@ -175,14 +175,20 @@
 <div id="footer-container"></div>
 <script src="scripts.js"></script>
 <script>
+const ETATS_BOUTON = {
+  envoi: { fr: 'Envoi en cours…', en: 'Sending…' },
+  erreur: { fr: 'Erreur — réessayez', en: 'Error — try again' },
+  defaut: { fr: 'Envoyer le message', en: 'Send message' }
+};
 document.getElementById('contact-form').addEventListener('submit', async function(e) {
   e.preventDefault();
   const btn = document.getElementById('submit-btn');
   const succes = document.getElementById('form-succes');
   const span = btn.querySelector('span');
+  const l = window.langue || 'fr';
 
   btn.disabled = true;
-  span.textContent = 'Envoi en cours…';
+  span.textContent = ETATS_BOUTON.envoi[l];
 
   try {
     const res = await fetch(this.action, {
@@ -195,15 +201,15 @@ document.getElementById('contact-form').addEventListener('submit', async functio
       succes.style.display = 'block';
       succes.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     } else {
-      span.textContent = 'Erreur — réessayez';
+      span.textContent = ETATS_BOUTON.erreur[l];
     }
   } catch {
-    span.textContent = 'Erreur — réessayez';
+    span.textContent = ETATS_BOUTON.erreur[l];
   }
 
   btn.disabled = false;
-  if (btn.querySelector('span').textContent === 'Envoi en cours…') {
-    span.textContent = 'Envoyer le message';
+  if (btn.querySelector('span').textContent === ETATS_BOUTON.envoi[l]) {
+    span.textContent = ETATS_BOUTON.defaut[l];
   }
 });
 </script>

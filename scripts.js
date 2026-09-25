@@ -112,6 +112,11 @@ function appliquerTexteLangue() {
     const val = el.dataset[window.langue + 'Html'];
     if (val) el.innerHTML = val;
   });
+  /* Placeholders de champs de formulaire */
+  document.querySelectorAll('[data-fr-placeholder]').forEach(el => {
+    const val = el.dataset[window.langue + 'Placeholder'];
+    if (val) el.setAttribute('placeholder', val);
+  });
   /* Signal global pour toute section qui a besoin de réagir au changement
      de langue indépendamment du système data-fr/data-en (ex: accessoires.html
      section Couleurs, qui affiche le nom de la teinte dans la bonne langue). */
