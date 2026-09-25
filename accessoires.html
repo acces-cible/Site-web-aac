@@ -521,26 +521,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // État courant — base : 'plat' | 'contour' | 'pelvien'
   let etat = { base: 'plat', biseau: null, abd: false, ischion: false };
+  function langue() { return window.langue || 'fr'; }
 
-  function bouton(conteneur, label, value, groupe) {
+  function bouton(conteneur, labelFr, labelEn, value, groupe) {
     var b = document.createElement('button');
     b.type = 'button';
     b.className = 'siege-btn';
-    b.textContent = label;
+    b.textContent = labelFr;
+    b.dataset.fr = labelFr;
+    b.dataset.en = labelEn;
     b.dataset.value = value;
     b.dataset.groupe = groupe;
     conteneur.appendChild(b);
     return b;
   }
 
-  bouton(baseEl, 'Plat', 'plat', 'base');
-  bouton(baseEl, 'Contour', 'contour', 'base');
-  bouton(baseEl, 'Appui-pelvien', 'pelvien', 'base');
-  bouton(biseauEl, 'Aucun', 'aucun', 'biseau');
-  bouton(biseauEl, 'Postérieur', 'posterieur', 'biseau');
-  bouton(biseauEl, 'Antérieur', 'anterieur', 'biseau');
-  bouton(blocsEl, '+ Bloc ABD', 'abd', 'abd');
-  bouton(blocsEl, "+ Bloc d'ischion", 'ischion', 'ischion');
+  bouton(baseEl, 'Plat', 'Flat', 'plat', 'base');
+  bouton(baseEl, 'Contour', 'Contoured', 'contour', 'base');
+  bouton(baseEl, 'Appui-pelvien', 'Pelvic support', 'pelvien', 'base');
+  bouton(biseauEl, 'Aucun', 'None', 'aucun', 'biseau');
+  bouton(biseauEl, 'Postérieur', 'Posterior', 'posterieur', 'biseau');
+  bouton(biseauEl, 'Antérieur', 'Anterior', 'anterieur', 'biseau');
+  bouton(blocsEl, '+ Bloc ABD', '+ ABD block', 'abd', 'abd');
+  bouton(blocsEl, "+ Bloc d'ischion", '+ Ischial block', 'ischion', 'ischion');
 
   function maj() {
     var contourActif   = etat.base === 'contour';
@@ -567,19 +570,34 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Résumé
-    var titres = { plat: 'Coussin plat', contour: 'Coussin contour', pelvien: 'Appui-pelvien' };
-    var titre = titres[etat.base];
+    var l = langue();
+    var titres = {
+      plat:    { fr: 'Coussin plat',    en: 'Flat cushion' },
+      contour: { fr: 'Coussin contour', en: 'Contoured cushion' },
+      pelvien: { fr: 'Appui-pelvien',   en: 'Pelvic support' }
+    };
+    var titre = titres[etat.base][l];
+    var detailsLabels = {
+      posterieur: { fr: 'biseauté postérieur', en: 'posterior bevel' },
+      anterieur:  { fr: 'biseauté antérieur',  en: 'anterior bevel' },
+      abd:        { fr: 'bloc ABD',            en: 'ABD block' },
+      ischion:    { fr: "bloc d'ischion",      en: 'ischial block' }
+    };
     var details = [];
-    if (etat.biseau === 'posterieur') details.push('biseauté postérieur');
-    if (etat.biseau === 'anterieur')  details.push('biseauté antérieur');
-    if (etat.abd)     details.push('bloc ABD');
-    if (etat.ischion) details.push("bloc d'ischion");
+    if (etat.biseau === 'posterieur') details.push(detailsLabels.posterieur[l]);
+    if (etat.biseau === 'anterieur')  details.push(detailsLabels.anterieur[l]);
+    if (etat.abd)     details.push(detailsLabels.abd[l]);
+    if (etat.ischion) details.push(detailsLabels.ischion[l]);
 
     titreEl.textContent = titre;
-    var base = etat.base === 'pelvien'
-      ? 'Support rembourré pour le positionnement pelvien latéral. Vient avec un coussin plat.'
-      : (etat.base === 'contour' ? 'Base avec contour.' : 'Coussin de base sans contour.');
-    descEl.textContent = details.length ? base + ' Avec ' + details.join(', ') + '.' : base;
+    var baseTexte = etat.base === 'pelvien'
+      ? { fr: 'Support rembourré pour le positionnement pelvien latéral. Vient avec un coussin plat.', en: 'Padded support for lateral pelvic positioning. Comes with a flat cushion.' }
+      : (etat.base === 'contour'
+          ? { fr: 'Base avec contour.', en: 'Contoured base.' }
+          : { fr: 'Coussin de base sans contour.', en: 'Flat base cushion without contour.' });
+    var base = baseTexte[l];
+    var avec = { fr: ' Avec ', en: ' With ' };
+    descEl.textContent = details.length ? base + avec[l] + details.join(', ') + '.' : base;
 
     // Mesure anthropométrique requise : tout sauf Plat seul sans aucune option
     var requiertMesure = etat.base !== 'plat' || etat.biseau || etat.abd || etat.ischion;
@@ -615,6 +633,7 @@ document.addEventListener('DOMContentLoaded', () => {
     maj();
   });
 
+  document.addEventListener('langueChange', maj);
   maj();
 })();
 
@@ -626,19 +645,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const descEl  = document.getElementById('base-elargie-desc');
 
   let etat = { roulette: false, inclinable: false };
+  function langue() { return window.langue || 'fr'; }
 
-  function bouton(conteneur, label, value) {
+  function bouton(conteneur, labelFr, labelEn, value) {
     var b = document.createElement('button');
     b.type = 'button';
     b.className = 'attache-btn';
-    b.textContent = label;
+    b.textContent = labelFr;
+    b.dataset.fr = labelFr;
+    b.dataset.en = labelEn;
     b.dataset.value = value;
     conteneur.appendChild(b);
     return b;
   }
 
-  bouton(optsEl, '+ Sur roulette', 'roulette');
-  bouton(optsEl, '+ Inclinable', 'inclinable');
+  bouton(optsEl, '+ Sur roulette', '+ On casters', 'roulette');
+  bouton(optsEl, '+ Inclinable', '+ Tiltable', 'inclinable');
 
   const PHOTOS = {
     base: 'images/Accessoires/base-elargie.jpg',
@@ -660,13 +682,18 @@ document.addEventListener('DOMContentLoaded', () => {
       b.classList.toggle('actif', actif);
     });
 
-    var desc = 'Base au sol pour empêcher la chaise de basculer lors de rocking important.';
-    if (etat.roulette) desc += ' Permet de déplacer la chaise avec moins d\'effort.';
-    if (etat.inclinable) desc += ' Permet d\'incliner la chaise vers l\'arrière.';
+    var l = langue();
+    var desc = l === 'en'
+      ? 'A floor-level base to prevent the chair from tipping during significant rocking.'
+      : 'Base au sol pour empêcher la chaise de basculer lors de rocking important.';
+    if (etat.roulette) desc += l === 'en' ? ' Makes it easier to move the chair.' : ' Permet de déplacer la chaise avec moins d\'effort.';
+    if (etat.inclinable) desc += l === 'en' ? ' Allows the chair to tilt backward.' : ' Permet d\'incliner la chaise vers l\'arrière.';
     descEl.textContent = desc;
 
     var src = PHOTOS[photoKey()];
-    var alt = 'Base élargie' + (etat.roulette ? ' sur roulette' : '') + (etat.inclinable ? ' inclinable' : '');
+    var alt = l === 'en'
+      ? 'Widened base' + (etat.roulette ? ' on casters' : '') + (etat.inclinable ? ' tiltable' : '')
+      : 'Base élargie' + (etat.roulette ? ' sur roulette' : '') + (etat.inclinable ? ' inclinable' : '');
     construireZonePhoto('base-elargie-photo', src, alt);
   }
 
@@ -678,6 +705,7 @@ document.addEventListener('DOMContentLoaded', () => {
     maj();
   });
 
+  document.addEventListener('langueChange', maj);
   maj();
 })();
 function initSelecteurCeinture(id, config) {
@@ -688,10 +716,11 @@ function initSelecteurCeinture(id, config) {
   if (!typeEl) return;
 
   let etat = { type: config.groupe1Ordre[0], attache: 'boucle' };
+  function langue() { return window.langue || 'fr'; }
 
-  function bouton(conteneur, label, value) {
+  function bouton(conteneur, labelObj, value) {
     var b = document.createElement('button');
-    b.type = 'button'; b.className = 'attache-btn'; b.textContent = label; b.dataset.value = value;
+    b.type = 'button'; b.className = 'attache-btn'; b.textContent = labelObj.fr; b.dataset.fr = labelObj.fr; b.dataset.en = labelObj.en; b.dataset.value = value;
     conteneur.appendChild(b); return b;
   }
   config.groupe1Ordre.forEach(function(v) { bouton(typeEl, config.groupe1Labels[v], v); });
@@ -718,13 +747,16 @@ function initSelecteurCeinture(id, config) {
     });
 
     // Photo : par attache seule, ou par combinaison groupe1+attache selon la config — via carrousel générique
+    var l = langue();
     var src = config.photos && config.photos[photoKey()];
-    construireZonePhoto(photoZoneId, src, config.nom + ' — ' + config.attachesLabels[etat.attache]);
+    construireZonePhoto(photoZoneId, src, config.nom[l] + ' — ' + config.attachesLabels[etat.attache][l]);
 
     // Note d'avertissement Velcro/velcro
     if (etat.attache === 'velcro_velcro') {
       noteEl.style.display = '';
-      noteEl.textContent = "Velcro/velcro : cette attache peut se dégrader avec le temps et l'usage. Nous n'avons pas de contrôle sur sa durabilité et ne pouvons en garantir la tenue à long terme.";
+      noteEl.textContent = l === 'en'
+        ? "Velcro/velcro: this attachment can degrade with time and use. We have no control over its durability and cannot guarantee its long-term hold."
+        : "Velcro/velcro : cette attache peut se dégrader avec le temps et l'usage. Nous n'avons pas de contrôle sur sa durabilité et ne pouvons en garantir la tenue à long terme.";
     } else {
       noteEl.style.display = 'none';
     }
@@ -743,20 +775,21 @@ function initSelecteurCeinture(id, config) {
     maj();
   });
 
+  document.addEventListener('langueChange', maj);
   maj();
 }
 
 (function() {
   const LABELS = {
-    boucle: 'Boucle',
-    velcro_velcro: 'Velcro/velcro',
-    velcro_anneau: 'Velcro/anneau',
-    boucle_auto: "Boucle d'auto"
+    boucle: { fr: 'Boucle', en: 'Buckle' },
+    velcro_velcro: { fr: 'Velcro/velcro', en: 'Velcro/velcro' },
+    velcro_anneau: { fr: 'Velcro/anneau', en: 'Velcro/ring' },
+    boucle_auto: { fr: "Boucle d'auto", en: 'Auto buckle' }
   };
-  const TYPE_LABELS = { standard: 'Standard', rembourree: 'Rembourrée' };
+  const TYPE_LABELS = { standard: { fr: 'Standard', en: 'Standard' }, rembourree: { fr: 'Rembourrée', en: 'Padded' } };
 
   initSelecteurCeinture('c2points', {
-    nom: 'Ceinture 2 points',
+    nom: { fr: 'Ceinture 2 points', en: '2-point belt' },
     groupe1Ordre: ['standard', 'rembourree'],
     groupe1Labels: TYPE_LABELS,
     attachesLabels: LABELS,
@@ -768,7 +801,7 @@ function initSelecteurCeinture(id, config) {
     photos: {} // à compléter : 'standard_boucle': 'images/Ceinture/2pts-standard-boucle.jpg', etc.
   });
   initSelecteurCeinture('c3points', {
-    nom: 'Ceinture 3 points',
+    nom: { fr: 'Ceinture 3 points', en: '3-point belt' },
     groupe1Ordre: ['standard', 'rembourree'],
     groupe1Labels: TYPE_LABELS,
     attachesLabels: LABELS,
@@ -780,7 +813,7 @@ function initSelecteurCeinture(id, config) {
     photos: {}
   });
   initSelecteurCeinture('thoracique', {
-    nom: 'Ceinture thoracique',
+    nom: { fr: 'Ceinture thoracique', en: 'Thoracic belt' },
     groupe1Ordre: ['standard', 'rembourree'],
     groupe1Labels: TYPE_LABELS,
     attachesLabels: LABELS,
@@ -795,9 +828,9 @@ function initSelecteurCeinture(id, config) {
   // Ceinture couche — groupe1 = Taille (pas Type), photo basée sur l'attache seule
   // Pour le moment : seulement Petite et Moyenne disponibles (Garderie et Grande à venir)
   initSelecteurCeinture('couche', {
-    nom: 'Ceinture couche',
+    nom: { fr: 'Ceinture couche', en: 'Diaper-style belt' },
     groupe1Ordre: ['petite', 'moyenne'],
-    groupe1Labels: { petite: 'Petite', moyenne: 'Moyenne' },
+    groupe1Labels: { petite: { fr: 'Petite', en: 'Small' }, moyenne: { fr: 'Moyenne', en: 'Medium' } },
     attachesLabels: LABELS,
     attachesOrdre: ['boucle', 'velcro_velcro'],
     attaches: {
@@ -810,9 +843,9 @@ function initSelecteurCeinture(id, config) {
 
   // Plastron standard — groupe1 = Taille, photo basée sur l'attache seule (mêmes attaches partout)
   initSelecteurCeinture('plastron-standard', {
-    nom: 'Plastron en V',
+    nom: { fr: 'Plastron en V', en: 'V-shaped chest harness' },
     groupe1Ordre: ['garderie', 'petit', 'moyen', 'grand', 'tres-grand'],
-    groupe1Labels: { garderie: 'Garderie', petit: 'Petit', moyen: 'Moyen', grand: 'Grand', 'tres-grand': 'Très grand' },
+    groupe1Labels: { garderie: { fr: 'Garderie', en: 'Daycare' }, petit: { fr: 'Petit', en: 'Small' }, moyen: { fr: 'Moyen', en: 'Medium' }, grand: { fr: 'Grand', en: 'Large' }, 'tres-grand': { fr: 'Très grand', en: 'Extra-large' } },
     attachesLabels: LABELS,
     attachesOrdre: ['boucle', 'velcro_velcro'],
     attaches: {
@@ -827,9 +860,9 @@ function initSelecteurCeinture(id, config) {
 // Plastron en H — groupe1 = Taille, photo basée sur l'attache seule
   // Attache disponible uniquement en boucle (pas de velcro/velcro pour ce modèle)
   initSelecteurCeinture('plastron-h', {
-    nom: 'Plastron en H',
+    nom: { fr: 'Plastron en H', en: 'H-shaped chest harness' },
     groupe1Ordre: ['petit', 'moyen'],
-    groupe1Labels: { petit: 'Petit', moyen: 'Moyen' },
+    groupe1Labels: { petit: { fr: 'Petit', en: 'Small' }, moyen: { fr: 'Moyen', en: 'Medium' } },
     attachesLabels: LABELS,
     attachesOrdre: ['boucle'],
     attaches: {
@@ -847,19 +880,22 @@ function initSelecteurCeinture(id, config) {
   if (!formatsEl) return;
 
   const FORMATS = [
-    { id: 'mini',     label: 'Mini (20×13 po)',     img: 'images/Accessoires/cabaret-mini.jpg' },
-    { id: 'petit',    label: 'Petit (20×18 po)',    img: 'images/Accessoires/cabaret-petit.jpg' },
-    { id: 'regulier', label: 'Régulier (24×18 po)', img: 'images/Accessoires/cabaret-regulier.jpg' },
-    { id: 'surdim',   label: 'Surdimensionné',      img: 'images/Accessoires/cabaret-surdimensionne.jpg' }
+    { id: 'mini',     label: { fr: 'Mini (20×13 po)',     en: 'Mini (20×13 in)' },     img: 'images/Accessoires/cabaret-mini.jpg' },
+    { id: 'petit',    label: { fr: 'Petit (20×18 po)',    en: 'Small (20×18 in)' },    img: 'images/Accessoires/cabaret-petit.jpg' },
+    { id: 'regulier', label: { fr: 'Régulier (24×18 po)', en: 'Regular (24×18 in)' },  img: 'images/Accessoires/cabaret-regulier.jpg' },
+    { id: 'surdim',   label: { fr: 'Surdimensionné',      en: 'Oversized' },           img: 'images/Accessoires/cabaret-surdimensionne.jpg' }
   ];
 
   let courant = FORMATS[0].id;
+  function langue() { return window.langue || 'fr'; }
 
   FORMATS.forEach(function(f) {
     var b = document.createElement('button');
     b.type = 'button';
     b.className = 'attache-btn';
-    b.textContent = f.label;
+    b.textContent = f.label.fr;
+    b.dataset.fr = f.label.fr;
+    b.dataset.en = f.label.en;
     b.dataset.value = f.id;
     formatsEl.appendChild(b);
   });
@@ -868,8 +904,10 @@ function initSelecteurCeinture(id, config) {
     formatsEl.querySelectorAll('.attache-btn').forEach(function(b) {
       b.classList.toggle('actif', b.dataset.value === courant);
     });
+    var l = langue();
     var f = FORMATS.find(function(x) { return x.id === courant; });
-    construireZonePhoto('cabaret-photo', f.img, 'Cabaret — ' + f.label);
+    var prefixe = l === 'en' ? 'Tray — ' : 'Cabaret — ';
+    construireZonePhoto('cabaret-photo', f.img, prefixe + f.label[l]);
   }
 
   formatsEl.addEventListener('click', function(e) {
@@ -879,6 +917,7 @@ function initSelecteurCeinture(id, config) {
     maj();
   });
 
+  document.addEventListener('langueChange', maj);
   maj();
 })();
 
