@@ -1,0 +1,17 @@
+# Redirections des anciennes adresses Wix vers le nouveau site (Cloudflare Pages)
+# Format : ancienne-adresse  nouvelle-adresse  code
+# Liste tirée du plan de site Wix (sitemap.xml) le 2026-10-15.
+
+/chaise-ergo                    /ergo                   301
+/accessoires-pour-les-chaises   /accessoires            301
+/coussins                       /accessoires#coussins   301
+/ceintures-et-plastrons         /accessoires#ceintures  301
+/couleurs                       /accessoires#couleurs   301
+/copie-de-couleurs              /accessoires#couleurs   301
+/copie-de-couleurs-1            /accessoires#couleurs   301
+/tables-et-pupitres-ajustables  /bureaux                301
+/produits-personnalises         /surmesure              301
+/copie-de-soumission            /soumission             301
+/carri%C3%A8re                  /contactez-nous         301
+/product-page/*                 /accessoires            301
+/category/*                     /accessoires            301

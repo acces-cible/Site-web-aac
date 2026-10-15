@@ -1,0 +1,9 @@
+# Pendant la période de test : Google ne doit pas indexer le site de test
+# ni les adresses provisoires *.pages.dev (évite le contenu en double
+# avec le site Wix officiel). À retirer pour le domaine officiel au lancement.
+
+https://www.adaptationsacces-cible.com/*
+  X-Robots-Tag: noindex
+
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex
